@@ -91,6 +91,13 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </xctk:DateTimePicker>
+        <ListBox
+            x:Name="listBox"
+            Width="635"
+            Height="349"
+            Margin="272,53,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
 
     </Grid>
 
