@@ -4,10 +4,48 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:RestaurantHelper.Models"
     xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Margin="-7"
     Background="Azure">
+    <catel:UserControl.Resources>
+
+        <Style TargetType="ListBox">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Canvas Background="AliceBlue" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate DataType="{x:Type local:Table}">
+            <Canvas Width="200" Height="200" Background="Aqua">
+                <Ellipse
+                    Canvas.Left="{Binding Id}"
+                    Canvas.Top="{Binding SeatsNumber}"
+                    Width="40"
+                    Height="50"
+                    Stroke="White"
+                    StrokeThickness="1" />
+                <Image Width="20" Height="20">
+                    <Image.ToolTip>
+                        <StackPanel Width="250" TextBlock.FontSize="12">
+                            <TextBlock FontWeight="Bold" Text="Text" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Orbit: " />
+                                <TextBlock Text="Text" />
+                                <TextBlock Text=" AU" />
+                            </StackPanel>
+                            <TextBlock Text="Tet" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </Canvas>
+        </DataTemplate>
+    </catel:UserControl.Resources>
 
     <Grid MinWidth="1000" MinHeight="550">
 
