@@ -26,6 +26,9 @@ namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
             NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
             TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
             DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
+
+            DateTime maxDate = DateTime.Today.AddDays(10).Date;
+            MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
         }
 
         // TODO: Register models with the vmpropmodel codesnippet
@@ -70,8 +73,15 @@ namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
             get { return GetValue<string>(MinimumDateProperty); }
             set { SetValue(MinimumDateProperty, value); }
         }
+        public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string), 
+            $"{DateTime.Today.Month}.{DateTime.Today.Day}.{DateTime.Today.Year}");
 
-        public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string), $"{DateTime.Today.Month}.{DateTime.Today.Day}.{DateTime.Today.Year}");
+        public string MaximumDate
+        {
+            get { return GetValue<string>(MaximumDateProperty); }
+            set { SetValue(MaximumDateProperty, value); }
+        }
+        public static readonly PropertyData MaximumDateProperty = RegisterProperty("MaximumDate", typeof(string));
 
         public Command TimeValuChangedCommand { get; private set; }
         private void OnTimeValuChangedCommandExecute()
@@ -97,7 +107,8 @@ namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
 
                 if (DateTime.Parse(DateText).Date == DateTime.Today)
                 {
-                    
+                    int nowHour = DateTime.Now.Hour;
+                    FirstTime = $"{nowHour + 1}:00";
                 }
             });
             thread.Start();

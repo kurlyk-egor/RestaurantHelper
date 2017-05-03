@@ -77,6 +77,7 @@
             AutoCloseCalendar="True"
             FontSize="15"
             Format="LongDate"
+            Maximum="{Binding MaximumDate}"
             Minimum="{Binding MinimumDate}"
             ShowButtonSpinner="False"
             Text="{Binding DateText}"
