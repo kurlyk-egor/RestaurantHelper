@@ -97,10 +97,8 @@ namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
 
                 if (DateTime.Parse(DateText).Date == DateTime.Today)
                 {
-                    MessageBox.Show("Today");
+                    
                 }
-
-                else MessageBox.Show("{Xyeday");
             });
             thread.Start();
         }
