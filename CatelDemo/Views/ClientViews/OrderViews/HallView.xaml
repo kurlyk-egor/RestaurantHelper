@@ -1,0 +1,96 @@
+﻿<catel:UserControl
+    x:Class="CatelDemo.Views.ClientViews.OrderViews.HallView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Margin="-7"
+    Background="Azure">
+
+    <Grid MinWidth="1000" MinHeight="550">
+
+        <xctk:TimePicker
+            Grid.Column="0"
+            Margin="27,53,854,427"
+            AllowTextInput="False"
+            EndTime="22:00"
+            FontSize="30"
+            MaxDropDownHeight="200"
+            ShowButtonSpinner="False"
+            StartTime="8:00"
+            Text="{Binding FirstTime}"
+            TimeInterval="1:00">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <catel:EventToCommand Command="{Binding TimeValuChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </xctk:TimePicker>
+
+        <xctk:TimePicker
+            Grid.Column="0"
+            Margin="27,153,854,324"
+            AllowTextInput="False"
+            FontSize="30"
+            IsEnabled="{Binding IsEnabledLastTime}"
+            MaxDropDownHeight="200"
+            ShowButtonSpinner="False"
+            StartTime="{Binding StartTime}"
+            Text="{Binding LastTime}"
+            TimeInterval="1:00" />
+        <TextBlock
+            x:Name="textBlock"
+            Margin="27,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Ресторан открыт с 8:00 до 23:00"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="button"
+            Width="172"
+            Height="65"
+            Margin="272,455,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding BackCommand}"
+            Content="Назад" />
+        <Button
+            x:Name="button1"
+            Width="197"
+            Height="65"
+            Margin="566,455,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding NextCommand}"
+            Content="Далее" />
+        <xctk:DateTimePicker
+            Width="175"
+            Height="62"
+            Margin="27,274,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            AllowSpin="False"
+            AllowTextInput="False"
+            AutoCloseCalendar="True"
+            FontSize="15"
+            Format="LongDate"
+            Minimum="{Binding MinimumDate}"
+            ShowButtonSpinner="False"
+            Text="{Binding DateText}"
+            TextAlignment="Center"
+            TimePickerAllowSpin="False"
+            TimePickerShowButtonSpinner="False"
+            TimePickerVisibility="Collapsed">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <catel:EventToCommand Command="{Binding DateValueChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </xctk:DateTimePicker>
+
+    </Grid>
+
+</catel:UserControl>

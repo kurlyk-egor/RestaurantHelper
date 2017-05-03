@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User><Id>1</Id><Login>1</Login><Password>11</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>2</Id><Login>2</Login><Password>22</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>3</Id><Login>3</Login><Password>33</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>4</Id><Login>4</Login><Password>44</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>5</Id><Login>5</Login><Password>55</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>7</Id><Login>вап</Login><Password>ываыва</Password><Name>вап</Name><Phone>234</Phone></User>
+  <User><Id>6</Id><Login>Viking</Login><Password>sukasobaka</Password><Name>Курлык</Name><Phone>37529893369</Phone></User>
+  <User><Id>8</Id><Login>NewUser</Login><Password>NewPassword</Password><Name>New new new</Name><Phone>5553535</Phone></User>
+  <User><Id>9</Id><Login>йувуц</Login><Password>йуйуц</Password><Name>ца</Name><Phone>1</Phone></User>
+</ArrayOfUser>
