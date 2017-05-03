@@ -10,7 +10,7 @@ namespace RestaurantHelper.Services.Database
 {
     class UserRepository : IRepositoryBase<User>
     {
-        private const string PATH = @"..\..\RestaurantHelper\books.xml";
+        private const string PATH = @"..\..\CatelDemo\books.xml";
         private static UserRepository _instance;
         private readonly XmlSerializer _serializer = new XmlSerializer(typeof(List<User>));
         private List<User> _users;
