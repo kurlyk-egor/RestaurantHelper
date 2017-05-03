@@ -90,23 +90,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
             });
             thread.Start();
         }
-
-        public Command BackCommand { get; private set; }
-        private void OnBackCommandExecute()
-        {
-            _rootViewModel.ChangePage(_parentViewModel);
-        }
-
-        public Command NextCommand { get; private set; }
-        private bool OnNextCommandCanExecute()
-        {
-            // TODO: добавить обработчик доступности кнопки
-            return true;
-        }
-        private void OnNextCommandExecute()
-        {
-            _rootViewModel.ChangePage(new MenuViewModel(this));
-        }
 		#endregion
 
 
@@ -133,6 +116,24 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			set { SetValue(DateTextProperty, value); }
 		}
 		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof(string));
+
+
+		public Command BackCommand { get; private set; }
+		private void OnBackCommandExecute()
+		{
+			_rootViewModel.ChangePage(_parentViewModel);
+		}
+
+		public Command NextCommand { get; private set; }
+		private bool OnNextCommandCanExecute()
+		{
+			// TODO: добавить обработчик доступности кнопки
+			return true;
+		}
+		private void OnNextCommandExecute()
+		{
+			_rootViewModel.ChangePage(new MenuViewModel(this));
+		}
 		#endregion
 
 		protected override async Task InitializeAsync()
