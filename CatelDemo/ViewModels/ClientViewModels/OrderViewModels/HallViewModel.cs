@@ -26,21 +26,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
             MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
         }
 
-        // TODO: Register models with the vmpropmodel codesnippet
-        // TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
-        public string FirstTime
-        {
-            get { return GetValue<string>(FirstTimeProperty); }
-            set { SetValue(FirstTimeProperty, value); }
-        }
-        public static readonly PropertyData FirstTimeProperty = RegisterProperty("FirstTime", typeof(string));
+		// TODO: Register models with the vmpropmodel codesnippet
+		// TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
 
-        public string LastTime
-        {
-            get { return GetValue<string>(LastTimeProperty); }
-            set { SetValue(LastTimeProperty, value); }
-        }
-        public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof(string));
+		#region Additional Dependency Properties and Commands
 
         public bool IsEnabledLastTime
         {
@@ -55,13 +44,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
             set { SetValue(StartTimeProperty, value); }
         }
         public static readonly PropertyData StartTimeProperty = RegisterProperty("StartTime", typeof(string));
-
-        public string DateText
-        {
-            get { return GetValue<string>(DateTextProperty); }
-            set { SetValue(DateTextProperty, value); }
-        }
-        public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof(string));
 
         public string MinimumDate
         {
@@ -125,8 +107,35 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
         {
             _rootViewModel.ChangePage(new MenuViewModel(this));
         }
+		#endregion
 
-        protected override async Task InitializeAsync()
+
+
+		#region ViewModel Dependency Properties and Commands
+
+		public string FirstTime
+		{
+			get { return GetValue<string>(FirstTimeProperty); }
+			set { SetValue(FirstTimeProperty, value); }
+		}
+		public static readonly PropertyData FirstTimeProperty = RegisterProperty("FirstTime", typeof(string));
+
+		public string LastTime
+		{
+			get { return GetValue<string>(LastTimeProperty); }
+			set { SetValue(LastTimeProperty, value); }
+		}
+		public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof(string));
+
+		public string DateText
+		{
+			get { return GetValue<string>(DateTextProperty); }
+			set { SetValue(DateTextProperty, value); }
+		}
+		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof(string));
+		#endregion
+
+		protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
         }

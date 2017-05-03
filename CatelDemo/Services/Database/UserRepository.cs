@@ -22,14 +22,10 @@ namespace RestaurantHelper.Services.Database
 
         public static UserRepository GetRepositoryInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new UserRepository();
-            }
-            return _instance;
+	        return _instance ?? (_instance = new UserRepository());
         }
 
-        public void RefreshRepository()
+	    public void RefreshRepository()
         {
             using (FileStream stream = new FileStream(PATH, FileMode.Open))
             {
