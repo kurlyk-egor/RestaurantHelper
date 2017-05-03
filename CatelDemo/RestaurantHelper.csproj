@@ -98,6 +98,7 @@
     <Compile Include="Services\Database\TableRepository.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\TableConverter.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
@@ -244,7 +245,11 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Tables\table1.jpg" />
+    <Resource Include="Resources\Tables\table2.jpg" />
+    <Resource Include="Resources\Tables\table3.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\books.xml" />
     <Resource Include="Files\tables.xml" />

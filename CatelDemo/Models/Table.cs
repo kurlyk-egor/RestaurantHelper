@@ -47,5 +47,12 @@ namespace RestaurantHelper.Models
 			set { SetValue(LeftProperty, value); }
 		}
 		public static readonly PropertyData LeftProperty = RegisterProperty("Left", typeof(int));
+
+		public int Type
+		{
+			get { return GetValue<int>(TypeProperty); }
+			set { SetValue(TypeProperty, value); }
+		}
+		public static readonly PropertyData TypeProperty = RegisterProperty("Type", typeof(int));
 	}
 }

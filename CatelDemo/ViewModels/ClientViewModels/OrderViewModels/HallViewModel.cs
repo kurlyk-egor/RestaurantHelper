@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
@@ -76,8 +77,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
                 Thread.Sleep(200); // ожидание окончания события и непосредственного изменения свойства
 
                 int currentFirstTime = DateTime.Parse(FirstTime).Hour;
-                
-                StartTime = LastTime = $"{(currentFirstTime + 1)}:00";
+
+	            if (currentFirstTime < 8)
+	            {
+		            currentFirstTime = 8;
+	            }
+                StartTime = LastTime = $"{currentFirstTime + 1}:00";
                 IsEnabledLastTime = (currentFirstTime != 23);
             });
             thread.Start();
@@ -167,5 +172,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    {
 		     ((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
 	    }
+
+	    private int Hour() => DateTime.Now.Hour;
+	    private int Day() => DateTime.Today.Day;
     }
 }
