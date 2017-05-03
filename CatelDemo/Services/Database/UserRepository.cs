@@ -10,7 +10,7 @@ namespace RestaurantHelper.Services.Database
 {
     class UserRepository : IRepositoryBase<User>
     {
-        private const string PATH = @"..\..\CatelDemo\books.xml";
+        private const string PATH = @"..\..\CatelDemo\Files\books.xml";
         private static UserRepository _instance;
         private readonly XmlSerializer _serializer = new XmlSerializer(typeof(List<User>));
         private List<User> _users;
@@ -38,9 +38,9 @@ namespace RestaurantHelper.Services.Database
             return _users;
         }
 
-        public User GetItem(int itemId)
+        public User GetItem(int id)
         {
-            return _users.Find(u => u.Id == itemId);
+            return _users.Find(u => u.Id == id);
         }
 
         public void Insert(User item)
@@ -71,7 +71,7 @@ namespace RestaurantHelper.Services.Database
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
