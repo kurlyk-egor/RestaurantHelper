@@ -1,12 +1,12 @@
-﻿using Catel.Data;
-using CatelDemo.Models;
-using CatelDemo.Services.Database;
+﻿using System.Threading.Tasks;
+using Catel.Data;
+using Catel.MVVM;
+using RestaurantHelper.ViewModels;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
 
-namespace CatelDemo.ViewModels.ClientViewModels
+namespace RestaurantHelper.ViewModels.ClientViewModels
 {
-    using Catel.MVVM;
-    using System.Threading.Tasks;
-
     public class ProfileViewModel : ViewModelBase
     {
         private readonly IViewModel _previousViewModel;

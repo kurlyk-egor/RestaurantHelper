@@ -1,4 +1,4 @@
-﻿namespace CatelDemo.Views
+﻿namespace RestaurantHelper.Views
 {
     public partial class MainWindow
     {

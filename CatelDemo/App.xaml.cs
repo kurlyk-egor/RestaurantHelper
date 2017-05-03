@@ -1,4 +1,4 @@
-﻿namespace CatelDemo
+﻿namespace RestaurantHelper
 {
     using System.Windows;
 

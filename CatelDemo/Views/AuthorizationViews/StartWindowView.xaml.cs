@@ -1,4 +1,4 @@
-﻿namespace CatelDemo.Views.AuthorizationViews
+﻿namespace RestaurantHelper.Views.AuthorizationViews
 {
     public partial class StartWindowView
     {

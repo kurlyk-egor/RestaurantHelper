@@ -3,11 +3,11 @@ using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
-using CatelDemo.Models;
-using CatelDemo.Services.Other;
-using CatelDemo.ViewModels.ClientViewModels;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Other;
+using RestaurantHelper.ViewModels.ClientViewModels;
 
-namespace CatelDemo.ViewModels.AuthorizationViewModels
+namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class EnterViewModel : ViewModelBase
     {

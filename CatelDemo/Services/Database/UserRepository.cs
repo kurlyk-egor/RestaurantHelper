@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using Catel.Runtime.Serialization;
-using Catel.Runtime.Serialization.Xml;
-using CatelDemo.Models;
-using CatelDemo.Services.Interfaces;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Interfaces;
 using XmlSerializer = System.Xml.Serialization.XmlSerializer;
 
-namespace CatelDemo.Services.Database
+namespace RestaurantHelper.Services.Database
 {
     class UserRepository : IRepositoryBase<User>
     {
-        private const string PATH = @"..\..\CatelDemo\books.xml";
+        private const string PATH = @"..\..\RestaurantHelper\books.xml";
         private static UserRepository _instance;
         private readonly XmlSerializer _serializer = new XmlSerializer(typeof(List<User>));
         private List<User> _users;

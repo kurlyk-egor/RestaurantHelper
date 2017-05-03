@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catel.Data;
-using Catel.IoC;
-using Catel.Services;
-using CatelDemo.Services.Interfaces;
 
-namespace CatelDemo.Models
+namespace RestaurantHelper.Models
 {
     [Serializable]
     public class User : ModelBase

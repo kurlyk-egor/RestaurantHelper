@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CatelDemo.Services.Interfaces
+namespace RestaurantHelper.Services.Interfaces
 {
     public interface IRepositoryBase <T> : IDisposable
         where T : class

@@ -1,8 +1,8 @@
-﻿namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
-{
-    using Catel.MVVM;
-    using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Catel.MVVM;
 
+namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
+{
     public class TotalsViewModel : ViewModelBase
     {
         private readonly IViewModel _parentViewModel;

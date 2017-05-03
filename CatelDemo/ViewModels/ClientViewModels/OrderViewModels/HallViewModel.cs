@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
-using System.Windows;
+using System.Threading.Tasks;
 using Catel.Data;
-using CatelDemo.Services.Database;
-using CatelDemo.Services.Other;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using Catel.MVVM;
+using RestaurantHelper.ViewModels;
 
-namespace CatelDemo.ViewModels.ClientViewModels.OrderViewModels
+namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
-    using Catel.MVVM;
-    using System.Threading.Tasks;
-
     public class HallViewModel : ViewModelBase
     {
         private readonly IViewModel _parentViewModel;

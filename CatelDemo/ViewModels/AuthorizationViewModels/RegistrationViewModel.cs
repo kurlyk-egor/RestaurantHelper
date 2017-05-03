@@ -4,10 +4,10 @@ using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
-using CatelDemo.Models;
-using CatelDemo.Services.Database;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
 
-namespace CatelDemo.ViewModels.AuthorizationViewModels
+namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {

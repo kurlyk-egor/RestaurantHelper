@@ -11,17 +11,15 @@ using Catel.IoC;
 using Catel.MVVM;
 using Catel.MVVM.Views;
 using Catel.Services;
-using CatelDemo.Models;
-using CatelDemo.ViewModels;
-using CatelDemo.ViewModels.AuthorizationViewModels;
-using CatelDemo.ViewModels.ClientViewModels;
+using RestaurantHelper.ViewModels;
+using RestaurantHelper.Models;
+using RestaurantHelper.ViewModels.ClientViewModels;
 
-namespace CatelDemo.ViewModels
+namespace RestaurantHelper.ViewModels
 {
     using Catel.MVVM;
     using System.Threading.Tasks;
-
-    
+  
     public class MainWindowViewModel : ViewModelBase
     {
         public MainWindowViewModel()

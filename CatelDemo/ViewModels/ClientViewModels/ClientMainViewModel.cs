@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Catel.Data;
 using Catel.MVVM;
-using CatelDemo.Models;
-using CatelDemo.ViewModels.ClientViewModels.OrderViewModels;
+using RestaurantHelper.ViewModels;
+using RestaurantHelper.Models;
+using RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels;
 
-namespace CatelDemo.ViewModels.ClientViewModels
+namespace RestaurantHelper.ViewModels.ClientViewModels
 {
     public class ClientMainViewModel : ViewModelBase
     {

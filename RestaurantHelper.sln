@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatelDemo", "CatelDemo\CatelDemo.csproj", "{B14AC196-F1D6-404B-90E0-4EEE7A0A99CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantHelper", "CatelDemo\RestaurantHelper.csproj", "{B14AC196-F1D6-404B-90E0-4EEE7A0A99CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

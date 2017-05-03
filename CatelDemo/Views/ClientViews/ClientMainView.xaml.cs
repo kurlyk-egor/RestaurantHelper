@@ -1,4 +1,4 @@
-﻿namespace CatelDemo.Views.ClientViews
+﻿namespace RestaurantHelper.Views.ClientViews
 {
     public partial class ClientMainView
     {

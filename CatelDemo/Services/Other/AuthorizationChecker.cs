@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CatelDemo.Models;
-using CatelDemo.Services.Database;
-using CatelDemo.Services.Interfaces;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
 
-namespace CatelDemo.Services.Other
+namespace RestaurantHelper.Services.Other
 {
     class AuthorizationChecker
     {

@@ -1,4 +1,4 @@
-﻿namespace CatelDemo.Views.ClientViews.OrderViews
+﻿namespace RestaurantHelper.Views.ClientViews.OrderViews
 {
     public partial class MenuView
     {

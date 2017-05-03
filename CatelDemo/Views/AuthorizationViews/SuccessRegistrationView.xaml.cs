@@ -1,6 +1,6 @@
 ﻿using Catel.Windows;
 
-namespace CatelDemo.Views.AuthorizationViews
+namespace RestaurantHelper.Views.AuthorizationViews
 {
     public partial class SuccessRegistrationView : DataWindow
     {

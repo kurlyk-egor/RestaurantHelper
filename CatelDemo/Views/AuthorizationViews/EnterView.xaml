@@ -1,5 +1,5 @@
 ﻿<catel:UserControl
-    x:Class="CatelDemo.Views.AuthorizationViews.EnterView"
+    x:Class="RestaurantHelper.Views.AuthorizationViews.EnterView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Catel.MVVM;
 
-namespace CatelDemo.ViewModels.AuthorizationViewModels
+namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class StartWindowViewModel : ViewModelBase
     {
