@@ -94,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
