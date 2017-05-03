@@ -97,7 +97,8 @@
             Height="349"
             Margin="272,53,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            ItemsSource="{Binding Tables}" />
 
     </Grid>
 

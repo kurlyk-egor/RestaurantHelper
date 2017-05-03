@@ -8,7 +8,7 @@ using Catel.Data;
 namespace RestaurantHelper.Models
 {
 	[Serializable]
-	class Table : ModelBase
+	public class Table : ModelBase
 	{
 		public Table()
 		{			

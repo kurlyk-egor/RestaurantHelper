@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
+using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
 using RestaurantHelper.ViewModels;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
@@ -11,11 +16,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
     {
         private readonly IViewModel _parentViewModel;
         private readonly IViewModel _rootViewModel;
+	    private readonly TableRepository _tableRepository;
 
         public HallViewModel(IViewModel parentViewModel)
         {
             _parentViewModel = parentViewModel;
             _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+			_tableRepository = TableRepository.GetRepositoryInstance();
 
             BackCommand = new Command(OnBackCommandExecute);
             NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
@@ -24,6 +31,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
             DateTime maxDate = DateTime.Today.AddDays(10).Date;
             MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
+			AddAllTables();
         }
 
 		// TODO: Register models with the vmpropmodel codesnippet
@@ -117,6 +125,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof(string));
 
+		public ObservableCollection<Table> Tables
+		{
+			get { return GetValue<ObservableCollection<Table>>(TablesProperty); }
+			set { SetValue(TablesProperty, value); }
+		}
+		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof(ObservableCollection<Table>),
+			new ObservableCollection<Table>());
+
 
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
@@ -132,7 +148,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		private void OnNextCommandExecute()
 		{
-			_rootViewModel.ChangePage(new MenuViewModel(this));
+			// TODO: включить переход
+			//_rootViewModel.ChangePage(new MenuViewModel(this));
 		}
 		#endregion
 
@@ -145,5 +162,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
         {
             await base.CloseAsync();
         }
+
+	    private void AddAllTables()
+	    {
+		     ((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
+	    }
     }
 }
