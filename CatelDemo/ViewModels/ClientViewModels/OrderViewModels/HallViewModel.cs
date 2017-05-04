@@ -13,177 +13,235 @@ using RestaurantHelper.ViewModels;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
-    public class HallViewModel : ViewModelBase
-    {
-        private readonly IViewModel _parentViewModel;
-        private readonly IViewModel _rootViewModel;
-	    private readonly TableRepository _tableRepository;
+	public class HallViewModel : ViewModelBase
+	{
+		private readonly IViewModel _parentViewModel;
+		private readonly IViewModel _rootViewModel;
+		private readonly TableRepository _tableRepository;
 
-        public HallViewModel(IViewModel parentViewModel)
-        {
-            _parentViewModel = parentViewModel;
-            _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+		public HallViewModel(IViewModel parentViewModel)
+		{
+			_parentViewModel = parentViewModel;
+			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_tableRepository = TableRepository.GetRepositoryInstance();
 
-            BackCommand = new Command(OnBackCommandExecute);
-            NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
-            TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
-            DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
+			BackCommand = new Command(OnBackCommandExecute);
+			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
+			TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
+			DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
 
-	        DateTime today = DateTime.Now;
-	        if (today.Hour >= 22)
-	        {
-		        today = today.AddDays(1);
-	        }
-		    MinimumDate = $"{today.Month}.{today.Day}.{today.Year}";
+			DateTime today = DateTime.Now;
+			if (today.Hour >= 22)
+			{
+				today = today.AddDays(1);
+			}
+			MinimumDate = $"{today.Month}.{today.Day}.{today.Year}";
 
 			DateTime maxDate = today.AddDays(10).Date;
 			MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
 
 			AddAllTablesToObservableCollection();
-        }
+		}
 
 		// TODO: Register models with the vmpropmodel codesnippet
 		// TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
 
-		
-        public bool IsEnabledLastTime
-        {
-            get { return GetValue<bool>(IsEnabledLastTimeProperty); }
-            set { SetValue(IsEnabledLastTimeProperty, value); }
-        }
-        public static readonly PropertyData IsEnabledLastTimeProperty = RegisterProperty("IsEnabledLastTime", typeof(bool), false);
+
+		public bool IsEnabledLastTime
+		{
+			get { return GetValue<bool>(IsEnabledLastTimeProperty); }
+			set { SetValue(IsEnabledLastTimeProperty, value); }
+		}
+
+		public static readonly PropertyData IsEnabledLastTimeProperty = RegisterProperty("IsEnabledLastTime", typeof (bool),
+			false);
 
 		public string StartFirstTime
 		{
 			get { return GetValue<string>(StartFirstTimeProperty); }
 			set { SetValue(StartFirstTimeProperty, value); }
 		}
-		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof(string), "8:00");
 
-        public string StartLastTime
-        {
-            get { return GetValue<string>(StartLastTimeProperty); }
-            set { SetValue(StartLastTimeProperty, value); }
-        }
-        public static readonly PropertyData StartLastTimeProperty = RegisterProperty("StartLastTime", typeof(string));
+		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof (string),
+			"8:00");
 
-        public string MinimumDate
-        {
-            get { return GetValue<string>(MinimumDateProperty); }
-            set { SetValue(MinimumDateProperty, value); }
-        }
-        public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string));
+		public string StartLastTime
+		{
+			get { return GetValue<string>(StartLastTimeProperty); }
+			set { SetValue(StartLastTimeProperty, value); }
+		}
 
-        public string MaximumDate
-        {
-            get { return GetValue<string>(MaximumDateProperty); }
-            set { SetValue(MaximumDateProperty, value); }
-        }
-        public static readonly PropertyData MaximumDateProperty = RegisterProperty("MaximumDate", typeof(string));
+		public static readonly PropertyData StartLastTimeProperty = RegisterProperty("StartLastTime", typeof (string));
 
-        public Command TimeValuChangedCommand { get; private set; }
-        private void OnTimeValuChangedCommandExecute()
-        {
-            Thread thread = new Thread(() =>
-            {
-                Thread.Sleep(200); // ожидание окончания события и непосредственного изменения свойства
+		public string MinimumDate
+		{
+			get { return GetValue<string>(MinimumDateProperty); }
+			set { SetValue(MinimumDateProperty, value); }
+		}
 
-                int currentFirstTime = DateTime.Parse(FirstTime).Hour;
-	            //MessageBox.Show("change");
-                StartLastTime = LastTime = $"{currentFirstTime + 1}:00";
-                IsEnabledLastTime = (currentFirstTime != 23);
-            });
-            thread.Start();
-        }
+		public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string));
 
-        public Command DateValueChangedCommand { get; private set; }
-        private void OnDateValueChangedCommandExecute()
-        {
-            Thread thread = new Thread(() =>
-            {
-                Thread.Sleep(200); // ожидание окончания события и непосредственного изменения свойства
+		public string MaximumDate
+		{
+			get { return GetValue<string>(MaximumDateProperty); }
+			set { SetValue(MaximumDateProperty, value); }
+		}
 
-                if (DateTime.Parse(DateText).Date == DateTime.Today)
-                {
-                    int nowHour = DateTime.Now.Hour;
-	                if (nowHour < 8) nowHour = 8;
-	                else nowHour++;
-                    StartFirstTime = FirstTime = $"{nowHour}:00";
-                }
-                else
-                {
-	                StartFirstTime = "8:00";
-                }
+		public static readonly PropertyData MaximumDateProperty = RegisterProperty("MaximumDate", typeof (string));
+
+		public Command TimeValuChangedCommand { get; private set; }
+
+		private void OnTimeValuChangedCommandExecute()
+		{
+			Thread thread = new Thread(() =>
+			{
+				Thread.Sleep(200); // ожидание непосредственного изменения свойства
+
+				LastTimePickerHelper helper = new LastTimePickerHelper(FirstTime);
+				StartLastTime = helper.StartLastTime;
+				LastTime = helper.LastTime;
+				IsEnabledLastTime = true;
 			});
-            thread.Start();
-        }
+			thread.Start();
+		}
+
+		public Command DateValueChangedCommand { get; private set; }
+
+		private void OnDateValueChangedCommandExecute()
+		{
+			Thread thread = new Thread(() =>
+			{
+				Thread.Sleep(200); // ожидание непосредственного изменения свойства
+
+				FirstTimePickerHelper helper = new FirstTimePickerHelper(DateText);
+				StartFirstTime = helper.StartFirstTime;
+				FirstTime = helper.FirstTime;
+			});
+			thread.Start();
+		}
 
 		public string FirstTime
 		{
 			get { return GetValue<string>(FirstTimeProperty); }
 			set { SetValue(FirstTimeProperty, value); }
 		}
-		public static readonly PropertyData FirstTimeProperty = RegisterProperty("FirstTime", typeof(string));
+
+		public static readonly PropertyData FirstTimeProperty = RegisterProperty("FirstTime", typeof (string));
 
 		public string LastTime
 		{
 			get { return GetValue<string>(LastTimeProperty); }
 			set { SetValue(LastTimeProperty, value); }
 		}
-		public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof(string));
+
+		public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof (string));
 
 		public string DateText
 		{
 			get { return GetValue<string>(DateTextProperty); }
 			set { SetValue(DateTextProperty, value); }
 		}
-		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof(string));
+
+		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof (string));
 
 		public ObservableCollection<Table> Tables
 		{
 			get { return GetValue<ObservableCollection<Table>>(TablesProperty); }
 			set { SetValue(TablesProperty, value); }
 		}
-		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof(ObservableCollection<Table>),
+
+		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof (ObservableCollection<Table>),
 			new ObservableCollection<Table>());
 
 
 		public Command BackCommand { get; private set; }
+
 		private void OnBackCommandExecute()
 		{
 			_rootViewModel.ChangePage(_parentViewModel);
 		}
 
 		public Command NextCommand { get; private set; }
+
 		private bool OnNextCommandCanExecute()
 		{
 			// TODO: добавить обработчик доступности кнопки
 			return true;
 		}
+
 		private void OnNextCommandExecute()
 		{
 			// TODO: включить переход
 			//_rootViewModel.ChangePage(new MenuViewModel(this));
 		}
-		
+
 
 		protected override async Task InitializeAsync()
-        {
-            await base.InitializeAsync();
-        }
+		{
+			await base.InitializeAsync();
+		}
 
-        protected override async Task CloseAsync()
-        {
-            await base.CloseAsync();
-        }
+		protected override async Task CloseAsync()
+		{
+			await base.CloseAsync();
+		}
 
-	    private void AddAllTablesToObservableCollection()
-	    {
-		     ((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
-	    }
+		private void AddAllTablesToObservableCollection()
+		{
+			((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
+		}
 
-	    private int Hour() => DateTime.Now.Hour;
-	    private int Day() => DateTime.Today.Day;
-    }
+		/// <summary>
+		/// Класс считает подходящие значения в первом тайпикере
+		/// </summary>
+		public class FirstTimePickerHelper
+		{
+			private readonly DateTime _date;
+			public string FirstTime { get; set; }
+			public string StartFirstTime { get; set; }
+
+			public FirstTimePickerHelper(string curDate)
+			{
+				_date = DateTime.Parse(curDate);
+				CalcStartFirstTimeAndFirstTime();
+			}
+			
+			private void CalcStartFirstTimeAndFirstTime()
+			{
+				if (_date == DateTime.Today)
+				{
+					int nowHour = DateTime.Now.Hour;
+					nowHour = (nowHour < 8) ? 8 : nowHour + 1;
+					FirstTime = StartFirstTime = $"{nowHour}:00";
+				}
+				else
+				{
+					FirstTime = StartFirstTime = "8:00";
+				}
+			}
+		}
+
+
+		/// <summary>
+		/// Класс считает подходящие значения во втором тайпикере
+		/// </summary>
+		public class LastTimePickerHelper
+		{
+			private readonly DateTime _date;
+			public string LastTime { get; set; }
+			public string StartLastTime { get; set; }
+
+			public LastTimePickerHelper(string firstTime)
+			{
+				_date = DateTime.Parse(firstTime);
+				CalcStartLastTimeAndLastTime();
+			}
+
+			public void CalcStartLastTimeAndLastTime()
+			{
+				int currentFirstTime = _date.Hour;
+				StartLastTime = LastTime = $"{currentFirstTime + 1}:00";
+			}
+		}
+	}
 }
