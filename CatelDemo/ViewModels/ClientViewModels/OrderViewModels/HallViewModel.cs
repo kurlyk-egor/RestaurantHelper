@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Navigation;
+using System.Windows;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
@@ -30,16 +30,23 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
             TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
             DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
 
-            DateTime maxDate = DateTime.Today.AddDays(10).Date;
-            MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
-			AddAllTables();
+	        DateTime today = DateTime.Now;
+	        if (today.Hour >= 22)
+	        {
+		        today = today.AddDays(1);
+	        }
+		    MinimumDate = $"{today.Month}.{today.Day}.{today.Year}";
+
+			DateTime maxDate = today.AddDays(10).Date;
+			MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
+
+			AddAllTablesToObservableCollection();
         }
 
 		// TODO: Register models with the vmpropmodel codesnippet
 		// TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
 
-		#region Additional Dependency Properties and Commands
-
+		
         public bool IsEnabledLastTime
         {
             get { return GetValue<bool>(IsEnabledLastTimeProperty); }
@@ -47,20 +54,26 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
         }
         public static readonly PropertyData IsEnabledLastTimeProperty = RegisterProperty("IsEnabledLastTime", typeof(bool), false);
 
-        public string StartTime
+		public string StartFirstTime
+		{
+			get { return GetValue<string>(StartFirstTimeProperty); }
+			set { SetValue(StartFirstTimeProperty, value); }
+		}
+		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof(string), "8:00");
+
+        public string StartLastTime
         {
-            get { return GetValue<string>(StartTimeProperty); }
-            set { SetValue(StartTimeProperty, value); }
+            get { return GetValue<string>(StartLastTimeProperty); }
+            set { SetValue(StartLastTimeProperty, value); }
         }
-        public static readonly PropertyData StartTimeProperty = RegisterProperty("StartTime", typeof(string));
+        public static readonly PropertyData StartLastTimeProperty = RegisterProperty("StartLastTime", typeof(string));
 
         public string MinimumDate
         {
             get { return GetValue<string>(MinimumDateProperty); }
             set { SetValue(MinimumDateProperty, value); }
         }
-        public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string), 
-            $"{DateTime.Today.Month}.{DateTime.Today.Day}.{DateTime.Today.Year}");
+        public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string));
 
         public string MaximumDate
         {
@@ -77,12 +90,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
                 Thread.Sleep(200); // ожидание окончания события и непосредственного изменения свойства
 
                 int currentFirstTime = DateTime.Parse(FirstTime).Hour;
-
-	            if (currentFirstTime < 8)
-	            {
-		            currentFirstTime = 8;
-	            }
-                StartTime = LastTime = $"{currentFirstTime + 1}:00";
+	            //MessageBox.Show("change");
+                StartLastTime = LastTime = $"{currentFirstTime + 1}:00";
                 IsEnabledLastTime = (currentFirstTime != 23);
             });
             thread.Start();
@@ -98,16 +107,17 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
                 if (DateTime.Parse(DateText).Date == DateTime.Today)
                 {
                     int nowHour = DateTime.Now.Hour;
-                    FirstTime = $"{nowHour + 1}:00";
+	                if (nowHour < 8) nowHour = 8;
+	                else nowHour++;
+                    StartFirstTime = FirstTime = $"{nowHour}:00";
                 }
-            });
+                else
+                {
+	                StartFirstTime = "8:00";
+                }
+			});
             thread.Start();
         }
-		#endregion
-
-
-
-		#region ViewModel Dependency Properties and Commands
 
 		public string FirstTime
 		{
@@ -156,7 +166,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			// TODO: включить переход
 			//_rootViewModel.ChangePage(new MenuViewModel(this));
 		}
-		#endregion
+		
 
 		protected override async Task InitializeAsync()
         {
@@ -168,7 +178,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
             await base.CloseAsync();
         }
 
-	    private void AddAllTables()
+	    private void AddAllTablesToObservableCollection()
 	    {
 		     ((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
 	    }

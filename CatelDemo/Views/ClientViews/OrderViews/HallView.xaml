@@ -6,19 +6,18 @@
     xmlns:cnv="clr-namespace:RestaurantHelper.Services.Other"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:local="clr-namespace:RestaurantHelper.Models"
+    xmlns:xctg="http://schemas.xceed.com/wpf/xaml/datagrid"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Margin="-7"
     Background="Azure">
     <catel:UserControl.Resources>
-
         <cnv:TableConverter x:Key="ToPathConv" />
-        <Style TargetType="ListBox">
+        <Style x:Key="ListStyle" TargetType="ListBox">
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
-                        <Canvas Background="AliceBlue" />
+                        <Canvas Background="Aquamarine" />
                     </ItemsPanelTemplate>
-
                 </Setter.Value>
             </Setter>
         </Style>
@@ -54,12 +53,14 @@
 
         <xctk:TimePicker
             Grid.Column="0"
-            Margin="27,53,854,427"
+            Margin="27,53,798,427"
             AllowTextInput="False"
+            EndTime="22:00"
             FontSize="30"
             MaxDropDownHeight="200"
             ShowButtonSpinner="False"
-            StartTime="8:00"
+            ShowDropDownButton="True"
+            StartTime="{Binding StartFirstTime}"
             Text="{Binding FirstTime}"
             TimeInterval="1:00">
             <i:Interaction.Triggers>
@@ -71,15 +72,16 @@
 
         <xctk:TimePicker
             Grid.Column="0"
-            Margin="27,153,854,324"
+            Margin="27,153,798,324"
             AllowTextInput="False"
             FontSize="30"
             IsEnabled="{Binding IsEnabledLastTime}"
             MaxDropDownHeight="200"
             ShowButtonSpinner="False"
-            StartTime="8:00"
+            StartTime="{Binding StartLastTime}"
             Text="{Binding LastTime}"
             TimeInterval="1:00" />
+
         <TextBlock
             x:Name="textBlock"
             Margin="27,10,0,0"
@@ -138,7 +140,8 @@
             Margin="235,28,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            ItemsSource="{Binding Tables}" />
+            ItemsSource="{Binding Tables}"
+            Style="{StaticResource ListStyle}" />
 
     </Grid>
 
