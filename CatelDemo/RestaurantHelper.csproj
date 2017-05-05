@@ -98,6 +98,9 @@
     <Compile Include="Services\Database\TableRepository.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
+    <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
+    <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\TableConverter.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
@@ -254,6 +257,7 @@
     <Resource Include="Files\books.xml" />
     <Resource Include="Files\tables.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
+using Catel.MVVM.Views;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
-using RestaurantHelper.ViewModels;
+using RestaurantHelper.Services.Other.HallPickersHelpers;
+
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
@@ -30,31 +33,23 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
 			DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
 
-			DateTime today = DateTime.Now;
-			if (today.Hour >= 22)
-			{
-				today = today.AddDays(1);
-			}
-			MinimumDate = $"{today.Month}.{today.Day}.{today.Year}";
-
-			DateTime maxDate = today.AddDays(10).Date;
-			MaximumDate = $"{maxDate.Month}.{maxDate.Day}.{maxDate.Year}";
+			DateMinMaxHelper helper = new DateMinMaxHelper();
+			MinimumDate = helper.Minimum;
+			MaximumDate = helper.Maximum;
 
 			AddAllTablesToObservableCollection();
 		}
 
-		// TODO: Register models with the vmpropmodel codesnippet
-		// TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
 
+		#region Additional Properties and Commands
 
-		public bool IsEnabledLastTime
+		[ViewToViewModel(MappingType = ViewToViewModelMappingType.ViewModelToView)]
+		public bool IsEnabledTimePickers
 		{
-			get { return GetValue<bool>(IsEnabledLastTimeProperty); }
-			set { SetValue(IsEnabledLastTimeProperty, value); }
+			get { return GetValue<bool>(IsEnabledTimePickersProperty); }
+			set { SetValue(IsEnabledTimePickersProperty, value); }
 		}
-
-		public static readonly PropertyData IsEnabledLastTimeProperty = RegisterProperty("IsEnabledLastTime", typeof (bool),
-			false);
+		public static readonly PropertyData IsEnabledTimePickersProperty = RegisterProperty("IsEnabledTimePickers", typeof (bool), false);
 
 		public string StartFirstTime
 		{
@@ -62,8 +57,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			set { SetValue(StartFirstTimeProperty, value); }
 		}
 
-		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof (string),
-			"8:00");
+		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof (string), "8:00");
 
 		public string StartLastTime
 		{
@@ -100,7 +94,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				LastTimePickerHelper helper = new LastTimePickerHelper(FirstTime);
 				StartLastTime = helper.StartLastTime;
 				LastTime = helper.LastTime;
-				IsEnabledLastTime = true;
+				IsEnabledTimePickers = true;
 			});
 			thread.Start();
 		}
@@ -119,6 +113,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			});
 			thread.Start();
 		}
+		#endregion
+
+
+		#region View Model Properties and Commands
 
 		public string FirstTime
 		{
@@ -175,6 +173,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			//_rootViewModel.ChangePage(new MenuViewModel(this));
 		}
 
+		#endregion
+
 
 		protected override async Task InitializeAsync()
 		{
@@ -189,59 +189,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void AddAllTablesToObservableCollection()
 		{
 			((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
-		}
-
-		/// <summary>
-		/// Класс считает подходящие значения в первом тайпикере
-		/// </summary>
-		public class FirstTimePickerHelper
-		{
-			private readonly DateTime _date;
-			public string FirstTime { get; set; }
-			public string StartFirstTime { get; set; }
-
-			public FirstTimePickerHelper(string curDate)
-			{
-				_date = DateTime.Parse(curDate);
-				CalcStartFirstTimeAndFirstTime();
-			}
-			
-			private void CalcStartFirstTimeAndFirstTime()
-			{
-				if (_date == DateTime.Today)
-				{
-					int nowHour = DateTime.Now.Hour;
-					nowHour = (nowHour < 8) ? 8 : nowHour + 1;
-					FirstTime = StartFirstTime = $"{nowHour}:00";
-				}
-				else
-				{
-					FirstTime = StartFirstTime = "8:00";
-				}
-			}
-		}
-
-
-		/// <summary>
-		/// Класс считает подходящие значения во втором тайпикере
-		/// </summary>
-		public class LastTimePickerHelper
-		{
-			private readonly DateTime _date;
-			public string LastTime { get; set; }
-			public string StartLastTime { get; set; }
-
-			public LastTimePickerHelper(string firstTime)
-			{
-				_date = DateTime.Parse(firstTime);
-				CalcStartLastTimeAndLastTime();
-			}
-
-			public void CalcStartLastTimeAndLastTime()
-			{
-				int currentFirstTime = _date.Hour;
-				StartLastTime = LastTime = $"{currentFirstTime + 1}:00";
-			}
 		}
 	}
 }
