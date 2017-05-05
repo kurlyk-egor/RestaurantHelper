@@ -151,6 +151,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof (ObservableCollection<Table>),
 			new ObservableCollection<Table>());
 
+		public Table SelectedItemTable
+		{
+			get { return GetValue<Table>(SelectedItemTableProperty); }
+			set { SetValue(SelectedItemTableProperty, value); }
+		}
+
+		public static readonly PropertyData SelectedItemTableProperty = RegisterProperty("SelectedItemTable", typeof(Table));
 
 		public Command BackCommand { get; private set; }
 
@@ -163,8 +170,16 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		private bool OnNextCommandCanExecute()
 		{
-			// TODO: добавить обработчик доступности кнопки
-			return true;
+			bool result = true;
+			if (SelectedItemTable != null)
+			{
+				result = SelectedItemTable.Availability;
+			}
+			if (string.IsNullOrEmpty(FirstTime) || string.IsNullOrEmpty(LastTime) || string.IsNullOrEmpty(DateText))
+			{
+				result = false;
+			}
+			return result;
 		}
 
 		private void OnNextCommandExecute()

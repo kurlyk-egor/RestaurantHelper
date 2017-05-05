@@ -15,51 +15,57 @@
         <converters:TablePathConverter x:Key="PathConverter" />
         <converters:TableHeightConverter x:Key="HeightConverter" />
         <converters:TableWidthConverter x:Key="WidthConverter" />
+        <converters:TableAvailabilityConverter x:Key="AvailabilityConverter" />
 
-        <Style x:Key="ListStyle" TargetType="ListBox">
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <Canvas>
-                            <Canvas.Background>
-                                <ImageBrush ImageSource="../../../Files/../Resources/Tables/../../Resources/hallback.jpg" />
-                            </Canvas.Background>
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style x:Key="Style" TargetType="ListBox">
+            <Style.Setters>
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <Canvas>
+                                <Canvas.Background>
+                                    <ImageBrush ImageSource="../../../Files/../Resources/Tables/../../Resources/hallback.jpg" />
+                                </Canvas.Background>
+                            </Canvas>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
         </Style>
 
-        <DataTemplate DataType="{x:Type local:Table}">
-            <Canvas>
-                <Grid
-                    Canvas.Left="{Binding Left}"
-                    Canvas.Top="{Binding Top}"
-                    Width="{Binding Path=Type, Converter={StaticResource WidthConverter}}"
-                    Height="{Binding Path=Type, Converter={StaticResource HeightConverter}}">
+        <DataTemplate x:Key="DataTemplate">
+            <Canvas Width="{Binding Path=Type, Converter={StaticResource WidthConverter}}" Height="{Binding Path=Type, Converter={StaticResource HeightConverter}}">
+                <Border BorderBrush="{Binding Path=Availability, Converter={StaticResource AvailabilityConverter}}" BorderThickness="1">
+                    <Grid Width="{Binding Path=Type, Converter={StaticResource WidthConverter}}" Height="{Binding Path=Type, Converter={StaticResource HeightConverter}}">
 
-                    <Image Source="{Binding Path=Type, Converter={StaticResource PathConverter}}" Stretch="Fill">
-                        <Image.ToolTip>
-                            <StackPanel Width="250" TextBlock.FontSize="12">
-                                <TextBlock FontWeight="Bold" Text="Text" />
-                                <StackPanel Orientation="Horizontal">
-                                    <!--  Информация во всплывающем окне  -->
-                                    <TextBlock Text="" />
-                                    <TextBlock Text="" />
-                                    <TextBlock Text="" />
-                                </StackPanel>
-                                <TextBlock Text="" TextWrapping="Wrap" />
-                            </StackPanel>
-                        </Image.ToolTip>
-                    </Image>
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="16"
-                        Text="{Binding Number}" />
-                </Grid>
+                        <Image
+                            Grid.Row="0"
+                            Source="{Binding Path=Type, Converter={StaticResource PathConverter}}"
+                            Stretch="Fill" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="{Binding Number}" />
+
+                        <Rectangle
+                            Panel.ZIndex="1"
+                            Fill="{Binding Path=Availability, Converter={StaticResource AvailabilityConverter}}"
+                            Opacity="0.1" />
+                    </Grid>
+                    <Border.ToolTip>
+                        <StackPanel Width="250" TextBlock.FontSize="16">
+                            <TextBlock FontWeight="Bold" Text="Доступность столика" />
+                            <TextBlock FontWeight="Bold" Text="{Binding Availability}" />
+                        </StackPanel>
+                    </Border.ToolTip>
+                </Border>
             </Canvas>
         </DataTemplate>
+
+        <Style x:Key="ListBoxItemStyle">
+            <Setter Property="Canvas.Left" Value="{Binding Left}" />
+            <Setter Property="Canvas.Top" Value="{Binding Top}" />
+        </Style>
     </catel:UserControl.Resources>
 
 
@@ -147,18 +153,20 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </xctk:DateTimePicker>
-        <Polygon Points="240, 30, 240, 440, 840, 440, 840, 130, 640 ,30">
-        </Polygon>
+        <Polygon Points="240, 30, 240, 440, 840, 440, 840, 130, 640 ,30" />
+
         <ListBox
-            x:Name="listBox"
+            x:Name="TableViewer"
             Width="600"
             Height="410"
             Margin="240,30,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+            ItemTemplate="{StaticResource DataTemplate}"
             ItemsSource="{Binding Tables}"
-            Style="{StaticResource ListStyle}" />
-
+            SelectedItem="{Binding SelectedItemTable}"
+            Style="{StaticResource Style}" />
         <TextBlock
             x:Name="textBlock1"
             Margin="42,70,0,0"
@@ -180,7 +188,16 @@
             VerticalAlignment="Top"
             Text="Время  окончания посещения"
             TextWrapping="Wrap" />
-
+        <TextBox
+            x:Name="textBox"
+            Width="120"
+            Height="23"
+            Margin="857,210,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{Binding SelectedItemTable}"
+            Text="{Binding Number}"
+            TextWrapping="Wrap" />
     </Grid>
 
 </catel:UserControl>

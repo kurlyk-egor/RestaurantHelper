@@ -98,6 +98,7 @@
     <Compile Include="Services\Database\TableRepository.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
     <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
     <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
@@ -251,16 +252,17 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Tables\table1.jpg" />
-    <Resource Include="Resources\Tables\table2.jpg" />
-    <Resource Include="Resources\Tables\table3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Files\books.xml" />
     <Resource Include="Files\tables.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\hallback.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Tables\table1.jpg" />
+    <Resource Include="Resources\Tables\table2.jpg" />
+    <Resource Include="Resources\Tables\table3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

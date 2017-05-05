@@ -54,5 +54,13 @@ namespace RestaurantHelper.Models
 			set { SetValue(TypeProperty, value); }
 		}
 		public static readonly PropertyData TypeProperty = RegisterProperty("Type", typeof(int));
+
+		// вычисляемое поле на основе других таблиц
+		public bool Availability
+		{
+			get { return GetValue<bool>(AvailabilityProperty); }
+			set { SetValue(AvailabilityProperty, value); }
+		}
+		public static readonly PropertyData AvailabilityProperty = RegisterProperty("Availability", typeof(bool), null);
 	}
 }
