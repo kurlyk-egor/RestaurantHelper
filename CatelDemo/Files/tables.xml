@@ -1,53 +1,53 @@
 <?xml version="1.0"?>
 <ArrayOfTable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Table><Id>0</Id><Number>1</Number><SeatsNumber>4</SeatsNumber>
-    <Top>5</Top>
-    <Left>10</Left>
+  <Table><Id>1</Id><Number>1</Number><SeatsNumber>4</SeatsNumber>
+    <Top>10</Top>
+    <Left>20</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>1</Id><Number>2</Number><SeatsNumber>4</SeatsNumber>
-    <Top>110</Top>
-    <Left>10</Left>
+  <Table><Id>2</Id><Number>2</Number><SeatsNumber>4</SeatsNumber>
+    <Top>90</Top>
+    <Left>20</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>2</Id><Number>3</Number><SeatsNumber>4</SeatsNumber>
-    <Top>210</Top>
-    <Left>10</Left>
+  <Table><Id>3</Id><Number>3</Number><SeatsNumber>4</SeatsNumber>
+    <Top>170</Top>
+    <Left>20</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>3</Id><Number>4</Number><SeatsNumber>8</SeatsNumber>
-    <Top>310</Top>
-    <Left>10</Left>
+  <Table><Id>4</Id><Number>4</Number><SeatsNumber>8</SeatsNumber>
+    <Top>250</Top>
+    <Left>20</Left>
     <Type>3</Type>
   </Table>
-  <Table><Id>4</Id><Number>5</Number><SeatsNumber>4</SeatsNumber>
-    <Top>410</Top>
-    <Left>10</Left>
+  <Table><Id>5</Id><Number>5</Number><SeatsNumber>4</SeatsNumber>
+    <Top>310</Top>
+    <Left>200</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>5</Id><Number>6</Number><SeatsNumber>4</SeatsNumber>
-    <Top>400</Top>
-    <Left>150</Left>
+  <Table><Id>6</Id><Number>6</Number><SeatsNumber>4</SeatsNumber>
+    <Top>310</Top>
+    <Left>310</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>6</Id><Number>7</Number><SeatsNumber>6</SeatsNumber>
-    <Top>400</Top>
-    <Left>250</Left>
-    <Type>1</Type>
-  </Table>
-  <Table><Id>7</Id><Number>8</Number><SeatsNumber>4</SeatsNumber>
-    <Top>400</Top>
-    <Left>350</Left>
+  <Table><Id>7</Id><Number>7</Number><SeatsNumber>6</SeatsNumber>
+    <Top>310</Top>
+    <Left>420</Left>
     <Type>2</Type>
   </Table>
-  <Table><Id>8</Id><Number>9</Number><SeatsNumber>4</SeatsNumber>
-    <Top>310</Top>
-    <Left>500</Left>
+  <Table><Id>8</Id><Number>8</Number><SeatsNumber>4</SeatsNumber>
+    <Top>220</Top>
+    <Left>490</Left>
     <Type>1</Type>
   </Table>
-  <Table><Id>9</Id><Number>10</Number><SeatsNumber>6</SeatsNumber>
+  <Table><Id>9</Id><Number>9</Number><SeatsNumber>4</SeatsNumber>
     <Top>10</Top>
-    <Left>500</Left>
+    <Left>330</Left>
+    <Type>1</Type>
+  </Table>
+  <Table><Id>10</Id><Number>10</Number><SeatsNumber>6</SeatsNumber>
+    <Top>10</Top>
+    <Left>150</Left>
     <Type>2</Type>
   </Table>
 </ArrayOfTable>
