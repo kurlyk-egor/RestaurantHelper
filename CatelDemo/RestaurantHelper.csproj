@@ -100,6 +100,7 @@
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
     <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
     <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
+    <Compile Include="Services\Other\Converters\TableToolTipConverter.cs" />
     <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
@@ -253,7 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\books.xml" />
-    <Resource Include="Files\tables.xml" />
+    <Resource Include="Files\tables.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\hallback.jpg" />

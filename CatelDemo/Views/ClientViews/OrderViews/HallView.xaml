@@ -5,10 +5,9 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:converters="clr-namespace:RestaurantHelper.Services.Other.Converters"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:local="clr-namespace:RestaurantHelper.Models"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Margin="-7"
-    Background="Azure">
+    Background="White">
 
     <catel:UserControl.Resources>
 
@@ -16,6 +15,7 @@
         <converters:TableHeightConverter x:Key="HeightConverter" />
         <converters:TableWidthConverter x:Key="WidthConverter" />
         <converters:TableAvailabilityConverter x:Key="AvailabilityConverter" />
+        <converters:TableToolTipConverter x:Key="ToolTipConverter" />
 
         <Style x:Key="Style" TargetType="ListBox">
             <Style.Setters>
@@ -30,6 +30,7 @@
                         </ItemsPanelTemplate>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="BorderThickness" Value="0" />
             </Style.Setters>
         </Style>
 
@@ -38,33 +39,63 @@
                 <Border BorderBrush="{Binding Path=Availability, Converter={StaticResource AvailabilityConverter}}" BorderThickness="1">
                     <Grid Width="{Binding Path=Type, Converter={StaticResource WidthConverter}}" Height="{Binding Path=Type, Converter={StaticResource HeightConverter}}">
 
-                        <Image
-                            Grid.Row="0"
-                            Source="{Binding Path=Type, Converter={StaticResource PathConverter}}"
-                            Stretch="Fill" />
+                        <Image Source="{Binding Path=Type, Converter={StaticResource PathConverter}}" Stretch="Fill" />
                         <TextBlock
+                            Margin="0,0,0,5"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Heavy"
+                            Foreground="White"
                             Text="{Binding Number}" />
 
                         <Rectangle
                             Panel.ZIndex="1"
                             Fill="{Binding Path=Availability, Converter={StaticResource AvailabilityConverter}}"
-                            Opacity="0.1" />
+                            Opacity="0.07" />
                     </Grid>
                     <Border.ToolTip>
-                        <StackPanel Width="250" TextBlock.FontSize="16">
-                            <TextBlock FontWeight="Bold" Text="Доступность столика" />
-                            <TextBlock FontWeight="Bold" Text="{Binding Availability}" />
+                        <StackPanel
+                            Width="250"
+                            Orientation="Horizontal"
+                            TextBlock.FontSize="16">
+                            <TextBlock FontWeight="Bold" Text="Столик N" />
+                            <TextBlock FontWeight="Bold" Text="{Binding Number}" />
+                            <TextBlock FontWeight="Bold" Text="{Binding Path=Availability, Converter={StaticResource ToolTipConverter}}" />
                         </StackPanel>
                     </Border.ToolTip>
                 </Border>
             </Canvas>
         </DataTemplate>
 
-        <Style x:Key="ListBoxItemStyle">
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Canvas.Left" Value="{Binding Left}" />
             <Setter Property="Canvas.Top" Value="{Binding Top}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <Rectangle
+                                x:Name="SelectedTable"
+                                Margin="-5,-5,-7,-7"
+                                StrokeThickness="15">
+                                <Rectangle.Effect>
+                                    <BlurEffect Radius="15" />
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <ContentPresenter
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="SelectedTable" Property="Stroke" Value="#3A48CA" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </catel:UserControl.Resources>
 
@@ -103,26 +134,26 @@
             TimeInterval="1:00" />
 
         <TextBlock
-            x:Name="textBlock"
+            x:Name="TextBlock"
             Margin="27,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Ресторан открыт с 8:00 до 23:00"
             TextWrapping="Wrap" />
         <Button
-            x:Name="button"
+            x:Name="Button"
             Width="172"
             Height="65"
-            Margin="272,455,0,0"
+            Margin="311,475,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад" />
         <Button
-            x:Name="button1"
+            x:Name="Button1"
             Width="197"
             Height="65"
-            Margin="566,455,0,0"
+            Margin="521,475,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding NextCommand}"
@@ -168,28 +199,28 @@
             SelectedItem="{Binding SelectedItemTable}"
             Style="{StaticResource Style}" />
         <TextBlock
-            x:Name="textBlock1"
+            x:Name="TextBlock1"
             Margin="42,70,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Выберите дату посещения"
             TextWrapping="Wrap" />
         <TextBlock
-            x:Name="textBlock2"
+            x:Name="TextBlock2"
             Margin="40,198,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Время начала посещения"
             TextWrapping="Wrap" />
         <TextBlock
-            x:Name="textBlock3"
+            x:Name="TextBlock3"
             Margin="36,320,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Время  окончания посещения"
             TextWrapping="Wrap" />
         <TextBox
-            x:Name="textBox"
+            x:Name="TextBox"
             Width="120"
             Height="23"
             Margin="857,210,0,0"
