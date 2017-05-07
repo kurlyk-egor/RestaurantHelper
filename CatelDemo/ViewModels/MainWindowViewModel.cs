@@ -13,6 +13,7 @@ using Catel.MVVM.Views;
 using Catel.Services;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
+using RestaurantHelper.ViewModels.AuthorizationViewModels;
 using RestaurantHelper.ViewModels.ClientViewModels;
 
 namespace RestaurantHelper.ViewModels

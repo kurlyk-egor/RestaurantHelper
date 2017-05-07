@@ -79,7 +79,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             }
             else
             {
-                //_parentViewModel
                 messageService.ShowAsync("Пользователь не зарегистрирован");
             }
         }

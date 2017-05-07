@@ -9,4 +9,5 @@
   <User><Id>8</Id><Login>NewUser</Login><Password>NewPassword</Password><Name>New new new</Name><Phone>5553535</Phone></User>
   <User><Id>9</Id><Login>йувуц</Login><Password>йуйуц</Password><Name>ца</Name><Phone>1</Phone></User>
   <User><Id>6</Id><Login>Viking</Login><Password>new password</Password><Name>Курлык</Name><Phone>375298933692</Phone></User>
+  <User><Id>10</Id><Login>стас</Login><Password>стля</Password><Name>щыкалат</Name><Phone>5553535</Phone></User>
 </ArrayOfUser>

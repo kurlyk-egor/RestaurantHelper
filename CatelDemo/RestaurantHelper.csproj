@@ -127,6 +127,10 @@
     <Compile Include="Views\ClientViews\ClientMainView.xaml.cs">
       <DependentUpon>ClientMainView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\ResourceDictionaries\HallResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AuthorizationViews\EnterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
