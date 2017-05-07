@@ -26,7 +26,7 @@ namespace RestaurantHelper.Services.Other.Converters
 					case 2:
 						return DEFAULT_HEIGHT;		
 					case 3:
-						return DEFAULT_HEIGHT * 2;
+						return DEFAULT_HEIGHT * 1.8;
 				}
 			}
 

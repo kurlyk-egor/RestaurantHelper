@@ -87,6 +87,16 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="SelectedTable" Property="Stroke" Value="#3A48CA" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="SelectedTable" Property="Stroke" Value="AliceBlue" />
+                                <Setter TargetName="SelectedTable" Property="Border.BorderThickness" Value="25" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

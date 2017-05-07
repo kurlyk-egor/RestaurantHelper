@@ -7,19 +7,19 @@
     <Availability>true</Availability>
   </Table>
   <Table><Id>2</Id><Number>2</Number><SeatsNumber>4</SeatsNumber>
-    <Top>90</Top>
+    <Top>97</Top>
     <Left>20</Left>
     <Type>1</Type>
     <Availability>false</Availability>
   </Table>
   <Table><Id>3</Id><Number>3</Number><SeatsNumber>4</SeatsNumber>
-    <Top>170</Top>
+    <Top>177</Top>
     <Left>20</Left>
     <Type>1</Type>
     <Availability>true</Availability>
   </Table>
   <Table><Id>4</Id><Number>4</Number><SeatsNumber>8</SeatsNumber>
-    <Top>250</Top>
+    <Top>265</Top>
     <Left>20</Left>
     <Type>3</Type>
     <Availability>false</Availability>
@@ -32,18 +32,18 @@
   </Table>
   <Table><Id>6</Id><Number>6</Number><SeatsNumber>4</SeatsNumber>
     <Top>310</Top>
-    <Left>310</Left>
+    <Left>305</Left>
     <Type>1</Type>
     <Availability>true</Availability>
   </Table>
   <Table><Id>7</Id><Number>7</Number><SeatsNumber>6</SeatsNumber>
     <Top>310</Top>
-    <Left>420</Left>
+    <Left>435</Left>
     <Type>2</Type>
     <Availability>true</Availability>
   </Table>
   <Table><Id>8</Id><Number>8</Number><SeatsNumber>4</SeatsNumber>
-    <Top>200</Top>
+    <Top>180</Top>
     <Left>490</Left>
     <Type>1</Type>
     <Availability>true</Availability>

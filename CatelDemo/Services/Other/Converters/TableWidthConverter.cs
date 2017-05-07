@@ -26,7 +26,7 @@ namespace RestaurantHelper.Services.Other.Converters
 						return DEFAULT_WIDTH;
 					case 2:
 					case 3:
-						return (DEFAULT_WIDTH * 2);
+						return (DEFAULT_WIDTH * 1.8);
 				}
 			}
 
