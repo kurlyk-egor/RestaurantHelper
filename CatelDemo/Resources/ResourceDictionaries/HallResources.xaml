@@ -9,6 +9,7 @@
     <local:TableAvailabilityConverter x:Key="AvailabilityConverter" />
     <local:TableToolTipConverter x:Key="ToolTipConverter" />
     <local:DateToTimeConverter x:Key="DateToTimeConverter" />
+    <local:DateStringConverter x:Key="DateStringConverter" />
 
     <Style x:Key="Style" TargetType="ListBox">
         <Style.Setters>

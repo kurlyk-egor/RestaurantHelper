@@ -68,6 +68,7 @@
             Command="{Binding NextCommand}"
             Content="Далее" />
         <xctk:DateTimePicker
+            x:Name="DatePicker"
             Width="175"
             Height="62"
             Margin="27,108,0,0"
@@ -155,6 +156,40 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock
+            x:Name="textBlock"
+            Margin="852,93,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Брони столика:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock1"
+            Margin="874,129,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Столик не выбран"
+            TextWrapping="Wrap"
+            Visibility="{Binding CaptionVisibility}" />
+        <TextBlock
+            x:Name="textBlock2"
+            Margin="852,70,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="0.411,-0.719"
+            Text="Дата:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox"
+            Width="76"
+            Height="22"
+            Margin="898,64,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="Bisque"
+            BorderThickness="1"
+            IsEnabled="False"
+            Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateStringConverter}}" />
     </Grid>
 
 </catel:UserControl>

@@ -48,6 +48,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			MaximumDate = helper.Maximum;
 
 			AddAllTablesToObservableCollection();
+			TableReservations.Clear();
+			ReservationsListRefresh();
 		}
 
 
@@ -93,6 +95,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public static readonly PropertyData MaximumDateProperty = RegisterProperty("MaximumDate", typeof (string));
 
+		public Visibility CaptionVisibility
+		{
+			get { return GetValue<Visibility>(CaptionVisibilityProperty); }
+			set { SetValue(CaptionVisibilityProperty, value); }
+		}
+		public static readonly PropertyData CaptionVisibilityProperty = RegisterProperty("CaptionVisibility", typeof(Visibility), Visibility.Visible);
+
+
 		public Command TimeValuChangedCommand { get; private set; }
 
 		private void OnTimeValuChangedCommandExecute() // выбрали какое то время
@@ -107,6 +117,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				IsEnabledTimePickers = true;
 			});
 			thread.Start();
+
+			ReservationsListRefresh(); // дата установлена
 		}
 
 		public Command DateValueChangedCommand { get; private set; }
@@ -124,6 +136,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			thread.Start();
 		}
 		#endregion
+
 
 
 		#region View Model Properties and Commands
@@ -181,14 +194,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public Command TableSelectionChanged { get; private set; }
 		private void OnTableSelectionChangedExecute()
 		{
-			if (DateText != null)
-			{
-				TableReservations.Clear();
-				((ICollection<Reservation>) TableReservations).AddRange(_availabilityChecker
-					.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
-			}
+			CaptionVisibility = Visibility.Collapsed;
+			ReservationsListRefresh();
 		}
-
 
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
@@ -200,15 +208,18 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public Command NextCommand { get; private set; }
 		private bool OnNextCommandCanExecute()
 		{
-			bool result;
+			ReservationsListRefresh();
+			bool result = false;
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
 				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime),
 					DateTime.Parse(DateText));
 				result = true;
 			}
-
-			result = SelectedItemTable != null && SelectedItemTable.Availability;
+			if (result)
+			{
+				result = SelectedItemTable != null && SelectedItemTable.Availability;
+			}
 			return result;
 		}
 		private void OnNextCommandExecute()
@@ -239,6 +250,19 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void AddAllTablesToObservableCollection()
 		{
 			((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
+		}
+
+		private void ReservationsListRefresh()
+		{
+			TableReservations.Clear();
+			_availabilityChecker.ResetValues();
+			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
+			{
+				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText));
+
+				((ICollection<Reservation>)TableReservations).AddRange(_availabilityChecker
+					.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
+			}
 		}
 	}
 }

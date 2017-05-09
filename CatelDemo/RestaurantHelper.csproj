@@ -100,6 +100,7 @@
     <Compile Include="Services\Database\TableRepository.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
     <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
     <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
     <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
