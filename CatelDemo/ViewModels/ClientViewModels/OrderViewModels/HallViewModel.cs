@@ -5,12 +5,14 @@ using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Catel;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
 using Catel.MVVM.Views;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Other;
 using RestaurantHelper.Services.Other.HallPickersHelpers;
 
 
@@ -19,19 +21,27 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	public class HallViewModel : ViewModelBase
 	{
 		private readonly IViewModel _parentViewModel;
+		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
 		private readonly TableRepository _tableRepository;
+		private readonly ReservationRepository _reservationRepository;
+		private readonly TablesAvailabilityChecker _availabilityChecker;
 
-		public HallViewModel(IViewModel parentViewModel)
+		public HallViewModel(IViewModel parentViewModel, User user)
 		{
 			_parentViewModel = parentViewModel;
+			_user = user;
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_tableRepository = TableRepository.GetRepositoryInstance();
+			_reservationRepository = ReservationRepository.GetRepositoryInstance();
+			_availabilityChecker = new TablesAvailabilityChecker(_tableRepository.GetCollection());
 
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
+
 			TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
 			DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
+			TableSelectionChanged = new Command(OnTableSelectionChangedExecute);
 
 			DateMinMaxHelper helper = new DateMinMaxHelper();
 			MinimumDate = helper.Minimum;
@@ -85,7 +95,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public Command TimeValuChangedCommand { get; private set; }
 
-		private void OnTimeValuChangedCommandExecute()
+		private void OnTimeValuChangedCommandExecute() // выбрали какое то время
 		{
 			Thread thread = new Thread(() =>
 			{
@@ -101,7 +111,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public Command DateValueChangedCommand { get; private set; }
 
-		private void OnDateValueChangedCommandExecute()
+		private void OnDateValueChangedCommandExecute() // выбрали дату
 		{
 			Thread thread = new Thread(() =>
 			{
@@ -159,33 +169,58 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public static readonly PropertyData SelectedItemTableProperty = RegisterProperty("SelectedItemTable", typeof(Table));
 
-		public Command BackCommand { get; private set; }
+		public ObservableCollection<Reservation> TableReservations
+		{
+			get { return GetValue<ObservableCollection<Reservation>>(TableReservationsProperty); }
+			set { SetValue(TableReservationsProperty, value); }
+		}
+		public static readonly PropertyData TableReservationsProperty = RegisterProperty("TableReservations", typeof(ObservableCollection<Reservation>), 
+			new ObservableCollection<Reservation>());
 
+
+		public Command TableSelectionChanged { get; private set; }
+		private void OnTableSelectionChangedExecute()
+		{
+			if (DateText != null)
+			{
+				TableReservations.Clear();
+				((ICollection<Reservation>) TableReservations).AddRange(_availabilityChecker
+					.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
+			}
+		}
+
+
+		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
 			_rootViewModel.ChangePage(_parentViewModel);
 		}
 
-		public Command NextCommand { get; private set; }
 
+		public Command NextCommand { get; private set; }
 		private bool OnNextCommandCanExecute()
 		{
-			bool result = true;
-			if (SelectedItemTable != null)
+			bool result;
+			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
-				result = SelectedItemTable.Availability;
+				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime),
+					DateTime.Parse(DateText));
+				result = true;
 			}
-			if (string.IsNullOrEmpty(FirstTime) || string.IsNullOrEmpty(LastTime) || string.IsNullOrEmpty(DateText))
-			{
-				result = false;
-			}
+
+			result = SelectedItemTable != null && SelectedItemTable.Availability;
 			return result;
 		}
-
 		private void OnNextCommandExecute()
 		{
-			// TODO: включить переход
-			//_rootViewModel.ChangePage(new MenuViewModel(this));
+			Reservation reservation = new Reservation(_user.Id, SelectedItemTable.Number,
+				DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText).Date);
+
+			_reservationRepository.Insert(reservation);
+			// TODO: сохранять изменения только после подтверждения заказа!
+			_reservationRepository.SaveChanges();
+
+			_rootViewModel.ChangePage(new MenuViewModel(this, reservation));
 		}
 
 		#endregion

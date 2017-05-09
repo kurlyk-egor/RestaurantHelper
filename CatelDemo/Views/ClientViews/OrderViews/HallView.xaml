@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
-    xmlns:converters="clr-namespace:RestaurantHelper.Services.Other.Converters"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Margin="-7"
@@ -107,7 +106,14 @@
             ItemTemplate="{StaticResource DataTemplate}"
             ItemsSource="{Binding Tables}"
             SelectedItem="{Binding SelectedItemTable}"
-            Style="{StaticResource Style}" />
+            Style="{StaticResource Style}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding TableSelectionChanged}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
         <TextBlock
             x:Name="TextBlock1"
             Margin="42,70,0,0"
@@ -129,16 +135,26 @@
             VerticalAlignment="Top"
             Text="Время  окончания посещения"
             TextWrapping="Wrap" />
-        <TextBox
-            x:Name="TextBox"
-            Width="120"
-            Height="23"
-            Margin="857,210,0,0"
+        <ListBox
+            x:Name="listBox"
+            Width="142"
+            Height="240"
+            Margin="852,114,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            DataContext="{Binding SelectedItemTable}"
-            Text="{Binding Number}"
-            TextWrapping="Wrap" />
+            BorderThickness="0"
+            ItemsSource="{Binding TableReservations}">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=FirstTime, Converter={StaticResource DateToTimeConverter}}" />
+                        <TextBlock Text="-" />
+                        <TextBlock Text="{Binding Path=LastTime, Converter={StaticResource DateToTimeConverter}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 
 </catel:UserControl>

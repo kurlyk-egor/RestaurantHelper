@@ -51,6 +51,7 @@ namespace RestaurantHelper.Services.Database
 		public void Insert(Table item)
 		{
 			item.Id = NextId();
+			_tables.Add(item);
 		}
 
 		public void Delete(Table item)

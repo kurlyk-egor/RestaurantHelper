@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Catel.Data;
 
 namespace RestaurantHelper.Models
@@ -55,12 +56,12 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData TypeProperty = RegisterProperty("Type", typeof(int));
 
-		// вычисляемое поле на основе других таблиц
+		[XmlIgnore]
 		public bool Availability
 		{
 			get { return GetValue<bool>(AvailabilityProperty); }
 			set { SetValue(AvailabilityProperty, value); }
 		}
-		public static readonly PropertyData AvailabilityProperty = RegisterProperty("Availability", typeof(bool), null);
+		public static readonly PropertyData AvailabilityProperty = RegisterProperty("Availability", typeof(bool), true);
 	}
 }

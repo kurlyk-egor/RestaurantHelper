@@ -43,7 +43,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
         private void OnOrderCommandExecute()
         {
-            _parentViewModel.ChangePage(new HallViewModel(this));
+            _parentViewModel.ChangePage(new HallViewModel(this, _user));
         }
 
         private void OnMyOrdersCommandExecute()

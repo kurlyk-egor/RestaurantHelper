@@ -4,14 +4,46 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
+    <Grid Width="500" Height="500">
+        <TextBox
+            x:Name="textBox"
+            Width="120"
+            Height="23"
+            Margin="367,69,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox1"
+            Width="120"
+            Height="23"
+            Margin="380,128,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="TextBox"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock"
+            Margin="301,131,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="ClientId"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock1"
+            Margin="301,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="TextBlock"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock2"
+            Margin="301,72,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Id"
+            TextWrapping="Wrap" />
 
-        <Label Content="{Binding Title}" />
-        <Label Content="Here goes your real content" />
-    </catel:StackGrid>
+    </Grid>
 
 </catel:UserControl>
