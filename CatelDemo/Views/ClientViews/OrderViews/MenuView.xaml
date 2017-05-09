@@ -4,46 +4,76 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <Grid Width="500" Height="500">
-        <TextBox
-            x:Name="textBox"
-            Width="120"
-            Height="23"
-            Margin="367,69,0,0"
+    <Grid Width="700" Height="500">
+        <ListBox
+            x:Name="listBox"
+            Width="419"
+            Height="332"
+            Margin="23,73,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <ListBox
+            x:Name="listBox1"
+            Width="173"
+            Height="275"
+            Margin="505,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <Button
+            x:Name="button"
+            Width="132"
+            Height="53"
+            Margin="23,437,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="textBox1"
-            Width="120"
-            Height="23"
-            Margin="380,128,0,0"
+            Content="Назад" />
+        <Button
+            x:Name="button1"
+            Width="138"
+            Height="43"
+            Margin="304,410,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="TextBox"
-            TextWrapping="Wrap" />
+            Content="Добавить" />
+        <Button
+            x:Name="button2"
+            Width="173"
+            Height="43"
+            Margin="505,348,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Удалить" />
         <TextBlock
             x:Name="textBlock"
-            Margin="301,131,0,0"
+            Margin="36,37,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="ClientId"
+            Text="Выберите блюда из списка ниже:"
             TextWrapping="Wrap" />
+        <Button
+            x:Name="button3"
+            Width="141"
+            Height="53"
+            Margin="537,437,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Далее" />
+        <Image
+            x:Name="image"
+            Width="63"
+            Height="63"
+            Margin="442,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Source="../../../Resources/arrows.jpg"
+            Stretch="Uniform" />
         <TextBlock
             x:Name="textBlock1"
-            Margin="301,187,0,0"
+            Margin="505,40,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="TextBlock"
+            Text="Ваш заказ:"
             TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock2"
-            Margin="301,72,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Id"
-            TextWrapping="Wrap" />
-
     </Grid>
 
 </catel:UserControl>

@@ -5,4 +5,5 @@
   <Reservation><Id>4</Id><UserId>6</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-09T18:00:00</FirstTime><LastTime>2017-05-09T20:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
   <Reservation><Id>5</Id><UserId>6</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
   <Reservation><Id>6</Id><UserId>6</UserId><TableNumber>9</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
+  <Reservation><Id>7</Id><UserId>6</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
 </ArrayOfReservation>
