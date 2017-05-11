@@ -49,7 +49,7 @@ namespace RestaurantHelper.Models
         protected override void ValidateFields(List<IFieldValidationResult> validationResults)
         {
             // TODO: если не сделаю валидацию лучше, пусть будет хоть какая нибудь
-            if (string.IsNullOrEmpty(Name))
+           /* if (string.IsNullOrEmpty(Name))
             {
                 validationResults.Add(FieldValidationResult.CreateError(NameProperty, "Name cannot be empty"));
             }
@@ -57,7 +57,7 @@ namespace RestaurantHelper.Models
             if (string.IsNullOrEmpty(Phone))
             {
                 validationResults.Add(FieldValidationResult.CreateError(PhoneProperty, "Phone cannot be empty"));
-            }
+            }*/
         }
 
         public override string ToString()

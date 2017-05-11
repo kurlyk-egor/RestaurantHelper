@@ -19,6 +19,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    private readonly IViewModel _rootViewModel;
 	    private readonly TableRepository _tableRepository;
 	    private readonly ReservationRepository _reservationRepository;
+	    private readonly OrderedDishRepository _orderedDishRepository;
 	    private readonly OrderRepository _orderRepository;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
@@ -30,7 +31,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_sumCalculator = new OrderedSumCalculator();
 			_tableRepository = TableRepository.GetRepositoryInstance();
 			_orderRepository = OrderRepository.GetRepositoryInstance();
+			_orderedDishRepository = OrderedDishRepository.GetRepositoryInstance();
 			_reservationRepository = ReservationRepository.GetRepositoryInstance();
+
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			BackCommand = new Command(OnBackCommandExecute);
@@ -115,7 +118,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void OnOrderCommandExecute()
 		{
 			SaveReservation();
-			SaveOrder();
+			SaveOrderWithDishes();
 			_rootViewModel.ChangePage(new ClientMainViewModel(_user));
 		}
 
@@ -152,18 +155,31 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_reservationRepository.SaveChanges();
 		}
 
-		private void SaveOrder()
+		private void SaveOrderWithDishes()
 		{
-			Order order = new Order();
-			order.UserId = _user.Id;
-			order.ReservationId = _reservation.Id;
-			
-			Dictionary<int, int> dishesDictionary = _orderedDishes.ToDictionary(dish => dish.Id, dish => dish.Quantity);
-			order.Dishes = dishesDictionary;
+			Order order = new Order
+			{
+				UserId = _user.Id,
+				ReservationId = _reservation.Id
+			};
 
 			_orderRepository.Insert(order);
+			// TODO: Id будет генерить БД, но нам нужен индекс только что созданного заказа
+			var orderId = _orderRepository.GetCollection().Max(o => o.Id);
+
+			foreach (var dish in _orderedDishes)
+			{
+				OrderedDish orderedDish = new OrderedDish
+				{
+					OrderId = orderId,
+					DishId = dish.Id,
+					Quantity = dish.Quantity,
+				};
+				_orderedDishRepository.Insert(orderedDish);
+			}
 
 			_orderRepository.SaveChanges();
+			_orderedDishRepository.SaveChanges();
 		}
 	}
 }

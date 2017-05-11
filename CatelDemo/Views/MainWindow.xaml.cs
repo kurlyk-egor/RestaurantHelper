@@ -1,4 +1,6 @@
-﻿namespace RestaurantHelper.Views
+﻿using System.Windows.Input;
+
+namespace RestaurantHelper.Views
 {
     public partial class MainWindow
     {
@@ -6,5 +8,10 @@
         {
             InitializeComponent();
         }
+
+	    private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+	    {
+		    DragMove();
+	    }
     }
 }

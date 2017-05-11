@@ -48,7 +48,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
         private void OnMyOrdersCommandExecute()
         {
-            // TODO: Handle command logic here
+            _parentViewModel.ChangePage(new MyOrdersViewModel(this, _user));
         }
 
         private void OnProfileCommandExecute()

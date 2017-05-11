@@ -30,16 +30,5 @@ namespace RestaurantHelper.Models
 			set { SetValue(ReservationIdProperty, value); }
 		}
 		public static readonly PropertyData ReservationIdProperty = RegisterProperty("ReservationId", typeof(int));
-
-		/// <summary>
-		/// ключ - Id блюда;
-		/// значение - количество заказанных блюд
-		/// </summary>
-		public Dictionary<int, int> Dishes
-		{
-			get { return GetValue<Dictionary<int, int>>(DishesProperty); }
-			set { SetValue(DishesProperty, value); }
-		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(Dictionary<int, int>), new Dictionary<int, int>());
 	}
 }

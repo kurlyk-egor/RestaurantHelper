@@ -4,9 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     Margin="-7">
-    <catel:UserControl.Background>
-        <ImageBrush ImageSource="../../Resources/back.jpg" />
-    </catel:UserControl.Background>
+
     <Grid
         x:Name="LayoutRoot"
         MinWidth="500"

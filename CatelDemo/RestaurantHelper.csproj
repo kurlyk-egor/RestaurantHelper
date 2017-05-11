@@ -46,6 +46,14 @@
       <HintPath>..\packages\Catel.MVVM.4.5.4\lib\net45\Catel.MVVM.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.0.823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.0.823\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -96,9 +104,12 @@
     </ApplicationDefinition>
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderedDish.cs" />
+    <Compile Include="Models\OrderWithReservationInfo.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Services\Database\DishRepository.cs" />
+    <Compile Include="Services\Database\OrderedDishRepository.cs" />
     <Compile Include="Services\Database\OrderRepository.cs" />
     <Compile Include="Services\Database\ReservationRepository.cs" />
     <Compile Include="Services\Database\TableRepository.cs" />
@@ -116,11 +127,14 @@
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
+    <Compile Include="Services\ValidationRules\NotEmptyValidationRule.cs" />
+    <Compile Include="Services\ValidationRules\NumericTextBoxValidationRule.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\SuccessRegistrationViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ClientMainViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\MyOrdersViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\HallViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
@@ -164,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ClientViews\MyOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ClientViews\OrderViews\HallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +209,9 @@
     <Compile Include="Services\Interfaces\IRepositoryBase.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\ClientViews\MyOrdersView.xaml.cs">
+      <DependentUpon>MyOrdersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClientViews\OrderViews\HallView.xaml.cs">
       <DependentUpon>HallView.xaml</DependentUpon>
     </Compile>
@@ -267,7 +288,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\books.xml" />
+    <Resource Include="Files\books.xml">
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="Files\tables.xml">
       <SubType>Designer</SubType>
     </Resource>
@@ -292,8 +315,16 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\orders.xml" />
+    <Resource Include="Files\orders.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\ordered_dishes.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,8 +15,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
     public class MenuViewModel : ViewModelBase
     {
+		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
-	    private readonly User _user;
 	    private readonly Reservation _reservation;
 	    private readonly DishRepository _dishRepository;
 		private readonly OrderedSumCalculator _sumCalculator;
@@ -140,7 +140,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public Command NextCommand { get; private set; }
 		private bool OnNextCommandCanExecute()
 		{
-			return true;
+			return TotalSum != 0;
 		}
 		private void OnNextCommandExecute()
 		{

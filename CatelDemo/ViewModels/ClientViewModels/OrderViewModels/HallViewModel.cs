@@ -255,7 +255,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void ReservationsListRefresh()
 		{
 			TableReservations.Clear();
-			_availabilityChecker.ResetValues();
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
 				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText));
@@ -269,11 +268,15 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 
 		private void SetViewModelProperties(Reservation reservation)
-		{		
+		{	
+			FirstTimePickerHelper fHelper = new FirstTimePickerHelper(reservation.Day.ToShortDateString());
+			StartFirstTime = fHelper.StartFirstTime;
 			FirstTime = reservation.FirstTime.ToShortTimeString();
-			LastTimePickerHelper helper = new LastTimePickerHelper(FirstTime);
-			StartLastTime = helper.StartLastTime;
+
+			LastTimePickerHelper lHelper = new LastTimePickerHelper(FirstTime);
+			StartLastTime = lHelper.StartLastTime;
 			LastTime = reservation.LastTime.ToShortTimeString();
+
 			DateText = reservation.Day.ToShortDateString();
 			SelectedItemTable = Tables.FirstOrDefault(table => table.Number == reservation.TableId);
 			CaptionVisibility = Visibility.Collapsed;

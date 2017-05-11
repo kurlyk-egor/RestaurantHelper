@@ -63,5 +63,8 @@ namespace RestaurantHelper.Models
 			set { SetValue(AvailabilityProperty, value); }
 		}
 		public static readonly PropertyData AvailabilityProperty = RegisterProperty("Availability", typeof(bool), true);
+
+
+		public override string ToString() => $"{Availability}";
 	}
 }

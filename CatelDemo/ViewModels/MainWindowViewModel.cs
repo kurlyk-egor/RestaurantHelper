@@ -25,10 +25,10 @@ namespace RestaurantHelper.ViewModels
     {
         public MainWindowViewModel()
         {
-            // TODO: можно пропустить авторизацию и запускать главное окно, передавая существующего юзера
-            //CurrentPage = new StartWindowViewModel(this);
-            // TODO: user есть в списке
-            CurrentPage = new ClientMainViewModel(new User() {Id = 6, Login = "Viking", Password="sukasobaka", Name = "Курлык", Phone = "375298933692"});
+            // TODO: запуск авторизации
+            CurrentPage = new StartWindowViewModel(this);
+            // user есть в списке
+            //CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
 
             // собственные пространства имен
             var viewModelLocator = ServiceLocator.Default.ResolveType<IViewModelLocator>();
@@ -52,7 +52,7 @@ namespace RestaurantHelper.ViewModels
         }
         public static readonly PropertyData CurrentPageProperty = RegisterProperty("CurrentPage", typeof(IViewModel));
 
-        public override string Title => "CourseProject";
+        public override string Title => "RestaurantHelperClient";
 
         protected override async Task InitializeAsync()
         {
