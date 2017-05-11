@@ -20,16 +20,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
 	public class HallViewModel : ViewModelBase
 	{
-		private readonly IViewModel _parentViewModel;
 		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
 		private readonly TableRepository _tableRepository;
 		private readonly ReservationRepository _reservationRepository;
 		private readonly TablesAvailabilityChecker _availabilityChecker;
 
-		public HallViewModel(IViewModel parentViewModel, User user)
+		public HallViewModel(User user, ViewModelProperties viewModelProperties = null)
 		{
-			_parentViewModel = parentViewModel;
 			_user = user;
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_tableRepository = TableRepository.GetRepositoryInstance();
@@ -50,8 +48,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			AddAllTablesToObservableCollection();
 			TableReservations.Clear();
 			ReservationsListRefresh();
-		}
 
+			if (viewModelProperties != null)
+			{
+				SetViewModelProperties(viewModelProperties);
+			}
+		}
 
 		#region Additional Properties and Commands
 
@@ -201,11 +203,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
-			_rootViewModel.ChangePage(_parentViewModel);
+			_rootViewModel.ChangePage(new ClientMainViewModel(_user));
 		}
 
 
 		public Command NextCommand { get; private set; }
+
 		private bool OnNextCommandCanExecute()
 		{
 			ReservationsListRefresh();
@@ -227,11 +230,11 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			Reservation reservation = new Reservation(_user.Id, SelectedItemTable.Number,
 				DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText).Date);
 
-			_reservationRepository.Insert(reservation);
+			//_reservationRepository.Insert(reservation);
 			// TODO: сохранять изменения только после подтверждения заказа!
-			_reservationRepository.SaveChanges();
+			//_reservationRepository.SaveChanges();
 
-			_rootViewModel.ChangePage(new MenuViewModel(this, reservation));
+			_rootViewModel.ChangePage(new MenuViewModel(_user, reservation, GetViewModelProperties()));
 		}
 
 		#endregion
@@ -260,9 +263,28 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			{
 				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText));
 
-				((ICollection<Reservation>)TableReservations).AddRange(_availabilityChecker
-					.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
+				if (SelectedItemTable != null)
+				{
+					((ICollection<Reservation>) TableReservations)
+						.AddRange(_availabilityChecker.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
+				}
 			}
+		}
+
+		private void SetViewModelProperties(ViewModelProperties vmProps)
+		{
+			FirstTime = vmProps.FirstTime;
+			LastTime = vmProps.LastTime;
+			DateTime date = DateTime.Parse(vmProps.DateText);
+			DateText = date.ToShortDateString();
+			SelectedItemTable = vmProps.SelectedTable;
+			CaptionVisibility = Visibility.Collapsed;
+			IsEnabledTimePickers = true;
+		}
+
+		private ViewModelProperties GetViewModelProperties()
+		{
+			return new ViewModelProperties(FirstTime, LastTime, DateText, SelectedItemTable);
 		}
 	}
 }

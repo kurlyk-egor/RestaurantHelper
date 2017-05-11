@@ -1,9 +1,4 @@
 <?xml version="1.0"?>
 <ArrayOfReservation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Reservation><Id>2</Id><UserId>6</UserId><TableNumber>5</TableNumber><FirstTime>2017-05-09T08:00:00</FirstTime><LastTime>2017-05-09T09:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
-  <Reservation><Id>3</Id><UserId>6</UserId><TableNumber>3</TableNumber><FirstTime>2017-05-09T10:00:00</FirstTime><LastTime>2017-05-09T11:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
-  <Reservation><Id>4</Id><UserId>6</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-09T18:00:00</FirstTime><LastTime>2017-05-09T20:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
-  <Reservation><Id>5</Id><UserId>6</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
-  <Reservation><Id>6</Id><UserId>6</UserId><TableNumber>9</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
-  <Reservation><Id>7</Id><UserId>6</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-09T20:00:00</FirstTime><LastTime>2017-05-09T21:00:00</LastTime><Day>2017-05-09T00:00:00</Day></Reservation>
+  <Reservation><Id>1</Id><UserId>6</UserId><TableNumber>1</TableNumber><FirstTime>2017-05-11T08:00:00</FirstTime><LastTime>2017-05-11T09:00:00</LastTime><Day>2017-05-21T00:00:00</Day></Reservation>
 </ArrayOfReservation>

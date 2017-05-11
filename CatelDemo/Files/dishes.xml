@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfDish xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Dish><Id>1</Id><Name>Борщ хохляцкий</Name><Price>250</Price><PictureId>1</PictureId></Dish>
+  <Dish><Id>2</Id><Name>Драники</Name><Price>200</Price><PictureId>2</PictureId></Dish>
+  <Dish><Id>3</Id><Name>Гамбургер</Name><Price>130</Price><PictureId>3</PictureId></Dish>
+  <Dish><Id>4</Id><Name>Грибной суп</Name><Price>120</Price><PictureId>4</PictureId></Dish>
+  <Dish><Id>5</Id><Name>Вырезка свиная</Name><Price>220</Price><PictureId>5</PictureId></Dish>
+  <Dish><Id>6</Id><Name>Тирамису</Name><Price>150</Price><PictureId>6</PictureId></Dish>
+  <Dish><Id>7</Id><Name>Овощное рагу</Name><Price>160</Price><PictureId>7</PictureId></Dish>
+  <Dish><Id>8</Id><Name>Пицца грибная</Name><Price>170</Price><PictureId>8</PictureId></Dish>
+  <Dish><Id>9</Id><Name>Омлет со шкварками</Name><Price>110</Price><PictureId>9</PictureId></Dish>
+  <Dish><Id>10</Id><Name>Десерт творожный</Name><Price>100</Price><PictureId>10</PictureId></Dish>
+</ArrayOfDish>

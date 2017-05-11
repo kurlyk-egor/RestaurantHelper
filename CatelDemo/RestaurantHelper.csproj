@@ -94,8 +94,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Dish.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Table.cs" />
+    <Compile Include="Services\Database\DishRepository.cs" />
+    <Compile Include="Services\Database\OrderRepository.cs" />
     <Compile Include="Services\Database\ReservationRepository.cs" />
     <Compile Include="Services\Database\TableRepository.cs" />
     <Compile Include="Services\Database\UserRepository.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
+    <Compile Include="Services\Other\ViewModelProperties.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
@@ -280,6 +285,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrows.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\dishes.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
