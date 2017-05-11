@@ -5,7 +5,7 @@
     xmlns:catel="http://catel.codeplex.com"
     Margin="-7">
     <catel:UserControl.Background>
-        <ImageBrush ImageSource="../../Resources/clientmain.jpg" />
+        <ImageBrush ImageSource="../../Resources/1750_2500.png" />
     </catel:UserControl.Background>
 
     <Grid MinWidth="350" MinHeight="500">
@@ -17,7 +17,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OrderCommand}"
-            Content="Заказать" />
+            Content="Заказать" BorderBrush="#FFECEAEA" FontFamily="Batang" FontSize="18" Foreground="#FF4B567A" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button1"
             Width="139"
@@ -26,7 +34,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding MyOrdersCommand}"
-            Content="Мои заказы" />
+            Content="Мои заказы" BorderBrush="#FFECEAEA" FontFamily="Batang" FontSize="16" Foreground="#FF384261" >
+        <Button.Background>
+            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+            </LinearGradientBrush>
+        </Button.Background>
+        </Button>
         <Button
             x:Name="button2"
             Width="139"
@@ -35,7 +51,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding ProfileCommand}"
-            Content="Профиль" />
+            Content="Профиль" BorderBrush="#FFEAE8E8" FontFamily="Batang" FontSize="18" Foreground="#FF404A6C" >
+        <Button.Background>
+            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+            </LinearGradientBrush>
+        </Button.Background>
+        </Button>
         <Button
             x:Name="button3"
             Width="139"
@@ -44,7 +68,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding RewiewsCommand}"
-            Content="Отзывы" />
+            Content="Отзывы" BorderBrush="#FFEAEAEA" FontFamily="Batang" FontSize="18" Foreground="#FF3B4463" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button4"
             Width="139"
@@ -53,7 +85,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding QuestionsCommand}"
-            Content="Вопросы" />
+            Content="Вопросы" BorderBrush="#FFE6E5E5" FontFamily="Batang" FontSize="18" Foreground="#FF323A57" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button5"
             Width="139"
@@ -62,18 +102,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding ExitCommand}"
-            Content="Выход" />
-
-        <TextBlock
-            x:Name="textBlock"
-            MinWidth="100"
-            Margin="38,45,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="Aquamarine"
-            Text="{Binding AuthorizedString}"
-            TextWrapping="Wrap" />
-
+            Content="Выход" BorderBrush="#FFE4E3E3" FontFamily="Batang" FontSize="18" Foreground="#FF3F4A6E" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
+                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
+                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 
 </catel:UserControl>

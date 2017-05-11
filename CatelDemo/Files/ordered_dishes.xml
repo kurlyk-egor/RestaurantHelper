@@ -21,4 +21,5 @@
   <OrderedDish><Id>19</Id><OrderId>12</OrderId><DishId>8</DishId><Quantity>1</Quantity></OrderedDish>
   <OrderedDish><Id>20</Id><OrderId>13</OrderId><DishId>8</DishId><Quantity>1</Quantity></OrderedDish>
   <OrderedDish><Id>21</Id><OrderId>13</OrderId><DishId>2</DishId><Quantity>3</Quantity></OrderedDish>
+  <OrderedDish><Id>22</Id><OrderId>14</OrderId><DishId>7</DishId><Quantity>1</Quantity></OrderedDish>
 </ArrayOfOrderedDish>
