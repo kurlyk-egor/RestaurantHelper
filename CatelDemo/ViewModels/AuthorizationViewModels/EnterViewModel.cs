@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Catel;
 using Catel.Data;
@@ -28,16 +29,19 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 			TryEnterCommand = new Command(OnTryEnterCommandExecute);//, OnTryEnterCommandCanExecute);
         }
 
-        // TODO: Register models with the vmpropmodel codesnippet
-
-
-        // TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
         public string Login
         {
             get { return GetValue<string>(LoginProperty); }
             set { SetValue(LoginProperty, value); }
         }
         public static readonly PropertyData LoginProperty = RegisterProperty("Login", typeof(string));
+
+		public string LoginErrorInfo
+		{
+			get { return GetValue<string>(LoginErrorInfoProperty); }
+			set { SetValue(LoginErrorInfoProperty, value); }
+		}
+		public static readonly PropertyData LoginErrorInfoProperty = RegisterProperty("LoginErrorInfo", typeof(string), string.Empty);
 
         public string Password
         {
@@ -71,6 +75,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 		private void OnValidateFieldsCommandExecute()
 		{
 			IsEnabledEnterButton = User.IsValidLogin(Login) && User.IsValidPhone(Password);
+			//LoginErrorInfo = 
 		}
 
         private void OnTryEnterCommandExecute()

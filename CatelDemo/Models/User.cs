@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Catel.Data;
 using System.Linq;
+using Xceed.Wpf.DataGrid.Converters;
 
 namespace RestaurantHelper.Models
 {

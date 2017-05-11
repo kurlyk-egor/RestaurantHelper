@@ -24,11 +24,16 @@
             TextWrapping="Wrap">
             <TextBox.Text>
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
+                    <!--<Binding.ValidationRules>
                         <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
+                    </Binding.ValidationRules>-->
                 </Binding>
             </TextBox.Text>
+            <TextBox.ToolTip>
+                <StackPanel>
+                    <TextBlock Text="{Binding LoginErrorInfo}" />
+                </StackPanel>
+            </TextBox.ToolTip>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <catel:EventToCommand Command="{Binding ValidateFieldsCommand}" />
@@ -45,9 +50,9 @@
             TextWrapping="Wrap">
             <TextBox.Text>
                 <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
+                    <!--<Binding.ValidationRules>
                         <validation:NumericTextBoxValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
+                    </Binding.ValidationRules>-->
                 </Binding>
             </TextBox.Text>
             <i:Interaction.Triggers>
