@@ -14,7 +14,6 @@ namespace RestaurantHelper.Models
 	{
 		public Dish()
 		{
-
 		}
 
 		public int Id
@@ -56,7 +55,7 @@ namespace RestaurantHelper.Models
 
 		public override string ToString()
 		{
-			return $"{Id}: {Name} {Price} {PictureId} x {Quantity}";
+			return $"{Id}: {Name} | {Price} x {Quantity}";
 		}
 	}
 }

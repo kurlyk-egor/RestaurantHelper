@@ -189,7 +189,7 @@
             VerticalAlignment="Top"
             BorderBrush="Bisque"
             BorderThickness="1"
-            IsEnabled="False"
+            IsReadOnly="True"
             Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateStringConverter}}" />
     </Grid>
 

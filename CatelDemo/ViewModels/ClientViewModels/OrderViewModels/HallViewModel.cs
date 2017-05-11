@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,17 +22,19 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	public class HallViewModel : ViewModelBase
 	{
 		private readonly User _user;
+		private readonly ObservableCollection<Dish> _orderedDishes;
 		private readonly IViewModel _rootViewModel;
 		private readonly TableRepository _tableRepository;
-		private readonly ReservationRepository _reservationRepository;
+		private readonly Reservation _reservation;
 		private readonly TablesAvailabilityChecker _availabilityChecker;
 
-		public HallViewModel(User user, ViewModelProperties viewModelProperties = null)
+		public HallViewModel(User user, Reservation reservation = null, ObservableCollection<Dish> orderedDishes = null)
 		{
 			_user = user;
+			_orderedDishes = orderedDishes;
+			_reservation = new Reservation();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_tableRepository = TableRepository.GetRepositoryInstance();
-			_reservationRepository = ReservationRepository.GetRepositoryInstance();
 			_availabilityChecker = new TablesAvailabilityChecker(_tableRepository.GetCollection());
 
 			BackCommand = new Command(OnBackCommandExecute);
@@ -49,9 +52,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			TableReservations.Clear();
 			ReservationsListRefresh();
 
-			if (viewModelProperties != null)
+			if (reservation != null)
 			{
-				SetViewModelProperties(viewModelProperties);
+				SetViewModelProperties(reservation);
 			}
 		}
 
@@ -227,14 +230,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		private void OnNextCommandExecute()
 		{
-			Reservation reservation = new Reservation(_user.Id, SelectedItemTable.Number,
-				DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText).Date);
-
-			//_reservationRepository.Insert(reservation);
-			// TODO: сохранять изменения только после подтверждения заказа!
-			//_reservationRepository.SaveChanges();
-
-			_rootViewModel.ChangePage(new MenuViewModel(_user, reservation, GetViewModelProperties()));
+			SaveReservation();
+			_rootViewModel.ChangePage(new MenuViewModel(_user, _reservation, _orderedDishes));
 		}
 
 		#endregion
@@ -271,20 +268,25 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 		}
 
-		private void SetViewModelProperties(ViewModelProperties vmProps)
-		{
-			FirstTime = vmProps.FirstTime;
-			LastTime = vmProps.LastTime;
-			DateTime date = DateTime.Parse(vmProps.DateText);
-			DateText = date.ToShortDateString();
-			SelectedItemTable = vmProps.SelectedTable;
+		private void SetViewModelProperties(Reservation reservation)
+		{		
+			FirstTime = reservation.FirstTime.ToShortTimeString();
+			LastTimePickerHelper helper = new LastTimePickerHelper(FirstTime);
+			StartLastTime = helper.StartLastTime;
+			LastTime = reservation.LastTime.ToShortTimeString();
+			DateText = reservation.Day.ToShortDateString();
+			SelectedItemTable = Tables.FirstOrDefault(table => table.Number == reservation.TableId);
 			CaptionVisibility = Visibility.Collapsed;
 			IsEnabledTimePickers = true;
 		}
 
-		private ViewModelProperties GetViewModelProperties()
+		private void SaveReservation()
 		{
-			return new ViewModelProperties(FirstTime, LastTime, DateText, SelectedItemTable);
+			_reservation.FirstTime = DateTime.Parse(FirstTime);
+			_reservation.LastTime = DateTime.Parse(LastTime);
+			_reservation.Day = DateTime.Parse(DateText);
+			_reservation.TableId = SelectedItemTable.Number;
+			_reservation.UserId = _user.Id;
 		}
 	}
 }

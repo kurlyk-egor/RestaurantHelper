@@ -4,14 +4,166 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
+    <Grid Width="368" Height="400">
+        <TextBlock
+            x:Name="textBlock"
+            Margin="60,27,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Text="Детали Вашего заказа, " />
+            <Run Text="{Binding UserLogin}" />
+            <Run Text=":" />
+        </TextBlock>
+        <Button
+            x:Name="button"
+            Width="93"
+            Height="30"
+            Margin="38,343,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding BackCommand}"
+            Content="Назад" />
+        <Button
+            x:Name="button1"
+            Width="85"
+            Height="31"
+            Margin="262,343,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding OrderCommand}"
+            Content="Заказать!" />
+        <TextBlock
+            x:Name="textBlock1"
+            Margin="38,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Столик"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock2"
+            Margin="183,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Мест:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox"
+            Width="39"
+            Height="23"
+            Margin="237,63,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding TableSeatsNumber}"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox1"
+            Width="42"
+            Height="23"
+            Margin="101,63,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding TableNumber}"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock3"
+            Margin="38,111,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Дата посещения:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox2"
+            Width="120"
+            Height="23"
+            Margin="156,104,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding VisitDate}"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock4"
+            Margin="38,147,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Время:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox3"
+            Width="62"
+            Height="23"
+            Margin="93,144,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding FirstTime}"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox4"
+            Width="63"
+            Height="23"
+            Margin="194,144,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding LastTime}"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock5"
+            Width="8"
+            Margin="172,147,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="-"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock6"
+            Width="75"
+            Margin="38,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Заказанные товары"
+            TextWrapping="Wrap" />
+        <ListBox
+            x:Name="listBox"
+            Width="187"
+            Height="74"
+            Margin="118,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding OrderedDishes}" />
+        <TextBlock
+            x:Name="textBlock7"
+            Height="21"
+            Margin="38,277,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Сумма:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox5"
+            Width="95"
+            Height="23"
+            Margin="118,274,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding TotalSum}"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock8"
+            Margin="38,310,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Контактный телефон:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox6"
+            Width="133"
+            Height="23"
+            Margin="183,307,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding PhoneNumber}"
+            TextWrapping="Wrap" />
 
-        <Label Content="{Binding Title}" />
-        <Label Content="Here goes your real content" />
-    </catel:StackGrid>
+    </Grid>
 
 </catel:UserControl>

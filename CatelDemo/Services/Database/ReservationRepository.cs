@@ -84,6 +84,7 @@ namespace RestaurantHelper.Services.Database
 
 		private int NextId()
 		{
+			if (_reservations.Count == 0) return 1;
 			int max = _reservations.Max(table => table.Id);
 			return ++max;
 		}

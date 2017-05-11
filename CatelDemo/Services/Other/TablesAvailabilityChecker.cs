@@ -32,7 +32,7 @@ namespace RestaurantHelper.Services.Other
 
 			foreach (var r in reservations) // у недоступных значение меняем на false
 			{
-				_tables.Find(t => t.Number == r.TableNumber).Availability = false;
+				_tables.Find(t => t.Number == r.TableId).Availability = false;
 			}
 		}
 
@@ -47,7 +47,7 @@ namespace RestaurantHelper.Services.Other
 		// брони на сегодня
 		public List<Reservation> GetDaylyReservationsForTable(DateTime day, int tableNumber)
 		{
-			return _reservations.GetCollection().Where(r => r.Day.Date == day.Date && r.TableNumber == tableNumber).ToList();
+			return _reservations.GetCollection().Where(r => r.Day.Date == day.Date && r.TableId == tableNumber).ToList();
 		} 
 	}
 }

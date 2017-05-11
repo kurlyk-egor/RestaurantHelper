@@ -18,14 +18,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly IViewModel _rootViewModel;
 	    private readonly User _user;
 	    private readonly Reservation _reservation;
-	    private readonly ViewModelProperties _viewModelProperties;
 	    private readonly DishRepository _dishRepository;
+		private readonly OrderedSumCalculator _sumCalculator;
 
-		public MenuViewModel(User user, Reservation reservation, ViewModelProperties viewModelProperties)
+		public MenuViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes = null)
 	    {
 			_user = user;
 			_reservation = reservation;
-			_viewModelProperties = viewModelProperties;
+			_sumCalculator = new OrderedSumCalculator();
 			_dishRepository = DishRepository.GetRepositoryInstance();
 		    _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
@@ -35,6 +35,16 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
 
 			AddDishesToCollection();
+
+			if (orderedDishes != null)
+			{
+				OrderedDishes = orderedDishes;
+				TotalSum = _sumCalculator.GetCurrentSum(OrderedDishes);
+			}
+			else
+			{
+				OrderedDishes.Clear();
+			}
 	    }
 
 		public ObservableCollection<Dish> Dishes
@@ -104,7 +114,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 
 			OrderedDishes.Sort((d1, d2) => d1.Quantity - d2.Quantity);
-			CalculateTotals();
+			TotalSum = _sumCalculator.GetCurrentSum(OrderedDishes);
 			CurrentDishesCount = 1;
 		}
 
@@ -117,13 +127,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		{
 			SelectedOrderedDish.Quantity = 1;
 			OrderedDishes.Remove(SelectedOrderedDish);
-			CalculateTotals();
+			TotalSum = _sumCalculator.GetCurrentSum(OrderedDishes);
 		}
 
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
-			_rootViewModel.ChangePage(new HallViewModel(_user, _viewModelProperties));
+			_rootViewModel.ChangePage(new HallViewModel(_user, _reservation, OrderedDishes));
 		}
 
 
@@ -134,7 +144,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		private void OnNextCommandExecute()
 		{
-			
+			_rootViewModel.ChangePage(new TotalsViewModel(_user, _reservation, OrderedDishes));
 		}
 
         protected override async Task InitializeAsync()
@@ -151,16 +161,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		{
 			Dishes.Clear();
 			((ICollection<Dish>)Dishes).AddRange(_dishRepository.GetCollection());
-		}
-
-		private void CalculateTotals()
-		{
-			int sum = 0;
-			if (OrderedDishes.Any())
-			{
-				sum += OrderedDishes.Sum(dish => dish.Price * dish.Quantity);
-			}
-			TotalSum = sum;
 		}
 	}
 }

@@ -14,14 +14,6 @@ namespace RestaurantHelper.Models
 		{
 		}
 
-		public Reservation(int userId, int tableNumber, DateTime firsTime, DateTime lastTime, DateTime day)
-		{
-			UserId = userId;
-			TableNumber = tableNumber;
-			FirstTime = firsTime;
-			LastTime = lastTime;
-			Day = day;
-		}
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }
@@ -36,7 +28,7 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData ClientIdProperty = RegisterProperty("UserId", typeof(int));
 
-		public int TableNumber
+		public int TableId
 		{
 			get { return GetValue<int>(TableNumberProperty); }
 			set { SetValue(TableNumberProperty, value); }

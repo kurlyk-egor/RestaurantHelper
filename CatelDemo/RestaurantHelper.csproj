@@ -114,8 +114,8 @@
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
+    <Compile Include="Services\Other\OrderedSumCalculator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
-    <Compile Include="Services\Other\ViewModelProperties.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
@@ -290,6 +290,9 @@
     <Resource Include="Files\dishes.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\orders.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
