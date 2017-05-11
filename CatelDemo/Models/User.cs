@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Catel.Data;
+using System.Linq;
 
 namespace RestaurantHelper.Models
 {
@@ -45,20 +46,15 @@ namespace RestaurantHelper.Models
         }
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
 
+	    public static bool IsValidLogin(string login)
+	    {
+		    return !string.IsNullOrWhiteSpace(login);
+	    }
 
-        protected override void ValidateFields(List<IFieldValidationResult> validationResults)
-        {
-            // TODO: если не сделаю валидацию лучше, пусть будет хоть какая нибудь
-           /* if (string.IsNullOrEmpty(Name))
-            {
-                validationResults.Add(FieldValidationResult.CreateError(NameProperty, "Name cannot be empty"));
-            }
-
-            if (string.IsNullOrEmpty(Phone))
-            {
-                validationResults.Add(FieldValidationResult.CreateError(PhoneProperty, "Phone cannot be empty"));
-            }*/
-        }
+	    public static bool IsValidPhone(string phone)
+	    {
+		    return !string.IsNullOrWhiteSpace(phone) && phone.ToCharArray().Count(c => !char.IsDigit(c)) == 0;
+	    }
 
         public override string ToString()
         {

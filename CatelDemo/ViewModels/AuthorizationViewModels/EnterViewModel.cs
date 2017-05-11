@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using System.Windows.Controls;
+using Catel;
 using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
@@ -6,6 +8,7 @@ using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.ViewModels.ClientViewModels;
+using Xceed.Wpf.Toolkit;
 
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
@@ -21,7 +24,8 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             _previousViewModel = previousViewModel;
 
             BackCommand = new Command(OnBackCommandExecute);
-            TryEnterCommand = new Command(OnTryEnterCommandExecute, OnTryEnterCommandCanExecute);
+			ValidateFieldsCommand = new Command(OnValidateFieldsCommandExecute);
+			TryEnterCommand = new Command(OnTryEnterCommandExecute);//, OnTryEnterCommandCanExecute);
         }
 
         // TODO: Register models with the vmpropmodel codesnippet
@@ -42,7 +46,15 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         }
         public static readonly PropertyData PasswordProperty = RegisterProperty("Password", typeof(string));
 
-        // TODO: Register commands with the vmcommand or vmcommandwithcanexecute codesnippets
+
+		public bool IsEnabledEnterButton
+		{
+			get { return GetValue< bool>(IsEnabledEnterButtonProperty); }
+			set { SetValue(IsEnabledEnterButtonProperty, value); }
+		}
+		public static readonly PropertyData IsEnabledEnterButtonProperty = RegisterProperty("IsEnabledEnterButton", typeof( bool), false);
+
+
 
         public Command BackCommand { get; private set; }
 
@@ -53,10 +65,13 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
         public Command TryEnterCommand { get; private set; }
 
-        private bool OnTryEnterCommandCanExecute()
-        {
-            return !(string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password));
-        }
+
+		public Command ValidateFieldsCommand { get; private set; }
+
+		private void OnValidateFieldsCommandExecute()
+		{
+			IsEnabledEnterButton = User.IsValidLogin(Login) && User.IsValidPhone(Password);
+		}
 
         private void OnTryEnterCommandExecute()
         {
@@ -70,7 +85,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             if (_authorizationChecker.IsMatchUser())
             {
                 User user = _authorizationChecker.GetUser();
-                messageService.ShowAsync("Успешная авторизация!");
+                //TODO: надо бы сделать какую нибудь заставку для успешной авторизации
                 _parentViewModel.ChangePage(new ClientMainViewModel(user));
             }
             else if (_authorizationChecker.IsExistsLogin())
@@ -85,14 +100,10 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-
-            // TODO: subscribe to events here
         }
 
         protected override async Task CloseAsync()
         {
-            // TODO: unsubscribe from events here
-
             await base.CloseAsync();
         }
     }

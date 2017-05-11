@@ -16,13 +16,17 @@
             Margin="101,101,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFECEAEA"
             Command="{Binding OrderCommand}"
-            Content="Заказать" BorderBrush="#FFECEAEA" FontFamily="Batang" FontSize="18" Foreground="#FF4B567A" >
+            Content="Заказать"
+            FontFamily="Batang"
+            FontSize="18"
+            Foreground="#FF4B567A">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
@@ -33,15 +37,19 @@
             Margin="101,163,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFECEAEA"
             Command="{Binding MyOrdersCommand}"
-            Content="Мои заказы" BorderBrush="#FFECEAEA" FontFamily="Batang" FontSize="16" Foreground="#FF384261" >
-        <Button.Background>
-            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
-            </LinearGradientBrush>
-        </Button.Background>
+            Content="Мои заказы"
+            FontFamily="Batang"
+            FontSize="16"
+            Foreground="#FF384261">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
         <Button
             x:Name="button2"
@@ -50,15 +58,19 @@
             Margin="101,223,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFEAE8E8"
             Command="{Binding ProfileCommand}"
-            Content="Профиль" BorderBrush="#FFEAE8E8" FontFamily="Batang" FontSize="18" Foreground="#FF404A6C" >
-        <Button.Background>
-            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
-            </LinearGradientBrush>
-        </Button.Background>
+            Content="Профиль"
+            FontFamily="Batang"
+            FontSize="18"
+            Foreground="#FF404A6C">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
         <Button
             x:Name="button3"
@@ -67,13 +79,17 @@
             Margin="101,290,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFEAEAEA"
             Command="{Binding RewiewsCommand}"
-            Content="Отзывы" BorderBrush="#FFEAEAEA" FontFamily="Batang" FontSize="18" Foreground="#FF3B4463" >
+            Content="Отзывы"
+            FontFamily="Batang"
+            FontSize="18"
+            Foreground="#FF3B4463">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
@@ -84,13 +100,17 @@
             Margin="101,365,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFE6E5E5"
             Command="{Binding QuestionsCommand}"
-            Content="Вопросы" BorderBrush="#FFE6E5E5" FontFamily="Batang" FontSize="18" Foreground="#FF323A57" >
+            Content="Вопросы"
+            FontFamily="Batang"
+            FontSize="18"
+            Foreground="#FF323A57">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
@@ -101,13 +121,17 @@
             Margin="101,431,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            BorderBrush="#FFE4E3E3"
             Command="{Binding ExitCommand}"
-            Content="Выход" BorderBrush="#FFE4E3E3" FontFamily="Batang" FontSize="18" Foreground="#FF3F4A6E" >
+            Content="Выход"
+            FontFamily="Batang"
+            FontSize="18"
+            Foreground="#FF3F4A6E">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF5FAFF" Offset="0"/>
-                    <GradientStop Color="#FFD2E3F4" Offset="1"/>
-                    <GradientStop Color="#FFE3ECF5" Offset="0.487"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFF5FAFF" />
+                    <GradientStop Offset="1" Color="#FFD2E3F4" />
+                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
