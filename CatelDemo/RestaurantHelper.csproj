@@ -139,6 +139,12 @@
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ActionsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\HallViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ResultsViewModel.cs" />
     <Compile Include="Views\AuthorizationViews\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
@@ -150,6 +156,24 @@
     </Compile>
     <Compile Include="Views\ClientViews\ClientMainView.xaml.cs">
       <DependentUpon>ClientMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\ActionsView.xaml.cs">
+      <DependentUpon>ActionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\ClientsView.xaml.cs">
+      <DependentUpon>ClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\HallView.xaml.cs">
+      <DependentUpon>HallView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\ResultsView.xaml.cs">
+      <DependentUpon>ResultsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\ResourceDictionaries\HallResources.xaml">
       <SubType>Designer</SubType>
@@ -228,6 +252,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ManagerViews\ActionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\ClientsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\EmployeesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\HallView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\ResultsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -327,6 +375,7 @@
   <ItemGroup>
     <Resource Include="Resources\1750_2500.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
