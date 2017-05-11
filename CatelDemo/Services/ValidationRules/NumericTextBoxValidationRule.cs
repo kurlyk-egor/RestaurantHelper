@@ -8,5 +8,6 @@ namespace RestaurantHelper.Services.ValidationRules
 {
 	class NumericTextBoxValidationRule
 	{
+        мяу
 	}
 }
