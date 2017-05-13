@@ -15,6 +15,7 @@ using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
 using RestaurantHelper.ViewModels.AuthorizationViewModels;
 using RestaurantHelper.ViewModels.ClientViewModels;
+using RestaurantHelper.ViewModels.ManagerViewModels;
 
 namespace RestaurantHelper.ViewModels
 {
@@ -26,9 +27,11 @@ namespace RestaurantHelper.ViewModels
         public MainWindowViewModel()
         {
             // TODO: запуск авторизации
-            CurrentPage = new StartWindowViewModel(this);
+            //CurrentPage = new StartWindowViewModel(this);
             // user есть в списке
             //CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
+			// запуск из под админа сразу
+			CurrentPage = new ManagerMainViewModel();
 
             // собственные пространства имен
             var viewModelLocator = ServiceLocator.Default.ResolveType<IViewModelLocator>();
@@ -42,7 +45,10 @@ namespace RestaurantHelper.ViewModels
 
             viewModelLocator.NamingConventions.Add("[AS].ViewModels.AuthorizationViewModels.[VW]ViewModel");
             viewLocator.NamingConventions.Add("[AS].Views.AuthorizationViews.[VM]View");
-        }
+
+			viewModelLocator.NamingConventions.Add("[AS].ViewModels.ManagerViewModels.[VW]ViewModel");
+			viewLocator.NamingConventions.Add("[AS].Views.ManagerViews.[VM]View");
+		}
 
         // сюда биндится текущий UserControl в ContentControle окна
         public IViewModel CurrentPage

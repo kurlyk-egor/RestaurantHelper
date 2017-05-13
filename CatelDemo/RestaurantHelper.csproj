@@ -142,8 +142,10 @@
     <Compile Include="ViewModels\ManagerViewModels\ActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ClientsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\HallViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerMainViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerMenuViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ResultsViewModel.cs" />
     <Compile Include="Views\AuthorizationViews\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
@@ -166,11 +168,17 @@
     <Compile Include="Views\ManagerViews\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\HallView.xaml.cs">
-      <DependentUpon>HallView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ManagerHallView.xaml.cs">
+      <DependentUpon>ManagerHallView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ManagerMainView.xaml.cs">
+      <DependentUpon>ManagerMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\ManagerMenuView.xaml.cs">
+      <DependentUpon>ManagerMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\ResultsView.xaml.cs">
       <DependentUpon>ResultsView.xaml</DependentUpon>
@@ -264,13 +272,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManagerViews\HallView.xaml">
+    <Page Include="Views\ManagerViews\ManagerHallView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManagerViews\MenuView.xaml">
+    <Page Include="Views\ManagerViews\ManagerMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\ManagerMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerViews\ResultsView.xaml">
       <Generator>MSBuild:Compile</Generator>

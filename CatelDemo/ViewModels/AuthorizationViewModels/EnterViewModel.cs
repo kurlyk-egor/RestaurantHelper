@@ -9,6 +9,7 @@ using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.ViewModels.ClientViewModels;
+using RestaurantHelper.ViewModels.ManagerViewModels;
 using Xceed.Wpf.Toolkit;
 
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
@@ -74,20 +75,19 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
 		private void OnValidateFieldsCommandExecute()
 		{
-			IsEnabledEnterButton = User.IsValidLogin(Login) && User.IsValidPhone(Password);
-			//LoginErrorInfo = 
+			// TODO: сделать нормальную валидацию
+			IsEnabledEnterButton = User.IsValidLogin(Login);
 		}
 
         private void OnTryEnterCommandExecute()
         {
-            // TODO: Handle command logic here
-            var locator = this.GetServiceLocator();
-            var messageService = locator.ResolveType<IMessageService>();
-
             _authorizationChecker = new AuthorizationChecker(new User {Login = Login, Password = Password});
-            
 
-            if (_authorizationChecker.IsMatchUser())
+	        if (_authorizationChecker.IsAdmin())
+	        {
+		        _parentViewModel.ChangePage(new ManagerMainViewModel());
+	        }
+            else if (_authorizationChecker.IsMatchUser())
             {
                 User user = _authorizationChecker.GetUser();
                 //TODO: надо бы сделать какую нибудь заставку для успешной авторизации
@@ -95,11 +95,11 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             }
             else if (_authorizationChecker.IsExistsLogin())
             {
-                messageService.ShowAsync("Неверный пароль!");
+                MessageBox.Show("Неверный пароль!");
             }
             else
             {
-                messageService.ShowAsync("Пользователь не зарегистрирован");
+				MessageBox.Show("Пользователь не зарегистрирован");
             }
         }
         protected override async Task InitializeAsync()

@@ -1,0 +1,95 @@
+﻿<catel:UserControl
+    x:Class="RestaurantHelper.Views.ManagerViews.ManagerMainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com">
+    <catel:UserControl.Resources>
+        <catel:ViewModelToViewConverter x:Key="ViewModelToViewConverter" />
+    </catel:UserControl.Resources>
+
+    <Grid Width="750" Height="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*" />
+            <RowDefinition Height="530*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding EmployeesCommand}"
+                Content="Работники" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding HallCommand}"
+                Content="Зал" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="2"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding MenuCommand}"
+                Content="Меню" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="3"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding ReportsCommand}"
+                Content="Отчеты" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="4"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding ActionsCommand}"
+                Content="Акции" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="5"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding RewiewsCommand}"
+                Content="Отзывы" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="6"
+                Height="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding ExitCommand}"
+                Content="Выход" />
+        </Grid>
+
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Content="{Binding Path=CurrentManagerPage, Converter={StaticResource ViewModelToViewConverter}}" />
+    </Grid>
+
+</catel:UserControl>

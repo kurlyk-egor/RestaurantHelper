@@ -1,8 +1,8 @@
 ﻿namespace RestaurantHelper.Views.ManagerViews
 {
-	public partial class HallView
+	public partial class ManagerMenuView
 	{
-		public HallView()
+		public ManagerMenuView()
 		{
 			InitializeComponent();
 		}

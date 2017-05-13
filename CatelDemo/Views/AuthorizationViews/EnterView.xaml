@@ -5,9 +5,7 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:validation="clr-namespace:RestaurantHelper.Services.ValidationRules"
-    Margin="-7"
-    Focusable="True">
-
+    Margin="-7">
 
     <Grid
         MinWidth="400"
@@ -110,6 +108,7 @@
             VerticalAlignment="Top"
             Command="{Binding TryEnterCommand}"
             Content="Войти"
+            IsDefault="True"
             IsEnabled="{Binding IsEnabledEnterButton}" />
 
     </Grid>

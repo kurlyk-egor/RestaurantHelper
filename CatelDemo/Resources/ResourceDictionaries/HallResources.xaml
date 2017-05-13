@@ -18,12 +18,14 @@
                     <ItemsPanelTemplate>
                         <Canvas>
                             <Canvas.Background>
-                                <ImageBrush ImageSource="../hallback.jpg" />
+                                <ImageBrush ImageSource="../hallback.jpg" Stretch="Fill" />
                             </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
+
+            <Setter Property="Margin" Value="-5" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush">
                 <Setter.Value>
@@ -101,7 +103,7 @@
                                 <Condition Property="IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="SelectedTable" Property="Stroke" Value="AliceBlue" />
+                                <Setter TargetName="SelectedTable" Property="Stroke" Value="Azure" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

@@ -5,7 +5,6 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    Margin="-7"
     Background="White">
 
 

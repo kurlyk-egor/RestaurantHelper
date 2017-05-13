@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using Catel.MVVM;
-
-namespace RestaurantHelper.ViewModels.ManagerViewModels
+﻿namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
-	public class EmployeesViewModel : ViewModelBase
+	using Catel.MVVM;
+	using System.Threading.Tasks;
+
+	public class ReportsViewModel : ViewModelBase
 	{
-		public EmployeesViewModel()
+		public ReportsViewModel()
 		{
 		}
 

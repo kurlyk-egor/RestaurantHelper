@@ -14,4 +14,8 @@
   <Order><Id>12</Id><UserId>4</UserId><ReservationId>12</ReservationId></Order>
   <Order><Id>13</Id><UserId>4</UserId><ReservationId>13</ReservationId></Order>
   <Order><Id>14</Id><UserId>4</UserId><ReservationId>14</ReservationId></Order>
+  <Order><Id>15</Id><UserId>4</UserId><ReservationId>15</ReservationId></Order>
+  <Order><Id>16</Id><UserId>3</UserId><ReservationId>16</ReservationId></Order>
+  <Order><Id>17</Id><UserId>6</UserId><ReservationId>17</ReservationId></Order>
+  <Order><Id>18</Id><UserId>6</UserId><ReservationId>18</ReservationId></Order>
 </ArrayOfOrder>

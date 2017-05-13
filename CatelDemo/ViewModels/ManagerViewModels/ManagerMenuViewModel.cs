@@ -3,12 +3,11 @@ using Catel.MVVM;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
-	public class HallViewModel : ViewModelBase
+	public class ManagerMenuViewModel : ViewModelBase
 	{
-		public HallViewModel()
+		public ManagerMenuViewModel()
 		{
 		}
-
 
 		// TODO: Register models with the vmpropmodel codesnippet
 		// TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets

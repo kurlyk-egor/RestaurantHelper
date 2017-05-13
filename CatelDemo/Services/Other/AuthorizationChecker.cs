@@ -13,7 +13,7 @@ namespace RestaurantHelper.Services.Other
 
         public AuthorizationChecker(User user)
         {
-            this._user = user;
+            _user = user;
             _repository = UserRepository.GetRepositoryInstance();
         }
 
@@ -49,5 +49,12 @@ namespace RestaurantHelper.Services.Other
         {
             return _user;
         }
+
+	    public bool IsAdmin()
+	    {
+			Refresh();
+			// TODO: переделать адекватно
+		    return _user.Login == "admin" && _user.Password == "admin";
+	    }
     }
 }

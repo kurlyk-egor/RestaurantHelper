@@ -5,4 +5,5 @@
   <User><Id>3</Id><Login>Viking</Login><Password>sobaka</Password><Name>Курлык</Name><Phone>375298933692</Phone></User>
   <User><Id>4</Id><Login>1</Login><Password>22</Password><Name>333</Name><Phone>44</Phone></User>
   <User><Id>5</Id><Login>2</Login><Password>22</Password><Name>222</Name><Phone>2222</Phone></User>
+  <User><Id>6</Id><Login>gavrusev</Login><Password>12345</Password><Name>Гаврусев А. В.</Name><Phone>375291808518</Phone></User>
 </ArrayOfUser>
