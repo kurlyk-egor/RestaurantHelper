@@ -126,6 +126,7 @@
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
+    <Compile Include="Services\Other\TableMoveHelper.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
     <Compile Include="Services\ValidationRules\NotEmptyValidationRule.cs" />
     <Compile Include="Services\ValidationRules\NumericTextBoxValidationRule.cs" />

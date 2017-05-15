@@ -8,16 +8,19 @@ using Catel.Data;
 using Catel.MVVM;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Other;
+using Xceed.Wpf.Toolkit;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
 	public class ManagerHallViewModel : ViewModelBase
 	{
-		readonly TableRepository _tableRepository;
+		private readonly TableMoveHelper _tableMoveHelper;
 		public ManagerHallViewModel()
 		{
-			_tableRepository  = TableRepository.GetRepositoryInstance();
+			_tableMoveHelper = new TableMoveHelper(Tables);
 			AddAllTablesToObservableCollection();
+
 			MoveTableUpCommand = new Command(OnMoveTableUpCommandExecute);
 			MoveTableDownCommand = new Command(OnMoveTableDownCommandExecute);
 			MoveTableLeftCommand = new Command(OnMoveTableLeftCommandExecute);
@@ -39,41 +42,42 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		public static readonly PropertyData SelectedItemTableProperty = RegisterProperty("SelectedItemTable", typeof(Table));
 
+		public int MoveCounter	
+		{
+			get { return GetValue<int>(MoveCounterProperty); }
+			set { SetValue(MoveCounterProperty, value); }
+		}
+		public static readonly PropertyData MoveCounterProperty = RegisterProperty("MoveCounter", typeof(int), 1);
+
 		public Command MoveTableUpCommand { get; private set; }
 		public Command MoveTableDownCommand { get; private set; }
 		public Command MoveTableLeftCommand { get; private set; }
 		public Command MoveTableRightCommand { get; private set; }
-
 		public Command SaveTablesPositionsCommand { get; private set; }
 		private void OnSaveTablesPositionsCommandExecute()
 		{
-			foreach (var table in Tables)
-			{
-				_tableRepository.GetItem(table.Id).Top =
-					Tables.ToList().Find(t => t.Id == table.Id).Top;
-				_tableRepository.GetItem(table.Id).Left =
-					Tables.ToList().Find(t => t.Id == table.Id).Left;
-			}
+			_tableMoveHelper.SaveCurrentTables();
+			MessageBox.Show("Сохранено!");
 		}
 
 		private void OnMoveTableUpCommandExecute()
 		{
-			SelectedItemTable.Top -= 10;
+			_tableMoveHelper.MoveTableUp(SelectedItemTable, MoveCounter);
 		}
 
 		private void OnMoveTableDownCommandExecute()
 		{
-			SelectedItemTable.Top += 10;
+			_tableMoveHelper.MoveTableDown(SelectedItemTable, MoveCounter);
 		}
 
 		private void OnMoveTableLeftCommandExecute()
 		{
-			SelectedItemTable.Left -= 10;
+			_tableMoveHelper.MoveTableLeft(SelectedItemTable, MoveCounter);
 		}
 
 		private void OnMoveTableRightCommandExecute()
 		{
-			SelectedItemTable.Left += 10;
+			_tableMoveHelper.MoveTableRight(SelectedItemTable, MoveCounter);
 		}
 
 		protected override async Task InitializeAsync()
@@ -88,7 +92,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void AddAllTablesToObservableCollection()
 		{
-			((ICollection<Table>)Tables).AddRange(_tableRepository.GetCollection());
+			Tables = _tableMoveHelper.FillAllTables();
 		}
 	}
 }
