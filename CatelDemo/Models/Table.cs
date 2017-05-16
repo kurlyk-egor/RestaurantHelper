@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Catel.Data;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models
 {
 	[Serializable]
-	public class Table : ModelBase
+	public class Table : ModelBase, IHaveId
 	{
 		public Table()
 		{			

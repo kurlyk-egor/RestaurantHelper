@@ -16,6 +16,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			ActionsCommand = new Command(OnActionsCommandExecute);
 			RewiewsCommand = new Command(OnRewiewsCommandExecute);
 			ExitCommand = new Command(OnExitCommandExecute);
+
+			CurrentManagerPage = new EmployeesViewModel();
 		}
 
 		public IViewModel CurrentManagerPage

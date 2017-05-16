@@ -18,4 +18,6 @@
   <Order><Id>16</Id><UserId>3</UserId><ReservationId>16</ReservationId></Order>
   <Order><Id>17</Id><UserId>6</UserId><ReservationId>17</ReservationId></Order>
   <Order><Id>18</Id><UserId>6</UserId><ReservationId>18</ReservationId></Order>
+  <Order><Id>19</Id><UserId>7</UserId><ReservationId>19</ReservationId></Order>
+  <Order><Id>20</Id><UserId>7</UserId><ReservationId>20</ReservationId></Order>
 </ArrayOfOrder>

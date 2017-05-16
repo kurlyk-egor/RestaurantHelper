@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models
 {
 	[Serializable]
-	public class Reservation : ModelBase
+	public class Reservation : ModelBase, IHaveId
 	{
 		public Reservation()
 		{
@@ -55,5 +56,11 @@ namespace RestaurantHelper.Models
 			set { SetValue(DayProperty, value); }
 		}
 		public static readonly PropertyData DayProperty = RegisterProperty("Day", typeof(DateTime));
+
+
+		public override string ToString()
+		{
+			return $"{Day}     {FirstTime} {LastTime}";
+		}
 	}
 }

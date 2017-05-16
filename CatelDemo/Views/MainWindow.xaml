@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     Background="{DynamicResource MaterialDesignPaper}"
+    BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
     BorderThickness="2"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Left="100"
@@ -16,7 +17,6 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     Top="100"
-    BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
     WindowStyle="None">
 
 

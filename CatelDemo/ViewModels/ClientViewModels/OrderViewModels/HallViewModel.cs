@@ -13,6 +13,7 @@ using Catel.MVVM;
 using Catel.MVVM.Views;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.Services.Other.HallPickersHelpers;
 
@@ -24,7 +25,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly User _user;
 		private readonly ObservableCollection<Dish> _orderedDishes;
 		private readonly IViewModel _rootViewModel;
-		private readonly TableRepository _tableRepository;
+		private readonly IRepositoryBase<Table> _tableRepository;
 		private readonly Reservation _reservation;
 		private readonly TablesAvailabilityChecker _availabilityChecker;
 
@@ -33,8 +34,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_user = user;
 			_orderedDishes = orderedDishes;
 			_reservation = new Reservation();
+			_tableRepository = new RepositoryBase<Table>();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
-			_tableRepository = TableRepository.GetRepositoryInstance();
+			// передаем ссылку на наши столики
 			_availabilityChecker = new TablesAvailabilityChecker(_tableRepository.GetCollection());
 
 			BackCommand = new Command(OnBackCommandExecute);
@@ -209,7 +211,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_rootViewModel.ChangePage(new ClientMainViewModel(_user));
 		}
 
-
 		public Command NextCommand { get; private set; }
 
 		private bool OnNextCommandCanExecute()
@@ -218,8 +219,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			bool result = false;
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
-				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime),
-					DateTime.Parse(DateText));
+				_availabilityChecker.FillAvailabilities(FirstTime, LastTime, DateText);
 				result = true;
 			}
 			if (result)
@@ -257,12 +257,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			TableReservations.Clear();
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
-				_availabilityChecker.FillAvailabilities(DateTime.Parse(FirstTime), DateTime.Parse(LastTime), DateTime.Parse(DateText));
+				_availabilityChecker.FillAvailabilities(FirstTime, LastTime, DateText);
 
 				if (SelectedItemTable != null)
 				{
 					((ICollection<Reservation>) TableReservations)
-						.AddRange(_availabilityChecker.GetDaylyReservationsForTable(DateTime.Parse(DateText), SelectedItemTable.Number));
+						.AddRange(_availabilityChecker.GetDaylyReservationsForTable(DateText, SelectedItemTable.Number));
 				}
 			}
 		}

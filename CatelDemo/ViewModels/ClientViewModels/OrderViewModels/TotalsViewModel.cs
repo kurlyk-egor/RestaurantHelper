@@ -7,6 +7,7 @@ using Catel.Data;
 using Catel.MVVM;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
@@ -17,10 +18,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    private readonly Reservation _reservation;
 	    private readonly ObservableCollection<Dish> _orderedDishes;
 	    private readonly IViewModel _rootViewModel;
-	    private readonly TableRepository _tableRepository;
-	    private readonly ReservationRepository _reservationRepository;
-	    private readonly OrderedDishRepository _orderedDishRepository;
-	    private readonly OrderRepository _orderRepository;
+	    private readonly IRepositoryBase<Table> _tableRepository;
+	    private readonly IRepositoryBase<Reservation> _reservationRepository;
+	    private readonly IRepositoryBase<OrderedDish> _orderedDishRepository;
+	    private readonly IRepositoryBase<Order> _orderRepository;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
 		public TotalsViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes)
@@ -29,10 +30,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_reservation = reservation;
 			_orderedDishes = orderedDishes;
 			_sumCalculator = new OrderedSumCalculator();
-			_tableRepository = TableRepository.GetRepositoryInstance();
-			_orderRepository = OrderRepository.GetRepositoryInstance();
-			_orderedDishRepository = OrderedDishRepository.GetRepositoryInstance();
-			_reservationRepository = ReservationRepository.GetRepositoryInstance();
+			_tableRepository = new RepositoryBase<Table>();
+			_orderRepository = new RepositoryBase<Order>();
+			_orderedDishRepository = new RepositoryBase<OrderedDish>();
+			_reservationRepository = new RepositoryBase<Reservation>();
 
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 

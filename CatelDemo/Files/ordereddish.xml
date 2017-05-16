@@ -29,4 +29,7 @@
   <OrderedDish><Id>27</Id><OrderId>18</OrderId><DishId>8</DishId><Quantity>1</Quantity></OrderedDish>
   <OrderedDish><Id>28</Id><OrderId>18</OrderId><DishId>3</DishId><Quantity>2</Quantity></OrderedDish>
   <OrderedDish><Id>29</Id><OrderId>18</OrderId><DishId>10</DishId><Quantity>2</Quantity></OrderedDish>
+  <OrderedDish><Id>30</Id><OrderId>19</OrderId><DishId>7</DishId><Quantity>7</Quantity></OrderedDish>
+  <OrderedDish><Id>31</Id><OrderId>20</OrderId><DishId>5</DishId><Quantity>1</Quantity></OrderedDish>
+  <OrderedDish><Id>32</Id><OrderId>20</OrderId><DishId>6</DishId><Quantity>1</Quantity></OrderedDish>
 </ArrayOfOrderedDish>

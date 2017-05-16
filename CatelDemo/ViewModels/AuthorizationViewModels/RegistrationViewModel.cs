@@ -6,12 +6,13 @@ using Catel.MVVM;
 using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {
-        private readonly UserRepository _repository;
+        private readonly IRepositoryBase<User> _userRepository;
         private readonly IViewModel _parentViewModel;
         private readonly IViewModel _previousViewModel;
 
@@ -20,7 +21,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         {
             _parentViewModel = parentViewModel;
             _previousViewModel = previousViewModel;
-            _repository = UserRepository.GetRepositoryInstance();
+            _userRepository = new RepositoryBase<User>();
 
             BackCommand = new Command(OnBackCommandExecute);
             RegistrationCommand = new Command(OnRegistrationCommandExecute, OnRegistrationCommandCanExecute);
@@ -112,8 +113,8 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         }
         private async void OnRegistrationCommandExecute()
         {
-            _repository.Insert(User);
-            _repository.SaveChanges();
+            _userRepository.Insert(User);
+            _userRepository.SaveChanges();
             
             var resolver = this.GetDependencyResolver();
             var visualizer = resolver.Resolve<IUIVisualizerService>();

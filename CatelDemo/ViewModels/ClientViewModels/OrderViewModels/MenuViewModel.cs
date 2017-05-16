@@ -9,6 +9,7 @@ using Catel.Data;
 using Catel.MVVM;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
@@ -18,7 +19,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
 	    private readonly Reservation _reservation;
-	    private readonly DishRepository _dishRepository;
+	    private readonly IRepositoryBase<Dish> _dishRepository;
 		private readonly OrderedSumCalculator _sumCalculator;
 
 		public MenuViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes = null)
@@ -26,7 +27,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_user = user;
 			_reservation = reservation;
 			_sumCalculator = new OrderedSumCalculator();
-			_dishRepository = DishRepository.GetRepositoryInstance();
+			_dishRepository = new RepositoryBase<Dish>();
 		    _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			AddCommand = new Command(OnAddCommandExecute, OnAddCommandCanExecute);

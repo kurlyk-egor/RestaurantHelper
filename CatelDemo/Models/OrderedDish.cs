@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models
 {
 	[Serializable]
-	public class OrderedDish : ModelBase
+	public class OrderedDish : ModelBase, IHaveId
 	{
 		public OrderedDish()
 		{

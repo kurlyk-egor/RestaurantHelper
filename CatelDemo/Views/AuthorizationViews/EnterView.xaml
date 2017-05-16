@@ -22,9 +22,9 @@
             TextWrapping="Wrap">
             <TextBox.Text>
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
-                    <!--<Binding.ValidationRules>
+                    <Binding.ValidationRules>
                         <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>-->
+                    </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
             <TextBox.ToolTip>

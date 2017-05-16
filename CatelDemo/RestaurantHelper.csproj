@@ -102,18 +102,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Actions\Action.cs" />
+    <Compile Include="Models\Actions\AmountExcessAction.cs" />
+    <Compile Include="Models\Actions\DiscountAction.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedDish.cs" />
     <Compile Include="Models\OrderWithReservationInfo.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Table.cs" />
-    <Compile Include="Services\Database\DishRepository.cs" />
-    <Compile Include="Services\Database\OrderedDishRepository.cs" />
-    <Compile Include="Services\Database\OrderRepository.cs" />
-    <Compile Include="Services\Database\ReservationRepository.cs" />
-    <Compile Include="Services\Database\TableRepository.cs" />
-    <Compile Include="Services\Database\UserRepository.cs" />
+    <Compile Include="Services\Database\RepositoryBase.cs" />
+    <Compile Include="Services\Interfaces\IHaveId.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
     <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
     <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
@@ -353,10 +352,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\books.xml">
+    <Resource Include="Files\user.xml">
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Files\tables.xml">
+    <Resource Include="Files\table.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
@@ -364,7 +363,7 @@
     <Resource Include="Resources\hallback.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\reservations.xml" />
+    <Resource Include="Files\reservation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Tables\table1.jpg" />
@@ -375,17 +374,17 @@
     <Resource Include="Resources\arrows.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\dishes.xml">
+    <Resource Include="Files\dish.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\orders.xml">
+    <Resource Include="Files\order.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\ordered_dishes.xml">
+    <Resource Include="Files\ordereddish.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>

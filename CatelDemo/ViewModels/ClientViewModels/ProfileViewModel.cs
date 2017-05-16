@@ -4,18 +4,19 @@ using Catel.MVVM;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
         private readonly IViewModel _previousViewModel;
-        private readonly UserRepository _repository;
+        private readonly IRepositoryBase<User> _userRepository;
         public ProfileViewModel(IViewModel previousViewModel, User user)
         {
             _previousViewModel = previousViewModel;
             User = user;
-            _repository = UserRepository.GetRepositoryInstance();
+            _userRepository = new RepositoryBase<User>();
 
             SaveCommand = new Command(OnSaveCommandExecute, OnSaveCommandCanExecute);
             BackCommand = new Command(OnBackCommandExecute);
@@ -66,8 +67,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
 
 
-        // TODO: Register commands with the vmcommand or vmcommandwithcanexecute codesnippets
-
         public Command SaveCommand { get; private set; }
         private bool OnSaveCommandCanExecute()
         {
@@ -79,8 +78,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         }
         private void OnSaveCommandExecute()
         {
-            _repository.Update(User);
-            _repository.SaveChanges();
+            _userRepository.Update(User);
+            _userRepository.SaveChanges();
         }
 
         public Command BackCommand { get; private set; }

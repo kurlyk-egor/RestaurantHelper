@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using Catel.Data;
 using System.Linq;
+using RestaurantHelper.Services.Interfaces;
 using Xceed.Wpf.DataGrid.Converters;
 
 namespace RestaurantHelper.Models
 {
     [Serializable]
-    public class User : ModelBase
+    public class User : ModelBase, IHaveId
     {
         public User()
         {

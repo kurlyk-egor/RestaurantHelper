@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 using Catel.Collections;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 using Xceed.Wpf.Toolkit;
 
 namespace RestaurantHelper.Services.Other
 {
 	class TableMoveHelper
 	{
-		private const int MAX_TABLE_TOP = 350;
-		private const int MAX_TABLE_LEFT = 400;
+		private const int MAX_TABLE_TOP = 335;
+		private const int MAX_TABLE_LEFT = 500;
 		private const int MIN_TABLE_TOP = 10;
 		private const int MIN_TABLE_LEFT = 10;
 
-		private readonly TableRepository _tableRepository;
+		private readonly IRepositoryBase<Table> _tableRepository;
 		private readonly ObservableCollection<Table> _myTables; 
 
 		public TableMoveHelper(ObservableCollection<Table> myTables)
 		{
-			_tableRepository = TableRepository.GetRepositoryInstance();
+			_tableRepository = new RepositoryBase<Table>();
 			_myTables = myTables;
 		}
 
@@ -44,7 +45,6 @@ namespace RestaurantHelper.Services.Other
 			}
 
 			_tableRepository.SaveChanges();
-			MessageBox.Show("Сохранено!");
 		}
 
 		public void MoveTableUp(Table table, int units)
@@ -81,7 +81,7 @@ namespace RestaurantHelper.Services.Other
 		{
 			if (table.Left + units > MAX_TABLE_LEFT)
 			{
-				table.Left = 0;
+				table.Left = MAX_TABLE_LEFT;
 				return;
 			}
 			table.Left += units;

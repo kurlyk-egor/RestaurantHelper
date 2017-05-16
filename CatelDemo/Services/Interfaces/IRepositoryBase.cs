@@ -6,6 +6,7 @@ namespace RestaurantHelper.Services.Interfaces
     public interface IRepositoryBase <T> : IDisposable
         where T : class
     {
+	    string PathToFile { get; set; }
         void RefreshRepository();
         List<T> GetCollection();
         T GetItem(int id);

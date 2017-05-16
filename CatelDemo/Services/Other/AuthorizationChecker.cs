@@ -2,6 +2,7 @@
 using System.Linq;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
@@ -9,12 +10,12 @@ namespace RestaurantHelper.Services.Other
     {
         private IEnumerable<User> _users; 
         private User _user;
-        private readonly UserRepository _repository;
+        private readonly IRepositoryBase<User> _userRepository;
 
         public AuthorizationChecker(User user)
         {
             _user = user;
-            _repository = UserRepository.GetRepositoryInstance();
+			_userRepository = new RepositoryBase<User>();
         }
 
         public bool IsMatchUser()
@@ -42,7 +43,7 @@ namespace RestaurantHelper.Services.Other
 
         private void Refresh()
         {
-            _users = _repository.GetCollection();
+            _users = _userRepository.GetCollection();
         }
 
         public User GetUser()

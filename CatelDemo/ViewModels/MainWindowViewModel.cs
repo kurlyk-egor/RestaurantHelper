@@ -31,7 +31,7 @@ namespace RestaurantHelper.ViewModels
 			// user есть в списке
 			// TODO: запуск сразу клиентской части
 			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
-			// // TODO: запуск сразу из под админа
+			 // TODO: запуск сразу из под админа
 			//CurrentPage = new ManagerMainViewModel();
 
 			// собственные пространства имен
@@ -59,7 +59,7 @@ namespace RestaurantHelper.ViewModels
         }
         public static readonly PropertyData CurrentPageProperty = RegisterProperty("CurrentPage", typeof(IViewModel));
 
-        public override string Title => "RestaurantHelperClient";
+        public override string Title => "RestaurantHelper";
 
         protected override async Task InitializeAsync()
         {

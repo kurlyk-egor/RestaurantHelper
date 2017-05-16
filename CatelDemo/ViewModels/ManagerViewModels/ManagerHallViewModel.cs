@@ -26,6 +26,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			MoveTableLeftCommand = new Command(OnMoveTableLeftCommandExecute);
 			MoveTableRightCommand = new Command(OnMoveTableRightCommandExecute);
 			SaveTablesPositionsCommand = new Command(OnSaveTablesPositionsCommandExecute);
+			ResetTablePositionsCommand = new Command(OnResetTablePositionsCommandExecute);
 		}
 
 		public ObservableCollection<Table> Tables
@@ -47,17 +48,25 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			get { return GetValue<int>(MoveCounterProperty); }
 			set { SetValue(MoveCounterProperty, value); }
 		}
-		public static readonly PropertyData MoveCounterProperty = RegisterProperty("MoveCounter", typeof(int), 1);
+		public static readonly PropertyData MoveCounterProperty = RegisterProperty("MoveCounter", typeof(int), 10);
 
 		public Command MoveTableUpCommand { get; private set; }
 		public Command MoveTableDownCommand { get; private set; }
 		public Command MoveTableLeftCommand { get; private set; }
 		public Command MoveTableRightCommand { get; private set; }
 		public Command SaveTablesPositionsCommand { get; private set; }
+		public Command ResetTablePositionsCommand { get; private set; }
+
+
 		private void OnSaveTablesPositionsCommandExecute()
 		{
 			_tableMoveHelper.SaveCurrentTables();
 			MessageBox.Show("Сохранено!");
+		}
+		
+		private void OnResetTablePositionsCommandExecute()
+		{
+			//  TODO: если успею - сделаю сброс
 		}
 
 		private void OnMoveTableUpCommandExecute()

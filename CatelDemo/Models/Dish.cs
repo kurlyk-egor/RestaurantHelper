@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Catel.Data;
 using Catel.Runtime.Serialization;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models
 {
 	[Serializable]
-	public class Dish : ModelBase
+	public class Dish : ModelBase, IHaveId
 	{
 		public Dish()
 		{
