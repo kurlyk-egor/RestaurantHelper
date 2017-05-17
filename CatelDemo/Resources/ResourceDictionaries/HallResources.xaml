@@ -11,6 +11,8 @@
     <local:DateToTimeConverter x:Key="DateToTimeConverter" />
     <local:DateStringConverter x:Key="DateStringConverter" />
     <local:ActionTypeToDescriptionConverter x:Key="ActionTypeToDescriptionConverter" />
+    <local:ActionToDescription x:Key="ActionToDescriptionConverter" />
+    <local:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
 
     <Style x:Key="Style" TargetType="ListBox">
         <Style.Setters>

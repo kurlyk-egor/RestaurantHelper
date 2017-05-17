@@ -61,7 +61,8 @@ namespace RestaurantHelper.Services.Database
 
 		public void Delete(T item)
 		{
-			_items.Remove(item);
+			T findedItem = _items.Find(i => i.Id == item.Id);
+			_items.Remove(findedItem);
 		}
 
 		public void Update(T item)

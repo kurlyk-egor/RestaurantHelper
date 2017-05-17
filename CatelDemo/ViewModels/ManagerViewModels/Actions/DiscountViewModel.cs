@@ -25,7 +25,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			((ICollection<Dish>) Dishes).AddRange(dishesRepository.GetCollection());
 
 			_discountAction = new DiscountAction();
-			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
+			ApplyAction = new Command(OnApplyActionExecute);
 		}
 
 		public ObservableCollection<Dish> Dishes
@@ -67,15 +67,10 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 
 		public Command ApplyAction { get; private set; }
-		private bool OnApplyActionCanExecute()
-		{
-			return SelectedDish != null && !string.IsNullOrEmpty(ActionName) && !string.IsNullOrEmpty(ActionInfo);
-		}
 		private void OnApplyActionExecute()
 		{
-			//IRepository<DiscountAction> discountActionsRepository = new Repository<DiscountAction>();
 			FillDiscountAction();
-			ActionsFilter actionsFilter = new ActionsFilter();
+			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;
 			if (!actionsFilter.CanAddAction(_discountAction, out message))
 			{
@@ -85,9 +80,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			{
 				actionsFilter.SaveAction(_discountAction);
 			}
-
-			//discountActionsRepository.Insert(_discountAction);
-			//discountActionsRepository.SaveChanges();
 		}	
 
 		protected override async Task InitializeAsync()
@@ -102,7 +94,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 		private void FillDiscountAction()
 		{
-			_discountAction.DiscountedDishId = SelectedDish.Id;
+			_discountAction.DishId = SelectedDish.Id;
 			_discountAction.DiscountSum = DiscountValue;
 			_discountAction.Name = ActionName;
 			_discountAction.Description = ActionInfo;

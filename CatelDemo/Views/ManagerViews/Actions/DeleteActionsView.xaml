@@ -4,14 +4,68 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
+    <Grid
+        MinWidth="700"
+        MinHeight="400"
+        Margin="-250,0,0,0"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <ListBox
+            x:Name="ListBox"
+            Width="450"
+            Height="275"
+            Margin="20,48,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+            BorderThickness="1"
+            ItemsSource="{Binding Actions}"
+            SelectedItem="{Binding SelectedAction}" />
+        <TextBlock
+            x:Name="textBlock"
+            Margin="46,19,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="15"
+            Text="Запущенные акции:"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="button"
+            Width="224"
+            Margin="202,338,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding DeleteActionCommand}"
+            Content="Удалить выбранную акцию" />
+        <GroupBox
+            x:Name="groupBox"
+            Width="200"
+            Height="165"
+            Margin="509,158,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Описание акции">
 
-        <Label Content="{Binding Title}" />
-        <Label Content="Here goes your real content" />
-    </catel:StackGrid>
+            <TextBlock Text="{Binding ElementName=ListBox, Path=SelectedItem, Converter={StaticResource ActionToDescriptionConverter}}" TextWrapping="Wrap" />
+        </GroupBox>
+        <TextBlock
+            x:Name="textBlock1"
+            Margin="509,75,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="18"
+            Text="Название акции:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox"
+            Width="185"
+            Height="30"
+            Margin="509,104,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            IsReadOnly="True"
+            Text="{Binding Path=SelectedAction, Converter={StaticResource ActionToDishNameConverter}}"
+            TextWrapping="Wrap" />
+    </Grid>
 
 </catel:UserControl>

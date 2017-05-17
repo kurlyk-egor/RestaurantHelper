@@ -18,7 +18,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			RewiewsCommand = new Command(OnRewiewsCommandExecute);
 			ExitCommand = new Command(OnExitCommandExecute);
 
-			CurrentManagerPage = new EmployeesViewModel();
+			CurrentManagerPage = new ManagerHallViewModel();
 		}
 
 		public IViewModel CurrentManagerPage
@@ -27,8 +27,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			set { SetValue(CurrentManagerPageProperty, value); }
 		}
 		public static readonly PropertyData CurrentManagerPageProperty = RegisterProperty("CurrentManagerPage", typeof(IViewModel));
-
-
 
 
 

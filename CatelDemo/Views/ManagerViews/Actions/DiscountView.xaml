@@ -42,7 +42,7 @@
                 </ComboBox>
                 <TextBlock
                     x:Name="textBlock_Copy"
-                    Margin="20,90,0,0"
+                    Margin="20,100,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Text="Процент скидки"

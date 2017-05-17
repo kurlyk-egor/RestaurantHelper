@@ -21,11 +21,16 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData DiscountSumProperty = RegisterProperty("DiscountSum", typeof(int));
 
-		public int DiscountedDishId
+		public int DishId
 		{
 			get { return GetValue<int>(DiscountedDishIdProperty); }
 			set { SetValue(DiscountedDishIdProperty, value); }
 		}
 		public static readonly PropertyData DiscountedDishIdProperty = RegisterProperty("DiscountedDishId", typeof(int));
+
+		public override string ToString()
+		{
+			return $"СКИДКА {Id} | {DiscountSum,2}% | {Name,20}";
+		}
 	}
 }

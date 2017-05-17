@@ -20,11 +20,17 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData ExcessSumProperty = RegisterProperty("ExcessSum", typeof(int));
 
-		public int ExtraDishId
+		public int DishId
 		{
 			get { return GetValue<int>(ExtraDishIdProperty); }
 			set { SetValue(ExtraDishIdProperty, value); }
 		}
 		public static readonly PropertyData ExtraDishIdProperty = RegisterProperty("ExtraDishId", typeof(int));
+
+
+		public override string ToString()
+		{
+			return $"ПРЕВЫШЕНИЕ {Id} | {ExcessSum,6} | {Name,20}";
+		}
 	}
 }

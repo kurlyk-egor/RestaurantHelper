@@ -9,13 +9,14 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 {
 	public class ActionsViewModel : ViewModelBase
 	{
-		private readonly List<IViewModel> _actionPages = new List<IViewModel> { new DiscountViewModel(), new AmountExcessViewModel(), new DeleteActionsViewModel()};
+		// страницы двух немного разных акций
+		private readonly List<IViewModel> _actionPages = new List<IViewModel> { new DiscountViewModel(), new AmountExcessViewModel() };
 
 		public ActionsViewModel()
 		{
 			SelectionChangedCommand = new Command(OnSelectionChangedCommandExecute);
 			AddActionCommand = new Command(OnAddActionCommandExecute);
-			DeleteActionCommand = new Command(OnDeleteActionCommandExecute);
+			ShowActionsCommand = new Command(OnShowActionsCommandExecute);
 		}
 
 		public FastObservableCollection <ActionType> ActionTypes
@@ -65,10 +66,10 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		}
 
 
-		public Command DeleteActionCommand { get; private set; }
-		private void OnDeleteActionCommandExecute()
+		public Command ShowActionsCommand { get; private set; }
+		private void OnShowActionsCommandExecute()
 		{
-			SetDeleteActionProperties();
+			SetShowActionProperties();
 		}
 
 		protected override async Task InitializeAsync()
@@ -81,10 +82,9 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			await base.CloseAsync();
 		}
 
-		private void SetDeleteActionProperties()
-		{
-			ActionsPage = _actionPages.Find(vm => vm is DeleteActionsViewModel);
-			SelectedActionType = 0;
+		private void SetShowActionProperties()
+		{			
+			ActionsPage = new DeleteActionsViewModel();
 		}
 
 		private void SetAddDiscountProperties()

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catel.Collections;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Interfaces;
@@ -51,7 +53,7 @@ namespace RestaurantHelper.Services.Other
 			}
 		}
 
-		// брони на сегодня
+		// брони переданный день
 		public List<Reservation> GetDaylyReservationsForTable(string dayStr, int tableNumber)
 		{
 			DateTime day;
@@ -63,6 +65,30 @@ namespace RestaurantHelper.Services.Other
 			}
 
 			return returnList;
-		} 
+		}
+
+		public ObservableCollection<Reservation> GetTodayReservationsForTable(int tableNumber)
+		{
+			
+			ObservableCollection<Reservation> reservations = new ObservableCollection<Reservation>();
+			// получить брони на сегодня для столика
+			((ICollection<Reservation>)reservations).AddRange(GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber));
+
+			return reservations;
+		}
+
+		/// <summary>
+		/// <returns>возвращает столики, доступные прямо сейчас</returns>
+		/// </summary>
+		/// <returns></returns>
+		public List<Table> GetAvailableNowTables()
+		{
+			var first = $"{DateTime.Now.Hour}:00";
+			var second = $"{DateTime.Now.AddHours(1).Hour}:00";
+			var date = DateTime.Today.ToShortDateString();
+
+			FillAvailabilities(first, second, date);
+			return _tables;
+		}
 	}
 }

@@ -2,16 +2,113 @@
     x:Class="RestaurantHelper.Views.ManagerViews.Actions.AmountExcessView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:catel="http://catel.codeplex.com">
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
+    <Grid
+        MinWidth="400"
+        MinHeight="400"
+        Margin="15"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <GroupBox
+            x:Name="groupBox"
+            Margin="15,15,15,50"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Header="Параметры скидки">
+            <Grid>
+                <TextBlock
+                    x:Name="textBlock"
+                    Margin="30,10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="Бесплатное блюдо"
+                    TextWrapping="Wrap" />
+                <ComboBox
+                    x:Name="comboBox"
+                    Width="120"
+                    Margin="20,40,10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding Dishes}"
+                    SelectedItem="{Binding SelectedDish}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock
+                    x:Name="textBlock_Copy"
+                    Width="50"
+                    Margin="20,100,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="Сумма заказа"
+                    TextWrapping="Wrap">
+                    <TextBlock.ToolTip>
+                        <TextBlock Text="Если пользователь закажет больше этой суммы, он получит бесплатное блюдо" TextWrapping="Wrap" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <Slider
+                    x:Name="Slider"
+                    Width="300"
+                    Height="30"
+                    Margin="80,-37,0,0"
+                    HorizontalAlignment="Left"
+                    AutoToolTipPlacement="TopLeft"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    Maximum="5000"
+                    Minimum="100"
+                    TickFrequency="50"
+                    Value="{Binding DiscountValue}" />
 
-        <Label Content="{Binding Title}" />
-        <Label Content="Amount" />
-    </catel:StackGrid>
+                <Button
+                    Margin="15,0,15,25"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding ApplyAction}"
+                    Content="Применить акцию" />
+
+                <TextBox
+                    Width="170"
+                    Height="40"
+                    Margin="0,10,15,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.FloatingScale="0.8"
+                    materialDesign:HintAssist.Hint="Название акции"
+                    materialDesign:HintAssist.IsFloating="True"
+                    Text="{Binding ActionName}" />
+
+                <TextBlock
+                    Width="200"
+                    Height="26"
+                    Margin="20,150,20,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="Информация об акции" />
+
+                <TextBox
+                    Width="360"
+                    Height="60"
+                    Margin="25,170,20,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    VerticalContentAlignment="Top"
+                    BorderThickness="1"
+                    Text="{Binding ActionInfo}"
+                    TextWrapping="Wrap" />
+                <Label
+                    x:Name="label"
+                    Margin="195,90,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="{Binding ElementName=Slider, Path=Value}"
+                    Foreground="{DynamicResource PrimaryHueMidBrush}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
 
 </catel:UserControl>

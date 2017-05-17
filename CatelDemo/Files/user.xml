@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User><Id>0</Id><Login>Admin</Login><Password>Admin</Password><Name>Admin</Name><Phone>0</Phone></User>
   <User><Id>1</Id><Login>NewUser</Login><Password>NewPassword</Password><Name>New new new</Name><Phone>2232322</Phone></User>
   <User><Id>2</Id><Login>стас</Login><Password>стля</Password><Name>Стасик</Name><Phone>5553535</Phone></User>
   <User><Id>3</Id><Login>Viking</Login><Password>sobaka</Password><Name>Курлык</Name><Phone>375298933692</Phone></User>

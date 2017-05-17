@@ -113,22 +113,26 @@
     <Compile Include="Models\Table.cs" />
     <Compile Include="Services\Database\Repository.cs" />
     <Compile Include="Services\Interfaces\IHaveId.cs" />
-    <Compile Include="Services\Other\ActionsFilter.cs" />
+    <Compile Include="Services\Other\ActionsHelper.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\Converters\ActionToDescription.cs" />
     <Compile Include="Services\Other\Converters\ActionTypeToDescriptionConverter.cs" />
     <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
     <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
+    <Compile Include="Services\Other\Converters\DishIdToNameConverter.cs" />
     <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
     <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
     <Compile Include="Services\Other\Converters\TableToolTipConverter.cs" />
     <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
+    <Compile Include="Services\Other\ClientsForTableSelector.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
-    <Compile Include="Services\Other\TableMoveHelper.cs" />
+    <Compile Include="Services\Other\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
+    <Compile Include="Services\Other\AdminReservationsCreator.cs" />
     <Compile Include="Services\ValidationRules\NotEmptyValidationRule.cs" />
     <Compile Include="Services\ValidationRules\NumericTextBoxValidationRule.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
@@ -145,6 +149,7 @@
     <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\AddReservationViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ClientsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />
@@ -175,6 +180,9 @@
     </Compile>
     <Compile Include="Views\ManagerViews\Actions\DiscountView.xaml.cs">
       <DependentUpon>DiscountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\AddReservationView.xaml.cs">
+      <DependentUpon>AddReservationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
@@ -287,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerViews\Actions\DiscountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\AddReservationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,6 +431,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\discountaction.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\amountexcessaction.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

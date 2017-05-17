@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catel.Collections;
 using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
-	public class ActionsFilter
+	public class ActionsHelper
 	{
 		private readonly IRepository<DiscountAction> _discountRepository = new Repository<DiscountAction>();
 		private readonly IRepository<AmountExcessAction> _amountExcessRepository = new Repository<AmountExcessAction>();
@@ -33,7 +35,7 @@ namespace RestaurantHelper.Services.Other
 			{
 				foreach (var discountAction in _discountRepository.GetCollection())
 				{
-					if (discAction.DiscountedDishId == discountAction.DiscountedDishId)
+					if (discAction.DishId == discountAction.DishId)
 					{
 						message = "На этот товар уже установлена скидка";
 					}
@@ -72,8 +74,34 @@ namespace RestaurantHelper.Services.Other
 			}
 		}
 
+		public void RemoveAction(Action action)
+		{
+			if (action is AmountExcessAction)
+			{
+				_amountExcessRepository.Delete((AmountExcessAction)action);
+				_amountExcessRepository.SaveChanges();
+			}
+			if (action is DiscountAction)
+			{
+				_discountRepository.Delete((DiscountAction)action);
+				_discountRepository.SaveChanges();
+			}
+
+		}
+
+		public ObservableCollection<Action> GetActions()
+		{
+			FillActionsList();
+			ObservableCollection < Action > actions = new ObservableCollection<Action>();
+			((ICollection<Action>)actions).AddRange(_actions);
+			return actions;
+		} 
+
+
 		private void FillActionsList()
 		{
+			_actions.Clear();
+
 			foreach (var discountAction in _discountRepository.GetCollection())
 			{
 				_actions.Add(discountAction);

@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <UserControl.Resources>
-        <catel:BooleanToHidingVisibilityConverter x:Key="HidingVisibilityConverter" />
+        <catel:BooleanToCollapsingVisibilityConverter x:Key="CollapsingVisibilityConverter" />
         <catel:ViewModelToViewConverter x:Key="ViewModelToViewConverter" />
     </UserControl.Resources>
 
@@ -28,7 +28,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Header="Тип акции"
-            IsEnabled="{Binding ElementName=AddActionButton, Path=IsChecked}">
+            Visibility="{Binding ElementName=AddActionButton, Path=IsChecked, Converter={StaticResource CollapsingVisibilityConverter}}">
             <Grid>
                 <ComboBox
                     x:Name="ComboBox"
@@ -48,14 +48,6 @@
                     </i:Interaction.Triggers>
                 </ComboBox>
                 <TextBlock
-                    x:Name="textBlock1"
-                    Margin="25,67,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Text="Описание акции:"
-                    TextWrapping="Wrap"
-                    Visibility="{Binding ElementName=ComboBox, Path=IsSelectionBoxHighlighted, Converter={StaticResource HidingVisibilityConverter}}" />
-                <TextBlock
                     x:Name="textBlock2"
                     Margin="15,97,15,0"
                     HorizontalAlignment="Left"
@@ -70,7 +62,6 @@
         <ContentControl
             Grid.Row="1"
             Grid.Column="1"
-            Padding="10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Content="{Binding Path=ActionsPage, Converter={StaticResource ViewModelToViewConverter}}" />
@@ -79,23 +70,27 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Width="151"
-            Margin="67,17,0,0"
+            Width="180"
+            Margin="67,30,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
             Command="{Binding AddActionCommand}"
             Content="Запустить акцию"
+            FontSize="18"
             IsChecked="True" />
         <RadioButton
             x:Name="button1"
             Grid.Row="0"
             Grid.Column="1"
-            Width="143"
-            Margin="84,17,0,0"
+            Width="230"
+            Margin="84,30,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Command="{Binding DeleteActionCommand}"
-            Content="Удалить акцию" />
+            VerticalContentAlignment="Center"
+            Command="{Binding ShowActionsCommand}"
+            Content="Просмотреть все акции"
+            FontSize="18" />
     </Grid>
 
 </catel:UserControl>
