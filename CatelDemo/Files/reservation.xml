@@ -17,14 +17,13 @@
   <Reservation><Id>16</Id><UserId>3</UserId><TableNumber>5</TableNumber><FirstTime>2017-05-13T08:00:00</FirstTime><LastTime>2017-05-13T09:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
   <Reservation><Id>17</Id><UserId>6</UserId><TableNumber>5</TableNumber><FirstTime>2017-05-13T11:00:00</FirstTime><LastTime>2017-05-13T12:00:00</LastTime><Day>2017-05-13T00:00:00</Day></Reservation>
   <Reservation><Id>18</Id><UserId>6</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-13T12:00:00</FirstTime><LastTime>2017-05-13T13:00:00</LastTime><Day>2017-05-13T00:00:00</Day></Reservation>
-  <Reservation><Id>19</Id><UserId>7</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-16T17:00:00</FirstTime><LastTime>2017-05-16T18:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
   <Reservation><Id>20</Id><UserId>7</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-16T18:00:00</FirstTime><LastTime>2017-05-16T19:00:00</LastTime><Day>2017-05-16T00:00:00</Day></Reservation>
   <Reservation><Id>21</Id><UserId>3</UserId><TableNumber>6</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
   <Reservation><Id>22</Id><UserId>3</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
   <Reservation><Id>23</Id><UserId>3</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
-  <Reservation><Id>24</Id><UserId>3</UserId><TableNumber>3</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00</Day></Reservation>
   <Reservation><Id>25</Id><UserId>0</UserId><TableNumber>8</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00+03:00</Day></Reservation>
   <Reservation><Id>26</Id><UserId>0</UserId><TableNumber>9</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00+03:00</Day></Reservation>
   <Reservation><Id>28</Id><UserId>0</UserId><TableNumber>1</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T10:00:00</LastTime><Day>2017-05-17T00:00:00+03:00</Day></Reservation>
   <Reservation><Id>29</Id><UserId>0</UserId><TableNumber>2</TableNumber><FirstTime>2017-05-17T09:00:00</FirstTime><LastTime>2017-05-17T10:00:00</LastTime><Day>2017-05-17T00:00:00+03:00</Day></Reservation>
+  <Reservation><Id>30</Id><UserId>0</UserId><TableNumber>10</TableNumber><FirstTime>2017-05-17T08:00:00</FirstTime><LastTime>2017-05-17T09:00:00</LastTime><Day>2017-05-17T00:00:00+03:00</Day></Reservation>
 </ArrayOfReservation>

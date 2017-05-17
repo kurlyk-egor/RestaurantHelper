@@ -13,6 +13,7 @@
     <local:ActionTypeToDescriptionConverter x:Key="ActionTypeToDescriptionConverter" />
     <local:ActionToDescription x:Key="ActionToDescriptionConverter" />
     <local:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
+    <local:DishIdToPicturePathConverter x:Key="DishIdToPicturePathConverter" />
 
     <Style x:Key="Style" TargetType="ListBox">
         <Style.Setters>
@@ -21,7 +22,7 @@
                     <ItemsPanelTemplate>
                         <Canvas>
                             <Canvas.Background>
-                                <ImageBrush ImageSource="../hallback.jpg" Stretch="Fill" />
+                                <ImageBrush ImageSource="Resources/hallback.jpg" Stretch="Fill" />
                             </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>
@@ -107,6 +108,95 @@
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="SelectedTable" Property="Stroke" Value="Azure" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
+
+    <!--  меню  -->
+    <Style x:Key="DishesStyle" TargetType="ListBox">
+        <Style.Setters>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="470" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Margin" Value="-5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        </Style.Setters>
+    </Style>
+
+
+    <DataTemplate x:Key="DishDataTemplate">
+        <Border
+            x:Name="Border"
+            Margin="10"
+            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+            BorderThickness="1"
+            FocusManager.IsFocusScope="True">
+            <StackPanel
+                Width="140"
+                Height="170"
+                FocusManager.IsFocusScope="True"
+                Orientation="Vertical">
+
+                <Image
+                    Width="140"
+                    Height="150"
+                    Source="{Binding Path=Id, Converter={StaticResource DishIdToPicturePathConverter}}"
+                    Stretch="Fill" />
+                <TextBlock
+                    Height="30"
+                    FontSize="12"
+                    Foreground="{DynamicResource PrimaryHueMidBrush}"
+                    Text="{Binding Name}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="DishesListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid>
+                        <Rectangle
+                            x:Name="SelectedTable"
+                            Margin="5"
+                            StrokeThickness="5">
+                            <Rectangle.Effect>
+                                <BlurEffect Radius="5" />
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="SelectedTable" Property="Stroke" Value="#3A48CA" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="SelectedTable" Property="Stroke" Value="{DynamicResource MaterialDesignSelection}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

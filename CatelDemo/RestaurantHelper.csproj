@@ -120,6 +120,7 @@
     <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
     <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
     <Compile Include="Services\Other\Converters\DishIdToNameConverter.cs" />
+    <Compile Include="Services\Other\Converters\DishIdToPicturePathConverter.cs" />
     <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
     <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
     <Compile Include="Services\Other\Converters\TableToolTipConverter.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
+    <Compile Include="Services\Other\ManagerMenuChanger.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
     <Compile Include="Services\Other\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
@@ -205,7 +207,7 @@
     <Compile Include="Views\ManagerViews\ResultsView.xaml.cs">
       <DependentUpon>ResultsView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resources\ResourceDictionaries\HallResources.xaml">
+    <Page Include="HallResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -434,6 +436,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\amountexcessaction.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Dishes\1.jpg" />
+    <Resource Include="Resources\Dishes\10.jpg" />
+    <Resource Include="Resources\Dishes\11.jpg" />
+    <Resource Include="Resources\Dishes\12.jpg" />
+    <Resource Include="Resources\Dishes\13.jpg" />
+    <Resource Include="Resources\Dishes\2.jpg" />
+    <Resource Include="Resources\Dishes\3.jpg" />
+    <Resource Include="Resources\Dishes\4.jpg" />
+    <Resource Include="Resources\Dishes\5.jpg" />
+    <Resource Include="Resources\Dishes\6.jpg" />
+    <Resource Include="Resources\Dishes\7.jpg" />
+    <Resource Include="Resources\Dishes\8.jpg" />
+    <Resource Include="Resources\Dishes\9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

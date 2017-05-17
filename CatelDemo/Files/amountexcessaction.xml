@@ -1,2 +1,4 @@
 <?xml version="1.0"?>
-<ArrayOfAmountExcessAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfAmountExcessAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmountExcessAction><ExcessSum>500</ExcessSum><ExtraDishId>6</ExtraDishId><Id>1</Id><Name>Бесплатное тирамису</Name><Description>Просто дарим</Description></AmountExcessAction>
+</ArrayOfAmountExcessAction>

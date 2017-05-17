@@ -2,16 +2,52 @@
     x:Class="RestaurantHelper.Views.ManagerViews.ManagerMenuView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:catel="http://catel.codeplex.com">
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
-
-        <Label Content="{Binding Title}" />
-        <Label Content="Here goes your real content" />
-    </catel:StackGrid>
+    <Grid Width="800" Height="500">
+        <ListBox
+            x:Name="listBox"
+            Width="600"
+            Height="330"
+            Margin="23,73,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemContainerStyle="{StaticResource DishesListBoxItemStyle}"
+            ItemTemplate="{StaticResource DishDataTemplate}"
+            ItemsSource="{Binding Dishes}"
+            SelectedItem="{Binding SelectedDish}"
+            Style="{StaticResource DishesStyle}" />
+        <GroupBox
+            x:Name="groupBox"
+            Width="133"
+            Height="217"
+            Margin="645,73,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Детали" />
+        <Button
+            x:Name="button"
+            Width="130"
+            Margin="60,442,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Добавить" />
+        <Button
+            x:Name="button1"
+            Width="130"
+            Margin="284,442,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Удалить" />
+        <Button
+            x:Name="button2"
+            Width="130"
+            Margin="492,442,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Редактировать" />
+    </Grid>
 
 </catel:UserControl>
