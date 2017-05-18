@@ -19,12 +19,12 @@ namespace RestaurantHelper.Services.Other
 		private const int MIN_TABLE_TOP = 10;
 		private const int MIN_TABLE_LEFT = 10;
 
-		private readonly IRepositoryBase<Table> _tableRepository;
+		private readonly IRepository<Table> _tableRepository;
 		private readonly ObservableCollection<Table> _myTables; 
 
 		public TableMoveHelper(ObservableCollection<Table> myTables)
 		{
-			_tableRepository = new RepositoryBase<Table>();
+			_tableRepository = new Repository<Table>();
 			_myTables = myTables;
 		}
 

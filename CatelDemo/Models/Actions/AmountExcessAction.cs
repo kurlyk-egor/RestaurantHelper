@@ -7,7 +7,24 @@ using Catel.Data;
 
 namespace RestaurantHelper.Models.Actions
 {
-	class AmountExcessAction : ModelBase
+	[Serializable]
+	public class AmountExcessAction : Action
 	{
+		public AmountExcessAction()
+		{
+		}
+		public int ExcessSum
+		{
+			get { return GetValue<int>(ExcessSumProperty); }
+			set { SetValue(ExcessSumProperty, value); }
+		}
+		public static readonly PropertyData ExcessSumProperty = RegisterProperty("ExcessSum", typeof(int));
+
+		public int ExtraDishId
+		{
+			get { return GetValue<int>(ExtraDishIdProperty); }
+			set { SetValue(ExtraDishIdProperty, value); }
+		}
+		public static readonly PropertyData ExtraDishIdProperty = RegisterProperty("ExtraDishId", typeof(int));
 	}
 }

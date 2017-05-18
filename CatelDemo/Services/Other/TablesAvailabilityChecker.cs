@@ -13,12 +13,12 @@ namespace RestaurantHelper.Services.Other
 	public class TablesAvailabilityChecker
 	{
 		private readonly List<Table> _tables;
-		private readonly IRepositoryBase<Reservation> _reservations;
+		private readonly IRepository<Reservation> _reservations;
 
 		public TablesAvailabilityChecker(List<Table> tables)
 		{
 			_tables = tables;
-			_reservations = new RepositoryBase<Reservation>();
+			_reservations = new Repository<Reservation>();
 		}
 
 		public void FillAvailabilities(string firstTime, string secondTime, string currentDay)

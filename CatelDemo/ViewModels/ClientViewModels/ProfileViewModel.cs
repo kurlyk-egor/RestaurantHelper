@@ -11,12 +11,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
     public class ProfileViewModel : ViewModelBase
     {
         private readonly IViewModel _previousViewModel;
-        private readonly IRepositoryBase<User> _userRepository;
+        private readonly IRepository<User> _userRepository;
         public ProfileViewModel(IViewModel previousViewModel, User user)
         {
             _previousViewModel = previousViewModel;
             User = user;
-            _userRepository = new RepositoryBase<User>();
+            _userRepository = new Repository<User>();
 
             SaveCommand = new Command(OnSaveCommandExecute, OnSaveCommandCanExecute);
             BackCommand = new Command(OnBackCommandExecute);

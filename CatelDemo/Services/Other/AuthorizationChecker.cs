@@ -10,12 +10,12 @@ namespace RestaurantHelper.Services.Other
     {
         private IEnumerable<User> _users; 
         private User _user;
-        private readonly IRepositoryBase<User> _userRepository;
+        private readonly IRepository<User> _userRepository;
 
         public AuthorizationChecker(User user)
         {
             _user = user;
-			_userRepository = new RepositoryBase<User>();
+			_userRepository = new Repository<User>();
         }
 
         public bool IsMatchUser()

@@ -1,4 +1,4 @@
-﻿namespace RestaurantHelper.Views.ManagerViews
+﻿namespace RestaurantHelper.Views.ManagerViews.Actions
 {
 	public partial class ActionsView
 	{

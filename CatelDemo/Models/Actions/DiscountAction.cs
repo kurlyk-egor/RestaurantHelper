@@ -4,33 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
+using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models.Actions
 {
-	class DiscountAction : ModelBase
+	[Serializable]
+	public class DiscountAction : Action
 	{
-		public int Id
+		public DiscountAction()
 		{
-			get { return GetValue<int>(IdProperty); }
-			set { SetValue(IdProperty, value); }
 		}
-		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
-
-		public string Name
+		public int DiscountSum
 		{
-			get { return GetValue<string>(NameProperty); }
-			set { SetValue(NameProperty, value); }
+			get { return GetValue<int>(DiscountSumProperty); }
+			set { SetValue(DiscountSumProperty, value); }
 		}
-		public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
+		public static readonly PropertyData DiscountSumProperty = RegisterProperty("DiscountSum", typeof(int));
 
-
-		public string Description
+		public int DiscountedDishId
 		{
-			get { return GetValue<string>(DescriptionProperty); }
-			set { SetValue(DescriptionProperty, value); }
+			get { return GetValue<int>(DiscountedDishIdProperty); }
+			set { SetValue(DiscountedDishIdProperty, value); }
 		}
-		public static readonly PropertyData DescriptionProperty = RegisterProperty("Description", typeof(string));
-
-
+		public static readonly PropertyData DiscountedDishIdProperty = RegisterProperty("DiscountedDishId", typeof(int));
 	}
 }

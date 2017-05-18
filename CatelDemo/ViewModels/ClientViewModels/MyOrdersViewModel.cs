@@ -19,10 +19,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		private readonly User _user;
 		private readonly IViewModel _parentViewModel;
 		private readonly IViewModel _rootViewModel;
-		private readonly IRepositoryBase<Order> _orderRepository;
-		private readonly IRepositoryBase<Reservation> _reservationRepository;
-		private readonly IRepositoryBase<Dish> _dishRepository;
-		private readonly IRepositoryBase<OrderedDish> _orderedDishRepository;
+		private readonly IRepository<Order> _orderRepository;
+		private readonly IRepository<Reservation> _reservationRepository;
+		private readonly IRepository<Dish> _dishRepository;
+		private readonly IRepository<OrderedDish> _orderedDishRepository;
 		private readonly OrderedSumCalculator _orderedSumCalculator;
 
 		public MyOrdersViewModel(IViewModel parentViewModel, User user)
@@ -33,10 +33,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			_orderedSumCalculator = new OrderedSumCalculator();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
-			_dishRepository = new RepositoryBase<Dish>();
-			_orderRepository = new RepositoryBase<Order>();
-			_reservationRepository = new RepositoryBase<Reservation>();
-			_orderedDishRepository = new RepositoryBase<OrderedDish>();
+			_dishRepository = new Repository<Dish>();
+			_orderRepository = new Repository<Order>();
+			_reservationRepository = new Repository<Reservation>();
+			_orderedDishRepository = new Repository<OrderedDish>();
 
 			BackCommand = new Command(OnBackCommandExecute);
 			SelectAnotherOrderCommand = new Command(OnSelectAnotherOrderCommandExecute);

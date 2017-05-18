@@ -19,7 +19,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
 	    private readonly Reservation _reservation;
-	    private readonly IRepositoryBase<Dish> _dishRepository;
+	    private readonly IRepository<Dish> _dishRepository;
 		private readonly OrderedSumCalculator _sumCalculator;
 
 		public MenuViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes = null)
@@ -27,7 +27,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_user = user;
 			_reservation = reservation;
 			_sumCalculator = new OrderedSumCalculator();
-			_dishRepository = new RepositoryBase<Dish>();
+			_dishRepository = new Repository<Dish>();
 		    _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			AddCommand = new Command(OnAddCommandExecute, OnAddCommandCanExecute);
@@ -100,10 +100,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		private void OnAddCommandExecute()
 		{
+			// добавить выбранное блюдо
 			var dish = OrderedDishes.FirstOrDefault(cur => cur.Id == SelectedDish.Id);
 
 			if (dish != null)
 			{
+				// TODO: костыль, чтобы оповестить вью, что во вьюмодели данные изменились
 				OrderedDishes.Remove(dish);
 				OrderedDishes.Add(dish);
 				dish.Quantity += CurrentDishesCount;

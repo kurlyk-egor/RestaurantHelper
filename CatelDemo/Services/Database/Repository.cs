@@ -4,19 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Database
 {
-	class RepositoryBase<T> : IRepositoryBase<T> 
+	class Repository<T> : IRepository<T> 
 		where T:class, IHaveId
 	{
 		private readonly XmlSerializer _serializer = new XmlSerializer(typeof(List<T>));
 		private List<T> _items = new List<T>();
 
-		public RepositoryBase()
+		public Repository()
 		{
 			PathToFile = $@"..\..\CatelDemo\Files\{typeof(T).Name.ToLower()}.xml";
 			RefreshRepository();
@@ -29,9 +30,16 @@ namespace RestaurantHelper.Services.Database
 
 		public void RefreshRepository()
 		{
-			using (FileStream stream = new FileStream(PathToFile, FileMode.OpenOrCreate))
+			try
 			{
-				_items = (List<T>)_serializer.Deserialize(stream);
+				using (FileStream stream = new FileStream(PathToFile, FileMode.OpenOrCreate))
+				{
+					_items = (List<T>)_serializer.Deserialize(stream);
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
 			}
 		}
 
@@ -79,8 +87,14 @@ namespace RestaurantHelper.Services.Database
 			}
 		}
 
+		public bool IsExistItem(T item)
+		{
+			return _items.Contains(item);
+		}
+
 		private int NextId()
 		{
+			if (_items.Count == 0) return 1;
 			int max = _items.Max(item => item.Id);
 			return ++max;
 		}

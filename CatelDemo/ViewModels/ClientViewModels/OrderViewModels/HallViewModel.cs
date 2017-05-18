@@ -25,7 +25,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly User _user;
 		private readonly ObservableCollection<Dish> _orderedDishes;
 		private readonly IViewModel _rootViewModel;
-		private readonly IRepositoryBase<Table> _tableRepository;
+		private readonly IRepository<Table> _tableRepository;
 		private readonly Reservation _reservation;
 		private readonly TablesAvailabilityChecker _availabilityChecker;
 
@@ -34,7 +34,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_user = user;
 			_orderedDishes = orderedDishes;
 			_reservation = new Reservation();
-			_tableRepository = new RepositoryBase<Table>();
+			_tableRepository = new Repository<Table>();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			// передаем ссылку на наши столики
 			_availabilityChecker = new TablesAvailabilityChecker(_tableRepository.GetCollection());

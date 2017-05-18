@@ -12,7 +12,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {
-        private readonly IRepositoryBase<User> _userRepository;
+        private readonly IRepository<User> _userRepository;
         private readonly IViewModel _parentViewModel;
         private readonly IViewModel _previousViewModel;
 
@@ -21,7 +21,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         {
             _parentViewModel = parentViewModel;
             _previousViewModel = previousViewModel;
-            _userRepository = new RepositoryBase<User>();
+            _userRepository = new Repository<User>();
 
             BackCommand = new Command(OnBackCommandExecute);
             RegistrationCommand = new Command(OnRegistrationCommandExecute, OnRegistrationCommandCanExecute);

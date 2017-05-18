@@ -1,4 +1,5 @@
 ﻿using Catel.Data;
+using RestaurantHelper.ViewModels.ManagerViewModels.Actions;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {

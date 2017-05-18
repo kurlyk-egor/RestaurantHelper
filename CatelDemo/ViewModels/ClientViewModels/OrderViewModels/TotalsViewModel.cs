@@ -18,10 +18,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    private readonly Reservation _reservation;
 	    private readonly ObservableCollection<Dish> _orderedDishes;
 	    private readonly IViewModel _rootViewModel;
-	    private readonly IRepositoryBase<Table> _tableRepository;
-	    private readonly IRepositoryBase<Reservation> _reservationRepository;
-	    private readonly IRepositoryBase<OrderedDish> _orderedDishRepository;
-	    private readonly IRepositoryBase<Order> _orderRepository;
+	    private readonly IRepository<Table> _tableRepository;
+	    private readonly IRepository<Reservation> _reservationRepository;
+	    private readonly IRepository<OrderedDish> _orderedDishRepository;
+	    private readonly IRepository<Order> _orderRepository;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
 		public TotalsViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes)
@@ -30,10 +30,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_reservation = reservation;
 			_orderedDishes = orderedDishes;
 			_sumCalculator = new OrderedSumCalculator();
-			_tableRepository = new RepositoryBase<Table>();
-			_orderRepository = new RepositoryBase<Order>();
-			_orderedDishRepository = new RepositoryBase<OrderedDish>();
-			_reservationRepository = new RepositoryBase<Reservation>();
+			_tableRepository = new Repository<Table>();
+			_orderRepository = new Repository<Order>();
+			_orderedDishRepository = new Repository<OrderedDish>();
+			_reservationRepository = new Repository<Reservation>();
 
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 

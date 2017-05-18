@@ -111,9 +111,11 @@
     <Compile Include="Models\OrderWithReservationInfo.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Table.cs" />
-    <Compile Include="Services\Database\RepositoryBase.cs" />
+    <Compile Include="Services\Database\Repository.cs" />
     <Compile Include="Services\Interfaces\IHaveId.cs" />
+    <Compile Include="Services\Other\ActionsFilter.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Other\Converters\ActionTypeToDescriptionConverter.cs" />
     <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
     <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
     <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
@@ -139,7 +141,10 @@
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\ActionsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\Actions\ActionsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ClientsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />
@@ -159,8 +164,17 @@
     <Compile Include="Views\ClientViews\ClientMainView.xaml.cs">
       <DependentUpon>ClientMainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\ActionsView.xaml.cs">
+    <Compile Include="Views\ManagerViews\Actions\ActionsView.xaml.cs">
       <DependentUpon>ActionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Actions\AmountExcessView.xaml.cs">
+      <DependentUpon>AmountExcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Actions\DeleteActionsView.xaml.cs">
+      <DependentUpon>DeleteActionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Actions\DiscountView.xaml.cs">
+      <DependentUpon>DiscountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
@@ -238,7 +252,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Services\Interfaces\IRepositoryBase.cs" />
+    <Compile Include="Services\Interfaces\IRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ClientViews\MyOrdersView.xaml.cs">
@@ -260,9 +274,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ManagerViews\ActionsView.xaml">
+    <Page Include="Views\ManagerViews\Actions\ActionsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagerViews\Actions\AmountExcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Actions\DeleteActionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Actions\DiscountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerViews\ClientsView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -391,7 +417,9 @@
   <ItemGroup>
     <Resource Include="Resources\1750_2500.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Files\discountaction.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

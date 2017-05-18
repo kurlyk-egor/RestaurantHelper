@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RestaurantHelper.Services.Interfaces
 {
-    public interface IRepositoryBase <T> : IDisposable
+    public interface IRepository <T> : IDisposable
         where T : class
     {
 	    string PathToFile { get; set; }
@@ -14,5 +14,6 @@ namespace RestaurantHelper.Services.Interfaces
         void Delete(T item);
         void Update(T item);     
         bool SaveChanges();
+	    bool IsExistItem(T item);
     }
 }
