@@ -39,12 +39,13 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData PriceProperty = RegisterProperty("Price", typeof(int));
 
-		public int PictureId
+		public string PicturePath
 		{
-			get { return GetValue<int>(PictureIdProperty); }
-			set { SetValue(PictureIdProperty, value); }
+			get { return GetValue<string>(PicturePathProperty); }
+			set { SetValue(PicturePathProperty, value); }
 		}
-		public static readonly PropertyData PictureIdProperty = RegisterProperty("PictureId", typeof(int));
+		public static readonly PropertyData PicturePathProperty = RegisterProperty("PicturePath", typeof(string));
+
 
 		[XmlIgnore]
 		public int Quantity

@@ -93,7 +93,7 @@ namespace RestaurantHelper.Services.Database
 			return _items.Contains(item);
 		}
 
-		private int NextId()
+		public int NextId()
 		{
 			if (_items.Count == 0) return 1;
 			int max = _items.Max(item => item.Id);

@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Catel.Data;
+using Catel.IoC;
 using Catel.MVVM;
+using Catel.Services;
 using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
@@ -13,6 +16,16 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		public ManagerMenuViewModel()
 		{
 			_menuChanger = new ManagerMenuChanger();
+
+			AddDishCommand = new Command(OnAddDishCommandExecute);
+			DeleteDishCommand = new Command(OnDeleteDishCommandExecute, OnAnyDishCommandCanExecute);
+			EditDishCommand = new Command(OnEditDishCommandExecute, OnAnyDishCommandCanExecute);
+
+			DishesCollectionRefresh();
+		}
+
+		private void DishesCollectionRefresh()
+		{
 			Dishes = _menuChanger.LoadAllDishes();
 		}
 
@@ -31,7 +44,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		public static readonly PropertyData SelectedDishProperty = RegisterProperty("SelectedDish", typeof(Dish));
 
-
 		protected override async Task InitializeAsync()
 		{
 			await base.InitializeAsync();
@@ -40,6 +52,39 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
+		}
+
+		public Command DeleteDishCommand { get; private set; }
+		private void OnDeleteDishCommandExecute()
+		{
+			_menuChanger.DeleteDish(SelectedDish);
+			DishesCollectionRefresh();
+		}
+
+		public Command AddDishCommand { get; private set; }
+		private void OnAddDishCommandExecute()
+		{
+			var visualizer = this.GetDependencyResolver().Resolve<IUIVisualizerService>();
+			var addDishVm = new AddDishViewModel();
+
+			if (visualizer.ShowDialog(addDishVm) == true)
+			{
+				Dishes.Add(addDishVm.Dish);
+			}
+		}
+
+		public Command EditDishCommand { get; private set; }
+		private void OnEditDishCommandExecute()
+		{
+			var visualizer = this.GetDependencyResolver().Resolve<IUIVisualizerService>();
+			var addDishVm = new AddDishViewModel(SelectedDish);
+
+			visualizer.ShowDialog(addDishVm);
+		}
+
+		private bool OnAnyDishCommandCanExecute()
+		{
+			return SelectedDish != null;
 		}
 	}
 }

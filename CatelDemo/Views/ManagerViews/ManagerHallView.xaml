@@ -75,14 +75,14 @@
         <TextBlock
             x:Name="textBlock1"
             Width="68"
-            Margin="44,18,0,0"
+            Margin="45,27,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="15"
+            FontSize="20"
             FontWeight="Black"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             RenderTransformOrigin="0.676,0.649"
-            Text="Текущие данные"
+            Text="{Binding TimeString}"
             TextWrapping="Wrap" />
         <Rectangle
             Grid.RowSpan="2"

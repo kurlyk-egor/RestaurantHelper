@@ -114,9 +114,14 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			get { return GetValue<bool>(IsEnabledAddButtonProperty); }
 			set { SetValue(IsEnabledAddButtonProperty, value); }
 		}
-
 		public static readonly PropertyData IsEnabledAddButtonProperty = RegisterProperty("IsEnabledAddButton", typeof (bool), false);
 
+		public string TimeString
+		{
+			get { return GetValue<string>(TimeStringProperty); }
+			set { SetValue(TimeStringProperty, value); }
+		}
+		public static readonly PropertyData TimeStringProperty = RegisterProperty("TimeString", typeof(string));
 
 		protected override async Task InitializeAsync()
 		{
@@ -197,6 +202,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 						_tablesAvailabilityRejuvenator.RefreshTablesCollection();
 						FreeTablesCount = _tablesAvailabilityRejuvenator.GetFreeTablesCount();
 						BusyTablesCount = _tablesAvailabilityRejuvenator.GetBusyTablesCount();
+						TimeString = DateTime.Now.ToShortTimeString();
 					});
 
 					Thread.Sleep(TimeSpan.FromSeconds(2));

@@ -33,7 +33,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             User = user;
         }
 
-        // TODO: Register models with the vmpropmodel codesnippet
         [Model]
         public User User
         {

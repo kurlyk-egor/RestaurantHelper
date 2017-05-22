@@ -13,6 +13,8 @@ using Catel.MVVM.Views;
 using Catel.Services;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
+using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.ViewModels.AuthorizationViewModels;
 using RestaurantHelper.ViewModels.ClientViewModels;
 using RestaurantHelper.ViewModels.ManagerViewModels;
@@ -26,7 +28,8 @@ namespace RestaurantHelper.ViewModels
     {
         public MainWindowViewModel()
         {
-            // TODO: запуск авторизации
+	        //new Repository<Dish>().SaveChanges();
+				// TODO: запуск авторизации
             //CurrentPage = new StartWindowViewModel(this);
 			// user есть в списке
 			// TODO: запуск сразу клиентской части

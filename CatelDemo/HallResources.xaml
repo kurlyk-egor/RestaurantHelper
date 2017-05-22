@@ -107,7 +107,7 @@
                                 <Condition Property="IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="SelectedTable" Property="Stroke" Value="Azure" />
+                                <Setter TargetName="SelectedTable" Property="Stroke" Value="{DynamicResource MaterialDesignSelection}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
@@ -120,20 +120,18 @@
 
 
 
-
-    <!--  меню  -->
+    <!--  шаблон  меню  -->
     <Style x:Key="DishesStyle" TargetType="ListBox">
         <Style.Setters>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
-                        <WrapPanel Width="470" Orientation="Horizontal" />
+                        <WrapPanel Width="750" Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Margin" Value="-5" />
-            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderThickness" Value="2" />
             <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
         </Style.Setters>
     </Style>
@@ -148,21 +146,34 @@
             FocusManager.IsFocusScope="True">
             <StackPanel
                 Width="140"
-                Height="170"
+                Height="205"
+                Background="{DynamicResource MaterialDesignBackground}"
                 FocusManager.IsFocusScope="True"
                 Orientation="Vertical">
 
                 <Image
                     Width="140"
-                    Height="150"
-                    Source="{Binding Path=Id, Converter={StaticResource DishIdToPicturePathConverter}}"
+                    Height="140"
+                    Source="{Binding PicturePath}"
                     Stretch="Fill" />
                 <TextBlock
-                    Height="30"
+                    Height="35"
+                    Padding="5"
                     FontSize="12"
                     Foreground="{DynamicResource PrimaryHueMidBrush}"
                     Text="{Binding Name}"
                     TextWrapping="Wrap" />
+
+                <TextBlock
+                    Height="20"
+                    Padding="5"
+                    TextWrapping="Wrap">
+                    <Run FontSize="12" Text="Цена:" />
+                    <Run
+                        FontSize="14"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}"
+                        Text="{Binding Price}" />
+                </TextBlock>
             </StackPanel>
         </Border>
     </DataTemplate>
