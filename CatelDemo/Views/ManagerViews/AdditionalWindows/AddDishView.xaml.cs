@@ -1,10 +1,8 @@
-﻿using RestaurantHelper.ViewModels.ManagerViewModels;
+﻿using Catel.Windows;
+using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
-namespace RestaurantHelper.Views.ManagerViews
+namespace RestaurantHelper.Views.ManagerViews.AdditionalWindows
 {
-	using Catel.Windows;
-	using ViewModels;
-
 	public partial class AddDishView
 	{
 		public AddDishView()

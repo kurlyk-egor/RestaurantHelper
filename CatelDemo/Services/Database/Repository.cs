@@ -70,6 +70,7 @@ namespace RestaurantHelper.Services.Database
 			T findedItem = _items.Find(u => u.Id == item.Id);
 			_items.Remove(findedItem);
 			_items.Add(item);
+			_items.Sort((i1,i2) => i1.Id - i2.Id);
 		}
 
 		public bool SaveChanges()

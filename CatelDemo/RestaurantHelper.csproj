@@ -105,11 +105,14 @@
     <Compile Include="Models\Actions\Action.cs" />
     <Compile Include="Models\Actions\AmountExcessAction.cs" />
     <Compile Include="Models\Actions\DiscountAction.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Reviews\ClientReview.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedDish.cs" />
     <Compile Include="Models\OrderWithReservationInfo.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\Reviews\ManagerAnswer.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Services\Database\Repository.cs" />
     <Compile Include="Services\Interfaces\IHaveId.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Services\Other\Converters\TableToolTipConverter.cs" />
     <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
     <Compile Include="Services\Other\ClientsForTableSelector.cs" />
+    <Compile Include="Services\Other\Converters\UserIdToLoginConverter.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
@@ -151,15 +155,14 @@
     <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\AddDishViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\AddReservationViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddDishViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddReservationViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerMainViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerMenuViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ReviewsViewModel.cs" />
     <Compile Include="Views\AuthorizationViews\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
@@ -184,14 +187,11 @@
     <Compile Include="Views\ManagerViews\Actions\DiscountView.xaml.cs">
       <DependentUpon>DiscountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\AddDishView.xaml.cs">
+    <Compile Include="Views\ManagerViews\AdditionalWindows\AddDishView.xaml.cs">
       <DependentUpon>AddDishView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\AddReservationView.xaml.cs">
+    <Compile Include="Views\ManagerViews\AdditionalWindows\AddReservationView.xaml.cs">
       <DependentUpon>AddReservationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ManagerViews\ClientsView.xaml.cs">
-      <DependentUpon>ClientsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
@@ -208,8 +208,8 @@
     <Compile Include="Views\ManagerViews\ReportsView.xaml.cs">
       <DependentUpon>ReportsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\ResultsView.xaml.cs">
-      <DependentUpon>ResultsView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ReviewsView.xaml.cs">
+      <DependentUpon>ReviewsView.xaml</DependentUpon>
     </Compile>
     <Page Include="HallResources.xaml">
       <SubType>Designer</SubType>
@@ -304,17 +304,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerViews\AddDishView.xaml">
+    <Page Include="Views\ManagerViews\AdditionalWindows\AddDishView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerViews\AddReservationView.xaml">
+    <Page Include="Views\ManagerViews\AdditionalWindows\AddReservationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ManagerViews\ClientsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ManagerViews\EmployeesView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -336,9 +332,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerViews\ResultsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\ManagerViews\ReviewsView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -459,6 +455,12 @@
     <Resource Include="Resources\Dishes\7.jpg" />
     <Resource Include="Resources\Dishes\8.jpg" />
     <Resource Include="Resources\Dishes\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\clientreview.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\manageranswer.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

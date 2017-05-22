@@ -1,5 +1,5 @@
 ﻿<catel:DataWindow
-    x:Class="RestaurantHelper.Views.ManagerViews.AddReservationView"
+    x:Class="RestaurantHelper.Views.ManagerViews.AdditionalWindows.AddReservationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"

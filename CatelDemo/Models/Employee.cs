@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Catel.Data;
+using RestaurantHelper.Services.Interfaces;
+
+namespace RestaurantHelper.Models
+{
+	[Serializable]
+	public class Employee : ModelBase, IHaveId
+	{
+		public Employee()
+		{ 
+		}
+
+		public int Id
+		{
+			get { return GetValue<int>(IdProperty); }
+			set { SetValue(IdProperty, value); }
+		}
+		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
+
+		public string Name
+		{
+			get { return GetValue<string>(NameProperty); }
+			set { SetValue(NameProperty, value); }
+		}
+		public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
+
+		public int Age
+		{
+			get { return GetValue<int>(AgeProperty); }
+			set { SetValue(AgeProperty, value); }
+		}
+		public static readonly PropertyData AgeProperty = RegisterProperty("Age", typeof(int));
+
+		public string Position
+		{
+			get { return GetValue<string>(PositionProperty); }
+			set { SetValue(PositionProperty, value); }
+		}
+		public static readonly PropertyData PositionProperty = RegisterProperty("Position", typeof(string));
+
+		public string WorkDays
+		{
+			get { return GetValue<string>(WorkDaysProperty); }
+			set { SetValue(WorkDaysProperty, value); }
+		}
+		public static readonly PropertyData WorkDaysProperty = RegisterProperty("WorkDays", typeof(string));
+	}
+}

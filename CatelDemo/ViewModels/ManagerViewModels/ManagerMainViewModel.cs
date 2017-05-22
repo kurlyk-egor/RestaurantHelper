@@ -18,7 +18,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			RewiewsCommand = new Command(OnRewiewsCommandExecute);
 			ExitCommand = new Command(OnExitCommandExecute);
 
-			CurrentManagerPage = new ManagerHallViewModel();
+			//TODO: запускать первой страницу мониторинга
+			CurrentManagerPage = new EmployeesViewModel();//ManagerHallViewModel();
 		}
 
 		public IViewModel CurrentManagerPage
@@ -67,7 +68,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void OnRewiewsCommandExecute()
 		{
-			CurrentManagerPage = new ResultsViewModel();
+			CurrentManagerPage = new ReviewsViewModel();
 		}
 
 		private async void OnExitCommandExecute()
@@ -85,11 +86,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
-		}
-
-		public void SetManagerPage(IViewModel page)
-		{
-			CurrentManagerPage = page;
 		}
 	}
 }

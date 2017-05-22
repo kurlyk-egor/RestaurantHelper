@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ArrayOfManagerAnswer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ManagerAnswer><Id>1</Id><ReviewId>1</ReviewId><Text>Спасибо, что выбрали нас!</Text><DateTime>2017-05-23T02:28:47.9221553+03:00</DateTime></ManagerAnswer>
+  <ManagerAnswer><Id>2</Id><ReviewId>2</ReviewId><Text>Огромное спасибо!</Text><DateTime>2017-05-23T02:00:05.3605245+03:00</DateTime></ManagerAnswer>
+  <ManagerAnswer><Id>3</Id><ReviewId>3</ReviewId><Text>Спасибо вам за отзыв!</Text><DateTime>2017-05-23T02:00:21.3374384+03:00</DateTime></ManagerAnswer>
+  <ManagerAnswer><Id>4</Id><ReviewId>6</ReviewId><Text>Обазательно приходите, будем ждать!</Text><DateTime>2017-05-23T02:00:46.5448801+03:00</DateTime></ManagerAnswer>
+</ArrayOfManagerAnswer>

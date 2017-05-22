@@ -5,14 +5,8 @@
   <Dish><Id>3</Id><Name>Гамбургер</Name><Price>130</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\3.jpg</PicturePath></Dish>
   <Dish><Id>4</Id><Name>Грибной суп</Name><Price>120</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\4.jpg</PicturePath></Dish>
   <Dish><Id>5</Id><Name>Вырезка свиная</Name><Price>220</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\5.jpg</PicturePath></Dish>
-  <Dish><Id>6</Id><Name>Тирамису</Name><Price>150</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\6.jpg</PicturePath></Dish>
   <Dish><Id>7</Id><Name>Овощное рагу</Name><Price>160</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\7.jpg</PicturePath></Dish>
   <Dish><Id>8</Id><Name>Пицца грибная</Name><Price>170</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\8.jpg</PicturePath></Dish>
   <Dish><Id>9</Id><Name>Омлет со шкварками</Name><Price>110</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\9.jpg</PicturePath></Dish>
   <Dish><Id>10</Id><Name>Десерт творожный</Name><Price>100</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\10.jpg</PicturePath></Dish>
-  <Dish><Id>11</Id><Name>Норм</Name><Price>123</Price><PicturePath>C:\Users\Public\Pictures\Sample Pictures\Desert.jpg</PicturePath></Dish>
-  <Dish><Id>12</Id><Name>Гамбургер</Name><Price>120</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\3.jpg</PicturePath></Dish>
-  <Dish><Id>13</Id><Name>Грибной суп</Name><Price>100</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\4.jpg</PicturePath></Dish>
-  <Dish><Id>14</Id><Name>Пейзаж</Name><Price>123</Price><PicturePath>C:\Users\Public\Pictures\Sample Pictures\Desert.jpg</PicturePath></Dish>
-  <Dish><Id>15</Id><Name>Курлыки в масле</Name><Price>50</Price><PicturePath>C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg</PicturePath></Dish>
 </ArrayOfDish>

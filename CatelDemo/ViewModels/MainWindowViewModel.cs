@@ -28,13 +28,13 @@ namespace RestaurantHelper.ViewModels
     {
         public MainWindowViewModel()
         {
-	        //new Repository<Dish>().SaveChanges();
-				// TODO: запуск авторизации
+			// TODO: запуск авторизации
             //CurrentPage = new StartWindowViewModel(this);
-			// user есть в списке
+
 			// TODO: запуск сразу клиентской части
 			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
-			 // TODO: запуск сразу из под админа
+			
+			// TODO: запуск сразу из под админа
 			CurrentPage = new ManagerMainViewModel();
 
 			// собственные пространства имен
@@ -55,6 +55,9 @@ namespace RestaurantHelper.ViewModels
 
 			viewModelLocator.NamingConventions.Add("[AS].ViewModels.ManagerViewModels.Actions.[VW]ViewModel");
 			viewLocator.NamingConventions.Add("[AS].Views.ManagerViews.Actions.[VM]View");
+
+			viewModelLocator.NamingConventions.Add("[AS].ViewModels.ManagerViewModels.AdditionalWindows.[VW]ViewModel");
+			viewLocator.NamingConventions.Add("[AS].Views.ManagerViews.AdditionalWindows.[VM]View");
 		}
 
         // сюда биндится текущий UserControl в ContentControle окна

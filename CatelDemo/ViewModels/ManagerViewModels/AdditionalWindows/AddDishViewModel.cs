@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Catel.Data;
+using Catel.MVVM;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 
-namespace RestaurantHelper.ViewModels.ManagerViewModels
+namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 {
-	using Catel.MVVM;
-	using System.Threading.Tasks;
-
 	public class AddDishViewModel : ViewModelBase
 	{
 		private readonly ManagerMenuChanger _menuChanger;

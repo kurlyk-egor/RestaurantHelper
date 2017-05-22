@@ -17,6 +17,7 @@ using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
+using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 

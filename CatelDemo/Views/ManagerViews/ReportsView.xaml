@@ -4,14 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <catel:StackGrid>
-        <catel:StackGrid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </catel:StackGrid.RowDefinitions>
-
-        <Label Content="{Binding Title}" />
-        <Label Content="Here goes your real content" />
-    </catel:StackGrid>
+    <Grid Name="Отчеты" />
 
 </catel:UserControl>

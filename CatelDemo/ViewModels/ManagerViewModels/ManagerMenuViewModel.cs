@@ -7,6 +7,7 @@ using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
+using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
