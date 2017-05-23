@@ -26,7 +26,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 ItemsSource="{Binding Employees}"
-                SelectedItem="{Binding SelectedEmployee}">
+                SelectedItem="{Binding SelectedEmployee}"
+                SelectionMode="Single">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>

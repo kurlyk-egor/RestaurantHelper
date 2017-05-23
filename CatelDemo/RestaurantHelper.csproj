@@ -130,6 +130,7 @@
     <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
     <Compile Include="Services\Other\ClientsForTableSelector.cs" />
     <Compile Include="Services\Other\Converters\UserIdToLoginConverter.cs" />
+    <Compile Include="Services\Other\DaysParser.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddDishViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddReservationViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />

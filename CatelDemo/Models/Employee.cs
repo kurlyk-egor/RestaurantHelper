@@ -8,6 +8,20 @@ using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models
 {
+
+	[Serializable]
+	[Flags]
+	public enum Days
+	{
+		Monday = 1,
+		Tuesday = 2,
+		Wednesday = 4,
+		Thursday = 8,
+		Friday = 16,
+		Saturday = 32,
+		Sunday = 64
+	}
+
 	[Serializable]
 	public class Employee : ModelBase, IHaveId
 	{

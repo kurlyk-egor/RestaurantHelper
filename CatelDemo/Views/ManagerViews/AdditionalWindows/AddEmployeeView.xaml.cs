@@ -1,4 +1,6 @@
-﻿namespace RestaurantHelper.Views.ManagerViews.AdditionalWindows
+﻿using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
+
+namespace RestaurantHelper.Views.ManagerViews.AdditionalWindows
 {
 	using Catel.Windows;
 	using ViewModels;
@@ -9,7 +11,7 @@
 			: this(null) { }
 
 		public AddEmployeeView(AddEmployeeViewModel viewModel)
-			: base(viewModel)
+			: base(viewModel, DataWindowMode.Custom)
 		{
 			InitializeComponent();
 		}

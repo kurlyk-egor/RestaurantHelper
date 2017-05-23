@@ -3,9 +3,12 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Catel.Collections;
 using Catel.Data;
+using Catel.IoC;
 using Catel.MVVM;
+using Catel.Services;
 using RestaurantHelper.Models;
 using RestaurantHelper.Services.Database;
+using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
@@ -50,19 +53,26 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		public Command AddEmployeeCommand { get; private set; }
 		private void OnAddEmployeeCommandExecute()
 		{
-			// TODO: Handle command logic here
+			var visualizer = DependencyResolver.Resolve<IUIVisualizerService>();
+			visualizer.ShowDialog(new AddEmployeeViewModel());
+			RefreshEmployeesCollection();
 		}
 
 		public Command DeleteEmployeeCommand { get; private set; }
 		private void OnDeleteEmployeeCommandExecute()
 		{
-			// TODO: Handle command logic here
+			var repo = new Repository<Employee>();
+			repo.Delete(SelectedEmployee);
+			repo.SaveChanges();
+			RefreshEmployeesCollection();
 		}
 
 		public Command EditEmployeeCommand { get; private set; }
 		private void OnEditEmployeeCommandExecute()
 		{
-			// TODO: Handle command logic here
+			var visualizer = DependencyResolver.Resolve<IUIVisualizerService>();
+			visualizer.ShowDialog(new AddEmployeeViewModel(SelectedEmployee));
+			RefreshEmployeesCollection();
 		}
 
 

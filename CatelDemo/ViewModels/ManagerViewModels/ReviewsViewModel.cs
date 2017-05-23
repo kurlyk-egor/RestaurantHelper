@@ -16,6 +16,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 	public class ReviewsViewModel : ViewModelBase
 	{
 		const string NO_ANSWER = "Ответа еще нет.";
+		const string NO_SELECT = "Ничего не выбрано.";
 		public ReviewsViewModel()
 		{
 			RefreshReviwsCollection();
@@ -47,7 +48,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			get { return GetValue<string>(AdminAnswerProperty); }
 			set { SetValue(AdminAnswerProperty, value); }
 		}
-		public static readonly PropertyData AdminAnswerProperty = RegisterProperty("AdminAnswer", typeof(string), NO_ANSWER);
+		public static readonly PropertyData AdminAnswerProperty = RegisterProperty("AdminAnswer", typeof(string), NO_SELECT);
 
 
 
@@ -134,7 +135,12 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void RefreshAdminAnswer()
 		{
-			if (SelectedClientReview == null || SelectedClientReview.AnswerId == 0)
+			if (SelectedClientReview == null)
+			{
+				AdminAnswer = NO_SELECT;
+				return;
+			}
+			if (SelectedClientReview.AnswerId == 0)
 			{
 				AdminAnswer = NO_ANSWER;
 				return;
