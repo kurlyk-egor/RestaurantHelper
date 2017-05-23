@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfDish xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Dish><Id>0</Id><Name>Панда</Name><Price>220</Price><PicturePath>C:\Users\Public\Pictures\Sample Pictures\Koala.jpg</PicturePath></Dish>
   <Dish><Id>1</Id><Name>Борщ хохляцкий</Name><Price>250</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\1.jpg</PicturePath></Dish>
   <Dish><Id>2</Id><Name>Драники</Name><Price>200</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\2.jpg</PicturePath></Dish>
   <Dish><Id>3</Id><Name>Гамбургер</Name><Price>100</Price><PicturePath>C:\Users\Viking\Documents\Visual Studio 2015\Projects\XXX\CatelDemo\Resources\Dishes\3.jpg</PicturePath></Dish>

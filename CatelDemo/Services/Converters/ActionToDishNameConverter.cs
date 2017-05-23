@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Services.Database;
-using Action = RestaurantHelper.Models.Actions.Action;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
 	class ActionToDishNameConverter : IValueConverter
 	{

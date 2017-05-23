@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catel.MVVM.Converters;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
-	class TableAvailabilityConverter : IValueConverter
+	class TableAvailabilityToToolTipMessageConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value != null)
 			{
-				if ((bool) value) return "LawnGreen";
+				if ((bool)value) return " ДОСТУПЕН";
 			}
-			return "MediumVioletRed";
+			return " НЕДОСТУПЕН";
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catel.MVVM.Converters;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
-	class DateStringConverter  : IValueConverter
+	class DateToDateStringConverter  : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
@@ -16,7 +12,7 @@ namespace RestaurantHelper.Services.Other.Converters
 			{
 				return ((DateTime) value).ToShortDateString();
 			}
-			return "";
+			return string.Empty;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

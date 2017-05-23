@@ -4,12 +4,16 @@ using Catel.MVVM.Converters;
 
 namespace RestaurantHelper.Services.Converters
 {
-	class DateToTimeConverter : IValueConverter
+	public class TableNumberToPicturePathConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value == null) return string.Empty;
-			return ((DateTime)value).ToShortTimeString();
+			string path = string.Empty;
+			if (value != null)
+			{
+				path = $@"../../../Resources/Tables/table{(int)value}.jpg";
+			}
+			return path;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

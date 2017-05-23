@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Globalization;
-using Catel.MVVM.Converters;
+using System.Windows.Data;
+using Action = RestaurantHelper.Models.Actions.Action;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
-	public class TablePathConverter : IValueConverter
+	class ActionToDescriptionConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			string path = "";
-			if (value != null)
+			var val = value as Action;
+			if (val != null)
 			{
-				path = $@"../../../Resources/Tables/table{(int)value}.jpg";
+				return val.Description;
 			}
-			return path;
+			return string.Empty;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

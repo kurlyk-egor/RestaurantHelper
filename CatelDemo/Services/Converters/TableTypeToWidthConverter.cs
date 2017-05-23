@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catel.MVVM.Converters;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
-	class TableWidthConverter : IValueConverter
+	class TableTypeToWidthConverter : IValueConverter
 	{
 		private const int DEFAULT_WIDTH = 70;
 

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catel.MVVM.Converters;
 
-namespace RestaurantHelper.Services.Other.Converters
+namespace RestaurantHelper.Services.Converters
 {
-	class TableHeightConverter : IValueConverter
+	class TableTypeToHeightConverter : IValueConverter
 	{
 		private const int DEFAULT_HEIGHT = 70;
 

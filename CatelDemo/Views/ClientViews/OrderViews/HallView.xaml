@@ -188,7 +188,7 @@
             VerticalAlignment="Top"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             IsReadOnly="True"
-            Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateStringConverter}}" />
+            Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateToDateStringConverter}}" />
         <TextBlock
             x:Name="textBlock3"
             Margin="100,0,0,100"

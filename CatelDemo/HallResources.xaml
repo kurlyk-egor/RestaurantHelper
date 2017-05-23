@@ -1,20 +1,19 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:RestaurantHelper.Services.Other.Converters">
+    xmlns:converters="clr-namespace:RestaurantHelper.Services.Converters">
 
-    <local:TablePathConverter x:Key="PathConverter" />
-    <local:TableHeightConverter x:Key="HeightConverter" />
-    <local:TableWidthConverter x:Key="WidthConverter" />
-    <local:TableAvailabilityConverter x:Key="AvailabilityConverter" />
-    <local:TableToolTipConverter x:Key="ToolTipConverter" />
-    <local:DateToTimeConverter x:Key="DateToTimeConverter" />
-    <local:DateStringConverter x:Key="DateStringConverter" />
-    <local:ActionTypeToDescriptionConverter x:Key="ActionTypeToDescriptionConverter" />
-    <local:ActionToDescription x:Key="ActionToDescriptionConverter" />
-    <local:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
-    <local:DishIdToPicturePathConverter x:Key="DishIdToPicturePathConverter" />
-    <local:UserIdToLoginConverter x:Key="UserIdToLoginConverter" />
+    <converters:TableNumberToPicturePathConverter x:Key="PathConverter" />
+    <converters:TableTypeToHeightConverter x:Key="HeightConverter" />
+    <converters:TableTypeToWidthConverter x:Key="WidthConverter" />
+    <converters:TableAvailabilityToColorConverter x:Key="AvailabilityConverter" />
+    <converters:TableAvailabilityToToolTipMessageConverter x:Key="ToolTipConverter" />
+    <converters:DateToTimeConverter x:Key="DateToTimeConverter" />
+    <converters:DateToDateStringConverter x:Key="DateToDateStringConverter" />
+    <converters:ActionTypeToDescriptionConverter x:Key="ActionTypeToDescriptionConverter" />
+    <converters:ActionToDescriptionConverter x:Key="ActionToDescriptionConverter" />
+    <converters:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
+    <converters:UserIdToLoginConverter x:Key="UserIdToLoginConverter" />
 
     <Style x:Key="Style" TargetType="ListBox">
         <Style.Setters>
@@ -276,7 +275,7 @@
                         FontSize="14"
                         TextWrapping="Wrap">
                         <Run FontSize="11" Text="Дата:" />
-                        <Run Foreground="{DynamicResource PrimaryHueMidBrush}" Text="{Binding Path=DateTime, Converter={StaticResource DateStringConverter}}" />
+                        <Run Foreground="{DynamicResource PrimaryHueMidBrush}" Text="{Binding Path=DateTime, Converter={StaticResource DateToDateStringConverter}}" />
                         <Run FontSize="11" Text="    Время:" />
                         <Run Foreground="{DynamicResource PrimaryHueMidBrush}" Text="{Binding Path=DateTime, Converter={StaticResource DateToTimeConverter}}" />
                     </TextBlock>
