@@ -14,7 +14,7 @@ namespace RestaurantHelper.Services.ValidationRules
 		{
 			return (value ?? "").ToString().Length > 0
 				? ValidationResult.ValidResult
-				: new ValidationResult(false, "Поле пусто");
+				: new ValidationResult(false, "Обязательное поле");
 		}
 	}
 }

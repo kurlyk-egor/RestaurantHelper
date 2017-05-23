@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
@@ -24,7 +25,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             _userRepository = new Repository<User>();
 
             BackCommand = new Command(OnBackCommandExecute);
-            RegistrationCommand = new Command(OnRegistrationCommandExecute, OnRegistrationCommandCanExecute);
+            RegistrationCommand = new Command(OnRegistrationCommandExecute);
 
             if (user == null)
             {
@@ -42,7 +43,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         public static readonly PropertyData UserProperty = RegisterProperty("User", typeof(User));
 
 
-        // TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
         [ViewModelToModel("User")]
         public string Login
         {
@@ -76,42 +76,22 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
 
 
-        // TODO: Register commands with the vmcommand or vmcommandwithcanexecute codesnippets
-
         public Command BackCommand { get; private set; }
         private void OnBackCommandExecute()
         {
-            // TODO: Handle command logic here
             _parentViewModel.ChangePage(_previousViewModel);
         }
 
 
         public Command RegistrationCommand { get; private set; }
-        private bool OnRegistrationCommandCanExecute()
-        {
-            bool result = true;
-            long number;
-
-            if (string.IsNullOrWhiteSpace(Phone) || !long.TryParse(Phone, out number))
-            {
-                result = false;
-            }
-            if (string.IsNullOrWhiteSpace(Login))
-            {
-                result = false;
-            }
-            if (string.IsNullOrWhiteSpace(Password))
-            {
-                result = false;
-            }
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                result = false;
-            }
-            return result;
-        }
         private async void OnRegistrationCommandExecute()
         {
+	        if (string.IsNullOrEmpty(Password))
+	        {
+		        MessageBox.Show("Вы не ввели пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+		        return;
+	        }
+
             _userRepository.Insert(User);
             _userRepository.SaveChanges();
             

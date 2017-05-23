@@ -8,4 +8,6 @@
   <User><Id>5</Id><Login>2</Login><Password>22</Password><Name>222</Name><Phone>2222</Phone></User>
   <User><Id>6</Id><Login>gavrusev</Login><Password>12345</Password><Name>Гаврусев А. В.</Name><Phone>375291808518</Phone></User>
   <User><Id>7</Id><Login>Login</Login><Password>Password</Password><Name>Name</Name><Phone>375298933692</Phone></User>
+  <User><Id>8</Id><Login>ыва</Login><Password>фвва</Password><Name IsNull="true" /><Phone IsNull="true" /></User>
+  <User><Id>9</Id><Login>123</Login><Password>123</Password><Name>Griboedov</Name><Phone>123123</Phone></User>
 </ArrayOfUser>

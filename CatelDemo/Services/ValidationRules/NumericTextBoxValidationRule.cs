@@ -12,9 +12,13 @@ namespace RestaurantHelper.Services.ValidationRules
 	{
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
-			return (value ?? "").ToString().ToCharArray().Count(c => !char.IsDigit(c)) > 0
-				? new ValidationResult(false, "This field must contain digits only.")
-				: ValidationResult.ValidResult;
+			string str = (value ?? "").ToString();
+			long i;
+			bool hasLegalChars = long.TryParse(str, out i);
+
+			return hasLegalChars ?
+				  ValidationResult.ValidResult
+				: new ValidationResult(false, "Поле должно содержать только цифры");
 		}
 	}
 }

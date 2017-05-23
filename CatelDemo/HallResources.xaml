@@ -31,12 +31,8 @@
             </Setter>
 
             <Setter Property="Margin" Value="-5" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush">
-                <Setter.Value>
-                    <SolidColorBrush Opacity="0.5" Color="HotPink " />
-                </Setter.Value>
-            </Setter>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SecondaryAccentBrush}" />
         </Style.Setters>
     </Style>
 
@@ -244,7 +240,7 @@
             Width="450"
             Margin="10"
             BorderBrush="LimeGreen"
-            BorderThickness="2"
+            BorderThickness="3"
             FocusManager.IsFocusScope="True">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.5" />

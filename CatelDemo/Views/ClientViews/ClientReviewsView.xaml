@@ -105,6 +105,7 @@
             Panel.ZIndex="1"
             Command="{Binding AllReviewsCommand}"
             Content="ВСЕ ОТЗЫВЫ"
+            FontSize="13"
             FontWeight="DemiBold"
             Foreground="{DynamicResource PrimaryHueDarkBrush}"
             IsChecked="True" />
@@ -114,6 +115,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="1"
+            FontSize="13"
             Command="{Binding MyReviewsCommand}"
             Content="МОИ ОТЗЫВЫ"
             FontWeight="DemiBold"
@@ -163,28 +165,22 @@
         <Rectangle
             Width="130"
             Height="40"
-            Margin="165,12,0,0"
+            Margin="163,12,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Fill="Transparent"
             Stroke="{DynamicResource PrimaryHueMidBrush}"
-            StrokeThickness="3">
-            <Rectangle.Effect>
-                <BlurEffect Radius="5" />
-            </Rectangle.Effect>
+            StrokeThickness="5">
         </Rectangle>
         <Rectangle
             Width="125"
             Height="40"
-            Margin="31,12,0,0"
+            Margin="29,12,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Fill="Transparent"
             Stroke="{DynamicResource PrimaryHueMidBrush}"
-            StrokeThickness="3">
-            <Rectangle.Effect>
-                <BlurEffect Radius="5" />
-            </Rectangle.Effect>
+            StrokeThickness="5">
         </Rectangle>
     </Grid>
 

@@ -4,170 +4,170 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    Margin="-7"
-    Focusable="True"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:validationRules="clr-namespace:RestaurantHelper.Services.ValidationRules"
+    FontSize="15"
     FontWeight="Bold">
-    <catel:UserControl.Background>
-        <ImageBrush ImageSource="../../Resources/registration.jpg" />
-    </catel:UserControl.Background>
 
-    <catel:UserControl.Resources>
-        <Style TargetType="TextBox">
-            <Style.Setters>
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="Control.IsMouseOver" Value="True">
-                    <Setter Property="Control.Background" Value="Aquamarine" />
-                    <Setter Property="BorderBrush" Value="DarkCyan" />
-                    <Setter Property="BorderThickness" Value="3" />
-                </Trigger>
-                <Trigger Property="Control.IsFocused" Value="True">
-                    <Setter Property="Control.Background" Value="DeepSkyBlue" />
-                    <Setter Property="BorderBrush" Value="DarkSlateBlue" />
-                    <Setter Property="BorderThickness" Value="2" />
-                </Trigger>
-                <Trigger Property="Control.IsMouseOver" Value="False">
-                    <Setter Property="Focusable" Value="False" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </catel:UserControl.Resources>
-
-
-    <Grid MinWidth="400" MinHeight="550">
+    <Grid MinWidth="450" MinHeight="330">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <TextBox
-            x:Name="textBox"
-            Width="120"
-            Height="23"
-            Margin="202,68,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding Login}"
+            x:Name="ValidationRequiredField1"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,10,0,10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            materialDesign:HintAssist.Hint="Введите логин"
+            materialDesign:HintAssist.HintOpacity="0.5"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            MaxLength="20"
             TextWrapping="Wrap">
+            <TextBox.Text>
+                <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:StringLengthMinMaxValidationRule
+                            Max="20"
+                            Min="3"
+                            ValidatesOnTargetUpdated="True" />
+                        <validationRules:ExistingLoginValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <PasswordBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5,10,0,10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            materialDesign:HintAssist.Hint="Введите пароль"
+            materialDesign:HintAssist.HintOpacity="0.3"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            MaxLength="20"
+            PasswordChar="*">
             <i:Interaction.Behaviors>
-                <catel:SelectTextOnFocus />
+                <catel:UpdateBindingOnPasswordChanged Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </i:Interaction.Behaviors>
+        </PasswordBox>
+
+        <TextBox
+            x:Name="ValidationRequiredField2"
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="5,10,0,10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            materialDesign:HintAssist.Hint="Введите ФИО"
+            materialDesign:HintAssist.HintOpacity="0.5"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            MaxLength="30">
+            <TextBox.Text>
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:StringLengthMinMaxValidationRule
+                            Max="30"
+                            Min="3"
+                            ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
         <TextBox
-            x:Name="textBox1"
-            Width="120"
-            Height="23"
-            Margin="202,159,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding Password}"
-            TextWrapping="Wrap">
-            <i:Interaction.Behaviors>
-                <catel:SelectTextOnFocus />
-            </i:Interaction.Behaviors>
+            x:Name="ValidationRequiredField3"
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="5,10,0,10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            materialDesign:HintAssist.Hint="Ваш телефон"
+            materialDesign:HintAssist.HintOpacity="0.5"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            MaxLength="12">
+            <TextBox.Text>
+                <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationRules:NumericTextBoxValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:StringLengthMinMaxValidationRule
+                            Max="12"
+                            Min="6"
+                            ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
-        <TextBlock
-            x:Name="textBlock"
-            Margin="79,68,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Логин"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock1"
-            Margin="79,159,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Пароль"
-            TextWrapping="Wrap" />
-        <Image
-            x:Name="image"
-            Width="49"
-            Height="51"
-            Margin="128,51,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            RenderTransformOrigin="0.388,0.627"
-            Source="../../Resources/2.jpg" />
-        <Image
-            x:Name="image1"
-            Width="46"
-            Height="48"
-            Margin="131,152,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Source="../../Resources/1.png" />
+
+
         <Button
-            x:Name="button"
-            Width="92"
+            Grid.Row="5"
+            Grid.Column="0"
+            Width="100"
             Height="35"
-            Margin="43,453,0,0"
+            Margin="20,20"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад" />
         <Button
-            x:Name="button1"
-            Width="93"
+            Grid.Row="5"
+            Grid.Column="1"
+            Width="120"
             Height="35"
-            Margin="229,453,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Margin="170,0,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            materialDesign:ColorZoneAssist.Mode="Accent"
             Command="{Binding RegistrationCommand}"
-            Content="Регистрация" />
-        <Image
-            x:Name="image1_Copy"
-            Width="46"
-            Height="48"
-            Margin="131,253,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Source="/RestaurantHelper;component/Resources/name.png" />
-        <Image
-            x:Name="image1_Copy1"
-            Width="46"
-            Height="48"
-            Margin="131,365,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Source="/RestaurantHelper;component/Resources/phone.jpg" />
-        <TextBox
-            x:Name="textBox1_Copy"
-            Width="120"
-            Height="23"
-            Margin="202,267,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding Name}"
-            TextWrapping="Wrap">
-            <i:Interaction.Behaviors>
-                <catel:SelectTextOnFocus />
-            </i:Interaction.Behaviors>
-        </TextBox>
-        <TextBox
-            x:Name="textBox1_Copy1"
-            Width="120"
-            Height="23"
-            Margin="202,374,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding Phone}"
-            TextWrapping="Wrap">
-            <i:Interaction.Behaviors>
-                <catel:NumericTextBox />
-                <catel:SelectTextOnFocus />
-            </i:Interaction.Behaviors>
-        </TextBox>
+            Content="Регистрация"
+            Style="{StaticResource ValidatingButton}" />
+
         <TextBlock
-            x:Name="textBlock1_Copy"
-            Margin="72,267,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="ФИО"
-            TextWrapping="Wrap" />
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,0,15,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Text="Логин" />
         <TextBlock
-            x:Name="textBlock1_Copy1"
-            Margin="66,381,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Телефон"
-            TextWrapping="Wrap" />
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,0,15,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Text="Пароль" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="0,0,15,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Text="ФИО" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Width="68"
+            Margin="0,18,15,17"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Text="Телефон" />
 
     </Grid>
 

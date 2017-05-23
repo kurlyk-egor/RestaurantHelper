@@ -29,13 +29,13 @@ namespace RestaurantHelper.ViewModels
         public MainWindowViewModel()
         {
 			// TODO: запуск авторизации
-            //CurrentPage = new StartWindowViewModel(this);
+            CurrentPage = new StartWindowViewModel(this);
 
 			// TODO: запуск сразу клиентской части
 			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
 			
 			// TODO: запуск сразу из под админа
-			CurrentPage = new ManagerMainViewModel();
+			//CurrentPage = new ManagerMainViewModel();
 
 			// собственные пространства имен
 			var viewModelLocator = ServiceLocator.Default.ResolveType<IViewModelLocator>();

@@ -181,13 +181,24 @@
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox"
-            Width="76"
+            Width="92"
             Height="39"
             Margin="898,47,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
             IsReadOnly="True"
             Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateStringConverter}}" />
+        <TextBlock
+            x:Name="textBlock3"
+            Margin="100,0,0,100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="30"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Text="Выбор столика"
+            TextWrapping="Wrap" />
     </Grid>
 
 </catel:UserControl>

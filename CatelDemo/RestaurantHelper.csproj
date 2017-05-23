@@ -72,26 +72,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xceed.Wpf.DataGrid, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
       <Private>True</Private>
@@ -118,28 +98,30 @@
     <Compile Include="Services\Interfaces\IHaveId.cs" />
     <Compile Include="Services\Other\ActionsHelper.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
-    <Compile Include="Services\Other\Converters\ActionToDescription.cs" />
-    <Compile Include="Services\Other\Converters\ActionTypeToDescriptionConverter.cs" />
-    <Compile Include="Services\Other\Converters\DateStringConverter.cs" />
-    <Compile Include="Services\Other\Converters\DateToTimeConverter.cs" />
-    <Compile Include="Services\Other\Converters\DishIdToNameConverter.cs" />
-    <Compile Include="Services\Other\Converters\DishIdToPicturePathConverter.cs" />
-    <Compile Include="Services\Other\Converters\TableAvailabilityConverter.cs" />
-    <Compile Include="Services\Other\Converters\TableHeightConverter.cs" />
-    <Compile Include="Services\Other\Converters\TableToolTipConverter.cs" />
-    <Compile Include="Services\Other\Converters\TableWidthConverter.cs" />
+    <Compile Include="Services\Converters\ActionToDescription.cs" />
+    <Compile Include="Services\Converters\ActionTypeToDescriptionConverter.cs" />
+    <Compile Include="Services\Converters\DateStringConverter.cs" />
+    <Compile Include="Services\Converters\DateToTimeConverter.cs" />
+    <Compile Include="Services\Converters\DishIdToNameConverter.cs" />
+    <Compile Include="Services\Converters\DishIdToPicturePathConverter.cs" />
+    <Compile Include="Services\Converters\TableAvailabilityConverter.cs" />
+    <Compile Include="Services\Converters\TableHeightConverter.cs" />
+    <Compile Include="Services\Converters\TableToolTipConverter.cs" />
+    <Compile Include="Services\Converters\TableWidthConverter.cs" />
     <Compile Include="Services\Other\ClientsForTableSelector.cs" />
-    <Compile Include="Services\Other\Converters\UserIdToLoginConverter.cs" />
+    <Compile Include="Services\Converters\UserIdToLoginConverter.cs" />
     <Compile Include="Services\Other\DaysParser.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
     <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
-    <Compile Include="Services\Other\Converters\TablePathConverter.cs" />
+    <Compile Include="Services\Converters\TablePathConverter.cs" />
     <Compile Include="Services\Other\ManagerMenuChanger.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
     <Compile Include="Services\Other\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
     <Compile Include="Services\Other\AdminReservationsCreator.cs" />
+    <Compile Include="Services\ValidationRules\ExistingLoginValidationRule.cs" />
+    <Compile Include="Services\ValidationRules\StringLengthMinMaxValidationRule.cs" />
     <Compile Include="Services\ValidationRules\NotEmptyValidationRule.cs" />
     <Compile Include="Services\ValidationRules\NumericTextBoxValidationRule.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />

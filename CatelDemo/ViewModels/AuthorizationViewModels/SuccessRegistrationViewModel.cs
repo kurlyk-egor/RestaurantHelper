@@ -8,13 +8,11 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
     {
         public SuccessRegistrationViewModel()
         {
-            
         }
 
         private async void OnOnLoadedExecute()
         {
-            // TODO: Handle command logic here
-            Thread.Sleep(1000);
+            Thread.Sleep(800);
             await CloseAsync();
         }
 

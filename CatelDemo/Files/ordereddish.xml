@@ -43,4 +43,6 @@
   <OrderedDish><Id>41</Id><OrderId>26</OrderId><DishId>4</DishId><Quantity>5</Quantity></OrderedDish>
   <OrderedDish><Id>42</Id><OrderId>27</OrderId><DishId>9</DishId><Quantity>1</Quantity></OrderedDish>
   <OrderedDish><Id>43</Id><OrderId>27</OrderId><DishId>7</DishId><Quantity>1</Quantity></OrderedDish>
+  <OrderedDish><Id>44</Id><OrderId>28</OrderId><DishId>7</DishId><Quantity>1</Quantity></OrderedDish>
+  <OrderedDish><Id>45</Id><OrderId>28</OrderId><DishId>4</DishId><Quantity>1</Quantity></OrderedDish>
 </ArrayOfOrderedDish>

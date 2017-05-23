@@ -4,112 +4,90 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:validation="clr-namespace:RestaurantHelper.Services.ValidationRules"
-    Margin="-7">
+    FontSize="18"
+    FontWeight="DemiBold">
 
     <Grid
-        MinWidth="400"
-        MinHeight="400"
+        Width="405"
+        MinWidth="370"
+        MinHeight="310"
         Focusable="True">
 
         <TextBox
-            x:Name="textBox"
-            Width="120"
+            x:Name="ValidationRequiredField1"
+            Width="257"
             Height="42"
-            Margin="202,51,0,0"
+            Margin="119,74,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint="Введите логин"
+            materialDesign:HintAssist.HintOpacity="0.5"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            MaxLength="20"
             TextWrapping="Wrap">
             <TextBox.Text>
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validation:StringLengthMinMaxValidationRule Min="3" ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-            <TextBox.ToolTip>
-                <StackPanel>
-                    <TextBlock Text="{Binding LoginErrorInfo}" />
-                </StackPanel>
-            </TextBox.ToolTip>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <catel:EventToCommand Command="{Binding ValidateFieldsCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </TextBox>
-        <TextBox
-            x:Name="textBox1"
-            Width="120"
+        <PasswordBox
+            Width="257"
             Height="41"
-            Margin="202,159,0,0"
+            Margin="119,146,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <TextBox.Text>
-                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
-                    <!--<Binding.ValidationRules>
-                        <validation:NumericTextBoxValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>-->
-                </Binding>
-            </TextBox.Text>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <catel:EventToCommand Command="{Binding ValidateFieldsCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
+            materialDesign:HintAssist.Hint="Введите пароль"
+            materialDesign:HintAssist.HintOpacity="0.3"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            MaxLength="20">
+            <i:Interaction.Behaviors>
+                <catel:UpdateBindingOnPasswordChanged Password="{Binding Password}" />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
         <TextBlock
-            x:Name="textBlock"
-            Margin="79,68,0,0"
+            Margin="44,82,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Логин"
             TextWrapping="Wrap" />
         <TextBlock
-            x:Name="textBlock1"
-            Margin="79,159,0,0"
+            Margin="33,153,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Пароль"
             TextWrapping="Wrap" />
-        <Image
-            x:Name="image"
-            Width="49"
-            Height="51"
-            Margin="128,51,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            RenderTransformOrigin="0.388,0.627"
-            Source="../../Resources/2.jpg" />
-        <Image
-            x:Name="image1"
-            Width="46"
-            Height="48"
-            Margin="131,152,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Source="../../Resources/1.png" />
         <Button
-            x:Name="button"
-            Width="98"
+            Width="113"
             Height="45"
-            Margin="79,273,0,0"
+            Margin="21,255,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад" />
         <Button
-            x:Name="button1"
-            Width="104"
+            Width="118"
             Height="45"
-            Margin="247,273,0,0"
+            Margin="277,255,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding TryEnterCommand}"
             Content="Войти"
             IsDefault="True"
-            IsEnabled="{Binding IsEnabledEnterButton}" />
+            Style="{StaticResource ValidatingButton}" />
+        <GroupBox
+            Width="374"
+            Height="229"
+            Margin="21,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Header="Авторизация" />
 
     </Grid>
 

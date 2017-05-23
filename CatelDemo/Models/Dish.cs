@@ -57,7 +57,7 @@ namespace RestaurantHelper.Models
 
 		public override string ToString()
 		{
-			return $"{Id}: {Name} | {Price} x {Quantity}";
+			return $"{Name} | {Price} x {Quantity}";
 		}
 	}
 }

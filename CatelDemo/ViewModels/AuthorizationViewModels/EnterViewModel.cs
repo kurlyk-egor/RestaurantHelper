@@ -26,8 +26,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             _previousViewModel = previousViewModel;
 
             BackCommand = new Command(OnBackCommandExecute);
-			ValidateFieldsCommand = new Command(OnValidateFieldsCommandExecute);
-			TryEnterCommand = new Command(OnTryEnterCommandExecute);//, OnTryEnterCommandCanExecute);
+			TryEnterCommand = new Command(OnTryEnterCommandExecute);
         }
 
         public string Login
@@ -37,29 +36,12 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         }
         public static readonly PropertyData LoginProperty = RegisterProperty("Login", typeof(string));
 
-		public string LoginErrorInfo
-		{
-			get { return GetValue<string>(LoginErrorInfoProperty); }
-			set { SetValue(LoginErrorInfoProperty, value); }
-		}
-		public static readonly PropertyData LoginErrorInfoProperty = RegisterProperty("LoginErrorInfo", typeof(string), string.Empty);
-
         public string Password
         {
             get { return GetValue<string>(PasswordProperty); }
             set { SetValue(PasswordProperty, value); }
         }
         public static readonly PropertyData PasswordProperty = RegisterProperty("Password", typeof(string));
-
-
-		public bool IsEnabledEnterButton
-		{
-			get { return GetValue< bool>(IsEnabledEnterButtonProperty); }
-			set { SetValue(IsEnabledEnterButtonProperty, value); }
-		}
-		public static readonly PropertyData IsEnabledEnterButtonProperty = RegisterProperty("IsEnabledEnterButton", typeof( bool), false);
-
-
 
         public Command BackCommand { get; private set; }
 
@@ -69,16 +51,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         }
 
         public Command TryEnterCommand { get; private set; }
-
-
-		public Command ValidateFieldsCommand { get; private set; }
-
-		private void OnValidateFieldsCommandExecute()
-		{
-			// TODO: сделать нормальную валидацию
-			IsEnabledEnterButton = User.IsValidLogin(Login);
-		}
-
         private void OnTryEnterCommandExecute()
         {
             _authorizationChecker = new AuthorizationChecker(new User {Login = Login, Password = Password});

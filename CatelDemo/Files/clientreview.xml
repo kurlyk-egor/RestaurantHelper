@@ -6,4 +6,5 @@
   <ClientReview><Id>6</Id><UserId>3</UserId><AnswerId>4</AnswerId><Text>Приду сюда еще</Text><DateTime>2017-05-23T00:18:47.4622489+03:00</DateTime></ClientReview>
   <ClientReview><Id>7</Id><UserId>3</UserId><AnswerId>0</AnswerId><Text>Самый прикольный отличный класс!</Text><DateTime>2017-05-23T08:57:49.7067057+03:00</DateTime></ClientReview>
   <ClientReview><Id>8</Id><UserId>3</UserId><AnswerId>5</AnswerId><Text>Я пидор, убейте меня!</Text><DateTime>2017-05-23T17:37:20.9990266+03:00</DateTime></ClientReview>
+  <ClientReview><Id>9</Id><UserId>9</UserId><AnswerId>0</AnswerId><Text>Отличное качество обслуживания, ухоженные леди, красивые домики на речке. Все как у людей.</Text><DateTime>2017-05-24T00:32:37.2459217+03:00</DateTime></ClientReview>
 </ArrayOfClientReview>
