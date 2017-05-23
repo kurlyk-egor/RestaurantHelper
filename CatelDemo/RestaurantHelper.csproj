@@ -145,12 +145,12 @@
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\SuccessRegistrationViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\ClientMainViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\MyOrdersViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\OrderViewModels\HallViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
-    <Compile Include="Resources\ClientViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientMainViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\MyOrdersViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\HallViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\ActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
@@ -189,6 +189,9 @@
     </Compile>
     <Compile Include="Views\ManagerViews\AdditionalWindows\AddDishView.xaml.cs">
       <DependentUpon>AddDishView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\AdditionalWindows\AddEmployeeView.xaml.cs">
+      <DependentUpon>AddEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\AdditionalWindows\AddReservationView.xaml.cs">
       <DependentUpon>AddReservationView.xaml</DependentUpon>
@@ -305,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerViews\AdditionalWindows\AddDishView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\AdditionalWindows\AddEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

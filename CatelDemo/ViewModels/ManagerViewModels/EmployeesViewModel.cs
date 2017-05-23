@@ -13,6 +13,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 	{
 		public EmployeesViewModel()
 		{
+			RefreshEmployeesCollection();
+
+			AddEmployeeCommand = new Command(OnAddEmployeeCommandExecute);
+			EditEmployeeCommand = new Command(OnEditEmployeeCommandExecute, OnAnyEmployeeCommandCanExecute);
+			DeleteEmployeeCommand = new Command(OnDeleteEmployeeCommandExecute, OnAnyEmployeeCommandCanExecute);
 		}
 
 		public ObservableCollection<Employee> Employees
@@ -39,6 +44,31 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
+		}
+
+
+		public Command AddEmployeeCommand { get; private set; }
+		private void OnAddEmployeeCommandExecute()
+		{
+			// TODO: Handle command logic here
+		}
+
+		public Command DeleteEmployeeCommand { get; private set; }
+		private void OnDeleteEmployeeCommandExecute()
+		{
+			// TODO: Handle command logic here
+		}
+
+		public Command EditEmployeeCommand { get; private set; }
+		private void OnEditEmployeeCommandExecute()
+		{
+			// TODO: Handle command logic here
+		}
+
+
+		private bool OnAnyEmployeeCommandCanExecute()
+		{
+			return SelectedEmployee != null;
 		}
 
 		private void RefreshEmployeesCollection()

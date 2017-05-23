@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfEmployee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Employee><Id>1</Id><Name>Купляков Борис Антонович</Name><Age>33</Age><Position>менеджер</Position><WorkDays>ПН, ВТ</WorkDays></Employee>
+  <Employee><Id>2</Id><Name>Иванов Андрей Николаевич</Name><Age>23</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
+  <Employee><Id>3</Id><Name>Сидоров Егор Иванович</Name><Age>24</Age><Position>официант</Position><WorkDays>БУДНИ, СБ</WorkDays></Employee>
+  <Employee><Id>4</Id><Name>Борсук Иван Иванович</Name><Age>25</Age><Position>официант</Position><WorkDays>ПН, ВТ, СБ</WorkDays></Employee>
+  <Employee><Id>5</Id><Name>Бородик Станислав Вячеславович</Name><Age>19</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
+  <Employee><Id>6</Id><Name>Гаврусев Геннадий Иванович</Name><Age>30</Age><Position>официант</Position><WorkDays>ВТ, СР, ЧТ</WorkDays></Employee>
+  <Employee><Id>7</Id><Name>Гончар Василий Егорович</Name><Age>36</Age><Position>уборщик</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
+  <Employee><Id>8</Id><Name>Грабалюк Ольга Юрьевна</Name><Age>34</Age><Position>официант</Position><WorkDays>ПН, СР, ЧТ</WorkDays></Employee>
+  <Employee><Id>9</Id><Name>Предсказуемый Игорь Артемович</Name><Age>27</Age><Position>повар</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
+  <Employee><Id>10</Id><Name>Чистяков Глеб Игоревич</Name><Age>20</Age><Position>бухгалтер</Position><WorkDays>ПН, ВТ, СР, ЧТ, ПТ</WorkDays></Employee>
+</ArrayOfEmployee>

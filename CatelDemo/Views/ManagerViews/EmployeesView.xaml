@@ -39,7 +39,7 @@
                                 DisplayMemberBinding="{Binding Age}"
                                 Header="Возраст" />
                             <GridViewColumn
-                                Width="250"
+                                Width="150"
                                 DisplayMemberBinding="{Binding Position}"
                                 Header="Должность" />
                             <GridViewColumn
@@ -59,6 +59,7 @@
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Command="{Binding EditEmployeeCommand}"
                 Content="Редактировать" />
             <Button
                 x:Name="button1_Copy"
@@ -66,6 +67,7 @@
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Command="{Binding DeleteEmployeeCommand}"
                 Content="Удалить" />
             <Button
                 x:Name="button_Copy"
@@ -73,6 +75,7 @@
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Command="{Binding AddEmployeeCommand}"
                 Content="Добавить" />
         </StackPanel>
     </Grid>
