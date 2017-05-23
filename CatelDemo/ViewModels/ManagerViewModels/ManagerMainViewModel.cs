@@ -15,11 +15,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			MenuCommand = new Command(OnMenuCommandExecute);		
 			ReportsCommand = new Command(OnReportsCommandExecute);
 			ActionsCommand = new Command(OnActionsCommandExecute);
-			RewiewsCommand = new Command(OnRewiewsCommandExecute);
+			ReviewsCommand = new Command(OnReviewsCommandExecute);
 			ExitCommand = new Command(OnExitCommandExecute);
 
 			//TODO: запускать первой страницу мониторинга
-			CurrentManagerPage = new EmployeesViewModel();//ManagerHallViewModel();
+			CurrentManagerPage = new ManagerHallViewModel();
 		}
 
 		public IViewModel CurrentManagerPage
@@ -37,7 +37,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		public Command MenuCommand { get; private set; }
 		public Command ReportsCommand { get; private set; }
 		public Command ActionsCommand { get; private set; }
-		public Command RewiewsCommand { get; private set; }
+		public Command ReviewsCommand { get; private set; }
 		public Command ExitCommand { get; private set; }
 
 
@@ -66,7 +66,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			CurrentManagerPage = new ActionsViewModel(); 
 		}
 
-		private void OnRewiewsCommandExecute()
+		private void OnReviewsCommandExecute()
 		{
 			CurrentManagerPage = new ReviewsViewModel();
 		}

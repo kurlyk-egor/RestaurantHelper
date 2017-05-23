@@ -16,8 +16,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
             OrderCommand = new Command(OnOrderCommandExecute);
             MyOrdersCommand = new Command(OnMyOrdersCommandExecute);
             ProfileCommand = new Command(OnProfileCommandExecute);
-            RewiewsCommand = new Command(OnRewiewsCommandExecute);
-            QuestionsCommand = new Command(OnQuestionsCommandExecute);
+            ReviewsCommand = new Command(OnReviewsCommandExecute);
             ExitCommand = new Command(OnExitCommandExecute);
 
             _user = user;
@@ -36,8 +35,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         public Command OrderCommand { get; private set; }
         public Command MyOrdersCommand { get; private set; }
         public Command ProfileCommand { get; private set; }
-        public Command RewiewsCommand { get; private set; }
-        public Command QuestionsCommand { get; private set; }
+        public Command ReviewsCommand { get; private set; }
         public Command ExitCommand { get; private set; }
 
 
@@ -56,14 +54,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
             _parentViewModel.ChangePage(new ProfileViewModel(this, _user));
         }
 
-        private void OnRewiewsCommandExecute()
+        private void OnReviewsCommandExecute()
         {
-            // TODO: Handle command logic here
-        }
-
-        private void OnQuestionsCommandExecute()
-        {
-            // TODO: Handle command logic here
+            _parentViewModel.ChangePage(new ClientReviewsViewModel(this, _user));
         }
 
         private async void OnExitCommandExecute()

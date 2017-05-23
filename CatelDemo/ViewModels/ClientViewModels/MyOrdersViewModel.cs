@@ -96,6 +96,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 				// получаем описание блюда
 				var dish = _dishRepository.GetCollection().FirstOrDefault(d => d.Id == orderedDish.DishId);
 				// указываем, сколько было заказано
+				if (dish == null) continue;
 				dish.Quantity = orderedDish.Quantity;
 				Dishes.Add(dish);
 			}

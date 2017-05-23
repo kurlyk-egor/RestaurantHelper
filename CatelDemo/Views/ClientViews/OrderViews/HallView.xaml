@@ -52,7 +52,7 @@
             x:Name="Button"
             Width="172"
             Height="65"
-            Margin="311,475,0,0"
+            Margin="119,464,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
@@ -61,7 +61,7 @@
             x:Name="Button1"
             Width="197"
             Height="65"
-            Margin="521,475,0,0"
+            Margin="753,464,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding NextCommand}"
@@ -182,12 +182,10 @@
         <TextBox
             x:Name="textBox"
             Width="76"
-            Height="22"
-            Margin="898,64,0,0"
+            Height="39"
+            Margin="898,47,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="Bisque"
-            BorderThickness="1"
             IsReadOnly="True"
             Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateStringConverter}}" />
     </Grid>

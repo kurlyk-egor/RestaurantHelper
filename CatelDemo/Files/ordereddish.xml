@@ -38,4 +38,9 @@
   <OrderedDish><Id>36</Id><OrderId>23</OrderId><DishId>6</DishId><Quantity>2</Quantity></OrderedDish>
   <OrderedDish><Id>37</Id><OrderId>23</OrderId><DishId>7</DishId><Quantity>8</Quantity></OrderedDish>
   <OrderedDish><Id>38</Id><OrderId>24</OrderId><DishId>9</DishId><Quantity>1</Quantity></OrderedDish>
+  <OrderedDish><Id>39</Id><OrderId>25</OrderId><DishId>4</DishId><Quantity>4</Quantity></OrderedDish>
+  <OrderedDish><Id>40</Id><OrderId>26</OrderId><DishId>8</DishId><Quantity>4</Quantity></OrderedDish>
+  <OrderedDish><Id>41</Id><OrderId>26</OrderId><DishId>4</DishId><Quantity>5</Quantity></OrderedDish>
+  <OrderedDish><Id>42</Id><OrderId>27</OrderId><DishId>9</DishId><Quantity>1</Quantity></OrderedDish>
+  <OrderedDish><Id>43</Id><OrderId>27</OrderId><DishId>7</DishId><Quantity>1</Quantity></OrderedDish>
 </ArrayOfOrderedDish>

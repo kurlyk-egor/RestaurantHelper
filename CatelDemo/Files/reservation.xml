@@ -30,4 +30,8 @@
   <Reservation><Id>32</Id><UserId>0</UserId><TableNumber>9</TableNumber><FirstTime>2017-05-22T14:00:00</FirstTime><LastTime>2017-05-22T15:00:00</LastTime><Day>2017-05-22T00:00:00+03:00</Day></Reservation>
   <Reservation><Id>33</Id><UserId>0</UserId><TableNumber>4</TableNumber><FirstTime>2017-05-22T16:00:00</FirstTime><LastTime>2017-05-22T17:00:00</LastTime><Day>2017-05-22T00:00:00+03:00</Day></Reservation>
   <Reservation><Id>34</Id><UserId>0</UserId><TableNumber>6</TableNumber><FirstTime>2017-05-22T21:00:00</FirstTime><LastTime>2017-05-22T22:00:00</LastTime><Day>2017-05-22T00:00:00+03:00</Day></Reservation>
+  <Reservation><Id>35</Id><UserId>3</UserId><TableNumber>3</TableNumber><FirstTime>2017-05-23T08:00:00</FirstTime><LastTime>2017-05-23T09:00:00</LastTime><Day>2017-05-24T00:00:00</Day></Reservation>
+  <Reservation><Id>36</Id><UserId>3</UserId><TableNumber>5</TableNumber><FirstTime>2017-05-23T08:00:00</FirstTime><LastTime>2017-05-23T09:00:00</LastTime><Day>2017-05-23T00:00:00</Day></Reservation>
+  <Reservation><Id>37</Id><UserId>3</UserId><TableNumber>7</TableNumber><FirstTime>2017-05-23T08:00:00</FirstTime><LastTime>2017-05-23T09:00:00</LastTime><Day>2017-05-25T00:00:00</Day></Reservation>
+  <Reservation><Id>38</Id><UserId>0</UserId><TableNumber>9</TableNumber><FirstTime>2017-05-23T17:00:00</FirstTime><LastTime>2017-05-23T19:00:00</LastTime><Day>2017-05-23T00:00:00+03:00</Day></Reservation>
 </ArrayOfReservation>

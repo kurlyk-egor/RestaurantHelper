@@ -2,13 +2,15 @@
     x:Class="RestaurantHelper.Views.ClientViews.ClientMainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:catel="http://catel.codeplex.com"
-    >
+    xmlns:catel="http://catel.codeplex.com">
     <catel:UserControl.Background>
-        <ImageBrush ImageSource="../../Resources/1750_2500.png" />
+        <ImageBrush ImageSource="../../Resources/1750_2500.png" Stretch="Fill" />
     </catel:UserControl.Background>
 
-    <Grid MinWidth="350" MinHeight="500">
+    <Grid
+        Height="440"
+        MinWidth="350"
+        MinHeight="440">
         <Button
             x:Name="button"
             Width="139"
@@ -75,13 +77,12 @@
         <Button
             x:Name="button3"
             Width="139"
-            Height="49"
+            Height="61"
             Margin="101,290,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             BorderBrush="#FFEAEAEA"
-            Command="{Binding RewiewsCommand}"
-            Content="Отзывы"
+            Command="{Binding ReviewsCommand}"
             FontFamily="Batang"
             FontSize="18"
             Foreground="#FF3B4463">
@@ -92,33 +93,15 @@
                     <GradientStop Offset="0.487" Color="#FFE3ECF5" />
                 </LinearGradientBrush>
             </Button.Background>
-        </Button>
-        <Button
-            x:Name="button4"
-            Width="139"
-            Height="47"
-            Margin="101,365,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderBrush="#FFE6E5E5"
-            Command="{Binding QuestionsCommand}"
-            Content="Вопросы"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF323A57">
-            <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
-                </LinearGradientBrush>
-            </Button.Background>
+            <Button.Content>
+                <TextBlock Text="Отзывы/ вопросы" TextWrapping="Wrap" />
+            </Button.Content>
         </Button>
         <Button
             x:Name="button5"
             Width="139"
             Height="46"
-            Margin="101,431,0,0"
+            Margin="101,368,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             BorderBrush="#FFE4E3E3"

@@ -1,0 +1,191 @@
+﻿<catel:UserControl
+    x:Class="RestaurantHelper.Views.ClientViews.ClientReviewsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+
+    <Grid MinWidth="800" MinHeight="500">
+        <ListBox
+            x:Name="listBox"
+            Width="500"
+            Height="373"
+            Margin="35,61,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemContainerStyle="{StaticResource ReviewsListBoxItemStyle}"
+            ItemTemplate="{StaticResource ReviewDataTemplate}"
+            ItemsSource="{Binding ClientReviews}"
+            SelectedItem="{Binding SelectedClientReview}"
+            Style="{StaticResource ReviewsStyle}"
+            VirtualizingPanel.ScrollUnit="Pixel">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding SelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        <Button
+            x:Name="button"
+            Width="222"
+            Height="37"
+            Margin="557,322,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding AddReviewCommand}"
+            Content="Добавить отзыв/вопрос" />
+        <TextBlock
+            x:Name="textBlock1"
+            Width="178"
+            Height="19"
+            Margin="589,61,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Ответ Администратора:"
+            TextWrapping="Wrap" />
+        <Border
+            Width="222"
+            Height="218"
+            Margin="557,85,0,0"
+            Padding="13"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{DynamicResource MaterialDesignPaper}"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <TextBox
+                x:Name="textBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                VerticalContentAlignment="Top"
+                AcceptsReturn="True"
+                HorizontalScrollBarVisibility="Disabled"
+                IsReadOnly="True"
+                MinLines="5"
+                Text="{Binding AdminAnswer}"
+                TextAlignment="Left"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto" />
+        </Border>
+        <Rectangle
+            Width="15"
+            Height="15"
+            Margin="365,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="OrangeRed"
+            Stroke="OrangeRed" />
+        <Rectangle
+            Width="15"
+            Height="15"
+            Margin="365,35,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="LimeGreen"
+            Stroke="LimeGreen" />
+        <TextBlock
+            Width="100"
+            Height="15"
+            Margin="385,35,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Отвеченные" />
+        <TextBlock
+            Width="100"
+            Height="15"
+            Margin="385,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Неотвеченные" />
+        <RadioButton
+            x:Name="RadioButtonAll"
+            Margin="35,23,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"
+            Command="{Binding AllReviewsCommand}"
+            Content="ВСЕ ОТЗЫВЫ"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource PrimaryHueDarkBrush}"
+            IsChecked="True" />
+        <RadioButton
+            x:Name="RadioButtonMy"
+            Margin="169,23,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"
+            Command="{Binding MyReviewsCommand}"
+            Content="МОИ ОТЗЫВЫ"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource PrimaryHueDarkBrush}"
+            IsChecked="{Binding IsMyReviews}" />
+        <Button
+            x:Name="button1"
+            Width="113"
+            Height="45"
+            Margin="35,444,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding BackCommand}"
+            Content="Назад" />
+        <Button
+            x:Name="button2"
+            Width="188"
+            Height="45"
+            Margin="347,444,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding RefreshCommand}"
+            Content="Обновить" />
+        <Button
+            x:Name="button_Copy"
+            Width="222"
+            Height="37"
+            Margin="557,378,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding EditReviewCommand}"
+            Content="Редактировать отзыв/вопрос"
+            FontSize="13"
+            ToolTip="{Binding ToolTipText}"
+            ToolTipService.ShowOnDisabled="True" />
+        <Button
+            x:Name="button_Copy1"
+            Width="222"
+            Height="37"
+            Margin="557,429,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding DeleteReviewCommand}"
+            Content="Удалить отзыв/вопрос"
+            ToolTip="{Binding ToolTipText}"
+            ToolTipService.ShowOnDisabled="True" />
+        <Rectangle
+            Width="130"
+            Height="40"
+            Margin="165,12,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="Transparent"
+            Stroke="{DynamicResource PrimaryHueMidBrush}"
+            StrokeThickness="3">
+            <Rectangle.Effect>
+                <BlurEffect Radius="5" />
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle
+            Width="125"
+            Height="40"
+            Margin="31,12,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="Transparent"
+            Stroke="{DynamicResource PrimaryHueMidBrush}"
+            StrokeThickness="3">
+            <Rectangle.Effect>
+                <BlurEffect Radius="5" />
+            </Rectangle.Effect>
+        </Rectangle>
+    </Grid>
+
+</catel:UserControl>

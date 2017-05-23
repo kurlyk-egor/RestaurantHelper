@@ -12,10 +12,9 @@ namespace RestaurantHelper.Services.ValidationRules
 	{
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
-			int len = (value ?? "").ToString().Length;
-			return  len > 0 && len <= 3 
-				? new ValidationResult(false, "Слишком короткое")
-				: ValidationResult.ValidResult;
+			return (value ?? "").ToString().Length > 0
+				? ValidationResult.ValidResult
+				: new ValidationResult(false, "Поле пусто");
 		}
 	}
 }

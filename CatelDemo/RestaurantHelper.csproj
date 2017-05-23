@@ -146,7 +146,9 @@
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\SuccessRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\AddReviewViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ClientMainViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientReviewsViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\MyOrdersViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\HallViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
@@ -174,8 +176,14 @@
     <Compile Include="Views\AuthorizationViews\SuccessRegistrationView.xaml.cs">
       <DependentUpon>SuccessRegistrationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ClientViews\AddReviewView.xaml.cs">
+      <DependentUpon>AddReviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClientViews\ClientMainView.xaml.cs">
       <DependentUpon>ClientMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientReviewsView.xaml.cs">
+      <DependentUpon>ClientReviewsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\Actions\ActionsView.xaml.cs">
       <DependentUpon>ActionsView.xaml</DependentUpon>
@@ -220,6 +228,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ValidationStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AuthorizationViews\EnterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -239,7 +251,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ClientViews\AddReviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ClientViews\ClientMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientReviewsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

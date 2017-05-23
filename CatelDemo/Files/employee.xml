@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <ArrayOfEmployee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Employee><Id>1</Id><Name>Купляков Борис Антонович</Name><Age>33</Age><Position>менеджер</Position><WorkDays>ПН, ВТ</WorkDays></Employee>
-  <Employee><Id>2</Id><Name>Иванов Андрей Николаевич</Name><Age>23</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
-  <Employee><Id>4</Id><Name>Борсук Иван Иванович</Name><Age>26</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР, ЧТ</WorkDays></Employee>
+  <Employee><Id>2</Id><Name>Иванов Андрей Николаевич</Name><Age>23</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР, ЧТ, ПТ</WorkDays></Employee>
+  <Employee><Id>4</Id><Name>Борсук Иван Иванович</Name><Age>26</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР, ЧТ, ПТ, СБ, ВС</WorkDays></Employee>
   <Employee><Id>5</Id><Name>Бородик Станислав Вячеславович</Name><Age>19</Age><Position>официант</Position><WorkDays>ПН, ВТ, СР</WorkDays></Employee>
   <Employee><Id>6</Id><Name>Гаврусев Геннадий Иванович</Name><Age>30</Age><Position>официант</Position><WorkDays>ВТ, ЧТ, ПТ</WorkDays></Employee>
   <Employee><Id>7</Id><Name>Гончар Василий Егорович</Name><Age>36</Age><Position>уборщик</Position><WorkDays>ПН, СБ, ВС</WorkDays></Employee>

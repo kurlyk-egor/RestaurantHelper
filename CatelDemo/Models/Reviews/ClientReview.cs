@@ -49,13 +49,5 @@ namespace RestaurantHelper.Models.Reviews
 			set { SetValue(DateTimeProperty, value); }
 		}
 		public static readonly PropertyData DateTimeProperty = RegisterProperty("DateTime", typeof(DateTime));
-
-
-		public int Rating
-		{
-			get { return GetValue<int>(RatingProperty); }
-			set { SetValue(RatingProperty, value); }
-		}
-		public static readonly PropertyData RatingProperty = RegisterProperty("Rating", typeof(int));
 	}
 }

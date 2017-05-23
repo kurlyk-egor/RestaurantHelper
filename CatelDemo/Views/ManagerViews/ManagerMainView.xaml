@@ -74,7 +74,7 @@
                 Height="Auto"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Command="{Binding RewiewsCommand}"
+                Command="{Binding ReviewsCommand}"
                 Content="Отзывы" />
             <Button
                 Grid.Row="0"
