@@ -39,7 +39,10 @@
                     <Binding Path="Text" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                            <validation:StringLengthMinMaxValidationRule Min="15" ValidatesOnTargetUpdated="True" />
+                            <validation:StringLengthMinMaxValidationRule
+                                Max="150"
+                                Min="15"
+                                ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>

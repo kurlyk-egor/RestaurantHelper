@@ -40,11 +40,11 @@
                                 DisplayMemberBinding="{Binding Age}"
                                 Header="Возраст" />
                             <GridViewColumn
-                                Width="150"
+                                Width="200"
                                 DisplayMemberBinding="{Binding Position}"
                                 Header="Должность" />
                             <GridViewColumn
-                                Width="200"
+                                Width="180"
                                 DisplayMemberBinding="{Binding WorkDays}"
                                 Header="Рабочие дни" />
                         </GridView.Columns>
@@ -55,13 +55,13 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button
-                x:Name="button2_Copy"
-                Width="135"
+                x:Name="button_Copy"
+                Width="115"
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Command="{Binding EditEmployeeCommand}"
-                Content="Редактировать" />
+                Command="{Binding AddEmployeeCommand}"
+                Content="Добавить" />
             <Button
                 x:Name="button1_Copy"
                 Width="115"
@@ -71,13 +71,13 @@
                 Command="{Binding DeleteEmployeeCommand}"
                 Content="Удалить" />
             <Button
-                x:Name="button_Copy"
-                Width="115"
+                x:Name="button2_Copy"
+                Width="135"
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Command="{Binding AddEmployeeCommand}"
-                Content="Добавить" />
+                Command="{Binding EditEmployeeCommand}"
+                Content="Редактировать" />
         </StackPanel>
     </Grid>
 

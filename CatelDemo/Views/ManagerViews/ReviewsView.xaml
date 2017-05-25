@@ -46,7 +46,7 @@
             Margin="589,61,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Ответ Администратора:"
+            Text="Введите ответ в поле ниже:"
             TextWrapping="Wrap" />
         <Border
             Width="222"

@@ -71,26 +71,50 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Width="180"
-            Margin="67,30,0,0"
+            Margin="67,29,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             VerticalContentAlignment="Center"
             Command="{Binding AddActionCommand}"
             Content="Запустить акцию"
             FontSize="18"
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
             IsChecked="True" />
         <RadioButton
             x:Name="button1"
             Grid.Row="0"
             Grid.Column="1"
             Width="230"
-            Margin="84,30,0,0"
+            Margin="84,29,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             VerticalContentAlignment="Center"
             Command="{Binding ShowActionsCommand}"
             Content="Просмотреть все акции"
-            FontSize="18" />
+            FontSize="18"
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
+        <Rectangle
+            Grid.Column="1"
+            Width="237"
+            Height="36"
+            Margin="81,26,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Fill="{DynamicResource SecondaryAccentBrush}"
+            Stroke="{DynamicResource MaterialDesignColumnHeader}"
+            StrokeThickness="2" />
+        <Rectangle
+            Grid.ColumnSpan="2"
+            Width="180"
+            Height="36"
+            Margin="65,26,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Fill="{DynamicResource SecondaryAccentBrush}"
+            Stroke="{DynamicResource MaterialDesignColumnHeader}"
+            StrokeThickness="2" />
     </Grid>
 
 </catel:UserControl>

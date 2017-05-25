@@ -31,7 +31,7 @@
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                        <validation:StringLengthMinMaxValidationRule Min="3" ValidatesOnTargetUpdated="True" />
+                        <validation:StringLengthMinMaxValidationRule Min="5" ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

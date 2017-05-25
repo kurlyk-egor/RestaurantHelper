@@ -6,6 +6,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:validationRules="clr-namespace:RestaurantHelper.Services.ValidationRules"
+    CreateWarningAndErrorValidatorForViewModel="False"
     FontSize="15"
     FontWeight="Bold">
 
@@ -36,12 +37,15 @@
             MaxLength="20"
             TextWrapping="Wrap">
             <TextBox.Text>
-                <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
+                <Binding
+                    Path="Login"
+                    UpdateSourceTrigger="PropertyChanged"
+                    ValidatesOnNotifyDataErrors="False">
                     <Binding.ValidationRules>
                         <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         <validationRules:StringLengthMinMaxValidationRule
                             Max="20"
-                            Min="3"
+                            Min="5"
                             ValidatesOnTargetUpdated="True" />
                         <validationRules:ExistingLoginValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
@@ -78,12 +82,15 @@
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             MaxLength="30">
             <TextBox.Text>
-                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                <Binding
+                    Path="Name"
+                    UpdateSourceTrigger="PropertyChanged"
+                    ValidatesOnNotifyDataErrors="False">
                     <Binding.ValidationRules>
                         <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         <validationRules:StringLengthMinMaxValidationRule
                             Max="30"
-                            Min="3"
+                            Min="5"
                             ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
@@ -102,13 +109,16 @@
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             MaxLength="12">
             <TextBox.Text>
-                <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged">
+                <Binding
+                    Path="Phone"
+                    UpdateSourceTrigger="PropertyChanged"
+                    ValidatesOnNotifyDataErrors="False">
                     <Binding.ValidationRules>
                         <validationRules:NumericTextBoxValidationRule ValidatesOnTargetUpdated="True" />
                         <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         <validationRules:StringLengthMinMaxValidationRule
-                            Max="12"
-                            Min="6"
+                            Max="15"
+                            Min="5"
                             ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>

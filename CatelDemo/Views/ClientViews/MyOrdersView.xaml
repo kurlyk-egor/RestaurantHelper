@@ -5,7 +5,7 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
-    <Grid Width="600" Height="500">
+    <Grid Width="697" Height="500">
         <TextBlock
             x:Name="textBlock"
             Width="83"
@@ -16,23 +16,25 @@
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock1"
-            Width="35"
-            Margin="136,48,0,0"
+            Width="124"
+            Height="26"
+            Margin="112,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="{Binding UserLogin}"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock2"
-            Width="72"
-            Margin="320,48,0,0"
+            Width="87"
+            Height="26"
+            Margin="320,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Мои заказы:"
             TextWrapping="Wrap" />
         <ListView
             x:Name="listView"
-            Width="349"
+            Width="446"
             Height="331"
             Margin="241,89,0,0"
             HorizontalAlignment="Left"
@@ -49,11 +51,26 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding OrderId}" Header="ИД заказа" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Day}" Header="Дата" />
-                    <GridViewColumn DisplayMemberBinding="{Binding FirstTime}" Header="Начало" />
-                    <GridViewColumn DisplayMemberBinding="{Binding LastTime}" Header="Окончание" />
-                    <GridViewColumn DisplayMemberBinding="{Binding TableId}" Header="Столик" />
+                    <GridViewColumn
+                        Width="100"
+                        DisplayMemberBinding="{Binding OrderId}"
+                        Header="ИД заказа" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding Day}"
+                        Header="Дата" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding FirstTime}"
+                        Header="Начало" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding LastTime}"
+                        Header="Окончание" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding TableId}"
+                        Header="Столик" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -76,23 +93,25 @@
             Header="Детали заказа">
             <ListBox
                 x:Name="listBox"
-                Width="197"
-                Height="164"
-                Margin="10,35,0,0"
+                Width="216"
+                Height="232"
+                Margin="0,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 ItemsSource="{Binding Dishes}" />
         </GroupBox>
         <TextBlock
             x:Name="textBlock3"
-            Margin="33,114,0,0"
+            Margin="24,128,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Заказанные блюда:"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock4"
-            Margin="33,345,0,0"
+            Width="51"
+            Height="23"
+            Margin="24,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Сумма:"
@@ -100,8 +119,8 @@
         <TextBox
             x:Name="textBox"
             Width="120"
-            Height="23"
-            Margin="99,342,0,0"
+            Height="34"
+            Margin="99,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             IsReadOnly="True"
