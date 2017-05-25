@@ -21,6 +21,10 @@ namespace RestaurantHelper.Services.Other
 			result = result.Substring(0, result.Length - 2);
 			return result;
 		}
+		/// <summary>
+		/// метод считает логическую сумму флагов установленных дней
+		/// </summary>
+		/// <returns>возвращает 0, если ни один флаг не установлен</returns>
 		public Days GetDays(bool d1, bool d2, bool d3, bool d4, bool d5, bool d6, bool d7)
 		{
 			Days result = 0;

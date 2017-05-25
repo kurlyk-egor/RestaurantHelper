@@ -17,8 +17,11 @@ namespace RestaurantHelper.Services.Other.HallPickersHelpers
 
 		public LastTimePickerHelper(string firstTime)
 		{
-			_date = DateTime.Parse(firstTime);
-			CalcStartLastTimeAndLastTime();
+			if (firstTime != null)
+			{
+				_date = DateTime.Parse(firstTime);
+				CalcStartLastTimeAndLastTime();
+			}
 		}
 
 		private void CalcStartLastTimeAndLastTime()

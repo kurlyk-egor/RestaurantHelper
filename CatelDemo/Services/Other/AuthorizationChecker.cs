@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
     class AuthorizationChecker
     {
-        private IEnumerable<User> _users; 
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private IEnumerable<User> _users; 
         private User _user;
-        private readonly IRepository<User> _userRepository;
 
-        public AuthorizationChecker(User user)
+		public AuthorizationChecker(User user)
         {
             _user = user;
-			_userRepository = new Repository<User>();
         }
 
         public bool IsMatchUser()
         {
             Refresh();
-            var find = _users.ToList().Find(u => u.Login == _user.Login && u.Password == _user.Password);
+            var find = _users?.ToList().Find(u => u.Login == _user.Login && u.Password == _user.Password);
             if (find == null)
             {
                 return false;
@@ -43,7 +42,7 @@ namespace RestaurantHelper.Services.Other
 
         private void Refresh()
         {
-            _users = _userRepository.GetCollection();
+            _users = _unitOfWork.Users.GetAll();
         }
 
         public User GetUser()

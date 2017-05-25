@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Catel.Collections;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using Xceed.Wpf.Toolkit;
 
 namespace RestaurantHelper.Services.Other
@@ -18,18 +18,16 @@ namespace RestaurantHelper.Services.Other
 	/// </summary>
 	class TablesAvailabilityRejuvenator
 	{
-		private readonly IRepository<Table> _tableRepository;
-		private readonly ObservableCollection<Table> _myTables;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly FastObservableCollection<Table> _myTables;
 
-		public TablesAvailabilityRejuvenator(ObservableCollection<Table> myTables)
+		public TablesAvailabilityRejuvenator(FastObservableCollection<Table> myTables)
 		{
-			_tableRepository = new Repository<Table>();
 			_myTables = myTables;
-
 			 ReFillTables();
 		}
 
-		public ObservableCollection<Table> FillAllTables()
+		public FastObservableCollection<Table> FillAllTables()
 		{
 			return _myTables;
 		}
@@ -60,8 +58,7 @@ namespace RestaurantHelper.Services.Other
 		private void ReFillTables()
 		{
 			_myTables.Clear();
-			_tableRepository.RefreshRepository();
-			((ICollection<Table>)_myTables).AddRange(_tableRepository.GetCollection());
+			_myTables.AddItems(_unitOfWork.Tables.GetAll());
 		}
 	}
 }

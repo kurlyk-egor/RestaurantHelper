@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
@@ -10,10 +10,11 @@ namespace RestaurantHelper.Services.Other
 	/// </summary>
 	class ClientsForTableSelector
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		public string GetUserNameForSelectedTable(int tableId)
 		{
-			var reservations = new Repository<Reservation>().GetCollection();
-			var users = new Repository<User>().GetCollection();
+			var reservations = _unitOfWork.Reservations.GetAll().ToList();
+			var users = _unitOfWork.Users.GetAll().ToList();
 			var time = DateTime.Now;
 			
 

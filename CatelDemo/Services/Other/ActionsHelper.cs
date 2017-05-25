@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Collections;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models.Actions;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
 	public class ActionsHelper
 	{
-		private readonly IRepository<DiscountAction> _discountRepository = new Repository<DiscountAction>();
-		private readonly IRepository<AmountExcessAction> _amountExcessRepository = new Repository<AmountExcessAction>();
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly List<Action> _actions = new List<Action>(); 
 
 		public bool CanAddAction(Action action, out string message)
@@ -33,7 +32,7 @@ namespace RestaurantHelper.Services.Other
 			var discAction = action as DiscountAction;
 			if (discAction != null)
 			{
-				foreach (var discountAction in _discountRepository.GetCollection())
+				foreach (var discountAction in _unitOfWork.DiscountActions.GetAll())
 				{
 					if (discAction.DishId == discountAction.DishId)
 					{
@@ -45,7 +44,7 @@ namespace RestaurantHelper.Services.Other
 			var amntAction = action as AmountExcessAction;
 			if (amntAction != null)
 			{
-				foreach (var amountAction in _amountExcessRepository.GetCollection())
+				foreach (var amountAction in _unitOfWork.AmountExcessActions.GetAll())
 				{
 					if (amntAction.ExcessSum == amountAction.ExcessSum)
 					{
@@ -63,37 +62,34 @@ namespace RestaurantHelper.Services.Other
 			var ditem = action as DiscountAction;
 			if (ditem != null)
 			{
-				_discountRepository.Insert(ditem);
-				_discountRepository.SaveChanges();
+				_unitOfWork.DiscountActions.Insert(ditem);
 			}
 			var aitem = action as AmountExcessAction;
 			if (aitem != null)
 			{
-				_amountExcessRepository.Insert(aitem);
-				_amountExcessRepository.SaveChanges();
+				_unitOfWork.AmountExcessActions.Insert(aitem);
 			}
+			_unitOfWork.SaveChanges();
 		}
 
 		public void RemoveAction(Action action)
 		{
 			if (action is AmountExcessAction)
 			{
-				_amountExcessRepository.Delete((AmountExcessAction)action);
-				_amountExcessRepository.SaveChanges();
+				_unitOfWork.AmountExcessActions.Delete(action.Id);
 			}
 			if (action is DiscountAction)
 			{
-				_discountRepository.Delete((DiscountAction)action);
-				_discountRepository.SaveChanges();
+				_unitOfWork.DiscountActions.Delete(action.Id);
 			}
-
+			_unitOfWork.SaveChanges();
 		}
 
-		public ObservableCollection<Action> GetActions()
+		public FastObservableCollection<Action> GetActions()
 		{
 			FillActionsList();
-			ObservableCollection < Action > actions = new ObservableCollection<Action>();
-			((ICollection<Action>)actions).AddRange(_actions);
+			FastObservableCollection <Action> actions = new FastObservableCollection<Action>();
+			actions.AddItems(_actions);
 			return actions;
 		} 
 
@@ -102,15 +98,16 @@ namespace RestaurantHelper.Services.Other
 		{
 			_actions.Clear();
 
-			foreach (var discountAction in _discountRepository.GetCollection())
+			foreach (var discountAction in _unitOfWork.DiscountActions.GetAll())
 			{
 				_actions.Add(discountAction);
 			}
 
-			foreach (var amountExcessAction in _amountExcessRepository.GetCollection())
+			foreach (var amountExcessAction in _unitOfWork.AmountExcessActions.GetAll())
 			{
 				_actions.Add(amountExcessAction);
 			}
+			_actions.Sort((a1, a2) => a1.Id - a2.Id);
 		}
 	}
 }

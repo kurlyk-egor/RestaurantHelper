@@ -1,26 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using RestaurantHelper.DAL;
-using RestaurantHelper.Models;
+using RestaurantHelper.Models.Actions;
 
 namespace RestaurantHelper.Services.Converters
 {
-	class UserIdToLoginConverter : IValueConverter
+	class ActionToTypeNameConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			UnitOfWork uow = UnitOfWork.GetInstance();
-			if (value is int)
+			if (value is DiscountAction)
 			{
-				var user = uow.Users.GetById((int) value);
-
-				if (user != null)
-				{
-					return user.Login;
-				}
+				return "Дискаунт";
 			}
-
+			if (value is AmountExcessAction)
+			{
+				return "Подарок ";
+			}
 			return string.Empty;
 		}
 

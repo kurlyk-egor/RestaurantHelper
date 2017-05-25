@@ -5,19 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 
 namespace RestaurantHelper.Services.ValidationRules
 {
 	public class ExistingLoginValidationRule : ValidationRule
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
 			string str = (value ?? "").ToString();
 			if(str.Length < 3) return ValidationResult.ValidResult; // нет смысла проверять
 
-			bool isExist = new Repository<User>().GetCollection().Exists(u => u.Login == str);
+			bool isExist = _unitOfWork.Users.IsExistLogin(str);
 
 			return isExist
 				? new ValidationResult(false, "Пользователь с таким логином уже зарегистрирован")

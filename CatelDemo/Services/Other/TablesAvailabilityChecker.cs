@@ -6,21 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Collections;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
 	public class TablesAvailabilityChecker
 	{
 		private readonly List<Table> _tables;
-		private readonly IRepository<Reservation> _reservations;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 
 		public TablesAvailabilityChecker(List<Table> tables)
 		{
 			_tables = tables;
-			_reservations = new Repository<Reservation>();
 		}
 
 		public void FillAvailabilities(string firstTime, string secondTime, string currentDay)
@@ -32,7 +31,7 @@ namespace RestaurantHelper.Services.Other
 			    DateTime.TryParse(secondTime, out second) &&
 			    DateTime.TryParse(currentDay, out day))
 			{ // если и день, и время выбраны
-				var reservations = _reservations.GetCollection()
+				var reservations = _unitOfWork.Reservations.GetAll()
 					.Where(r => r.Day.Date == day.Date &&
 					            ((r.FirstTime.Hour >= first.Hour && r.LastTime.Hour <= second.Hour) ||
 					             (r.FirstTime.Hour >= first.Hour && r.FirstTime.Hour < second.Hour) ||
@@ -61,18 +60,20 @@ namespace RestaurantHelper.Services.Other
 
 			if (DateTime.TryParse(dayStr, out day))
 			{
-				returnList = _reservations.GetCollection().Where(r => r.Day.Date == day.Date && r.TableId == tableNumber).ToList();
+				returnList = _unitOfWork.Reservations.GetAll()
+					.Where(r => r.Day.Date == day.Date && r.TableId == tableNumber)
+					.ToList();
 			}
 
 			return returnList;
 		}
 
-		public ObservableCollection<Reservation> GetTodayReservationsForTable(int tableNumber)
+		public FastObservableCollection<Reservation> GetTodayReservationsForTable(int tableNumber)
 		{
 			
-			ObservableCollection<Reservation> reservations = new ObservableCollection<Reservation>();
+			FastObservableCollection<Reservation> reservations = new FastObservableCollection<Reservation>();
 			// получить брони на сегодня для столика
-			((ICollection<Reservation>)reservations).AddRange(GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber));
+			reservations.AddItems(GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber));
 
 			return reservations;
 		}

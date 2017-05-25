@@ -9,33 +9,30 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Catel.Collections;
 using Microsoft.Win32;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Services.Other
 {
 	class ManagerMenuChanger
 	{
-		private readonly IRepository<Dish> _dishesRepository;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 
-		public ManagerMenuChanger()
+		public FastObservableCollection<Dish> LoadAllDishes()
 		{
-			_dishesRepository = new Repository<Dish>();
-		}
-
-		public ObservableCollection<Dish> LoadAllDishes()
-		{
-			ObservableCollection<Dish> dishes = new ObservableCollection<Dish>();
-			((ICollection<Dish>)dishes).AddRange(_dishesRepository.GetCollection());
+			FastObservableCollection<Dish> dishes = new FastObservableCollection<Dish>();
+			dishes.AddItems(_unitOfWork.Dishes.GetAll());
 			return dishes;
 		}
 
 		public string GetPicturePath()
 		{
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.Multiselect = false;
-			dialog.Filter = "JPG image (*.jpg)|*.jpg";
+			OpenFileDialog dialog = new OpenFileDialog
+			{
+				Multiselect = false,
+				Filter = "JPG image (*.jpg)|*.jpg"
+			};
 
 			if (dialog.ShowDialog() == true)
 			{
@@ -47,20 +44,20 @@ namespace RestaurantHelper.Services.Other
 
 		public void AddNewDish(Dish dish)
 		{
-			_dishesRepository.Insert(dish);
-			_dishesRepository.SaveChanges();
+			_unitOfWork.Dishes.Insert(dish);
+			_unitOfWork.SaveChanges();
 		}
 
 		public void DeleteDish(Dish dish)
 		{
-			_dishesRepository.Delete(dish);
-			_dishesRepository.SaveChanges();
+			_unitOfWork.Dishes.Delete(dish.Id);
+			_unitOfWork.SaveChanges();
 		}
 
 		public void EditDish(Dish dish)
 		{
-			_dishesRepository.Update(dish);
-			_dishesRepository.SaveChanges();
+			_unitOfWork.Dishes.Update(dish);
+			_unitOfWork.SaveChanges();
 		}
 	}
 }

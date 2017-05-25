@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Logging;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 
 namespace RestaurantHelper.Services.Other
 {
@@ -15,6 +15,7 @@ namespace RestaurantHelper.Services.Other
 	/// </summary>
 	class AdminReservationsCreator
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly Reservation _reservation;
 		public Reservation GetReservation(int tableId)
 		{
@@ -39,7 +40,7 @@ namespace RestaurantHelper.Services.Other
 			FillCurrentReservationForTable(tableId);
 
 			// получаем список броней, отфильтрованный для нужного столика и текущего дня
-			var reservations = new Repository<Reservation>().GetCollection()
+			var reservations = _unitOfWork.Reservations.GetAll()
 				.Where(r => r.TableId == tableId && r.Day == DateTime.Today);
 
 			DateTime first = DateTime.Parse(_firstTime);
@@ -84,7 +85,7 @@ namespace RestaurantHelper.Services.Other
 			_reservation.FirstTime = DateTime.Parse(_firstTime);
 			_reservation.LastTime = DateTime.Parse(_lastTime);
 			_reservation.TableId = tableId;
-			_reservation.UserId = 0;		// 0 - админ
+			_reservation.UserId = 0;
 		}
 	}
 }
