@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<ArrayOfDiscountAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DiscountAction><DiscountSum>15</DiscountSum><DiscountedDishId>1</DiscountedDishId><Id>1</Id><Name>Лучшая</Name><Description>Просто добавь воды</Description></DiscountAction>
-</ArrayOfDiscountAction>
