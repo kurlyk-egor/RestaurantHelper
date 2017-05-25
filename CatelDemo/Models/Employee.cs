@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models
 {
-
-	[Serializable]
 	[Flags]
 	public enum Days
 	{
@@ -22,13 +21,8 @@ namespace RestaurantHelper.Models
 		Sunday = 64
 	}
 
-	[Serializable]
-	public class Employee : ModelBase, IHaveId
+	public class Employee : MyModelBase
 	{
-		public Employee()
-		{ 
-		}
-
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }

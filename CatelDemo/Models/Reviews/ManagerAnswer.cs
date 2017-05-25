@@ -1,15 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models.Reviews
 {
-	[Serializable]
-	public class ManagerAnswer : ModelBase, IHaveId
+	public class ManagerAnswer : MyModelBase
 	{
-		public ManagerAnswer()
-		{
-		}
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }
@@ -17,6 +16,7 @@ namespace RestaurantHelper.Models.Reviews
 		}
 		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
 
+		[Required]
 		public int ReviewId
 		{
 			get { return GetValue<int>(ReviewIdProperty); }
@@ -24,6 +24,11 @@ namespace RestaurantHelper.Models.Reviews
 		}
 		public static readonly PropertyData ReviewIdProperty = RegisterProperty("ReviewId", typeof(int));
 
+		[ForeignKey("ReviewId")]
+		public ClientReview Review { get; set; }	
+
+
+		[MinLength(10), MaxLength(255), Required]
 		public string Text
 		{
 			get { return GetValue<string>(TextProperty); }
@@ -31,7 +36,7 @@ namespace RestaurantHelper.Models.Reviews
 		}
 		public static readonly PropertyData TextProperty = RegisterProperty("Text", typeof(string));
 
-
+		[Required]
 		public DateTime DateTime
 		{
 			get { return GetValue<DateTime>(DateTimeProperty); }

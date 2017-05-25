@@ -1,41 +1,28 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models.Actions
 {
 	/// <summary>
 	/// тип акции - 
-	/// или скидка на товар,
-	/// или бесплатный товар за превышение суммы заказа
 	/// </summary>
-	[Serializable]
 	public enum ActionType
 	{
 		/// <summary>
-		/// скидка (в процентах)
-		/// название проводимой акции
-		/// основной текст
-		/// товар, к которому применяется 
-		/// время действия
+		/// скидка на любое блюдо
 		/// </summary>
 		Discount = 1,
 
 		/// <summary>
-		/// превышение суммы
-		/// название акции
-		/// товар, который будет бесплатно даваться
-		/// непосредственно сумма превышения 
+		/// бесплатное блюдо за превышение суммы заказа
 		/// </summary>
 		AmountExcess
 	}
 
-	[Serializable]
-	public class Action : ModelBase, IHaveId
+	public class Action : MyModelBase
 	{
-		public Action()
-		{
-		}
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }
@@ -43,7 +30,7 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
 
-
+		[MinLength(5), MaxLength(20), Required]
 		public string Name
 		{
 			get { return GetValue<string>(NameProperty); }
@@ -51,7 +38,7 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
 
-
+		[MinLength(10), MaxLength(150), Required]
 		public string Description
 		{
 			get { return GetValue<string>(DescriptionProperty); }

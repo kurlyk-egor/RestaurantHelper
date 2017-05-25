@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models
 {
-	[Serializable]
-	public class Reservation : ModelBase, IHaveId
+	public class Reservation : MyModelBase
 	{
-		public Reservation()
-		{
-		}
-
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }
@@ -22,6 +19,7 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
 
+		[Required]
 		public int UserId
 		{
 			get { return GetValue<int>(ClientIdProperty); }
@@ -29,13 +27,18 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData ClientIdProperty = RegisterProperty("UserId", typeof(int));
 
+		[Required]
 		public int TableId
 		{
-			get { return GetValue<int>(TableNumberProperty); }
-			set { SetValue(TableNumberProperty, value); }
+			get { return GetValue<int>(TableIdProperty); }
+			set { SetValue(TableIdProperty, value); }
 		}
-		public static readonly PropertyData TableNumberProperty = RegisterProperty("TableNumber", typeof(int));
+		public static readonly PropertyData TableIdProperty = RegisterProperty("TableId", typeof(int));
 
+		[ForeignKey("TableId")]
+		public Table Table { get; set; }
+
+		[Required]
 		public DateTime FirstTime
 		{
 			get { return GetValue<DateTime>(FirstTimeProperty); }
@@ -43,6 +46,7 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData FirstTimeProperty = RegisterProperty("FirstTime", typeof(DateTime));
 
+		[Required]
 		public DateTime LastTime
 		{
 			get { return GetValue<DateTime>(LastTimeProperty); }
@@ -50,6 +54,7 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof(DateTime));
 
+		[Required]
 		public DateTime Day
 		{
 			get { return GetValue<DateTime>(DayProperty); }
@@ -60,7 +65,7 @@ namespace RestaurantHelper.Models
 
 		public override string ToString()
 		{
-			return $"{Day}     {FirstTime} {LastTime}";
+			return $"{Day} {FirstTime}-{LastTime}";
 		}
 	}
 }

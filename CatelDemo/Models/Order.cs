@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models
 {
-	[Serializable]
-	public class Order : ModelBase, IHaveId
+	public class Order : MyModelBase
 	{
 		public int Id
 		{
@@ -18,6 +20,7 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
 
+		[Required]
 		public int UserId
 		{
 			get { return GetValue<int>(UserIdProperty); }
@@ -25,11 +28,18 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData UserIdProperty = RegisterProperty("UserId", typeof(int));
 
+		[Required]
 		public int ReservationId
 		{
 			get { return GetValue<int>(ReservationIdProperty); }
 			set { SetValue(ReservationIdProperty, value); }
 		}
 		public static readonly PropertyData ReservationIdProperty = RegisterProperty("ReservationId", typeof(int));
+
+		[ForeignKey("UserId")]
+		public User User { get; set; }
+
+		[ForeignKey("ReservationId")]
+		public Reservation Reservation { get; set; }
 	}
 }

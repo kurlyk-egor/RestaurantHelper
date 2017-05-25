@@ -1,65 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Catel.Data;
 using System.Linq;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models
 {
-    [Serializable]
-    public class User : ModelBase, IHaveId
+    public class User : MyModelBase
     {
-        public User()
-        {
-        }
         public int Id
         {
             get { return GetValue< int>(IdProperty); }
             set { SetValue(IdProperty, value); }
         }
         public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
-        public string Login
+
+		[MinLength(5), MaxLength(20)]
+		public string Login
         {
             get { return GetValue<string>( LoginProperty); }
             set { SetValue( LoginProperty, value); }
         }
         public static readonly PropertyData LoginProperty = RegisterProperty("Login", typeof(string));
 
-        public string Password
+		[MaxLength(20)]
+		public string Password
         {
             get { return GetValue<string>(PasswordProperty); }
             set { SetValue(PasswordProperty, value); }
         }
         public static readonly PropertyData PasswordProperty = RegisterProperty("Password", typeof(string));
 
-        
-        public string Name
+		[MinLength(5), MaxLength(30)]
+		public string Name
         {
             get { return GetValue<string>(NameProperty); }
             set { SetValue(NameProperty, value); }
         }
         public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
 
-        public string Phone
+		[MinLength(5), MaxLength(15)]
+		public string Phone
         {
             get { return GetValue<string>(PhoneProperty); }
             set { SetValue(PhoneProperty, value); }
         }
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
-
-	    public static bool IsValidLogin(string login)
-	    {
-		    return !string.IsNullOrWhiteSpace(login);
-	    }
-
-	    public static bool IsValidPhone(string phone)
-	    {
-		    return !string.IsNullOrWhiteSpace(phone) && phone.ToCharArray().Count(c => !char.IsDigit(c)) == 0;
-	    }
-
-        public override string ToString()
-        {
-            return $"{Id} {Login} {Password}\n {Name} {Phone} ";
-        }
     }
 }

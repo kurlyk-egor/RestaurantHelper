@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catel.Data;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.Models.Actions
 {
-	[Serializable]
 	public class DiscountAction : Action
 	{
-		public DiscountAction()
-		{
-		}
+		[Required]
 		public int DiscountSum
 		{
 			get { return GetValue<int>(DiscountSumProperty); }
@@ -21,12 +19,16 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData DiscountSumProperty = RegisterProperty("DiscountSum", typeof(int));
 
+		[Required]
 		public int DishId
 		{
-			get { return GetValue<int>(DiscountedDishIdProperty); }
-			set { SetValue(DiscountedDishIdProperty, value); }
+			get { return GetValue<int>(DishIdProperty); }
+			set { SetValue(DishIdProperty, value); }
 		}
-		public static readonly PropertyData DiscountedDishIdProperty = RegisterProperty("DiscountedDishId", typeof(int));
+		public static readonly PropertyData DishIdProperty = RegisterProperty("DishId", typeof(int));
+
+		[ForeignKey("DishId")]
+		public Dish Dish { get; set; }
 
 		public override string ToString()
 		{

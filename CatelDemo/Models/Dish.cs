@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Catel.Data;
 using Catel.Runtime.Serialization;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 
 namespace RestaurantHelper.Models
 {
-	[Serializable]
-	public class Dish : ModelBase, IHaveId
+	public class Dish : MyModelBase
 	{
-		public Dish()
-		{
-		}
-
 		public int Id
 		{
 			get { return GetValue<int>(IdProperty); }
@@ -29,7 +26,6 @@ namespace RestaurantHelper.Models
 			get { return GetValue<string>(NameProperty); }
 			set { SetValue(NameProperty, value); }
 		}
-
 		public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
 
 		public int Price
@@ -47,7 +43,7 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData PicturePathProperty = RegisterProperty("PicturePath", typeof(string));
 
 
-		[XmlIgnore]
+		[NotMapped]
 		public int Quantity
 		{
 			get { return GetValue<int>(QuantityProperty); }
