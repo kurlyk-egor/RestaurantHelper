@@ -11,9 +11,9 @@ using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
 using Catel.MVVM.Views;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.Services.Other.HallPickersHelpers;
 
@@ -22,22 +22,21 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
 	public class HallViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly User _user;
-		private readonly ObservableCollection<Dish> _orderedDishes;
+		private readonly FastObservableCollection<Dish> _orderedDishes;
 		private readonly IViewModel _rootViewModel;
-		private readonly IRepository<Table> _tableRepository;
 		private readonly Reservation _reservation;
 		private readonly TablesAvailabilityChecker _availabilityChecker;
 
-		public HallViewModel(User user, Reservation reservation = null, ObservableCollection<Dish> orderedDishes = null)
+		public HallViewModel(User user, Reservation reservation = null, FastObservableCollection<Dish> orderedDishes = null)
 		{
 			_user = user;
 			_orderedDishes = orderedDishes;
 			_reservation = new Reservation();
-			_tableRepository = new Repository<Table>();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			// передаем ссылку на наши столики
-			_availabilityChecker = new TablesAvailabilityChecker(_tableRepository.GetCollection());
+			_availabilityChecker = new TablesAvailabilityChecker(_unitOfWork.Tables.GetAll().ToList());
 
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
@@ -50,7 +49,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			MinimumDate = helper.Minimum;
 			MaximumDate = helper.Maximum;
 
-			AddAllTablesToObservableCollection();
+			AddAllTablesToFastObservableCollection();
 			TableReservations.Clear();
 			ReservationsListRefresh();
 
@@ -172,14 +171,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public static readonly PropertyData DateTextProperty = RegisterProperty("DateText", typeof (string));
 
-		public ObservableCollection<Table> Tables
+		public FastObservableCollection<Table> Tables
 		{
-			get { return GetValue<ObservableCollection<Table>>(TablesProperty); }
+			get { return GetValue<FastObservableCollection<Table>>(TablesProperty); }
 			set { SetValue(TablesProperty, value); }
 		}
 
-		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof (ObservableCollection<Table>),
-			new ObservableCollection<Table>());
+		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof (FastObservableCollection<Table>),
+			new FastObservableCollection<Table>());
 
 		public Table SelectedItemTable
 		{
@@ -189,13 +188,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		public static readonly PropertyData SelectedItemTableProperty = RegisterProperty("SelectedItemTable", typeof(Table));
 
-		public ObservableCollection<Reservation> TableReservations
+		public FastObservableCollection<Reservation> TableReservations
 		{
-			get { return GetValue<ObservableCollection<Reservation>>(TableReservationsProperty); }
+			get { return GetValue<FastObservableCollection<Reservation>>(TableReservationsProperty); }
 			set { SetValue(TableReservationsProperty, value); }
 		}
-		public static readonly PropertyData TableReservationsProperty = RegisterProperty("TableReservations", typeof(ObservableCollection<Reservation>), 
-			new ObservableCollection<Reservation>());
+		public static readonly PropertyData TableReservationsProperty = RegisterProperty("TableReservations", typeof(FastObservableCollection<Reservation>), 
+			new FastObservableCollection<Reservation>());
 
 
 		public Command TableSelectionChanged { get; private set; }
@@ -247,9 +246,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			await base.CloseAsync();
 		}
 
-		private void AddAllTablesToObservableCollection()
+		private void AddAllTablesToFastObservableCollection()
 		{
-			((ICollection<Table>) Tables).AddRange(_tableRepository.GetCollection());
+			Tables.AddItems(_unitOfWork.Tables.GetAll());
 		}
 
 		private void ReservationsListRefresh()
@@ -261,8 +260,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 				if (SelectedItemTable != null)
 				{
-					((ICollection<Reservation>) TableReservations)
-						.AddRange(_availabilityChecker.GetDaylyReservationsForTable(DateText, SelectedItemTable.Number));
+					TableReservations.AddItems(_availabilityChecker.GetDaylyReservationsForTable(DateText, SelectedItemTable.Number));
 				}
 			}
 		}

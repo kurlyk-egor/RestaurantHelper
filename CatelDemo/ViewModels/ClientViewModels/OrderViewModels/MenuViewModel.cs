@@ -7,27 +7,26 @@ using System.Windows.Data;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
     public class MenuViewModel : ViewModelBase
     {
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly User _user;
 		private readonly IViewModel _rootViewModel;
 	    private readonly Reservation _reservation;
-	    private readonly IRepository<Dish> _dishRepository;
 		private readonly OrderedSumCalculator _sumCalculator;
 
-		public MenuViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes = null)
+		public MenuViewModel(User user, Reservation reservation, FastObservableCollection<Dish> orderedDishes = null)
 	    {
 			_user = user;
 			_reservation = reservation;
 			_sumCalculator = new OrderedSumCalculator();
-			_dishRepository = new Repository<Dish>();
 		    _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			AddCommand = new Command(OnAddCommandExecute, OnAddCommandCanExecute);
@@ -48,13 +47,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 	    }
 
-		public ObservableCollection<Dish> Dishes
+		public FastObservableCollection<Dish> Dishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(ObservableCollection<Dish>), 
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>), 
+			new FastObservableCollection<Dish>());
 
 		public Dish SelectedDish
 		{
@@ -70,13 +69,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData CurrentDishesCountProperty = RegisterProperty("CurrentDishesCount", typeof(int), 1);
 
-		public ObservableCollection<Dish> OrderedDishes
+		public FastObservableCollection<Dish> OrderedDishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(OrderedDishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(OrderedDishesProperty); }
 			set { SetValue(OrderedDishesProperty, value); }
 		}
-		public static readonly PropertyData OrderedDishesProperty = RegisterProperty("OrderedDishes", typeof(ObservableCollection<Dish>), 
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData OrderedDishesProperty = RegisterProperty("OrderedDishes", typeof(FastObservableCollection<Dish>), 
+			new FastObservableCollection<Dish>());
 
 		public Dish SelectedOrderedDish
 		{
@@ -163,7 +162,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void AddDishesToCollection()
 		{
 			Dishes.Clear();
-			((ICollection<Dish>)Dishes).AddRange(_dishRepository.GetCollection());
+			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 		}
 	}
 }

@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Catel.Collections;
 using Catel.Data;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
@@ -17,24 +17,24 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 	public class DiscountViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly DiscountAction _discountAction;
 		public DiscountViewModel()
 		{
-			IRepository<Dish> dishesRepository = new Repository<Dish>();
 			Dishes.Clear();
-			((ICollection<Dish>) Dishes).AddRange(dishesRepository.GetCollection());
+			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 
 			_discountAction = new DiscountAction();
-			ApplyAction = new Command(OnApplyActionExecute);
+			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
 		}
 
-		public ObservableCollection<Dish> Dishes
+		public FastObservableCollection<Dish> Dishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(ObservableCollection<Dish>),
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>),
+			new FastObservableCollection<Dish>());
 
 		public Dish SelectedDish
 		{
@@ -67,8 +67,18 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 
 		public Command ApplyAction { get; private set; }
+
+		private bool OnApplyActionCanExecute()
+		{
+			return SelectedDish != null;
+		}
 		private void OnApplyActionExecute()
 		{
+			if (SelectedDish == null)
+			{
+				MessageBox.Show("Не выбрано блюдо!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 			FillDiscountAction();
 			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;

@@ -9,13 +9,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         public SuccessRegistrationViewModel()
         {
         }
-
-        private async void OnOnLoadedExecute()
-        {
-            Thread.Sleep(800);
-            await CloseAsync();
-        }
-
         protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();

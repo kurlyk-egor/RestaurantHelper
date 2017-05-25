@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using Catel;
 using Catel.Collections;
@@ -11,10 +12,9 @@ using Catel.IoC;
 using Catel.MVVM;
 using Catel.MVVM.Views;
 using Catel.Services;
+using RestaurantHelper.DAL;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.ViewModels.AuthorizationViewModels;
 using RestaurantHelper.ViewModels.ClientViewModels;
 using RestaurantHelper.ViewModels.ManagerViewModels;
@@ -28,14 +28,15 @@ namespace RestaurantHelper.ViewModels
     {
         public MainWindowViewModel()
         {
+	        
 			// TODO: запуск авторизации
             CurrentPage = new StartWindowViewModel(this);
 
 			// TODO: запуск сразу клиентской части
 			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
-			
+
 			// TODO: запуск сразу из под админа
-			//CurrentPage = new ManagerMainViewModel();
+			CurrentPage = new ManagerMainViewModel();
 
 			// собственные пространства имен
 			var viewModelLocator = ServiceLocator.Default.ResolveType<IViewModelLocator>();
@@ -77,6 +78,9 @@ namespace RestaurantHelper.ViewModels
 
         protected override async Task CloseAsync()
         {
+	        var uow = UnitOfWork.GetInstance();
+			uow.SaveChanges();
+			
             await base.CloseAsync();
         }
 
@@ -95,4 +99,24 @@ public static class ViewModelExtension
     {
         ((MainWindowViewModel)iViewModel).ChangeCurrentPage(pageToChange);
     }
+
+	/// <summary>
+	/// метод расширения для IViewModel, отображающий заставку
+	/// </summary>
+	/// <param name="iViewModel">расширяемый тип</param>
+	/// <param name="pageToShow">отображаемая заставка</param>
+	/// <param name="milliseconds">время показа заставки</param>
+	/// /// <param name="pageToChange">страница, которая загрузится после заставки</param>
+	public static async void ChangePageWithDialog(this IViewModel iViewModel, IViewModel pageToShow, int milliseconds, IViewModel pageToChange = null)
+	{
+		ServiceLocator.Default.ResolveType<IUIVisualizerService>().Show(pageToShow);
+		Thread.Sleep(milliseconds);
+
+		// если нужно - переходим на другую страницу
+		if (pageToChange != null)
+		{
+			((MainWindowViewModel)iViewModel).ChangeCurrentPage(pageToChange);
+		}
+		await pageToShow.CloseViewModelAsync(true);
+	}
 }

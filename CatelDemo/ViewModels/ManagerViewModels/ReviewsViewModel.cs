@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Catel.Collections;
 using Catel.Data;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Reviews;
-using RestaurantHelper.Services.Database;
+using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
@@ -15,24 +16,27 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 	public class ReviewsViewModel : ViewModelBase
 	{
-		const string NO_ANSWER = "Ответа еще нет.";
-		const string NO_SELECT = "Ничего не выбрано.";
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private const string NO_ANSWER = "Ответа еще нет.";
+		private readonly ReviewsWithAnswersBinder _binder;
+
 		public ReviewsViewModel()
 		{
-			RefreshReviwsCollection();
+			_binder = new ReviewsWithAnswersBinder();
+			RefreshReviewsCollection();
 
 			ClearTextCommand = new Command(OnClearTextCommandExecute);
-			SaveAnswerCommand = new Command(OnSaveAnswerCommandExecute);
+			SaveAnswerCommand = new Command(OnSaveAnswerCommandExecute, OnSaveAnswerCommandCanExecute);
 			SelectionChangedCommand = new Command(OnSelectionChangedCommandExecute);
 		}
 
-		public ObservableCollection<ClientReview> ClientReviews
+		public FastObservableCollection<ClientReview> ClientReviews
 		{
-			get { return GetValue<ObservableCollection<ClientReview>>(ClientReviewsProperty); }
+			get { return GetValue<FastObservableCollection<ClientReview>>(ClientReviewsProperty); }
 			set { SetValue(ClientReviewsProperty, value); }
 		}
-		public static readonly PropertyData ClientReviewsProperty = RegisterProperty("ClientReviews", typeof(ObservableCollection<ClientReview>), 
-			new ObservableCollection<ClientReview>());
+		public static readonly PropertyData ClientReviewsProperty = RegisterProperty("ClientReviews", typeof(FastObservableCollection<ClientReview>), 
+			new FastObservableCollection<ClientReview>());
 
 
 		public ClientReview SelectedClientReview
@@ -48,7 +52,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			get { return GetValue<string>(AdminAnswerProperty); }
 			set { SetValue(AdminAnswerProperty, value); }
 		}
-		public static readonly PropertyData AdminAnswerProperty = RegisterProperty("AdminAnswer", typeof(string), NO_SELECT);
+		public static readonly PropertyData AdminAnswerProperty = RegisterProperty("AdminAnswer", typeof(string), "Ничего не выбрано.");
 
 
 
@@ -79,8 +83,9 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			RefreshAdminAnswer();
 		}
 
+
 		public Command SaveAnswerCommand { get; private set; }
-		private bool CanSaveAnswerCommandExecute()
+		private bool OnSaveAnswerCommandCanExecute()
 		{
 			return !string.IsNullOrEmpty(AdminAnswer) && 
 					AdminAnswer != NO_ANSWER && 
@@ -88,68 +93,19 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		private void OnSaveAnswerCommandExecute()
 		{
-			var answersRepo = new Repository<ManagerAnswer>();
-			var reviewsRepo = new Repository<ClientReview>();
-
-			// исключить несколько ответов на один и тот же отзыв
-			var answer = answersRepo.GetCollection().Find(a => a.ReviewId == SelectedClientReview.Id);
-
-			if (answer != null) // существует - обновить
-			{
-				answer.Text = AdminAnswer;
-				answer.DateTime = DateTime.Now;
-				answer.ReviewId = SelectedClientReview.Id;
-
-				answersRepo.Update(answer);
-			}
-			else			// не существует - добавить
-			{
-				answersRepo.Insert(new ManagerAnswer
-				{
-					Text = AdminAnswer,
-					DateTime = DateTime.Now,
-					ReviewId = SelectedClientReview.Id
-				});
-			}
-			answersRepo.SaveChanges();
-
-
-			var review = reviewsRepo.GetItem(SelectedClientReview.Id);
-			// обратная связь
-			review.AnswerId = answersRepo.GetCollection().Find(a => a.ReviewId == SelectedClientReview.Id).Id;
-			reviewsRepo.Update(review);
-			reviewsRepo.SaveChanges();
-
-			RefreshReviwsCollection();
-
+			int id = SelectedClientReview.Id;
+			_binder.SaveAnswer(AdminAnswer, id);
+			RefreshReviewsCollection();
 			// выбираем тот же отзыв
-			SelectedClientReview = ClientReviews.First(c => c.AnswerId == review.AnswerId);
+			SelectedClientReview = ClientReviews.First(c => c.Id == id);
 		}
 
 
-		private void RefreshReviwsCollection()
-		{
-			ClientReviews.Clear();
-			((ICollection<ClientReview>) ClientReviews).AddRange(new Repository<ClientReview>().GetCollection());
-		}
+		private void RefreshReviewsCollection() => Filler<ClientReview>.Fill(ClientReviews, _unitOfWork.ClientReviews);
 
 		private void RefreshAdminAnswer()
 		{
-			if (SelectedClientReview == null)
-			{
-				AdminAnswer = NO_SELECT;
-				return;
-			}
-			if (SelectedClientReview.AnswerId == 0)
-			{
-				AdminAnswer = NO_ANSWER;
-				return;
-			}
-
-			var r = new Repository<ManagerAnswer>();
-			var answer = r.GetItem(SelectedClientReview.AnswerId);
-
-			AdminAnswer =  (answer != null) ? answer.Text : NO_ANSWER;
+			AdminAnswer = _binder.GetManagerMessage(SelectedClientReview);
 		}
 	}
 }

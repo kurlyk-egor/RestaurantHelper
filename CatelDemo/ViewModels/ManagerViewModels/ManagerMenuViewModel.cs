@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Catel.Collections;
 using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
@@ -30,13 +30,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			Dishes = _menuChanger.LoadAllDishes();
 		}
 
-		public ObservableCollection<Dish> Dishes
+		public FastObservableCollection<Dish> Dishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(ObservableCollection<Dish>), 
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>), 
+			new FastObservableCollection<Dish>());
 
 		public Dish SelectedDish
 		{

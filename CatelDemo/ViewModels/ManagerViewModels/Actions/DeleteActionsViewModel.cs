@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Catel.Collections;
 using Catel.Data;
 using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Services.Other;
@@ -21,13 +22,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			DeleteActionCommand = new Command(OnDeleteActionCommandExecute, OnDeleteActionCommandCanExecute);
 		}
 		
-		public ObservableCollection<Action> Actions
+		public FastObservableCollection<Action> Actions
 		{
-			get { return GetValue<ObservableCollection<Action>>(ActionsProperty); }
+			get { return GetValue<FastObservableCollection<Action>>(ActionsProperty); }
 			set { SetValue(ActionsProperty, value); }
 		}
-		public static readonly PropertyData ActionsProperty = RegisterProperty("Actions", typeof(ObservableCollection<Action>), 
-			new ObservableCollection<Action>());
+		public static readonly PropertyData ActionsProperty = RegisterProperty("Actions", typeof(FastObservableCollection<Action>), 
+			new FastObservableCollection<Action>());
 
 
 		public Action SelectedAction

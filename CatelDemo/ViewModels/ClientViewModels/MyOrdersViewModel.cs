@@ -4,9 +4,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Catel.Collections;
 using Catel.Data;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
+using RestaurantHelper.Models.Additional;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
@@ -16,13 +17,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 	public class MyOrdersViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly User _user;
 		private readonly IViewModel _parentViewModel;
 		private readonly IViewModel _rootViewModel;
-		private readonly IRepository<Order> _orderRepository;
-		private readonly IRepository<Reservation> _reservationRepository;
-		private readonly IRepository<Dish> _dishRepository;
-		private readonly IRepository<OrderedDish> _orderedDishRepository;
 		private readonly OrderedSumCalculator _orderedSumCalculator;
 
 		public MyOrdersViewModel(IViewModel parentViewModel, User user)
@@ -33,11 +31,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			_orderedSumCalculator = new OrderedSumCalculator();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
-			_dishRepository = new Repository<Dish>();
-			_orderRepository = new Repository<Order>();
-			_reservationRepository = new Repository<Reservation>();
-			_orderedDishRepository = new Repository<OrderedDish>();
-
 			BackCommand = new Command(OnBackCommandExecute);
 			SelectAnotherOrderCommand = new Command(OnSelectAnotherOrderCommandExecute);
 
@@ -45,14 +38,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		}
 
 
-		public ObservableCollection<OrderWithReservationInfo> OrdersWithReservations
+		public FastObservableCollection<OrderWithReservationInfo> OrdersWithReservations
 		{
-			get { return GetValue<ObservableCollection<OrderWithReservationInfo>>(OrdersWithReservationsProperty); }
+			get { return GetValue<FastObservableCollection<OrderWithReservationInfo>>(OrdersWithReservationsProperty); }
 			set { SetValue(OrdersWithReservationsProperty, value); }
 		}
 		public static readonly PropertyData OrdersWithReservationsProperty = RegisterProperty("OrdersWithReservations", 
-			typeof(ObservableCollection<OrderWithReservationInfo>),
-			new ObservableCollection<OrderWithReservationInfo>() );
+			typeof(FastObservableCollection<OrderWithReservationInfo>),
+			new FastObservableCollection<OrderWithReservationInfo>() );
 
 		public OrderWithReservationInfo SelectedOrderWithReservation
 		{
@@ -68,13 +61,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		}
 		public static readonly PropertyData UserLoginProperty = RegisterProperty("UserLogin", typeof(string));
 
-		public ObservableCollection<Dish> Dishes
+		public FastObservableCollection<Dish> Dishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(ObservableCollection<Dish>),
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>),
+			new FastObservableCollection<Dish>());
 
 		public int TotalSum
 		{
@@ -89,12 +82,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		{
 			Dishes.Clear();
 			// получаем все заказанные блюда
-			var orderedDishes =
-				_orderedDishRepository.GetCollection().Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
+			var orderedDishes = _unitOfWork.OrderedDishes.GetAll()
+				.Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
+
 			foreach (var orderedDish in orderedDishes)
 			{
 				// получаем описание блюда
-				var dish = _dishRepository.GetCollection().FirstOrDefault(d => d.Id == orderedDish.DishId);
+				var dish = _unitOfWork.Dishes.GetAll().FirstOrDefault(d => d.Id == orderedDish.DishId);
 				// указываем, сколько было заказано
 				if (dish == null) continue;
 				dish.Quantity = orderedDish.Quantity;
@@ -124,8 +118,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		{
 			OrdersWithReservations.Clear();
 
-			var userOrders = _orderRepository.GetCollection()
-				.Join(_reservationRepository.GetCollection(), 
+			var userOrders = _unitOfWork.Orders.GetAll()
+				.Join(_unitOfWork.Reservations.GetAll(), 
 				order => order.ReservationId, 
 				reservation => reservation.Id,
 				(o, r) => new OrderWithReservationInfo

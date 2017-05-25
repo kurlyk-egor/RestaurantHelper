@@ -5,9 +5,9 @@ using Catel.Collections;
 using Catel.Data;
 using Catel.IoC;
 using Catel.Services;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Reviews;
-using RestaurantHelper.Services.Database;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
@@ -17,6 +17,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 	public class ClientReviewsViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private Action _refreshReviewsAction;
 		private readonly IViewModel _parentViewModel;
 		private readonly User _user;
@@ -39,13 +40,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			OnAllReviewsCommandExecute();
 		}
 
-		public ObservableCollection<ClientReview> ClientReviews
+		public FastObservableCollection<ClientReview> ClientReviews
 		{
-			get { return GetValue<ObservableCollection<ClientReview>>(ClientReviewsProperty); }
+			get { return GetValue<FastObservableCollection<ClientReview>>(ClientReviewsProperty); }
 			set { SetValue(ClientReviewsProperty, value); }
 		}
-		public static readonly PropertyData ClientReviewsProperty = RegisterProperty("ClientReviews", typeof(ObservableCollection<ClientReview>),
-			new ObservableCollection<ClientReview>());
+		public static readonly PropertyData ClientReviewsProperty = RegisterProperty("ClientReviews", typeof(FastObservableCollection<ClientReview>),
+			new FastObservableCollection<ClientReview>());
 
 
 		public ClientReview SelectedClientReview
@@ -97,7 +98,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		private void OnMyReviewsCommandExecute()
 		{
 			ClientReviews.Clear();
-			((ICollection<ClientReview>)ClientReviews).AddRange(new Repository<ClientReview>().GetCollection()
+			ClientReviews.AddItems(_unitOfWork.ClientReviews.GetAll()
 				.Where(cr => cr.UserId == _user.Id));
 			_refreshReviewsAction = OnMyReviewsCommandExecute;
 			IsMyReviews = true;
@@ -107,7 +108,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		private void OnAllReviewsCommandExecute()
 		{
 			ClientReviews.Clear();
-			((ICollection<ClientReview>)ClientReviews).AddRange(new Repository<ClientReview>().GetCollection());
+			ClientReviews.AddItems(_unitOfWork.ClientReviews.GetAll());
 			_refreshReviewsAction = OnAllReviewsCommandExecute;
 			IsMyReviews = false;
 		}
@@ -134,20 +135,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		public Command DeleteReviewCommand { get; private set; }
 		private void OnDeleteReviewCommandExecute()
 		{
-			var reviewsRepo = new Repository<ClientReview>();
-			var answersRepo = new Repository<ManagerAnswer>();
-
-			var answer = answersRepo.GetItem(SelectedClientReview.AnswerId);
-
-			reviewsRepo.Delete(SelectedClientReview);
-			if (answer != null)
-			{
-				answersRepo.Delete(answer);
-			}
-
-			reviewsRepo.SaveChanges();
-			answersRepo.SaveChanges();
-
+			// TODO: реализовать каскадное удаление 
+			_unitOfWork.ClientReviews.Delete(SelectedClientReview.Id);
+			_unitOfWork.SaveChanges();
 			_refreshReviewsAction();
 		}
 
@@ -163,11 +153,11 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 				ToolTipText = "Удалять/редактировать отзывы можно только во вкладке 'МОИ ОТЗЫВЫ'";
 				return false;
 			}
-			if (SelectedClientReview.AnswerId != 0)
+			/*if (SelectedClientReview.AnswerId != null)
 			{
 				ToolTipText = "Администратор уже ответил на этот отзыв, его нельзя изменить";
 				return false;
-			}
+			}*/
 			ToolTipText = "Изменить/удалить выбранный отзыв";
 			return true;
 		}
@@ -192,16 +182,15 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 				AdminAnswer = "Ничего не выбрано";
 				return;
 			}
-			if (SelectedClientReview.AnswerId == 0)
+			/*if (SelectedClientReview.AnswerId == null)
 			{
 				AdminAnswer = "Администратор еще не ответил на этот отзыв";
 				return;
 			}
 
-			var r = new Repository<ManagerAnswer>();
-			var answer = r.GetItem(SelectedClientReview.AnswerId);
+			var answer = _unitOfWork.ManagerAnswers.GetById(SelectedClientReview.AnswerId.Value);
 
-			AdminAnswer = (answer != null) ? answer.Text : "Нет ответа";
+			AdminAnswer = (answer != null) ? answer.Text : "Нет ответа";*/
 		}
 	}
 }

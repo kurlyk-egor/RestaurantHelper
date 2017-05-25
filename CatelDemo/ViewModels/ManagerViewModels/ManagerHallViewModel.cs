@@ -14,8 +14,8 @@ using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 using Xceed.Wpf.Toolkit;
@@ -27,6 +27,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 	{
 		private const string TOOL_TIP_MESSAGE = "Довавить бронь текущему столику";
 
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly TablesAvailabilityRejuvenator _tablesAvailabilityRejuvenator;
 		private readonly AdminReservationsCreator _timeSelector;
 		private readonly ClientsForTableSelector _selector;
@@ -41,7 +42,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			// присваивание в конструкторе должно гарантировать поток UI
 			_dispatcher = Dispatcher.CurrentDispatcher;
 
-			AddAllTablesToObservableCollection();
+			AddAllTablesToFastObservableCollection();
 			RenewPropertiesStart();
 			RenewTooltipMessageStart();
 
@@ -50,13 +51,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			AddReservationCommand = new Command(OnAddReservationCommandExecute);
 		}
 
-		public ObservableCollection<Table> Tables
+		public FastObservableCollection<Table> Tables
 		{
-			get { return GetValue<ObservableCollection<Table> >(TablesProperty); }
+			get { return GetValue<FastObservableCollection<Table> >(TablesProperty); }
 			set { SetValue(TablesProperty, value); }
 		}
-		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof(ObservableCollection<Table> ), 
-			new ObservableCollection<Table>());
+		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof(FastObservableCollection<Table> ), 
+			new FastObservableCollection<Table>());
 
 		public Table SelectedItemTable
 		{
@@ -73,13 +74,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		public static readonly PropertyData FreeTablesCountProperty = RegisterProperty("FreeTablesCount", typeof(int));
 
-		public ObservableCollection<Reservation> TableReservations
+		public FastObservableCollection<Reservation> TableReservations
 		{
-			get { return GetValue<ObservableCollection<Reservation>>(TableReservationsProperty); }
+			get { return GetValue<FastObservableCollection<Reservation>>(TableReservationsProperty); }
 			set { SetValue(TableReservationsProperty, value); }
 		}	
-		public static readonly PropertyData TableReservationsProperty = RegisterProperty("TableReservations", typeof(ObservableCollection<Reservation>), 
-			new ObservableCollection<Reservation>());
+		public static readonly PropertyData TableReservationsProperty = RegisterProperty("TableReservations", typeof(FastObservableCollection<Reservation>), 
+			new FastObservableCollection<Reservation>());
 
 		public Reservation SelectedReservation
 		{
@@ -134,7 +135,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			await base.CloseAsync();
 		}
 
-		private void AddAllTablesToObservableCollection()
+		private void AddAllTablesToFastObservableCollection()
 		{
 			Tables = _tablesAvailabilityRejuvenator.FillAllTables();
 		}
@@ -147,9 +148,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		private void OnDeleteReservationCommandExecute()
 		{
-			var reservationsRepo = new Repository<Reservation>();
-			reservationsRepo.Delete(SelectedReservation);
-			reservationsRepo.SaveChanges();
+			_unitOfWork.Reservations.Delete(SelectedReservation.Id);
+			_unitOfWork.SaveChanges();
 
 			// имитация изменения выбора столика чтобы обновить текущий список броней
 			OnTableSelectionChangedCommandExecute();

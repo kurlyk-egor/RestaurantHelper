@@ -1,7 +1,7 @@
 ﻿using System;
 using Catel.Data;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
@@ -12,7 +12,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 	public class AddEmployeeViewModel : ViewModelBase
 	{
 		private readonly DaysParser _daysParser;
-		private readonly Repository<Employee> _employeesRepository; 
+		private readonly UnitOfWork _unitOfWork; 
 
 		//делегат, который выбирает, добавить или редактировать работника
 		private readonly Action<Employee> _addOrEditAction;
@@ -20,7 +20,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		public AddEmployeeViewModel(Employee employee = null)
 		{
 			_daysParser = new DaysParser();
-			_employeesRepository = new Repository<Employee>();
+			_unitOfWork = UnitOfWork.GetInstance();
 
 			OkCommand = new Command(OnOkCommandExecute, OnOkCommandCanExecute);
 
@@ -137,7 +137,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		public Command OkCommand { get; private set; }
 		private bool OnOkCommandCanExecute()
 		{
-			return !(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Position) || Age < 15);
+			return Age > 15 && (_daysParser.GetDays(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) != 0);
 		}
 		private async void OnOkCommandExecute()
 		{
@@ -162,16 +162,16 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		{
 			Days days = _daysParser.GetDays(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
 			employee.WorkDays = _daysParser.ParseDaysToString(days);
-			_employeesRepository.Insert(employee);
-			_employeesRepository.SaveChanges();
+			_unitOfWork.Employees.Insert(employee);
+			_unitOfWork.SaveChanges();
 		}
 
 		private void EditEmployee(Employee employee)
 		{
 			Days days = _daysParser.GetDays(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
 			employee.WorkDays = _daysParser.ParseDaysToString(days);
-			_employeesRepository.Update(employee);
-			_employeesRepository.SaveChanges();
+			_unitOfWork.Employees.Update(employee);
+			_unitOfWork.SaveChanges();
 		}
 	}
 }

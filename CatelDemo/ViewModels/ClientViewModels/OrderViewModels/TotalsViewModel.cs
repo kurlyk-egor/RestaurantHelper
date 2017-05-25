@@ -5,35 +5,28 @@ using System.Threading.Tasks;
 using Catel.Collections;
 using Catel.Data;
 using Catel.MVVM;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 {
     public class TotalsViewModel : ViewModelBase
     {
-	    private readonly User _user;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly User _user;
 	    private readonly Reservation _reservation;
-	    private readonly ObservableCollection<Dish> _orderedDishes;
+	    private readonly FastObservableCollection<Dish> _orderedDishes;
 	    private readonly IViewModel _rootViewModel;
-	    private readonly IRepository<Table> _tableRepository;
-	    private readonly IRepository<Reservation> _reservationRepository;
-	    private readonly IRepository<OrderedDish> _orderedDishRepository;
-	    private readonly IRepository<Order> _orderRepository;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
-		public TotalsViewModel(User user, Reservation reservation, ObservableCollection<Dish> orderedDishes)
+		public TotalsViewModel(User user, Reservation reservation, FastObservableCollection<Dish> orderedDishes)
         {
 			_user = user;
 			_reservation = reservation;
 			_orderedDishes = orderedDishes;
 			_sumCalculator = new OrderedSumCalculator();
-			_tableRepository = new Repository<Table>();
-			_orderRepository = new Repository<Order>();
-			_orderedDishRepository = new Repository<OrderedDish>();
-			_reservationRepository = new Repository<Reservation>();
 
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
@@ -85,13 +78,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData LastTimeProperty = RegisterProperty("LastTime", typeof(string));
 
-		public ObservableCollection<Dish> OrderedDishes
+		public FastObservableCollection<Dish> OrderedDishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(OrderedDishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(OrderedDishesProperty); }
 			set { SetValue(OrderedDishesProperty, value); }
 		}
-		public static readonly PropertyData OrderedDishesProperty = RegisterProperty("OrderedDishes", typeof(ObservableCollection<Dish>), 
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData OrderedDishesProperty = RegisterProperty("OrderedDishes", typeof(FastObservableCollection<Dish>), 
+			new FastObservableCollection<Dish>());
 
 		public int TotalSum
 		{
@@ -140,7 +133,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			PhoneNumber = _user.Phone;
 
 			TableNumber = _reservation.TableId;
-			TableSeatsNumber = _tableRepository.GetItem(_reservation.TableId).SeatsNumber;
+			TableSeatsNumber = _unitOfWork.Tables.GetById(_reservation.TableId).SeatsNumber;
 
 			VisitDate = _reservation.Day.ToLongDateString();
 			FirstTime = _reservation.FirstTime.ToShortTimeString();
@@ -152,8 +145,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 		private void SaveReservation()
 		{
-			_reservationRepository.Insert(_reservation);
-			_reservationRepository.SaveChanges();
+			_unitOfWork.Reservations.Insert(_reservation);
+			_unitOfWork.SaveChanges();
 		}
 
 		private void SaveOrderWithDishes()
@@ -164,9 +157,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				ReservationId = _reservation.Id
 			};
 
-			_orderRepository.Insert(order);
-			// TODO: Id будет генерить БД, но нам нужен индекс только что созданного заказа
-			var orderId = _orderRepository.GetCollection().Max(o => o.Id);
+			_unitOfWork.Orders.Insert(order);
+			_unitOfWork.SaveChanges();
+			// получаем индекс только что созданного заказа, который сгенерировала БД
+			var orderId = _unitOfWork.Orders.GetAll().Max(o => o.Id);
 
 			foreach (var dish in _orderedDishes)
 			{
@@ -174,13 +168,11 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				{
 					OrderId = orderId,
 					DishId = dish.Id,
-					Quantity = dish.Quantity,
+					Quantity = dish.Quantity
 				};
-				_orderedDishRepository.Insert(orderedDish);
+				_unitOfWork.OrderedDishes.Insert(orderedDish);
 			}
-
-			_orderRepository.SaveChanges();
-			_orderedDishRepository.SaveChanges();
+			_unitOfWork.SaveChanges();
 		}
 	}
 }

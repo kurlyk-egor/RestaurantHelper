@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Catel.Collections;
 using Catel.Data;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
@@ -16,24 +16,24 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 	public class AmountExcessViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly AmountExcessAction _amountExcessAction;
 		public AmountExcessViewModel()
 		{
-			IRepository<Dish> dishesRepository = new Repository<Dish>();
 			Dishes.Clear();
-			((ICollection<Dish>)Dishes).AddRange(dishesRepository.GetCollection());
+			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 
 			_amountExcessAction = new AmountExcessAction();
-			ApplyAction = new Command(OnApplyActionExecute);
+			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
 		}
 
-		public ObservableCollection<Dish> Dishes
+		public FastObservableCollection<Dish> Dishes
 		{
-			get { return GetValue<ObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(ObservableCollection<Dish>),
-			new ObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>),
+			new FastObservableCollection<Dish>());
 
 		public Dish SelectedDish
 		{
@@ -66,9 +66,18 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 
 		public Command ApplyAction { get; private set; }
+		private bool OnApplyActionCanExecute()
+		{
+			return SelectedDish != null;
+		}
 		private void OnApplyActionExecute()
 		{
-			FillDiscountAction();
+			if (SelectedDish == null)
+			{
+				MessageBox.Show("Не выбрано блюдо!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+			FillAmounExcessAction();
 			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;
 			if (!actionsFilter.CanAddAction(_amountExcessAction, out message))
@@ -90,7 +99,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			await base.CloseAsync();
 		}
 
-		private void FillDiscountAction()
+		private void FillAmounExcessAction()
 		{
 			_amountExcessAction.DishId = SelectedDish.Id;
 			_amountExcessAction.ExcessSum = DiscountValue;

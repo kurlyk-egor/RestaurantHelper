@@ -5,27 +5,25 @@ using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {
-        private readonly IRepository<User> _userRepository;
-        private readonly IViewModel _parentViewModel;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly IViewModel _parentViewModel;
         private readonly IViewModel _previousViewModel;
 
-
-        public RegistrationViewModel(IViewModel parentViewModel, IViewModel previousViewModel, User user = null)
+	    public RegistrationViewModel(IViewModel parentViewModel, IViewModel previousViewModel, User user = null)
         {
             _parentViewModel = parentViewModel;
             _previousViewModel = previousViewModel;
-            _userRepository = new Repository<User>();
 
-            BackCommand = new Command(OnBackCommandExecute);
-            RegistrationCommand = new Command(OnRegistrationCommandExecute);
+		    BackCommand = new Command(OnBackCommandExecute);
+            RegistrationCommand = new Command(OnRegistrationCommandExecute, OnRegistrationCommandCanExecute);
 
             if (user == null)
             {
@@ -84,25 +82,17 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
 
         public Command RegistrationCommand { get; private set; }
-        private async void OnRegistrationCommandExecute()
+
+	    private bool OnRegistrationCommandCanExecute()
+	    {
+		    return Password != null && Password.Length > 1;
+	    }
+		private void OnRegistrationCommandExecute()
         {
-	        if (string.IsNullOrEmpty(Password))
-	        {
-		        MessageBox.Show("Вы не ввели пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-		        return;
-	        }
+            _unitOfWork.Users.Insert(User);
+            _unitOfWork.SaveChanges();
 
-            _userRepository.Insert(User);
-            _userRepository.SaveChanges();
-            
-            var resolver = this.GetDependencyResolver();
-            var visualizer = resolver.Resolve<IUIVisualizerService>();
-            var successRegistration = new SuccessRegistrationViewModel();
-            visualizer.Show(successRegistration);
-
-            Thread.Sleep(1500);
-            _parentViewModel.ChangePage(_previousViewModel);
-            await successRegistration.CloseViewModelAsync(true);
+			_parentViewModel.ChangePageWithDialog(new SuccessRegistrationViewModel(), 1000, _previousViewModel);
         }
 
         protected override async Task InitializeAsync()

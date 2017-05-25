@@ -1,22 +1,22 @@
 ﻿using System.Threading.Tasks;
+using System.Windows;
 using Catel.Data;
 using Catel.MVVM;
+using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
-using RestaurantHelper.Services.Interfaces;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
-        private readonly IViewModel _previousViewModel;
-        private readonly IRepository<User> _userRepository;
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly IViewModel _previousViewModel;
         public ProfileViewModel(IViewModel previousViewModel, User user)
         {
             _previousViewModel = previousViewModel;
             User = user;
-            _userRepository = new Repository<User>();
 
             SaveCommand = new Command(OnSaveCommandExecute, OnSaveCommandCanExecute);
             BackCommand = new Command(OnBackCommandExecute);
@@ -68,18 +68,15 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 
         public Command SaveCommand { get; private set; }
-        private bool OnSaveCommandCanExecute()
+
+	    private bool OnSaveCommandCanExecute()
+	    {
+		    return Password != null && Password.Length > 1;
+	    }
+		private void OnSaveCommandExecute()
         {
-            long outlong;
-            bool result = !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password)
-                          && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Phone)
-                          && long.TryParse(Phone, out outlong);
-            return result;
-        }
-        private void OnSaveCommandExecute()
-        {
-            _userRepository.Update(User);
-            _userRepository.SaveChanges();
+            _unitOfWork.Users.Update(User);
+            _unitOfWork.SaveChanges();
         }
 
         public Command BackCommand { get; private set; }

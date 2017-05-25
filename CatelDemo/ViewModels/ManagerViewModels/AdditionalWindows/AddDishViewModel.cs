@@ -25,8 +25,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 				_addOrEditAction = _menuChanger.AddNewDish;
 				dish = new Dish();
 			}
+			else
+			{
+				_addOrEditAction = _menuChanger.EditDish;
+			}
 			Dish = dish;
-			_addOrEditAction = _menuChanger.EditDish;
 		}
 
 		[Model]
@@ -76,7 +79,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 
 		private bool OnOkCommandCanExecute()
 		{
-			return !(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(PicturePath) || Price < 0);
+			return !(string.IsNullOrEmpty(PicturePath) || Price < 0);
 		}
 		private async void OnOkCommandExecute()
 		{

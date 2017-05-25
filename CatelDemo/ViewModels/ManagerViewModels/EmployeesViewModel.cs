@@ -6,14 +6,15 @@ using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels
 {
 	public class EmployeesViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		public EmployeesViewModel()
 		{
 			RefreshEmployeesCollection();
@@ -23,13 +24,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			DeleteEmployeeCommand = new Command(OnDeleteEmployeeCommandExecute, OnAnyEmployeeCommandCanExecute);
 		}
 
-		public ObservableCollection<Employee> Employees
+		public FastObservableCollection<Employee> Employees
 		{
-			get { return GetValue<ObservableCollection<Employee>>(EmployeesProperty); }
+			get { return GetValue<FastObservableCollection<Employee>>(EmployeesProperty); }
 			set { SetValue(EmployeesProperty, value); }
 		}
-		public static readonly PropertyData EmployeesProperty = RegisterProperty("Employees", typeof(ObservableCollection<Employee>), 
-			new ObservableCollection<Employee>());
+		public static readonly PropertyData EmployeesProperty = RegisterProperty("Employees", typeof(FastObservableCollection<Employee>), 
+			new FastObservableCollection<Employee>());
 
 
 		public Employee SelectedEmployee
@@ -61,9 +62,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		public Command DeleteEmployeeCommand { get; private set; }
 		private void OnDeleteEmployeeCommandExecute()
 		{
-			var repo = new Repository<Employee>();
-			repo.Delete(SelectedEmployee);
-			repo.SaveChanges();
+			_unitOfWork.Employees.Delete(SelectedEmployee.Id);
+			_unitOfWork.SaveChanges();
 			RefreshEmployeesCollection();
 		}
 
@@ -84,7 +84,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		private void RefreshEmployeesCollection()
 		{
 			Employees.Clear();
-			((ICollection<Employee>)Employees).AddRange(new Repository<Employee>().GetCollection());
+			Employees.AddItems(_unitOfWork.Employees.GetAll());
 		}
 	}
 }

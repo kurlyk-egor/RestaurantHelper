@@ -26,7 +26,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             _previousViewModel = previousViewModel;
 
             BackCommand = new Command(OnBackCommandExecute);
-			TryEnterCommand = new Command(OnTryEnterCommandExecute);
+			TryEnterCommand = new Command(OnTryEnterCommandExecute, OnTryEnterCommandCanExecute);
         }
 
         public string Login
@@ -51,7 +51,12 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
         }
 
         public Command TryEnterCommand { get; private set; }
-        private void OnTryEnterCommandExecute()
+
+	    private bool OnTryEnterCommandCanExecute()
+	    {
+		    return Password != null && Password.Length > 1;
+	    }
+		private void OnTryEnterCommandExecute()
         {
             _authorizationChecker = new AuthorizationChecker(new User {Login = Login, Password = Password});
 

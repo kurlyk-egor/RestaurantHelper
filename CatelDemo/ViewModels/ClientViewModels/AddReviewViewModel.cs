@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
 using Catel.Data;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Models.Reviews;
-using RestaurantHelper.Services.Database;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
@@ -16,6 +16,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 	public class AddReviewViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly Action<ClientReview> _addOrEdit;
 		public AddReviewViewModel(ClientReview review = null, User user = null)
 		{
@@ -73,16 +74,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 		private void AddReview(ClientReview clientReview)
 		{
-			var r = new Repository<ClientReview>();
-			r.Insert(clientReview);
-			r.SaveChanges();
+			_unitOfWork.ClientReviews.Insert(clientReview);
+			_unitOfWork.SaveChanges();
 		}
 
 		private void EditReview(ClientReview clientReview)
 		{
-			var r = new Repository<ClientReview>();
-			r.Update(clientReview);
-			r.SaveChanges();
+			_unitOfWork.ClientReviews.Update(clientReview);
+			_unitOfWork.SaveChanges();
 		}
 	}
 }

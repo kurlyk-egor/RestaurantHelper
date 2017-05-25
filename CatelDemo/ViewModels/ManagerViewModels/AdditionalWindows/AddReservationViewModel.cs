@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Catel.Data;
 using Catel.MVVM;
+using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Database;
 using RestaurantHelper.Services.Other;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 {
 	public class AddReservationViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly Reservation _reservation;
 
 		public AddReservationViewModel(Table table)
@@ -41,9 +42,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		private async void OnOkCommandExecute()
 		{
 			// добавляем бронь
-			var reservationRepository = new Repository<Reservation>();
-			reservationRepository.Insert(_reservation);
-			reservationRepository.SaveChanges();
+			_unitOfWork.Reservations.Insert(_reservation);
+			_unitOfWork.SaveChanges();
 			
 			await CloseViewModelAsync(true);
 		}
