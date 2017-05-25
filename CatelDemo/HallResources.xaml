@@ -14,6 +14,7 @@
     <converters:ActionToDescriptionConverter x:Key="ActionToDescriptionConverter" />
     <converters:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
     <converters:UserIdToLoginConverter x:Key="UserIdToLoginConverter" />
+    <converters:ActionToTypeNameConverter x:Key="ActionToTypeNameConverter" />
 
     <Style x:Key="Style" TargetType="ListBox">
         <Style.Setters>

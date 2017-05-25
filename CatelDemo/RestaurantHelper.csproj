@@ -46,6 +46,14 @@
       <HintPath>..\packages\Catel.MVVM.4.5.4\lib\net45\Catel.MVVM.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +63,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -82,20 +91,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\RestaurantDbContext.cs" />
+    <Compile Include="DAL\Repositories\AmountExcessActionRepository.cs" />
+    <Compile Include="DAL\Repositories\ClientReviewRepository.cs" />
+    <Compile Include="DAL\Repositories\DiscountActionRepository.cs" />
+    <Compile Include="DAL\Repositories\DishRepository.cs" />
+    <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
+    <Compile Include="DAL\Repositories\ManagerAnswerRepository.cs" />
+    <Compile Include="DAL\Repositories\OrderedDishRepository.cs" />
+    <Compile Include="DAL\Repositories\OrderRepository.cs" />
+    <Compile Include="DAL\Repositories\ReservationRepository.cs" />
+    <Compile Include="DAL\Repositories\TableRepository.cs" />
+    <Compile Include="DAL\Repositories\UserRepository.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Models\Actions\Action.cs" />
     <Compile Include="Models\Actions\AmountExcessAction.cs" />
     <Compile Include="Models\Actions\DiscountAction.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Additional\MyModelBase.cs" />
     <Compile Include="Models\Reviews\ClientReview.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedDish.cs" />
-    <Compile Include="Models\OrderWithReservationInfo.cs" />
+    <Compile Include="Models\Additional\OrderWithReservationInfo.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Reviews\ManagerAnswer.cs" />
     <Compile Include="Models\Table.cs" />
-    <Compile Include="Services\Database\Repository.cs" />
-    <Compile Include="Services\Interfaces\IHaveId.cs" />
+    <Compile Include="Services\Converters\ActionToTypeNameConverter.cs" />
     <Compile Include="Services\Other\ActionsHelper.cs" />
     <Compile Include="Services\Other\AuthorizationChecker.cs" />
     <Compile Include="Services\Converters\ActionToDescriptionConverter.cs" />
@@ -116,6 +138,8 @@
     <Compile Include="Services\Converters\TableNumberToPicturePathConverter.cs" />
     <Compile Include="Services\Other\ManagerMenuChanger.cs" />
     <Compile Include="Services\Other\OrderedSumCalculator.cs" />
+    <Compile Include="Services\Other\Filler.cs" />
+    <Compile Include="Services\Other\ReviewsWithAnswersBinder.cs" />
     <Compile Include="Services\Other\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
     <Compile Include="Services\Other\AdminReservationsCreator.cs" />
@@ -272,7 +296,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Services\Interfaces\IRepository.cs" />
+    <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ClientViews\MyOrdersView.xaml.cs">
@@ -375,49 +399,18 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\registration.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\back.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\regback.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\name.png" />
-    <Resource Include="Resources\phone.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\success.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\clientmain.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\order.jpg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\user.xml">
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="Files\table.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\hallback.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\reservation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Tables\table1.jpg" />
@@ -433,23 +426,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\order.xml">
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\ordereddish.xml">
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\1750_2500.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\discountaction.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\amountexcessaction.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Dishes\1.jpg" />
@@ -466,12 +443,7 @@
     <Resource Include="Resources\Dishes\8.jpg" />
     <Resource Include="Resources\Dishes\9.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\clientreview.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Files\manageranswer.xml" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
