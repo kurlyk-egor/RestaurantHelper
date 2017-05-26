@@ -3,7 +3,7 @@ using Catel.Data;
 using Catel.MVVM;
 using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 {

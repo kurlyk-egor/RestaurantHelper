@@ -43,7 +43,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void OnEmployeesCommandExecute()
 		{
-			CurrentManagerPage = new EmployeesViewModel();
+			CurrentManagerPage = new ManagerEmployeesViewModel();
 		}
 
 		private void OnHallCommandExecute()
@@ -58,7 +58,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void OnReportsCommandExecute()
 		{
-			CurrentManagerPage = new ReportsViewModel();
+			CurrentManagerPage = new ManagerReportsViewModel();
 		}
 
 		private void OnActionsCommandExecute()
@@ -68,7 +68,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 
 		private void OnReviewsCommandExecute()
 		{
-			CurrentManagerPage = new ReviewsViewModel();
+			CurrentManagerPage = new ManagerReviewsViewModel();
 		}
 
 		private async void OnExitCommandExecute()

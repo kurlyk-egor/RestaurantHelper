@@ -48,5 +48,16 @@ namespace RestaurantHelper.Models
 			set { SetValue(QuantityProperty, value); }
 		}
 		public static readonly PropertyData QuantityProperty = RegisterProperty("Quantity", typeof(int));
+
+		/// <summary>
+			/// Реальная стоимость блюда, с учетом скидок
+			/// </summary>
+		[Required]
+		public int OrderedPrice
+		{
+			get { return GetValue<int>(OrderedPriceProperty); }
+			set { SetValue(OrderedPriceProperty, value); }
+		}
+		public static readonly PropertyData OrderedPriceProperty = RegisterProperty("OrderedPrice", typeof(int));
 	}
 }

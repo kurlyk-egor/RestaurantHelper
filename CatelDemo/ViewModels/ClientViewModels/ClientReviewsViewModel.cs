@@ -8,6 +8,7 @@ using Catel.Services;
 using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Reviews;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
@@ -21,10 +22,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		private Action _refreshReviewsAction;
 		private readonly IViewModel _parentViewModel;
 		private readonly User _user;
+		private readonly ReviewsWithAnswersBinder _binder;
 
 		public ClientReviewsViewModel(IViewModel parentViewModel, User user)
 		{
 			_parentViewModel = parentViewModel;
+			_binder = new ReviewsWithAnswersBinder();
 			_user = user;
 
 			BackCommand = new Command(OnBackCommandExecute);
@@ -135,7 +138,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		public Command DeleteReviewCommand { get; private set; }
 		private void OnDeleteReviewCommandExecute()
 		{
-			// TODO: реализовать каскадное удаление 
 			_unitOfWork.ClientReviews.Delete(SelectedClientReview.Id);
 			_unitOfWork.SaveChanges();
 			_refreshReviewsAction();
@@ -143,23 +145,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 		private bool OnAnyReviewCommandCanExecute()
 		{
-			if (SelectedClientReview == null)
-			{
-				ToolTipText = "Не выбран отзыв";
-				return false;
-			}
-			if (!IsMyReviews)
-			{
-				ToolTipText = "Удалять/редактировать отзывы можно только во вкладке 'МОИ ОТЗЫВЫ'";
-				return false;
-			}
-			/*if (SelectedClientReview.AnswerId != null)
-			{
-				ToolTipText = "Администратор уже ответил на этот отзыв, его нельзя изменить";
-				return false;
-			}*/
-			ToolTipText = "Изменить/удалить выбранный отзыв";
-			return true;
+			string message;
+			bool res = _binder.CanPerformCommands(SelectedClientReview, IsMyReviews, out message);
+			ToolTipText = message;
+			return res;
 		}
 
 		public Command BackCommand { get; private set; }
@@ -177,20 +166,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 		private void RefreshAdminAnswer()
 		{
-			if (SelectedClientReview == null)
-			{
-				AdminAnswer = "Ничего не выбрано";
-				return;
-			}
-			/*if (SelectedClientReview.AnswerId == null)
-			{
-				AdminAnswer = "Администратор еще не ответил на этот отзыв";
-				return;
-			}
-
-			var answer = _unitOfWork.ManagerAnswers.GetById(SelectedClientReview.AnswerId.Value);
-
-			AdminAnswer = (answer != null) ? answer.Text : "Нет ответа";*/
+			AdminAnswer = _binder.GetClientMessage(SelectedClientReview);
 		}
 	}
 }

@@ -32,6 +32,7 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
                 AcceptsReturn="True"
+                Foreground="{DynamicResource SecondaryAccentBrush}"
                 HorizontalScrollBarVisibility="Disabled"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto">
@@ -51,7 +52,7 @@
         <Button
             x:Name="button"
             Width="106"
-            Margin="221,187,0,0"
+            Margin="234,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
@@ -61,11 +62,11 @@
         <Button
             x:Name="button1"
             Width="94"
-            Margin="24,187,0,0"
+            Margin="10,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Отмена"
-            IsCancel="True" />
+            Command="{Binding CancelCommand}"
+            Content="Отмена" />
     </Grid>
 
 </catel:DataWindow>

@@ -18,32 +18,45 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStyle="None">
 
-    <Grid
-        Height="350"
-        MinWidth="300"
-        MinHeight="300">
+    <Grid Height="428" MinWidth="350">
+
+        <Button
+            x:Name="Collapsed"
+            Width="330"
+            Margin="10,386,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"
+            Command="{Binding OkCommand}"
+            Content="Сохранить"
+            IsDefault="True"
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
+
         <Button
             x:Name="button"
-            Width="101"
-            Margin="189,308,0,0"
+            Width="128"
+            Margin="212,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
             Content="Сохранить"
             IsDefault="True"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
         <Button
             x:Name="button1"
-            Width="88"
-            Margin="10,308,0,0"
+            Width="111"
+            Margin="10,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Отмена"
-            IsCancel="True" />
+            IsCancel="True"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
         <GroupBox
             x:Name="groupBox"
-            Width="280"
-            Height="285"
+            Width="330"
+            Height="359"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -51,23 +64,23 @@
             <Grid>
                 <TextBlock
                     x:Name="textBlock"
-                    Margin="10,15,179,0"
+                    Margin="10,10,224,0"
                     VerticalAlignment="Top"
                     Text="Название"
                     TextWrapping="Wrap" />
                 <TextBlock
                     x:Name="textBlock2"
                     Height="17"
-                    Margin="10,131,111,0"
+                    Margin="208,102,0,0"
                     VerticalAlignment="Top"
-                    Text="Выбор изображения"
-                    TextWrapping="Wrap" />
+                    FontSize="10"
+                    Text="Выбор изображения" />
 
                 <TextBox
                     x:Name="ValidationRequiredField2"
-                    Width="152"
+                    Width="197"
                     Height="28"
-                    Margin="88,8,0,0"
+                    Margin="105,4,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Название блюда"
@@ -85,7 +98,7 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBlock
-                    Margin="10,70,179,0"
+                    Margin="36,78,198,0"
                     VerticalAlignment="Top"
                     Text="Цена"
                     TextWrapping="Wrap" />
@@ -93,12 +106,13 @@
                     x:Name="ValidationRequiredField1"
                     Width="73"
                     Height="28"
-                    Margin="88,59,0,0"
+                    Margin="105,72,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Цена"
                     materialDesign:HintAssist.HintOpacity="0.5"
                     Foreground="{DynamicResource SecondaryAccentBrush}"
+                    MaxLength="6"
                     TextWrapping="Wrap">
                     <TextBox.Text>
                         <Binding Path="Price" UpdateSourceTrigger="PropertyChanged">
@@ -109,13 +123,20 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
+                <TextBlock
+                    x:Name="textBlock2_Copy"
+                    Height="17"
+                    Margin="10,128,111,0"
+                    VerticalAlignment="Top"
+                    Text="Информация"
+                    TextWrapping="Wrap" />
             </Grid>
         </GroupBox>
         <Button
             x:Name="button2"
             Width="70"
-            Height="17"
-            Margin="59,221,0,0"
+            Height="29"
+            Margin="243,177,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding SelectPictureCommand}"
@@ -123,7 +144,7 @@
             FontSize="8" />
         <TextBlock
             x:Name="textBlock1"
-            Margin="210,166,0,0"
+            Margin="253,219,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="10"
@@ -133,7 +154,7 @@
             x:Name="image"
             Width="100"
             Height="100"
-            Margin="181,183,0,0"
+            Margin="228,236,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Source="{Binding PicturePath}"
@@ -141,11 +162,44 @@
         <Rectangle
             Width="100"
             Height="100"
-            Margin="181,183,0,0"
+            Margin="228,236,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Fill="Transparent"
             Stroke="Black" />
+        <TextBox
+            x:Name="ValidationRequiredField3"
+            Width="191"
+            Height="133"
+            Margin="22,203,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Top"
+            materialDesign:HintAssist.Hint="Описание блюда"
+            materialDesign:HintAssist.HintOpacity="0.6"
+            materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+            AcceptsReturn="True"
+            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+            BorderThickness="1"
+            FontSize="13"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            HorizontalScrollBarVisibility="Disabled"
+            MaxLength="150"
+            MinLines="5"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto">
+            <TextBox.Text>
+                <Binding Path="Info" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validationRules:StringLengthMinMaxValidationRule
+                            Max="150"
+                            Min="15"
+                            ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
     </Grid>
 

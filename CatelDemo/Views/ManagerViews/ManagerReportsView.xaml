@@ -1,0 +1,9 @@
+﻿<catel:UserControl
+    x:Class="RestaurantHelper.Views.ManagerViews.ManagerReportsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com">
+
+    <Grid Name="Отчеты" />
+
+</catel:UserControl>

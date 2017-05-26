@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using RestaurantHelper.Models;
 
 namespace RestaurantHelper.DAL.Repositories
@@ -38,7 +40,14 @@ namespace RestaurantHelper.DAL.Repositories
 
 		public void Update(User item)
 		{
-			_db.Entry(item).State = EntityState.Modified;
+			try
+			{
+				_db.Entry(item).State = EntityState.Modified;
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.ToString());
+			}
 		}
 
 		public bool IsExistLogin(string login)

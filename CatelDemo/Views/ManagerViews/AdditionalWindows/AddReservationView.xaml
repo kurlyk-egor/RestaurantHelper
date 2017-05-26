@@ -20,7 +20,7 @@
         <Button
             x:Name="button"
             Width="101"
-            Margin="155,158,0,0"
+            Margin="189,158,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
@@ -29,7 +29,7 @@
         <Button
             x:Name="button1"
             Width="88"
-            Margin="39,158,0,0"
+            Margin="10,158,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Отмена"
@@ -63,6 +63,7 @@
                     Margin="120,8,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    Foreground="{DynamicResource SecondaryAccentBrush}"
                     IsReadOnly="True"
                     Text="{Binding TimeString}"
                     TextWrapping="Wrap" />
@@ -73,6 +74,7 @@
                     Margin="119,43,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    Foreground="{DynamicResource SecondaryAccentBrush}"
                     IsReadOnly="True"
                     Text="{Binding Path=TableNumber}"
                     TextWrapping="Wrap" />

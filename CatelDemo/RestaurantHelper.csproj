@@ -118,8 +118,8 @@
     <Compile Include="Models\Reviews\ManagerAnswer.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Services\Converters\ActionToTypeNameConverter.cs" />
-    <Compile Include="Services\Other\ActionsHelper.cs" />
-    <Compile Include="Services\Other\AuthorizationChecker.cs" />
+    <Compile Include="Services\Logic\ActionsHelper.cs" />
+    <Compile Include="Services\Logic\AuthorizationChecker.cs" />
     <Compile Include="Services\Converters\ActionToDescriptionConverter.cs" />
     <Compile Include="Services\Converters\ActionTypeToDescriptionConverter.cs" />
     <Compile Include="Services\Converters\DateToDateStringConverter.cs" />
@@ -129,20 +129,20 @@
     <Compile Include="Services\Converters\TableTypeToHeightConverter.cs" />
     <Compile Include="Services\Converters\TableAvailabilityToToolTipMessageConverter.cs" />
     <Compile Include="Services\Converters\TableTypeToWidthConverter.cs" />
-    <Compile Include="Services\Other\ClientsForTableSelector.cs" />
+    <Compile Include="Services\Logic\ClientsForTableSelector.cs" />
     <Compile Include="Services\Converters\UserIdToLoginConverter.cs" />
-    <Compile Include="Services\Other\DaysParser.cs" />
-    <Compile Include="Services\Other\HallPickersHelpers\DateMinMaxHelper.cs" />
-    <Compile Include="Services\Other\HallPickersHelpers\FirstTimePickerHelper.cs" />
-    <Compile Include="Services\Other\HallPickersHelpers\LastTimePickerHelper.cs" />
+    <Compile Include="Services\Logic\DaysParser.cs" />
+    <Compile Include="Services\Logic\HallPickersHelpers\DateMinMaxHelper.cs" />
+    <Compile Include="Services\Logic\HallPickersHelpers\FirstTimePickerHelper.cs" />
+    <Compile Include="Services\Logic\HallPickersHelpers\LastTimePickerHelper.cs" />
     <Compile Include="Services\Converters\TableNumberToPicturePathConverter.cs" />
-    <Compile Include="Services\Other\ManagerMenuChanger.cs" />
-    <Compile Include="Services\Other\OrderedSumCalculator.cs" />
-    <Compile Include="Services\Other\Filler.cs" />
-    <Compile Include="Services\Other\ReviewsWithAnswersBinder.cs" />
-    <Compile Include="Services\Other\TableAvailabilityRejuvenator.cs" />
-    <Compile Include="Services\Other\TablesAvailabilityChecker.cs" />
-    <Compile Include="Services\Other\AdminReservationsCreator.cs" />
+    <Compile Include="Services\Logic\ManagerMenuChanger.cs" />
+    <Compile Include="Services\Logic\OrderedSumCalculator.cs" />
+    <Compile Include="Services\Logic\Filler.cs" />
+    <Compile Include="Services\Logic\ReviewsWithAnswersBinder.cs" />
+    <Compile Include="Services\Logic\TableAvailabilityRejuvenator.cs" />
+    <Compile Include="Services\Logic\TablesAvailabilityChecker.cs" />
+    <Compile Include="Services\Logic\AdminReservationsCreator.cs" />
     <Compile Include="Services\ValidationRules\ExistingLoginValidationRule.cs" />
     <Compile Include="Services\ValidationRules\StringLengthMinMaxValidationRule.cs" />
     <Compile Include="Services\ValidationRules\NotEmptyValidationRule.cs" />
@@ -150,15 +150,15 @@
     <Compile Include="ViewModels\AuthorizationViewModels\EnterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModels\StartWindowViewModel.cs" />
-    <Compile Include="ViewModels\AuthorizationViewModels\SuccessRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\ShortMessageViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\AddReviewViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ClientMainViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ClientReviewsViewModel.cs" />
-    <Compile Include="ViewModels\ClientViewModels\MyOrdersViewModel.cs" />
-    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\HallViewModel.cs" />
-    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\TotalsViewModel.cs" />
-    <Compile Include="ViewModels\ClientViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientOrdersViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\ClientHallViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\ClientMenuViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\OrderViewModels\ClientTotalsViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientProfileViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\ActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
@@ -166,20 +166,20 @@
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddDishViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddReservationViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerEmployeesViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerHallViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerMainViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\ManagerMenuViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\ReviewsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerReportsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerReviewsViewModel.cs" />
     <Compile Include="Views\AuthorizationViews\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AuthorizationViews\StartWindowView.xaml.cs">
       <DependentUpon>StartWindowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AuthorizationViews\SuccessRegistrationView.xaml.cs">
-      <DependentUpon>SuccessRegistrationView.xaml</DependentUpon>
+    <Compile Include="Views\ShortMessageView.xaml.cs">
+      <DependentUpon>ShortMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClientViews\AddReviewView.xaml.cs">
       <DependentUpon>AddReviewView.xaml</DependentUpon>
@@ -211,8 +211,8 @@
     <Compile Include="Views\ManagerViews\AdditionalWindows\AddReservationView.xaml.cs">
       <DependentUpon>AddReservationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\EmployeesView.xaml.cs">
-      <DependentUpon>EmployeesView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ManagerEmployeesView.xaml.cs">
+      <DependentUpon>ManagerEmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\ManagerHallView.xaml.cs">
       <DependentUpon>ManagerHallView.xaml</DependentUpon>
@@ -223,11 +223,11 @@
     <Compile Include="Views\ManagerViews\ManagerMenuView.xaml.cs">
       <DependentUpon>ManagerMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\ReportsView.xaml.cs">
-      <DependentUpon>ReportsView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ManagerReportsView.xaml.cs">
+      <DependentUpon>ManagerReportsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\ReviewsView.xaml.cs">
-      <DependentUpon>ReviewsView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\ManagerReviewsView.xaml.cs">
+      <DependentUpon>ManagerReviewsView.xaml</DependentUpon>
     </Compile>
     <Page Include="HallResources.xaml">
       <SubType>Designer</SubType>
@@ -252,7 +252,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AuthorizationViews\SuccessRegistrationView.xaml">
+    <Page Include="Views\ShortMessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -268,7 +268,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientViews\MyOrdersView.xaml">
+    <Page Include="Views\ClientViews\ClientOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,7 +284,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientViews\ProfileView.xaml">
+    <Page Include="Views\ClientViews\ClientProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,8 +299,8 @@
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\ClientViews\MyOrdersView.xaml.cs">
-      <DependentUpon>MyOrdersView.xaml</DependentUpon>
+    <Compile Include="Views\ClientViews\ClientOrdersView.xaml.cs">
+      <DependentUpon>ClientOrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClientViews\OrderViews\HallView.xaml.cs">
       <DependentUpon>HallView.xaml</DependentUpon>
@@ -311,8 +311,8 @@
     <Compile Include="Views\ClientViews\OrderViews\TotalsView.xaml.cs">
       <DependentUpon>TotalsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientViews\ProfileView.xaml.cs">
-      <DependentUpon>ProfileView.xaml</DependentUpon>
+    <Compile Include="Views\ClientViews\ClientProfileView.xaml.cs">
+      <DependentUpon>ClientProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -346,7 +346,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerViews\EmployeesView.xaml">
+    <Page Include="Views\ManagerViews\ManagerEmployeesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -362,11 +362,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManagerViews\ReportsView.xaml">
+    <Page Include="Views\ManagerViews\ManagerReportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerViews\ReviewsView.xaml">
+    <Page Include="Views\ManagerViews\ManagerReviewsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

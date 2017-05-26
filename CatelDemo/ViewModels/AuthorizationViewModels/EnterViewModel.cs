@@ -7,7 +7,7 @@ using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 using RestaurantHelper.ViewModels.ClientViewModels;
 using RestaurantHelper.ViewModels.ManagerViewModels;
 using Xceed.Wpf.Toolkit;

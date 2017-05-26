@@ -7,21 +7,21 @@
     xmlns:validationRules="clr-namespace:RestaurantHelper.Services.ValidationRules">
 
     <Grid
-        MinWidth="400"
+        MinWidth="450"
         MinHeight="420"
         Margin="15"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
         <GroupBox
             x:Name="groupBox"
-            Margin="15,15,15,50"
+            Margin="15,15,15,27"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Header="Параметры акции">
             <Grid>
                 <TextBlock
                     x:Name="textBlock"
-                    Margin="30,10,0,0"
+                    Margin="25,10,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Text="Бесплатное блюдо"
@@ -29,7 +29,7 @@
                 <ComboBox
                     x:Name="comboBox"
                     Width="120"
-                    Margin="20,40,10,10"
+                    Margin="20,31,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     ItemsSource="{Binding Dishes}"
@@ -54,9 +54,9 @@
                 </TextBlock>
                 <Slider
                     x:Name="Slider"
-                    Width="300"
+                    Width="317"
                     Height="30"
-                    Margin="80,-37,0,0"
+                    Margin="75,102,0,194"
                     HorizontalAlignment="Left"
                     AutoToolTipPlacement="TopLeft"
                     IsMoveToPointEnabled="True"
@@ -67,7 +67,7 @@
                     Value="{Binding DiscountValue}" />
 
                 <Button
-                    Margin="15,0,15,10"
+                    Margin="20,0,5,10"
                     VerticalAlignment="Bottom"
                     Command="{Binding ApplyAction}"
                     Content="Применить акцию"
@@ -75,9 +75,9 @@
 
                 <TextBox
                     x:Name="ValidationRequiredField2"
-                    Width="170"
+                    Width="231"
                     Height="40"
-                    Margin="0,10,15,0"
+                    Margin="0,19,10,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.FloatingScale="0.8"
@@ -108,9 +108,9 @@
 
                 <TextBox
                     x:Name="ValidationRequiredField1"
-                    Width="360"
-                    Height="60"
-                    Margin="25,170,20,0"
+                    Width="372"
+                    Height="81"
+                    Margin="20,170,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Top"
@@ -133,10 +133,11 @@
                 </TextBox>
                 <Label
                     x:Name="label"
-                    Margin="195,90,0,0"
+                    Margin="203,71,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Content="{Binding ElementName=Slider, Path=Value}"
+                    FontSize="16"
                     Foreground="{DynamicResource PrimaryHueMidBrush}" />
             </Grid>
         </GroupBox>

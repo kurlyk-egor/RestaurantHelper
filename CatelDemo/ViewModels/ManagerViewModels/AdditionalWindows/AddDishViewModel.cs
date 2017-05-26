@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Catel.Data;
 using Catel.MVVM;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 {
@@ -17,20 +17,41 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		public AddDishViewModel(Dish dish = null)
 		{
 			_menuChanger = new ManagerMenuChanger();
+
 			OkCommand = new Command(OnOkCommandExecute, OnOkCommandCanExecute);
 			SelectPictureCommand = new Command(OnSelectPictureCommandExecute);
 
 			if (dish == null)
 			{
+				OneButtonMode = false;
+				TwoButtonMode = true;
 				_addOrEditAction = _menuChanger.AddNewDish;
 				dish = new Dish();
 			}
 			else
 			{
+				OneButtonMode = true;
+				TwoButtonMode = false;
 				_addOrEditAction = _menuChanger.EditDish;
 			}
 			Dish = dish;
 		}
+
+
+		public bool OneButtonMode
+		{
+			get { return GetValue<bool>(OneButtonModeProperty); }
+			set { SetValue(OneButtonModeProperty, value); }
+		}
+
+		public static readonly PropertyData OneButtonModeProperty = RegisterProperty("OneButtonMode", typeof(bool));
+		public bool TwoButtonMode
+		{
+			get { return GetValue<bool>(TwoButtonModeProperty); }
+			set { SetValue(TwoButtonModeProperty, value); }
+		}
+		public static readonly PropertyData TwoButtonModeProperty = RegisterProperty("TwoButtonMode", typeof(bool));
+
 
 		[Model]
 		public Dish Dish
@@ -58,6 +79,14 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		}
 		public static readonly PropertyData PriceProperty = RegisterProperty("Price", typeof(int));
 
+		[ViewModelToModel("Dish")]
+		public string Info
+		{
+			get { return GetValue<string>(InfoProperty); }
+			set { SetValue(InfoProperty, value); }
+		}
+		public static readonly PropertyData InfoProperty = RegisterProperty("Info", typeof(string));
+
 
 		[ViewModelToModel("Dish")]
 		public string PicturePath
@@ -68,15 +97,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		public static readonly PropertyData PicturePathProperty = RegisterProperty("PicturePath", typeof(string));
 
 
-
 		public Command OkCommand { get; private set; }
-		public Command SelectPictureCommand { get; private set; }
-
-		private void OnSelectPictureCommandExecute()
-		{
-			PicturePath = _menuChanger.GetPicturePath();
-		}
-
 		private bool OnOkCommandCanExecute()
 		{
 			return !(string.IsNullOrEmpty(PicturePath) || Price < 0);
@@ -87,6 +108,14 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 			_addOrEditAction(Dish);
 			await CloseViewModelAsync(true);
 		}
+
+		public Command SelectPictureCommand { get; private set; }
+		private void OnSelectPictureCommandExecute()
+		{
+			PicturePath = _menuChanger.GetPicturePath();
+		}
+
+
 		protected override async Task InitializeAsync()
 		{
 			await base.InitializeAsync();

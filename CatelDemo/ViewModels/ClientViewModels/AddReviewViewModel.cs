@@ -34,9 +34,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			}
 			ClientReview = review;
 
+			CancelCommand = new Command(OnCancelCommandExecute);
 			OkCommand = new Command(OnOkCommandExecute);
 		}
-
 
 		[Model]
 		public ClientReview ClientReview
@@ -61,6 +61,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
+		}
+
+
+		public Command CancelCommand { get; private set; }
+		private async void OnCancelCommandExecute()
+		{
+			await CloseViewModelAsync(false);
 		}
 
 		public Command OkCommand { get; private set; }

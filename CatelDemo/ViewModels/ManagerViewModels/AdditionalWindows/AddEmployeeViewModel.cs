@@ -2,7 +2,7 @@
 using Catel.Data;
 using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 {
@@ -11,8 +11,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 
 	public class AddEmployeeViewModel : ViewModelBase
 	{
+		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly DaysParser _daysParser;
-		private readonly UnitOfWork _unitOfWork; 
 
 		//делегат, который выбирает, добавить или редактировать работника
 		private readonly Action<Employee> _addOrEditAction;
@@ -20,17 +20,20 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 		public AddEmployeeViewModel(Employee employee = null)
 		{
 			_daysParser = new DaysParser();
-			_unitOfWork = UnitOfWork.GetInstance();
 
 			OkCommand = new Command(OnOkCommandExecute, OnOkCommandCanExecute);
 
 			if (employee == null)
 			{
+				OneButtonMode = false;
+				TwoButtonMode = true;
 				_addOrEditAction = AddEmployee;
 				employee = new Employee();
 			}
 			else
 			{
+				OneButtonMode = true;
+				TwoButtonMode = false;
 				_addOrEditAction = EditEmployee;
 				SetDaysProperties(employee);
 			}
@@ -89,6 +92,20 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 
 		#endregion
 
+		public bool OneButtonMode
+		{
+			get { return GetValue<bool>(OneButtonModeProperty); }
+			set { SetValue(OneButtonModeProperty, value); }
+		}
+
+		public static readonly PropertyData OneButtonModeProperty = RegisterProperty("OneButtonMode", typeof(bool));
+		public bool TwoButtonMode
+		{
+			get { return GetValue<bool>(TwoButtonModeProperty); }
+			set { SetValue(TwoButtonModeProperty, value); }
+		}
+		public static readonly PropertyData TwoButtonModeProperty = RegisterProperty("TwoButtonMode", typeof(bool));
+
 
 		[Model]
 		public Employee Employee
@@ -114,7 +131,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows
 			set { SetValue(AgeProperty, value); }
 		}
 		public static readonly PropertyData AgeProperty = RegisterProperty("Age", typeof(int));
-
+		
 		[ViewModelToModel("Employee")]
 		public string Position
 		{

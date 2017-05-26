@@ -7,7 +7,7 @@ using RestaurantHelper.DAL;
 using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 {

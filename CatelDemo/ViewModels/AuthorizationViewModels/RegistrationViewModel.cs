@@ -92,7 +92,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             _unitOfWork.Users.Insert(User);
             _unitOfWork.SaveChanges();
 
-			_parentViewModel.ChangePageWithDialog(new SuccessRegistrationViewModel(), 1000, _previousViewModel);
+			_parentViewModel.ChangePageWithDialog(new ShortMessageViewModel("Успешная регистрация!"), 1000, _previousViewModel);
         }
 
         protected override async Task InitializeAsync()

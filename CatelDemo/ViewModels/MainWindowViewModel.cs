@@ -30,7 +30,7 @@ namespace RestaurantHelper.ViewModels
         {
 	        
 			// TODO: запуск авторизации
-            CurrentPage = new StartWindowViewModel(this);
+           // CurrentPage = new StartWindowViewModel(this);
 
 			// TODO: запуск сразу клиентской части
 			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});

@@ -6,7 +6,7 @@ using Catel.IoC;
 using Catel.MVVM;
 using Catel.Services;
 using RestaurantHelper.Models;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 using RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels

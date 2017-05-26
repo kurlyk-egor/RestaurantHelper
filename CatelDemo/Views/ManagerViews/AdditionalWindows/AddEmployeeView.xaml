@@ -23,6 +23,20 @@
         Height="354"
         MinWidth="300"
         MinHeight="300">
+
+        <Button
+            x:Name="Collapsed"
+            Width="328"
+            Margin="10,312,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"
+            Command="{Binding OkCommand}"
+            Content="Сохранить"
+            IsDefault="True"
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
+
         <Button
             x:Name="button"
             Width="109"
@@ -32,7 +46,8 @@
             Command="{Binding OkCommand}"
             Content="Сохранить"
             IsDefault="True"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
         <Button
             x:Name="button1"
             Width="98"
@@ -40,7 +55,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Отмена"
-            IsCancel="True" />
+            IsCancel="True"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
         <GroupBox
             x:Name="groupBox"
             Width="328"
@@ -66,7 +82,7 @@
 
                 <TextBox
                     x:Name="ValidationRequiredField1"
-                    Width="147"
+                    Width="207"
                     Height="49"
                     Margin="93,0,0,0"
                     HorizontalAlignment="Left"
@@ -80,7 +96,7 @@
                     TextWrapping="Wrap">
                     <TextBox.Text>
                         <Binding
-                            Path="Name"
+                            Path="Employee.Name"
                             UpdateSourceTrigger="PropertyChanged"
                             ValidatesOnNotifyDataErrors="False">
                             <Binding.ValidationRules>
@@ -113,7 +129,7 @@
                     TextWrapping="Wrap">
                     <TextBox.Text>
                         <Binding
-                            Path="Age"
+                            Path="Employee.Age"
                             UpdateSourceTrigger="PropertyChanged"
                             ValidatesOnNotifyDataErrors="False">
                             <Binding.ValidationRules>
@@ -144,7 +160,7 @@
                     TextWrapping="Wrap">
                     <TextBox.Text>
                         <Binding
-                            Path="Position"
+                            Path="Employee.Position"
                             UpdateSourceTrigger="PropertyChanged"
                             ValidatesOnNotifyDataErrors="False">
                             <Binding.ValidationRules>

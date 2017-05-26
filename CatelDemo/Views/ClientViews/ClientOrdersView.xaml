@@ -1,0 +1,131 @@
+﻿<catel:UserControl
+    x:Class="RestaurantHelper.Views.ClientViews.ClientOrdersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+    <Grid Width="697" Height="500">
+        <TextBlock
+            x:Name="textBlock"
+            Width="83"
+            Margin="24,48,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Пользователь:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock1"
+            Width="124"
+            Height="26"
+            Margin="112,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding UserLogin}"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock2"
+            Width="87"
+            Height="26"
+            Margin="320,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Мои заказы:"
+            TextWrapping="Wrap" />
+        <ListView
+            x:Name="listView"
+            Width="446"
+            Height="331"
+            Margin="241,89,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding OrdersWithReservations}"
+            SelectedItem="{Binding SelectedOrderWithReservation}"
+            SelectionMode="Single">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding SelectAnotherOrderCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="100"
+                        DisplayMemberBinding="{Binding OrderId}"
+                        Header="ИД заказа" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding Day}"
+                        Header="Дата" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding FirstTime}"
+                        Header="Начало" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding LastTime}"
+                        Header="Окончание" />
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding TableId}"
+                        Header="Столик" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button
+            x:Name="button"
+            Width="93"
+            Height="36"
+            Margin="78,442,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding BackCommand}"
+            Content="Назад" />
+        <GroupBox
+            x:Name="groupBox"
+            Width="226"
+            Height="331"
+            Margin="10,89,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Детали заказа">
+            <ListBox
+                x:Name="listBox"
+                Width="216"
+                Height="232"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                ItemsSource="{Binding Dishes}" />
+        </GroupBox>
+        <TextBlock
+            x:Name="textBlock3"
+            Margin="24,128,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Заказанные блюда:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock4"
+            Width="51"
+            Height="23"
+            Margin="24,386,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Сумма:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox"
+            Width="120"
+            Height="34"
+            Margin="99,386,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            IsReadOnly="True"
+            Text="{Binding TotalSum}"
+            TextWrapping="Wrap" />
+    </Grid>
+
+</catel:UserControl>

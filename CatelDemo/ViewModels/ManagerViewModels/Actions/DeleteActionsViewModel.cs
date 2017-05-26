@@ -2,7 +2,7 @@
 using Catel.Collections;
 using Catel.Data;
 using RestaurantHelper.Models.Actions;
-using RestaurantHelper.Services.Other;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 {

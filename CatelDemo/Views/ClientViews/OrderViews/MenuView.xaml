@@ -137,11 +137,11 @@
             x:Name="textBox"
             Width="91"
             Height="36"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
             Margin="899,416,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="20"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
             IsReadOnly="True"
             Text="{Binding TotalSum}"
             TextWrapping="Wrap" />
