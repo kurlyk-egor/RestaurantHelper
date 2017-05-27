@@ -49,15 +49,6 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData PicturePathProperty = RegisterProperty("PicturePath", typeof(string));
 
-
-		[NotMapped]
-		public int Quantity
-		{
-			get { return GetValue<int>(QuantityProperty); }
-			set { SetValue(QuantityProperty, value); }
-		}
-		public static readonly PropertyData QuantityProperty = RegisterProperty("Quantity", typeof(int), 1);
-
 		[NotMapped]
 		public bool IsDiscounted
 		{
@@ -65,10 +56,5 @@ namespace RestaurantHelper.Models
 			set { SetValue(IsDiscountedProperty, value); }
 		}
 		public static readonly PropertyData IsDiscountedProperty = RegisterProperty("IsDiscounted", typeof(bool), false);
-
-		public override string ToString()
-		{
-			return $"{Name} | {Price} x {Quantity}";
-		}
 	}
 }

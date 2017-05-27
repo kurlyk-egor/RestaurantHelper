@@ -35,8 +35,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_orderedDishes = orderedDishes;
 			_reservation = new Reservation();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+			
+			
+			//TODO: был вызов UOW
 			// передаем ссылку на наши столики
-			_availabilityChecker = new TablesAvailabilityChecker(_unitOfWork.Tables.GetAll().ToList());
+			_availabilityChecker = new TablesAvailabilityChecker(Tables);
+
 
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
@@ -49,7 +53,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			MinimumDate = helper.Minimum;
 			MaximumDate = helper.Maximum;
 
-			AddAllTablesToFastObservableCollection();
+			RefreshTablesCollection();
 			TableReservations.Clear();
 			ReservationsListRefresh();
 
@@ -218,7 +222,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			bool result = false;
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
-				_availabilityChecker.FillAvailabilities(FirstTime, LastTime, DateText);
+				_availabilityChecker.SetTablesAvailabilities(FirstTime, LastTime, DateText);
 				result = true;
 			}
 			if (result)
@@ -246,8 +250,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			await base.CloseAsync();
 		}
 
-		private void AddAllTablesToFastObservableCollection()
+		private void RefreshTablesCollection()
 		{
+			Tables.Clear();
 			Tables.AddItems(_unitOfWork.Tables.GetAll());
 		}
 
@@ -256,7 +261,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			TableReservations.Clear();
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
-				_availabilityChecker.FillAvailabilities(FirstTime, LastTime, DateText);
+				_availabilityChecker.SetTablesAvailabilities(FirstTime, LastTime, DateText);
 
 				if (SelectedItemTable != null)
 				{
@@ -276,7 +281,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			LastTime = reservation.LastTime.ToShortTimeString();
 
 			DateText = reservation.Day.ToShortDateString();
-			SelectedItemTable = Tables.FirstOrDefault(table => table.Number == reservation.TableId);
+			SelectedItemTable = Tables.FirstOrDefault(table => table.Id == reservation.TableId);
 			CaptionVisibility = Visibility.Collapsed;
 			IsEnabledTimePickers = true;
 		}
@@ -287,7 +292,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_reservation.LastTime = DateTime.Parse(LastTime);
 			_reservation.Day = DateTime.Parse(DateText);
 			_reservation.TableId = SelectedItemTable.Number;
-			_reservation.UserId = _user.Id;
 		}
 	}
 }

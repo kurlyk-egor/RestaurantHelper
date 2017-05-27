@@ -32,7 +32,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			_user = user;
 			UserLogin = _user.Login;
 			_parentViewModel = parentViewModel;
-			_orderedSumCalculator = new OrderedSumCalculator();
+			_orderedSumCalculator = new OrderedSumCalculator(Dishes);
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			BackCommand = new Command(OnBackCommandExecute);
@@ -65,13 +65,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		}
 		public static readonly PropertyData UserLoginProperty = RegisterProperty("UserLogin", typeof(string));
 
-		public FastObservableCollection<Dish> Dishes
+		public FastObservableCollection<OrderedDish> Dishes
 		{
-			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
+			get { return GetValue<FastObservableCollection<OrderedDish>>(DishesProperty); }
 			set { SetValue(DishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<Dish>),
-			new FastObservableCollection<Dish>());
+		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<OrderedDish>),
+			new FastObservableCollection<OrderedDish>());
 
 		public int TotalSum
 		{

@@ -20,13 +20,16 @@
             Margin="20,48,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
             materialDesign:ListViewAssist.ListViewItemPadding="3"
             ItemsSource="{Binding Actions}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedAction}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="60"
+                        Width="55"
                         DisplayMemberBinding="{Binding Path=Id}"
                         Header="ИД" />
                     <GridViewColumn
@@ -34,11 +37,11 @@
                         DisplayMemberBinding="{Binding Converter={StaticResource ActionToTypeNameConverter}}"
                         Header="ТИП" />
                     <GridViewColumn
-                        Width="200"
-                        DisplayMemberBinding="{Binding Path=Name}"
-                        Header="Название акции" />
+                        Width="130"
+                        DisplayMemberBinding="{Binding Converter={StaticResource ActionToPercentOrSumConverter}}"
+                        Header="Скидка/Сумма" />
                     <GridViewColumn
-                        Width="150"
+                        Width="240"
                         DisplayMemberBinding="{Binding Converter={StaticResource ActionToDishNameConverter}}"
                         Header="Блюдо" />
                 </GridView>
@@ -91,6 +94,13 @@
             Panel.ZIndex="-1"
             Stroke="{DynamicResource SecondaryAccentBrush}"
             StrokeThickness="2" />
+        <TextBlock
+            x:Name="textBlock1"
+            Margin="583,46,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Название акции:"
+            TextWrapping="Wrap" />
     </Grid>
 
 </catel:UserControl>

@@ -10,7 +10,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 	public class ActionsViewModel : ViewModelBase
 	{
 		// страницы двух немного разных акций
-		private readonly List<IViewModel> _actionPages = new List<IViewModel> { new DiscountViewModel(), new AmountExcessViewModel() };
+		private readonly List<IViewModel> _actionPages = new List<IViewModel> { new DiscountViewModel(), new BonusViewModel() };
 
 		public ActionsViewModel()
 		{
@@ -25,7 +25,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			set { SetValue(ActionTypesProperty, value); }
 		}
 		public static readonly PropertyData ActionTypesProperty = RegisterProperty("ActionTypes", typeof(FastObservableCollection<ActionType>),
-			new FastObservableCollection<ActionType> { ActionType.Discount, ActionType.AmountExcess } );
+			new FastObservableCollection<ActionType> { ActionType.Discount, ActionType.Bonus } );
 
 		public  ActionType SelectedActionType
 		{
@@ -49,8 +49,8 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		{
 			switch (SelectedActionType)
 			{
-				case ActionType.AmountExcess:
-					SetAddAmountExcessProperties();
+				case ActionType.Bonus:
+					SetAddBonusProperties();
 					break;
 				case ActionType.Discount:
 					SetAddDiscountProperties();
@@ -93,10 +93,10 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			SelectedActionType = ActionType.Discount;
 		}
 
-		private void SetAddAmountExcessProperties()
+		private void SetAddBonusProperties()
 		{
-			ActionsPage = _actionPages.Find(vm => vm is AmountExcessViewModel);
-			SelectedActionType = ActionType.AmountExcess;
+			ActionsPage = _actionPages.Find(vm => vm is BonusViewModel);
+			SelectedActionType = ActionType.Bonus;
 		}
 	}
 }

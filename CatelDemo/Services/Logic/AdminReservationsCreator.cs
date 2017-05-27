@@ -80,7 +80,6 @@ namespace RestaurantHelper.Services.Logic
 			_reservation.FirstTime = DateTime.Parse(_firstTime);
 			_reservation.LastTime = DateTime.Parse(_lastTime);
 			_reservation.TableId = tableId;
-			_reservation.UserId = 0;
 		}
 	}
 }

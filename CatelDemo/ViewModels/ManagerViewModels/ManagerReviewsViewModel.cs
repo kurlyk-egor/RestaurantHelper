@@ -101,7 +101,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 
 
-		private void RefreshReviewsCollection() //=> Filler<ClientReview>.Fill(ClientReviews, _unitOfWork.ClientReviews);
+		private void RefreshReviewsCollection()
 		{
 			ClientReviews.Clear();
 			ClientReviews.AddItems(_unitOfWork.ClientReviews.GetAll());

@@ -41,13 +41,16 @@ namespace RestaurantHelper.Models
 		[ForeignKey("DishId")]
 		public Dish Dish { get; set; }
 
+		/// <summary>
+		/// количество одинаковых заказанных блюд
+		/// </summary>
 		[Required]
 		public int Quantity
 		{
 			get { return GetValue<int>(QuantityProperty); }
 			set { SetValue(QuantityProperty, value); }
 		}
-		public static readonly PropertyData QuantityProperty = RegisterProperty("Quantity", typeof(int));
+		public static readonly PropertyData QuantityProperty = RegisterProperty("Quantity", typeof(int), 0);
 
 		/// <summary>
 			/// Реальная стоимость блюда, с учетом скидок

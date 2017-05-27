@@ -35,29 +35,16 @@ namespace RestaurantHelper.Services.Logic
 
 		public string GetManagerMessage(ClientReview review)
 		{
+			// не выбрано
 			if (review == null)
 			{
 				return NO_SELECT;
 			}
-			string answerString;
+
 			var answer = _unitOfWork.ManagerAnswers.GetAll()?.ToList()
 				.Find(a => a.ReviewId == review.Id);
 
-			// не выбрано
-			if (review == null) 
-			{
-				answerString = NO_SELECT;
-			}
-			// нет ответа
-			else if (answer == null)
-			{
-				answerString = NO_ANSWER;
-			}
-			// есть ответ
-			else
-			{
-				answerString = answer.Text;
-			}
+			var answerString = answer == null ? NO_ANSWER : answer.Text;
 			return answerString;
 		}
 

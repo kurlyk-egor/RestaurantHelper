@@ -20,14 +20,6 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData IdProperty = RegisterProperty("Id", typeof(int));
 
 		[Required]
-		public int UserId
-		{
-			get { return GetValue<int>(ClientIdProperty); }
-			set { SetValue(ClientIdProperty, value); }
-		}
-		public static readonly PropertyData ClientIdProperty = RegisterProperty("UserId", typeof(int));
-
-		[Required]
 		public int TableId
 		{
 			get { return GetValue<int>(TableIdProperty); }

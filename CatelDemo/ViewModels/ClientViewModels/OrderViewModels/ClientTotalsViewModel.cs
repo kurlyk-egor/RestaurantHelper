@@ -17,16 +17,16 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly User _user;
 	    private readonly Reservation _reservation;
-	    private readonly FastObservableCollection<OrderedDish> _orderedDishes;
 	    private readonly IViewModel _rootViewModel;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
 		public ClientTotalsViewModel(User user, Reservation reservation, FastObservableCollection<OrderedDish> orderedDishes)
         {
+			OrderedDishes = orderedDishes;
+
 			_user = user;
 			_reservation = reservation;
-			_orderedDishes = orderedDishes;
-			_sumCalculator = new OrderedSumCalculator();
+			_sumCalculator = new OrderedSumCalculator(orderedDishes);
 
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
@@ -104,15 +104,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
-			_rootViewModel.ChangePage(new ClientMenuViewModel(_user, _reservation, _orderedDishes));
+			_rootViewModel.ChangePage(new ClientMenuViewModel(_user, _reservation, OrderedDishes));
 		}
 
 
 		public Command OrderCommand { get; private set; }
 		private void OnOrderCommandExecute()
 		{
-			SaveReservation();
-			SaveOrderWithDishes();
+			SaveAllToDataBase();
 			_rootViewModel.ChangePage(new ClientMainViewModel(_user));
 		}
 
@@ -139,38 +138,29 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			FirstTime = _reservation.FirstTime.ToShortTimeString();
 			LastTime = _reservation.LastTime.ToShortTimeString();
 
-			OrderedDishes = _orderedDishes;
-			TotalSum = _sumCalculator.GetCurrentOrderedSum(OrderedDishes);
+			TotalSum = _sumCalculator.GetCurrentOrderedSum();
 		}
 
-		private void SaveReservation()
+		private void SaveAllToDataBase()
 		{
 			_unitOfWork.Reservations.Insert(_reservation);
-			_unitOfWork.SaveChanges();
-		}
+			// получаем индекс только что созданной брони, который сгенерировала БД
+			var reservationId = _unitOfWork.Reservations.GetAll().Max(r => r.Id);
 
-		private void SaveOrderWithDishes()
-		{
 			Order order = new Order
 			{
 				UserId = _user.Id,
-				ReservationId = _reservation.Id
+				ReservationId = reservationId
 			};
 
 			_unitOfWork.Orders.Insert(order);
-			_unitOfWork.SaveChanges();
 			// получаем индекс только что созданного заказа, который сгенерировала БД
 			var orderId = _unitOfWork.Orders.GetAll().Max(o => o.Id);
 
-			foreach (var dish in _orderedDishes)
+			foreach (var dish in OrderedDishes)
 			{
-				OrderedDish orderedDish = new OrderedDish
-				{
-					OrderId = orderId,
-					DishId = dish.Id,
-					Quantity = dish.Quantity
-				};
-				_unitOfWork.OrderedDishes.Insert(orderedDish);
+				dish.OrderId = orderId;
+				_unitOfWork.OrderedDishes.Insert(dish);
 			}
 			_unitOfWork.SaveChanges();
 		}

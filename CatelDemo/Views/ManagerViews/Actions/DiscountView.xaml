@@ -30,7 +30,8 @@
                 <ComboBox
                     x:Name="ValidationRequiredField3"
                     Width="149"
-                    Margin="10,40,0,0"
+                    Height="45"
+                    Margin="10,31,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Foreground="{DynamicResource PrimaryHueMidBrush}"
@@ -75,29 +76,41 @@
                 <TextBox
                     x:Name="ValidationRequiredField2"
                     Width="232"
-                    Height="40"
-                    Margin="0,28,20,0"
+                    Height="53"
+                    Margin="0,15,20,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.FloatingScale="0.8"
                     materialDesign:HintAssist.Hint="Название акции"
                     materialDesign:HintAssist.IsFloating="True"
                     Foreground="{DynamicResource PrimaryHueMidBrush}"
-                    MaxLength="20" />
+                    MaxLength="20">
+                    <TextBox.Text>
+                        <Binding Path="ActionName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                <validationRules:StringLengthMinMaxValidationRule
+                                    Max="20"
+                                    Min="5"
+                                    ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
                 <TextBlock
                     Width="200"
                     Height="26"
-                    Margin="0,90,20,0"
+                    Margin="0,95,52,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Text="Информация об акции" />
 
                 <TextBox
                     x:Name="ValidationRequiredField1"
-                    Width="232"
+                    Width="273"
                     Height="150"
-                    Margin="0,110,20,0"
+                    Margin="0,121,20,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Top"

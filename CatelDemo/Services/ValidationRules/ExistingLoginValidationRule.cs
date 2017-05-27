@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using RestaurantHelper.DAL;
+using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
 
 namespace RestaurantHelper.Services.ValidationRules
@@ -19,7 +20,7 @@ namespace RestaurantHelper.Services.ValidationRules
 			string str = (value ?? "").ToString();
 			if(str.Length < 3) return ValidationResult.ValidResult; // нет смысла проверять
 
-			bool isExist = _unitOfWork.Users.IsExistLogin(str);
+			bool isExist = ((UserRepository)_unitOfWork.Users).IsExistLogin(str);
 
 			return isExist
 				? new ValidationResult(false, "Пользователь с таким логином уже зарегистрирован")

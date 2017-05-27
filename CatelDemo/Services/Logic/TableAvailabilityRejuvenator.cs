@@ -15,6 +15,7 @@ namespace RestaurantHelper.Services.Logic
 
 		public TablesAvailabilityRejuvenator(FastObservableCollection<Table> myTables)
 		{
+			myTables.AutomaticallyDispatchChangeNotifications = true;
 			_myTables = myTables;
 			 ReFillTables();
 		}
@@ -27,14 +28,15 @@ namespace RestaurantHelper.Services.Logic
 
 		public void RefreshTablesCollection()
 		{
-			var checker = new TablesAvailabilityChecker(_myTables.ToList());
-			var newTablesList = checker.GetAvailableNowTables();
+			var checker = new TablesAvailabilityChecker(_myTables);
+			checker.TablesAvailableNowRefresh();
+			//var newTablesList = checker.TablesAvailableNowRefresh();
 
-			foreach (var newTable in newTablesList)
-			{
-				int id = newTable.Id;
-				_myTables.Single(t => t.Id == id).Availability = newTable.Availability;
-			}
+			//foreach (var newTable in newTablesList)
+			//{
+			//	int id = newTable.Id;
+			//	_myTables.Single(t => t.Id == id).Availability = newTable.Availability;
+			//}
 		}
 
 		public int GetFreeTablesCount()

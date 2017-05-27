@@ -9,7 +9,7 @@
 
     <Grid Width="250" Height="150">
         <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="2">
-            <Image Opacity="0.7" Source="../Resources/success.jpg" />
+            <Image Opacity="0.7" Source="../Images/success.jpg" />
         </Border>
         <TextBlock
             HorizontalAlignment="Center"

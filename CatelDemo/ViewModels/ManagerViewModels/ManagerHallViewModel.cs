@@ -180,7 +180,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			TableReservations.Clear();
 			if (SelectedItemTable != null)
 			{
-				var tableChecker = new TablesAvailabilityChecker(Tables.ToList());
+				var tableChecker = new TablesAvailabilityChecker(Tables);
 				var reservations = tableChecker.GetTodayReservationsForTable(SelectedItemTable.Number);
 				var userName = _selector.GetUserNameForSelectedTable(SelectedItemTable.Id);
 				SelectedTableClientName = userName;

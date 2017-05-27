@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using RestaurantHelper.DAL.Repositories;
+using RestaurantHelper.Models;
+using RestaurantHelper.Models.Actions;
+using RestaurantHelper.Models.Reviews;
 
 namespace RestaurantHelper.DAL
 {
@@ -25,17 +28,17 @@ namespace RestaurantHelper.DAL
 
 		private readonly RestaurantDbContext _db = new RestaurantDbContext();
 
-		private AmountExcessActionRepository _amountExcessActionRepository;
-		private DiscountActionRepository _discountActionRepository;
-		private ClientReviewRepository _clientReviewRepository;
-		private ManagerAnswerRepository _managerAnswerRepository;
-		private UserRepository _userRepository;
-		private TableRepository _tableRepository;
-		private ReservationRepository _reservationRepository;
-		private DishRepository _dishRepository;
-		private OrderRepository _orderRepository;
-		private OrderedDishRepository _orderedDishRepository;
-		private EmployeeRepository _employeeRepository;
+		private IRepository<BonusAction> _bonusActionRepository;
+		private IRepository<DiscountAction> _discountActionRepository;
+		private IRepository<ClientReview> _clientReviewRepository;
+		private IRepository<ManagerAnswer> _managerAnswerRepository;
+		private IRepository<User> _userRepository;
+		private IRepository<Table> _tableRepository;
+		private IRepository<Reservation> _reservationRepository;
+		private IRepository<Dish> _dishRepository;
+		private IRepository<Order> _orderRepository;
+		private IRepository<OrderedDish> _orderedDishRepository;
+		private IRepository<Employee> _employeeRepository;
 
 
 		public void SaveChanges()
@@ -73,37 +76,37 @@ namespace RestaurantHelper.DAL
 	#region Unit Of Work Public Properties
 	partial class UnitOfWork
 	{
-		public AmountExcessActionRepository AmountExcessActions => 
-			_amountExcessActionRepository ?? (_amountExcessActionRepository = new AmountExcessActionRepository(_db));
+		public IRepository<BonusAction> BonusActions => 
+			_bonusActionRepository ?? (_bonusActionRepository = new BonusActionRepository(_db));
 
-		public DiscountActionRepository DiscountActions =>
+		public IRepository<DiscountAction> DiscountActions =>
 			_discountActionRepository ?? (_discountActionRepository = new DiscountActionRepository(_db));
 
-		public ClientReviewRepository ClientReviews =>
+		public IRepository<ClientReview> ClientReviews =>
 			_clientReviewRepository ?? (_clientReviewRepository = new ClientReviewRepository(_db));
 
-		public ManagerAnswerRepository ManagerAnswers =>
+		public IRepository<ManagerAnswer> ManagerAnswers =>
 			_managerAnswerRepository ?? (_managerAnswerRepository = new ManagerAnswerRepository(_db));
 
-		public UserRepository Users =>
+		public IRepository<User> Users =>
 			_userRepository ?? (_userRepository = new UserRepository(_db));
 
-		public TableRepository Tables =>
+		public IRepository<Table> Tables =>
 			_tableRepository ?? (_tableRepository = new TableRepository(_db));
 
-		public ReservationRepository Reservations =>
+		public IRepository<Reservation> Reservations =>
 			_reservationRepository ?? (_reservationRepository = new ReservationRepository(_db));
 
-		public DishRepository Dishes =>
+		public IRepository<Dish> Dishes =>
 			_dishRepository ?? (_dishRepository = new DishRepository(_db));
 
-		public OrderRepository Orders =>
+		public IRepository<Order> Orders =>
 			_orderRepository ?? (_orderRepository = new OrderRepository(_db));
 
-		public OrderedDishRepository OrderedDishes =>
+		public IRepository<OrderedDish> OrderedDishes =>
 			_orderedDishRepository ?? (_orderedDishRepository = new OrderedDishRepository(_db));
 
-		public EmployeeRepository Employees =>
+		public IRepository<Employee> Employees =>
 			_employeeRepository ?? (_employeeRepository = new EmployeeRepository(_db));
 	}
 	#endregion

@@ -26,9 +26,11 @@ namespace RestaurantHelper.Services.Logic
 
 			// нету текущей брони
 			if (reservation == null) return string.Empty;
+			
+			// заказ, соответствующий этой найденной брони
+			var order = _unitOfWork.Orders.GetAll().FirstOrDefault(o => o.ReservationId == reservation.Id);
 
-			var user = users.Find(u => u.Id == reservation.UserId);
-			return (user == null) ? "" : user.Login;
+			return (order == null) ? "" : order.User.Login;
 		}
 	}
 }

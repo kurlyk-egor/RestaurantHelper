@@ -7,8 +7,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="HallResources.xaml" />
-                <ResourceDictionary Source="ValidationStyle.xaml" />
+                <ResourceDictionary Source="Resources/Converters.xaml" />
+                <ResourceDictionary Source="Resources/TablesTemplates.xaml" />
+                <ResourceDictionary Source="Resources/DishesTemplates.xaml" />
+                <ResourceDictionary Source="Resources/ReviewsTemplates.xaml" />
+                <ResourceDictionary Source="Resources/ValidationStyle.xaml" />
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 

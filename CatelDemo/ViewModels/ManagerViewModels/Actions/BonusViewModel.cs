@@ -14,16 +14,16 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 	using Catel.MVVM;
 	using System.Threading.Tasks;
 
-	public class AmountExcessViewModel : ViewModelBase
+	public class BonusViewModel : ViewModelBase
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
-		private readonly AmountExcessAction _amountExcessAction;
-		public AmountExcessViewModel()
+		private readonly BonusAction _bonusAction;
+		public BonusViewModel()
 		{
 			Dishes.Clear();
 			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 
-			_amountExcessAction = new AmountExcessAction();
+			_bonusAction = new BonusAction();
 			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
 		}
 
@@ -80,13 +80,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			FillAmounExcessAction();
 			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;
-			if (!actionsFilter.CanAddAction(_amountExcessAction, out message))
+			if (!actionsFilter.CanAddAction(_bonusAction, out message))
 			{
 				MessageBox.Show(message);
 			}
 			else
 			{
-				actionsFilter.SaveAction(_amountExcessAction);
+				actionsFilter.SaveAction(_bonusAction);
 			}
 		}
 		protected override async Task InitializeAsync()
@@ -101,10 +101,10 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 		private void FillAmounExcessAction()
 		{
-			_amountExcessAction.DishId = SelectedDish.Id;
-			_amountExcessAction.ExcessSum = DiscountValue;
-			_amountExcessAction.Name = ActionName;
-			_amountExcessAction.Description = ActionInfo;
+			_bonusAction.DishId = SelectedDish.Id;
+			_bonusAction.ExcessSum = DiscountValue;
+			_bonusAction.Name = ActionName;
+			_bonusAction.Description = ActionInfo;
 		}
 	}
 }

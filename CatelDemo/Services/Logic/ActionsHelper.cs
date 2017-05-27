@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Catel.Collections;
 using RestaurantHelper.DAL;
+using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
 
 namespace RestaurantHelper.Services.Logic
@@ -24,30 +26,29 @@ namespace RestaurantHelper.Services.Logic
 				}
 			}
 
-			var discAction = action as DiscountAction;
-			if (discAction != null)
+			var discount = action as DiscountAction;
+			if (discount != null)
 			{
 				foreach (var discountAction in _unitOfWork.DiscountActions.GetAll())
 				{
-					if (discAction.DishId == discountAction.DishId)
+					if (discount.DishId == discountAction.DishId)
 					{
 						message = "На этот товар уже установлена скидка";
 					}
 				}
 			}
 
-			var amntAction = action as AmountExcessAction;
-			if (amntAction != null)
+			var bonus = action as BonusAction;
+			if (bonus != null)
 			{
-				foreach (var amountAction in _unitOfWork.AmountExcessActions.GetAll())
+				foreach (var amountAction in _unitOfWork.BonusActions.GetAll())
 				{
-					if (amntAction.ExcessSum == amountAction.ExcessSum)
+					if (bonus.ExcessSum == amountAction.ExcessSum)
 					{
 						message = "За превышение данной суммы уже предусмотрен бонус";
 					}
 				}
 			}
-
 
 			return string.IsNullOrEmpty(message);
 		}
@@ -59,19 +60,19 @@ namespace RestaurantHelper.Services.Logic
 			{
 				_unitOfWork.DiscountActions.Insert(ditem);
 			}
-			var aitem = action as AmountExcessAction;
-			if (aitem != null)
+			var bitem = action as BonusAction;
+			if (bitem != null)
 			{
-				_unitOfWork.AmountExcessActions.Insert(aitem);
+				_unitOfWork.BonusActions.Insert(bitem);
 			}
 			_unitOfWork.SaveChanges();
 		}
 
 		public void RemoveAction(Action action)
 		{
-			if (action is AmountExcessAction)
+			if (action is BonusAction)
 			{
-				_unitOfWork.AmountExcessActions.Delete(action.Id);
+				_unitOfWork.BonusActions.Delete(action.Id);
 			}
 			if (action is DiscountAction)
 			{
@@ -86,8 +87,19 @@ namespace RestaurantHelper.Services.Logic
 			FastObservableCollection <Action> actions = new FastObservableCollection<Action>();
 			actions.AddItems(_actions);
 			return actions;
-		} 
+		}
 
+		/// <summary>
+		/// метод пересчитывает вычисляемое поле модели
+		/// </summary>
+		public void CalculateDiscountsExisting(FastObservableCollection<Dish> dishes)
+		{
+			 dishes.ForEach(dish =>
+			 {
+				 // устанавливаем логическое значение
+				 dish.IsDiscounted = _unitOfWork.DiscountActions.GetAll().ToList().Exists(da => da.DishId == dish.Id);
+			 });
+		}
 
 		private void FillActionsList()
 		{
@@ -98,9 +110,9 @@ namespace RestaurantHelper.Services.Logic
 				_actions.Add(discountAction);
 			}
 
-			foreach (var amountExcessAction in _unitOfWork.AmountExcessActions.GetAll())
+			foreach (var bonusAction in _unitOfWork.BonusActions.GetAll())
 			{
-				_actions.Add(amountExcessAction);
+				_actions.Add(bonusAction);
 			}
 			_actions.Sort((a1, a2) => a1.Id - a2.Id);
 		}

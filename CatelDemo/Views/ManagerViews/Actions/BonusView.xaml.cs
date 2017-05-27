@@ -1,8 +1,8 @@
 ﻿namespace RestaurantHelper.Views.ManagerViews.Actions
 {
-	public partial class AmountExcessView
+	public partial class BonusView
 	{
-		public AmountExcessView()
+		public BonusView()
 		{
 			InitializeComponent();
 		}

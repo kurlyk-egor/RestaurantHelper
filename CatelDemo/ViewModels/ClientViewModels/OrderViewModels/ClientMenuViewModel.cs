@@ -10,6 +10,7 @@ using Catel.MVVM;
 using RestaurantHelper.DAL;
 using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
+using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
@@ -26,10 +27,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    {
 			_user = user;
 			_reservation = reservation;
-			_sumCalculator = new OrderedSumCalculator();
 		    _rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+			OrderedDishes.AutomaticallyDispatchChangeNotifications = true;
+			// передаем в конструктор ссылку на собираемую коллекцию заказанных блюд
+			_sumCalculator = new OrderedSumCalculator(OrderedDishes);
 
-			AddCommand = new Command(OnAddCommandExecute, OnAddCommandCanExecute);
+			AddCommand = new Command(OnAddCommandExecute);
 			DeleteCommand = new Command(OnDeleteCommandExecute, OnDeleteCommandCanExecute);
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
@@ -39,8 +42,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			if (orderedDishes != null)
 			{
 				OrderedDishes = orderedDishes;
-				//TODO: change to another call
-				TotalSum = _sumCalculator.GetCurrentOrderedSum(OrderedDishes);
+				TotalSum = _sumCalculator.GetCurrentOrderedSum();
 			}
 			else
 			{
@@ -48,6 +50,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 	    }
 
+
+		/// <summary>
+		/// список блюд
+		/// </summary>
 		public FastObservableCollection<Dish> Dishes
 		{
 			get { return GetValue<FastObservableCollection<Dish>>(DishesProperty); }
@@ -63,13 +69,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData SelectedDishProperty = RegisterProperty("SelectedDish", typeof(Dish));
 
-		public int CurrentDishesCount
-		{
-			get { return GetValue<int>(CurrentDishesCountProperty); }
-			set { SetValue(CurrentDishesCountProperty, value); }
-		}
-		public static readonly PropertyData CurrentDishesCountProperty = RegisterProperty("CurrentDishesCount", typeof(int), 1);
-
+		/// <summary>
+		/// список заказанных в данный момент блюд
+		/// </summary>
 		public FastObservableCollection<OrderedDish> OrderedDishes
 		{
 			get { return GetValue<FastObservableCollection<OrderedDish>>(OrderedDishesProperty); }
@@ -85,6 +87,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData SelectedOrderedDishProperty = RegisterProperty("SelectedOrderedDish", typeof(OrderedDish));
 
+		/// <summary>
+		/// итоговая сумма за заказ
+		/// </summary>
 		public int TotalSum
 		{
 			get { return GetValue<int>(TotalSumProperty); }
@@ -92,35 +97,27 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData TotalSumProperty = RegisterProperty("TotalSum", typeof(int), 0);
 
+		/// <summary>
+			/// Gets or sets the property value.
+			/// </summary>
+		public DiscountAction Discount
+		{
+			get { return GetValue<DiscountAction>(DiscountProperty); }
+			set { SetValue(DiscountProperty, value); }
+		}
+
+		/// <summary>
+		/// Register the Discount property so it is known in the class.
+		/// </summary>
+		public static readonly PropertyData DiscountProperty = RegisterProperty("Discount", typeof(DiscountAction));
+
 
 	    public Command AddCommand { get; private set; }
-		private bool OnAddCommandCanExecute()
-		{
-			return SelectedDish != null;
-		}
+
 		private void OnAddCommandExecute()
 		{
-			// добавить выбранное блюдо
-			var dish = OrderedDishes.FirstOrDefault(cur => cur.Id == SelectedDish.Id);
-
-			if (dish != null)
-			{
-				// TODO: костыль, чтобы оповестить вью, что во вьюмодели данные изменились
-				OrderedDishes.Remove(dish);
-				OrderedDishes.Add(dish);
-				dish.Quantity += CurrentDishesCount;
-			}
-			else
-			{
-				SelectedDish.Quantity = CurrentDishesCount;
-				// TODO: добавить к заказанным выбранное блюдо. в классе хэлпере сделать метод, кот вернет сформированный
-				// объект OrderedDish
-				//OrderedDishes.Add(SelectedDish);
-			}
-
-			OrderedDishes.Sort((d1, d2) => d1.Quantity - d2.Quantity);
-			TotalSum = _sumCalculator.GetCurrentOrderedSum(OrderedDishes);
-			CurrentDishesCount = 1;
+			_sumCalculator.AddDishIntoOrderedDishes(SelectedDish);
+			TotalSum = _sumCalculator.GetCurrentOrderedSum();
 		}
 
 		public Command DeleteCommand { get; private set; }
@@ -130,10 +127,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		private void OnDeleteCommandExecute()
 		{
-			SelectedOrderedDish.Quantity = 1;
 			OrderedDishes.Remove(SelectedOrderedDish);
-			TotalSum = _sumCalculator.GetCurrentOrderedSum(OrderedDishes);
+			TotalSum = _sumCalculator.GetCurrentOrderedSum();
 		}
+
 
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
@@ -141,11 +138,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_rootViewModel.ChangePage(new ClientHallViewModel(_user, _reservation, OrderedDishes));
 		}
 
-
 		public Command NextCommand { get; private set; }
 		private bool OnNextCommandCanExecute()
 		{
-			return TotalSum != 0;
+			return OrderedDishes.Any();
 		}
 		private void OnNextCommandExecute()
 		{
@@ -166,6 +162,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		{
 			Dishes.Clear();
 			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
+			new ActionsHelper().CalculateDiscountsExisting(Dishes);
 		}
 	}
 }

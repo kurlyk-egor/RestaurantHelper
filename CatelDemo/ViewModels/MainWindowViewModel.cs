@@ -28,15 +28,16 @@ namespace RestaurantHelper.ViewModels
     {
         public MainWindowViewModel()
         {
+
 	        
 			// TODO: запуск авторизации
-           // CurrentPage = new StartWindowViewModel(this);
+            CurrentPage = new StartWindowViewModel(this);
 
 			// TODO: запуск сразу клиентской части
-			//CurrentPage = new ClientMainViewModel(new User() {Id = 3, Login = "Viking", Password="sobaka", Name = "Курлык", Phone = "375298933692"});
+	        //GetClient();
 
 			// TODO: запуск сразу из под админа
-			CurrentPage = new ManagerMainViewModel();
+			//CurrentPage = new ManagerMainViewModel();
 
 			// собственные пространства имен
 			var viewModelLocator = ServiceLocator.Default.ResolveType<IViewModelLocator>();
@@ -61,7 +62,18 @@ namespace RestaurantHelper.ViewModels
 			viewLocator.NamingConventions.Add("[AS].Views.ManagerViews.AdditionalWindows.[VM]View");
 		}
 
-        // сюда биндится текущий UserControl в ContentControle окна
+	    private void GetClient()
+	    {
+		    var user = new User() {Id = 1, Login = "Viking", Password = "sobaka", Name = "Курлык", Phone = "33333"};
+
+			//var uow = UnitOfWork.GetInstance();
+			//uow.Users.Insert(user);
+			//uow.SaveChanges();
+
+			CurrentPage = new ClientMainViewModel(user);
+		}
+
+	    // сюда биндится текущий UserControl в ContentControle окна
         public IViewModel CurrentPage
         {
             get { return GetValue<IViewModel>(CurrentPageProperty); }

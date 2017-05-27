@@ -92,7 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\RestaurantDbContext.cs" />
-    <Compile Include="DAL\Repositories\AmountExcessActionRepository.cs" />
+    <Compile Include="DAL\Repositories\BonusActionRepository.cs" />
     <Compile Include="DAL\Repositories\ClientReviewRepository.cs" />
     <Compile Include="DAL\Repositories\DiscountActionRepository.cs" />
     <Compile Include="DAL\Repositories\DishRepository.cs" />
@@ -104,8 +104,21 @@
     <Compile Include="DAL\Repositories\TableRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="Migrations\201705262214372_InitialCreate.cs" />
+    <Compile Include="Migrations\201705262214372_InitialCreate.Designer.cs">
+      <DependentUpon>201705262214372_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705270331565_MigrateDB.cs" />
+    <Compile Include="Migrations\201705270331565_MigrateDB.Designer.cs">
+      <DependentUpon>201705270331565_MigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705270920312_Migrate2.cs" />
+    <Compile Include="Migrations\201705270920312_Migrate2.Designer.cs">
+      <DependentUpon>201705270920312_Migrate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actions\Action.cs" />
-    <Compile Include="Models\Actions\AmountExcessAction.cs" />
+    <Compile Include="Models\Actions\BonusAction.cs" />
     <Compile Include="Models\Actions\DiscountAction.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Additional\MyModelBase.cs" />
@@ -117,7 +130,11 @@
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Reviews\ManagerAnswer.cs" />
     <Compile Include="Models\Table.cs" />
+    <Compile Include="Services\Converters\ActionToPercentOrSumConverter.cs" />
     <Compile Include="Services\Converters\ActionToTypeNameConverter.cs" />
+    <Compile Include="Services\Converters\DishIdToNameConverter.cs" />
+    <Compile Include="Services\Converters\DishToDiscountPercentConverter.cs" />
+    <Compile Include="Services\Converters\ReviewIdToIndicateColorConverter.cs" />
     <Compile Include="Services\Logic\ActionsHelper.cs" />
     <Compile Include="Services\Logic\AuthorizationChecker.cs" />
     <Compile Include="Services\Converters\ActionToDescriptionConverter.cs" />
@@ -138,7 +155,6 @@
     <Compile Include="Services\Converters\TableNumberToPicturePathConverter.cs" />
     <Compile Include="Services\Logic\ManagerMenuChanger.cs" />
     <Compile Include="Services\Logic\OrderedSumCalculator.cs" />
-    <Compile Include="Services\Logic\Filler.cs" />
     <Compile Include="Services\Logic\ReviewsWithAnswersBinder.cs" />
     <Compile Include="Services\Logic\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Logic\TablesAvailabilityChecker.cs" />
@@ -160,7 +176,7 @@
     <Compile Include="ViewModels\ClientViewModels\OrderViewModels\ClientTotalsViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModels\ClientProfileViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\ActionsViewModel.cs" />
-    <Compile Include="ViewModels\ManagerViewModels\Actions\AmountExcessViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\Actions\BonusViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\AdditionalWindows\AddDishViewModel.cs" />
@@ -193,8 +209,8 @@
     <Compile Include="Views\ManagerViews\Actions\ActionsView.xaml.cs">
       <DependentUpon>ActionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerViews\Actions\AmountExcessView.xaml.cs">
-      <DependentUpon>AmountExcessView.xaml</DependentUpon>
+    <Compile Include="Views\ManagerViews\Actions\BonusView.xaml.cs">
+      <DependentUpon>BonusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerViews\Actions\DeleteActionsView.xaml.cs">
       <DependentUpon>DeleteActionsView.xaml</DependentUpon>
@@ -229,11 +245,23 @@
     <Compile Include="Views\ManagerViews\ManagerReviewsView.xaml.cs">
       <DependentUpon>ManagerReviewsView.xaml</DependentUpon>
     </Compile>
-    <Page Include="HallResources.xaml">
+    <Page Include="Resources\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ValidationStyle.xaml">
+    <Page Include="Resources\DishesTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ReviewsTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TablesTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ValidationStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,15 +300,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientViews\OrderViews\HallView.xaml">
+    <Page Include="Views\ClientViews\OrderViews\ClientHallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientViews\OrderViews\MenuView.xaml">
+    <Page Include="Views\ClientViews\OrderViews\ClientMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientViews\OrderViews\TotalsView.xaml">
+    <Page Include="Views\ClientViews\OrderViews\ClientTotalsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,14 +330,14 @@
     <Compile Include="Views\ClientViews\ClientOrdersView.xaml.cs">
       <DependentUpon>ClientOrdersView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientViews\OrderViews\HallView.xaml.cs">
-      <DependentUpon>HallView.xaml</DependentUpon>
+    <Compile Include="Views\ClientViews\OrderViews\ClientHallView.xaml.cs">
+      <DependentUpon>ClientHallView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientViews\OrderViews\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
+    <Compile Include="Views\ClientViews\OrderViews\ClientMenuView.xaml.cs">
+      <DependentUpon>ClientMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientViews\OrderViews\TotalsView.xaml.cs">
-      <DependentUpon>TotalsView.xaml</DependentUpon>
+    <Compile Include="Views\ClientViews\OrderViews\ClientTotalsView.xaml.cs">
+      <DependentUpon>ClientTotalsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClientViews\ClientProfileView.xaml.cs">
       <DependentUpon>ClientProfileView.xaml</DependentUpon>
@@ -322,7 +350,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManagerViews\Actions\AmountExcessView.xaml">
+    <Page Include="Views\ManagerViews\Actions\BonusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,6 +413,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201705262214372_InitialCreate.resx">
+      <DependentUpon>201705262214372_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705270331565_MigrateDB.resx">
+      <DependentUpon>201705270331565_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705270920312_Migrate2.resx">
+      <DependentUpon>201705270920312_Migrate2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -399,7 +436,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\success.jpg" />
+    <Resource Include="Images\success.jpg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -410,15 +447,15 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\hallback.jpg" />
+    <Resource Include="Images\hallback.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Tables\table1.jpg" />
-    <Resource Include="Resources\Tables\table2.jpg" />
-    <Resource Include="Resources\Tables\table3.jpg" />
+    <Resource Include="Images\Tables\table1.jpg" />
+    <Resource Include="Images\Tables\table2.jpg" />
+    <Resource Include="Images\Tables\table3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\arrows.jpg" />
+    <Resource Include="Images\arrows.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\dish.xml">
@@ -426,22 +463,22 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\1750_2500.png" />
+    <Resource Include="Images\1750_2500.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Dishes\1.jpg" />
-    <Resource Include="Resources\Dishes\10.jpg" />
-    <Resource Include="Resources\Dishes\11.jpg" />
-    <Resource Include="Resources\Dishes\12.jpg" />
-    <Resource Include="Resources\Dishes\13.jpg" />
-    <Resource Include="Resources\Dishes\2.jpg" />
-    <Resource Include="Resources\Dishes\3.jpg" />
-    <Resource Include="Resources\Dishes\4.jpg" />
-    <Resource Include="Resources\Dishes\5.jpg" />
-    <Resource Include="Resources\Dishes\6.jpg" />
-    <Resource Include="Resources\Dishes\7.jpg" />
-    <Resource Include="Resources\Dishes\8.jpg" />
-    <Resource Include="Resources\Dishes\9.jpg" />
+    <Resource Include="Images\Dishes\1.jpg" />
+    <Resource Include="Images\Dishes\10.jpg" />
+    <Resource Include="Images\Dishes\11.jpg" />
+    <Resource Include="Images\Dishes\12.jpg" />
+    <Resource Include="Images\Dishes\13.jpg" />
+    <Resource Include="Images\Dishes\2.jpg" />
+    <Resource Include="Images\Dishes\3.jpg" />
+    <Resource Include="Images\Dishes\4.jpg" />
+    <Resource Include="Images\Dishes\5.jpg" />
+    <Resource Include="Images\Dishes\6.jpg" />
+    <Resource Include="Images\Dishes\7.jpg" />
+    <Resource Include="Images\Dishes\8.jpg" />
+    <Resource Include="Images\Dishes\9.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

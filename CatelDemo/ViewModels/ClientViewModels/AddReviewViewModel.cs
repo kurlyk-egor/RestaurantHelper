@@ -26,17 +26,38 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 				{
 					review = new ClientReview {UserId = user.Id};
 				}
+
+				OneButtonMode = false;
+				TwoButtonMode = true;
 				_addOrEdit = AddReview;
 			}
 			else
 			{
+				OneButtonMode = true;
+				TwoButtonMode = false;
 				_addOrEdit = EditReview;
 			}
 			ClientReview = review;
 
-			CancelCommand = new Command(OnCancelCommandExecute);
 			OkCommand = new Command(OnOkCommandExecute);
 		}
+
+
+		public bool OneButtonMode
+		{
+			get { return GetValue<bool>(OneButtonModeProperty); }
+			set { SetValue(OneButtonModeProperty, value); }
+		}
+
+		public static readonly PropertyData OneButtonModeProperty = RegisterProperty("OneButtonMode", typeof(bool));
+		public bool TwoButtonMode
+		{
+			get { return GetValue<bool>(TwoButtonModeProperty); }
+			set { SetValue(TwoButtonModeProperty, value); }
+		}
+		public static readonly PropertyData TwoButtonModeProperty = RegisterProperty("TwoButtonMode", typeof(bool));
+
+
 
 		[Model]
 		public ClientReview ClientReview
@@ -63,12 +84,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			await base.CloseAsync();
 		}
 
-
-		public Command CancelCommand { get; private set; }
-		private async void OnCancelCommandExecute()
-		{
-			await CloseViewModelAsync(false);
-		}
 
 		public Command OkCommand { get; private set; }
 		private async void OnOkCommandExecute()

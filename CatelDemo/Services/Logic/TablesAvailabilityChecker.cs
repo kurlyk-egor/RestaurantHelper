@@ -9,37 +9,34 @@ namespace RestaurantHelper.Services.Logic
 {
 	public class TablesAvailabilityChecker
 	{
-		private readonly List<Table> _tables;
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly FastObservableCollection<Table> _tables;
 
-		public TablesAvailabilityChecker(List<Table> tables)
+		public TablesAvailabilityChecker(FastObservableCollection<Table> tables)
 		{
 			_tables = tables;
+			_tables.AutomaticallyDispatchChangeNotifications = true;
 		}
 
-		public void FillAvailabilities(string firstTime, string secondTime, string currentDay)
+		public void SetTablesAvailabilities(string firstTime, string secondTime, string currentDay)
 		{
 			DateTime first, second, day;
-			ResetValues(); // все true
+			ResetValues(); // все столики доступны
 
-			if (DateTime.TryParse(firstTime, out first) &&
-			    DateTime.TryParse(secondTime, out second) &&
-			    DateTime.TryParse(currentDay, out day))
-			{ // если и день, и время выбраны
+			// если выбраны и время и дата
+			if (DateTime.TryParse(firstTime, out first) && DateTime.TryParse(secondTime, out second) && DateTime.TryParse(currentDay, out day))
+			{
 				var reservations = _unitOfWork.Reservations.GetAll()
-					.Where(r => r.Day.Date == day.Date &&
-					            ((r.FirstTime.Hour >= first.Hour && r.LastTime.Hour <= second.Hour) ||
-					             (r.FirstTime.Hour >= first.Hour && r.FirstTime.Hour < second.Hour) ||
-					             (r.LastTime.Hour > first.Hour && r.LastTime.Hour <= second.Hour)));
+					.Where(r => r.Day.Date == day.Date && IsReservationInTheTimeRange(r, first, second));
 
-				foreach (var r in reservations) // у недоступных значение меняем на false
+				foreach (var r in reservations) // у столиков, попавших в этот набор, меням значение на false
 				{
-					_tables.Find(t => t.Number == r.TableId).Availability = false;
+					_tables.First(t => t.Id == r.TableId).Availability = false;
 				}
 			}
 		}
 
-		public void ResetValues()
+		private void ResetValues()
 		{
 			foreach (Table t in _tables)
 			{
@@ -47,44 +44,53 @@ namespace RestaurantHelper.Services.Logic
 			}
 		}
 
-		// брони переданный день
-		public List<Reservation> GetDaylyReservationsForTable(string dayStr, int tableNumber)
+		/// <summary>
+		/// получить все брони указанного столика за указанный день
+		/// </summary>
+		public FastObservableCollection<Reservation> GetDaylyReservationsForTable(string dayStr, int tableId)
 		{
 			DateTime day;
-			List <Reservation> returnList = new List<Reservation>();
+			FastObservableCollection <Reservation> returnList = new FastObservableCollection<Reservation>();
 
 			if (DateTime.TryParse(dayStr, out day))
 			{
-				returnList = _unitOfWork.Reservations.GetAll()
-					.Where(r => r.Day.Date == day.Date && r.TableId == tableNumber)
-					.ToList();
+				// дополняем список броней
+				 returnList.AddItems(_unitOfWork.Reservations.GetAll().Where(r => r.Day.Date == day.Date && r.TableId == tableId));
 			}
 
 			return returnList;
 		}
 
+		/// <summary>
+		/// получить все брони столика на сегодня
+		/// </summary>
 		public FastObservableCollection<Reservation> GetTodayReservationsForTable(int tableNumber)
 		{
-			
-			FastObservableCollection<Reservation> reservations = new FastObservableCollection<Reservation>();
 			// получить брони на сегодня для столика
-			reservations.AddItems(GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber));
-
-			return reservations;
+			return GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber);
 		}
 
 		/// <summary>
-		/// <returns>возвращает столики, доступные прямо сейчас</returns>
+		/// обновляет текущую доступность столиков 
 		/// </summary>
-		/// <returns></returns>
-		public List<Table> GetAvailableNowTables()
+		public void TablesAvailableNowRefresh()
 		{
 			var first = $"{DateTime.Now.Hour}:00";
 			var second = $"{DateTime.Now.AddHours(1).Hour}:00";
 			var date = DateTime.Today.ToShortDateString();
 
-			FillAvailabilities(first, second, date);
-			return _tables;
+			SetTablesAvailabilities(first, second, date);
+		}
+
+		private bool IsReservationInTheTimeRange(Reservation r, DateTime first, DateTime second)
+		{
+			return
+				// время брони полностью внутри диапазона
+				(r.FirstTime.Hour >= first.Hour && r.LastTime.Hour <= second.Hour) ||
+				// начало в диапазоне
+				(r.FirstTime.Hour >= first.Hour && r.FirstTime.Hour < second.Hour) ||
+				// конец в диапазоне
+				(r.LastTime.Hour > first.Hour && r.LastTime.Hour <= second.Hour);
 		}
 	}
 }

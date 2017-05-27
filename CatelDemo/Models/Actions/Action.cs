@@ -18,7 +18,7 @@ namespace RestaurantHelper.Models.Actions
 		/// <summary>
 		/// бесплатное блюдо за превышение суммы заказа
 		/// </summary>
-		AmountExcess
+		Bonus
 	}
 
 	public class Action : MyModelBase
@@ -38,7 +38,7 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData NameProperty = RegisterProperty("Name", typeof(string));
 
-		[MinLength(10), MaxLength(150), Required]
+		[MinLength(15), MaxLength(150), Required]
 		public string Description
 		{
 			get { return GetValue<string>(DescriptionProperty); }

@@ -7,7 +7,11 @@ namespace RestaurantHelper.DAL
 {
 	class RestaurantDbContext : DbContext
 	{
-		public DbSet<AmountExcessAction> AmountExcessActions { get; set; }
+		public RestaurantDbContext() : base() // TODO: connection string
+		{
+			
+		}
+		public DbSet<BonusAction> BonusActions { get; set; }
 		public DbSet<DiscountAction> DiscountActions { get; set; }
 		public DbSet<ClientReview> ClientReviews { get; set; }
 		public DbSet<ManagerAnswer> ManagerAnswers { get; set; }

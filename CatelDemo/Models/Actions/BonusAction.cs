@@ -9,7 +9,7 @@ using Catel.Data;
 
 namespace RestaurantHelper.Models.Actions
 {
-	public class AmountExcessAction : Action
+	public class BonusAction : Action
 	{
 		[Required]
 		public int ExcessSum
@@ -32,7 +32,7 @@ namespace RestaurantHelper.Models.Actions
 
 		public override string ToString()
 		{
-			return $"ПРЕВЫШЕНИЕ {Id} | {ExcessSum,6} | {Name,20}";
+			return $"БОНУС {Id} | {ExcessSum,6} | {Name,20}";
 		}
 	}
 }
