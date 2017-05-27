@@ -1,5 +1,5 @@
 ﻿<catel:UserControl
-    x:Class="RestaurantHelper.Views.ClientViews.OrderViews.TotalsView"
+    x:Class="RestaurantHelper.Views.ClientViews.OrderViews.ClientTotalsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
@@ -9,7 +9,8 @@
             <Setter Property="IsReadOnly" Value="True" />
         </Style>
     </catel:UserControl.Resources>
-    <Grid Width="383" Height="400">
+
+    <Grid Width="550" Height="400">
         <TextBlock
             x:Name="textBlock"
             Width="157"

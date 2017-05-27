@@ -21,13 +21,13 @@
         <GroupBox
             x:Name="groupBox"
             Width="350"
-            Height="163"
+            Height="171"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Header="Введите текст отзыва:">
             <TextBox
                 x:Name="ValidationRequiredField1"
-                Margin="5,5,5,12"
+                Margin="0,0,0,12"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
@@ -51,22 +51,35 @@
         </GroupBox>
         <Button
             x:Name="button"
-            Width="106"
-            Margin="234,187,0,0"
+            Width="120"
+            Margin="220,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
             Content="Сохранить"
             IsDefault="True"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
         <Button
             x:Name="button1"
-            Width="94"
+            Width="116"
             Margin="10,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Command="{Binding CancelCommand}"
-            Content="Отмена" />
+            Content="Отмена"
+            IsCancel="True"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
+        <Button
+            x:Name="Collapsed"
+            Width="330"
+            Margin="10,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding OkCommand}"
+            Content="Сохранить"
+            IsDefault="True"
+            Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
     </Grid>
 
 </catel:DataWindow>

@@ -1,66 +1,84 @@
 ﻿<catel:UserControl
-    x:Class="RestaurantHelper.Views.ClientViews.OrderViews.MenuView"
+    x:Class="RestaurantHelper.Views.ClientViews.OrderViews.ClientMenuView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit">
+    xmlns:m="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+    FontSize="15">
 
     <Grid Width="1000" Height="600">
         <ListBox
             x:Name="listBox"
-            Width="679"
-            Height="452"
-            Margin="23,40,0,0"
+            Width="532"
+            Height="429"
+            Margin="10,40,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="{DynamicResource MaterialDesignPaper}"
             ItemContainerStyle="{StaticResource DishesListBoxItemStyle}"
             ItemTemplate="{StaticResource DishDataTemplate}"
             ItemsSource="{Binding Dishes}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedDish}"
-            Style="{StaticResource DishesStyle}" />
-        <ListBox
+            Style="{StaticResource DishesStyle}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <catel:EventToCommand Command="{Binding AddCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        <ListView
             x:Name="listBox1"
-            Width="225"
-            Height="238"
-            Margin="765,108,0,0"
+            Width="380"
+            Height="264"
+            Margin="610,82,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="{DynamicResource MaterialDesignPaper}"
-            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-            BorderThickness="1"
+            BorderBrush="{DynamicResource SecondaryAccentBrush}"
+            BorderThickness="2"
             ItemsSource="{Binding OrderedDishes}"
             SelectedItem="{Binding SelectedOrderedDish}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="210"
+                        DisplayMemberBinding="{Binding Path=DishId, Converter={StaticResource DishIdToNameConverter}}"
+                        Header="НАЗВАНИЕ" />
+                    <GridViewColumn
+                        Width="67"
+                        m:ColorZoneAssist.Mode="PrimaryDark"
+                        DisplayMemberBinding="{Binding OrderedPrice}"
+                        Header="ЦЕНА" />
+                    <GridViewColumn
+                        Width="83"
+                        DisplayMemberBinding="{Binding Quantity}"
+                        Header="КОЛ-ВО" />
+                </GridView>
+            </ListView.View>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Initialized">
                     <catel:EventToCommand Command="{Binding CalculateTotals}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </ListBox>
+        </ListView>
         <Button
             x:Name="button"
             Width="156"
             Height="61"
-            Margin="23,513,0,0"
+            Margin="10,513,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад" />
         <Button
-            x:Name="button1"
-            Width="129"
-            Height="55"
-            Margin="550,499,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding AddCommand}"
-            Content="Добавить" />
-        <Button
             x:Name="button2"
-            Width="225"
+            Width="380"
             Height="43"
-            Margin="765,351,0,0"
+            Margin="610,351,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteCommand}"
@@ -76,9 +94,9 @@
             TextWrapping="Wrap" />
         <Button
             x:Name="button3"
-            Width="160"
-            Height="68"
-            Margin="812,513,0,0"
+            Width="204"
+            Height="61"
+            Margin="786,513,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding NextCommand}"
@@ -87,39 +105,22 @@
             x:Name="image"
             Width="63"
             Height="63"
-            Margin="702,215,0,0"
+            Margin="547,217,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Source="../../../Resources/arrows.jpg"
+            Source="../../../Images/arrows.jpg"
             Stretch="Uniform" />
         <TextBlock
             x:Name="textBlock1"
-            Margin="837,75,0,0"
+            Margin="620,57,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Ваш заказ:"
             TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock2"
-            Width="128"
-            Margin="345,511,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="20"
-            Text="Количество:"
-            TextWrapping="Wrap" />
-
-        <toolkit:IntegerUpDown
-            Margin="478,499,470,46"
-            AllowTextInput="False"
-            FontSize="25"
-            Maximum="5"
-            Minimum="1"
-            Value="{Binding CurrentDishesCount}" />
         <Rectangle
-            Width="225"
+            Width="380"
             Height="62"
-            Margin="765,407,0,0"
+            Margin="610,407,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Fill="#FFF4F4F5"
@@ -128,16 +129,16 @@
             x:Name="textBlock3"
             Width="93"
             Height="28"
-            Margin="783,424,0,0"
+            Margin="685,424,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="15"
             Text="Сумма заказа" />
         <TextBox
             x:Name="textBox"
-            Width="91"
+            Width="111"
             Height="36"
-            Margin="899,416,0,0"
+            Margin="812,416,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="20"

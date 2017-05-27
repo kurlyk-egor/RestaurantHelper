@@ -1,8 +1,8 @@
 ﻿namespace RestaurantHelper.Views.ClientViews.OrderViews
 {
-    public partial class TotalsView
+    public partial class ClientMenuView
     {
-        public TotalsView()
+        public ClientMenuView()
         {
             InitializeComponent();
         }
