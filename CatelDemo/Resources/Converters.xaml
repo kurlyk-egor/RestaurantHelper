@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:converters="clr-namespace:RestaurantHelper.Services.Converters">
+
+    <catel:BooleanToCollapsingVisibilityConverter x:Key="BoolToCollapse" />
+
+    <converters:TableNumberToPicturePathConverter x:Key="PathConverter" />
+    <converters:TableTypeToHeightConverter x:Key="HeightConverter" />
+    <converters:TableTypeToWidthConverter x:Key="WidthConverter" />
+    <converters:TableAvailabilityToColorConverter x:Key="AvailabilityConverter" />
+    <converters:TableAvailabilityToToolTipMessageConverter x:Key="ToolTipConverter" />
+    <converters:DateToTimeConverter x:Key="DateToTimeConverter" />
+    <converters:DateToDateStringConverter x:Key="DateToDateStringConverter" />
+    <converters:ActionTypeToDescriptionConverter x:Key="ActionTypeToDescriptionConverter" />
+    <converters:ActionToDescriptionConverter x:Key="ActionToDescriptionConverter" />
+    <converters:ActionToDishNameConverter x:Key="ActionToDishNameConverter" />
+    <converters:UserIdToLoginConverter x:Key="UserIdToLoginConverter" />
+    <converters:ActionToTypeNameConverter x:Key="ActionToTypeNameConverter" />
+    <converters:DishIdToNameConverter x:Key="DishIdToNameConverter" />
+    <converters:ReviewIdToIndicateColorConverter x:Key="ReviewIdToColorConverter" />
+    <converters:ActionToPercentOrSumConverter x:Key="ActionToPercentOrSumConverter" />
+    <converters:DishToDiscountPercentConverter x:Key="DishToPercentConverter" />
+</ResourceDictionary>
