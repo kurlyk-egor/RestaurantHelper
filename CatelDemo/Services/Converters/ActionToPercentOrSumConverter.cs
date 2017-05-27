@@ -1,33 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using RestaurantHelper.DAL;
-using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
 
 namespace RestaurantHelper.Services.Converters
 {
-	class ActionToDishNameConverter : IValueConverter
+	class ActionToPercentOrSumConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			Dish item;
-			UnitOfWork unitOfWork = UnitOfWork.GetInstance();
-
 			var discount = value as DiscountAction;
-			if(discount != null)
+			if (discount != null)
 			{
-				item = unitOfWork.Dishes.GetById(discount.DishId);
-				return item.Name;
+				return $"{discount.DiscountSum} %";
 			}
-
 			var bonus = value as BonusAction;
 			if (bonus != null)
 			{
-				item = unitOfWork.Dishes.GetById(bonus.DishId);
-				return item.Name;
+				return $"{bonus.ExcessSum} у.е.";
 			}
-
 			return string.Empty;
 		}
 

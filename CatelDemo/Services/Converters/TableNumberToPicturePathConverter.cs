@@ -11,7 +11,7 @@ namespace RestaurantHelper.Services.Converters
 			string path = string.Empty;
 			if (value != null)
 			{
-				path = $@"../../../Resources/Tables/table{(int)value}.jpg";
+				path = $@"pack://application:,,,/Images/Tables/table{(int)value}.jpg";
 			}
 			return path;
 		}

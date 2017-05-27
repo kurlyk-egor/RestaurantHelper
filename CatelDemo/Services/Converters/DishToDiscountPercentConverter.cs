@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
@@ -7,28 +11,20 @@ using RestaurantHelper.Models.Actions;
 
 namespace RestaurantHelper.Services.Converters
 {
-	class ActionToDishNameConverter : IValueConverter
+	class DishToDiscountPercentConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			Dish item;
-			UnitOfWork unitOfWork = UnitOfWork.GetInstance();
+			var dish = value as Dish;
+			string result = string.Empty;
 
-			var discount = value as DiscountAction;
-			if(discount != null)
+			if (dish != null)
 			{
-				item = unitOfWork.Dishes.GetById(discount.DishId);
-				return item.Name;
+				var discount = UnitOfWork.GetInstance().DiscountActions.GetAll().FirstOrDefault(da => da.DishId == dish.Id);
+			
+				result = discount == null ? "" : $"- {discount.DiscountSum}%";
 			}
-
-			var bonus = value as BonusAction;
-			if (bonus != null)
-			{
-				item = unitOfWork.Dishes.GetById(bonus.DishId);
-				return item.Name;
-			}
-
-			return string.Empty;
+			return result;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

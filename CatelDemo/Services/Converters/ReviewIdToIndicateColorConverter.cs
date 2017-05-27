@@ -4,25 +4,26 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
+using Catel.MVVM.Converters;
 using RestaurantHelper.DAL;
-using RestaurantHelper.Models.Actions;
+using RestaurantHelper.Models.Reviews;
 
 namespace RestaurantHelper.Services.Converters
 {
-	class ActionToTypeNameConverter : IValueConverter
+	class ReviewIdToIndicateColorConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value is DiscountAction)
+			string color = "Gray";
+			// value - Id отзыва. надо проверить, существует ли на него ответ
+			if (value != null)
 			{
-				return "СКИДКА";
+				var answer = UnitOfWork.GetInstance().ManagerAnswers.GetAll()
+					.FirstOrDefault(a => a.ReviewId == (int) value);
+
+				color = (answer == null) ? "LimeGreen" : "OrangeRed";
 			}
-			if (value is BonusAction)
-			{
-				return "БОНУС ";
-			}
-			return string.Empty;
+			return color;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
