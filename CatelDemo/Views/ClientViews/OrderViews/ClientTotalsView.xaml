@@ -109,6 +109,8 @@
             BorderBrush="{DynamicResource SecondaryAccentBrush}"
             BorderThickness="2"
             ItemsSource="{Binding OrderedDishes}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedOrderedDish}">
             <ListView.View>
                 <GridView>

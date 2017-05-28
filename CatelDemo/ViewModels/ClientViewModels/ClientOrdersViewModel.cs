@@ -32,13 +32,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			_user = user;
 			UserLogin = _user.Login;
 			_parentViewModel = parentViewModel;
-			_orderedSumCalculator = new OrderedSumCalculator(Dishes);
+			_orderedSumCalculator = new OrderedSumCalculator(OrderedDishes);
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 
 			BackCommand = new Command(OnBackCommandExecute);
 			SelectAnotherOrderCommand = new Command(OnSelectAnotherOrderCommandExecute);
+			DeleteOrderCommand = new Command(OnDeleteOrderCommandExecute, OnDeleteOrderCommandCanExecute);
 
-			FillOrdersWithReservationsList();
+			RefreshOrdersWithReservationsCollection();
 		}
 
 
@@ -65,12 +66,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		}
 		public static readonly PropertyData UserLoginProperty = RegisterProperty("UserLogin", typeof(string));
 
-		public FastObservableCollection<OrderedDish> Dishes
+		public FastObservableCollection<OrderedDish> OrderedDishes
 		{
-			get { return GetValue<FastObservableCollection<OrderedDish>>(DishesProperty); }
-			set { SetValue(DishesProperty, value); }
+			get { return GetValue<FastObservableCollection<OrderedDish>>(OrderedDishesProperty); }
+			set { SetValue(OrderedDishesProperty, value); }
 		}
-		public static readonly PropertyData DishesProperty = RegisterProperty("Dishes", typeof(FastObservableCollection<OrderedDish>),
+		public static readonly PropertyData OrderedDishesProperty = RegisterProperty("OrderedDishes", typeof(FastObservableCollection<OrderedDish>),
 			new FastObservableCollection<OrderedDish>());
 
 		public int TotalSum
@@ -84,24 +85,32 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		public Command SelectAnotherOrderCommand { get; private set; }
 		private void OnSelectAnotherOrderCommandExecute()
 		{
-			//Dishes.Clear();
-			//// получаем все заказанные блюда
-			//var orderedDishes = _unitOfWork.OrderedDishes.GetAll()
-			//	.Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
+			OrderedDishes.Clear();
+			// получаем все заказанные блюда
+			var orderedDishes = _unitOfWork.OrderedDishes.GetAll()
+				.Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
 
-			//foreach (var orderedDish in orderedDishes)
-			//{
-			//	// получаем описание блюда
-			//	var dish = _unitOfWork.Dishes.GetAll().FirstOrDefault(d => d.Id == orderedDish.DishId);
-			//	// указываем, сколько было заказано
-			//	if (dish == null) continue;
-			//	dish.Quantity = orderedDish.Quantity;
-			//	Dishes.Add(dish);
-			//}
-			//TotalSum = _orderedSumCalculator.GetCurrentOrderedSum(orderedDishes.ToList());
+			// добавляем в коллекцию
+			OrderedDishes.AddItems(orderedDishes);
+			TotalSum = _orderedSumCalculator.GetCurrentOrderedSum();
 		}
 
 
+		public Command DeleteOrderCommand { get; private set; }
+		private bool OnDeleteOrderCommandCanExecute()
+		{
+			return SelectedOrderWithReservation != null;
+		}
+		private void OnDeleteOrderCommandExecute()
+		{
+			var order = _unitOfWork.Orders.GetById(SelectedOrderWithReservation.OrderId);
+
+			_unitOfWork.Orders.Delete(order.Id);
+			_unitOfWork.Reservations.Delete(order.ReservationId);
+			_unitOfWork.SaveChanges();
+
+			RefreshOrdersWithReservationsCollection();
+		}
 		public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
@@ -118,9 +127,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			await base.CloseAsync();
 		}
 
-		private void FillOrdersWithReservationsList()
+		private void RefreshOrdersWithReservationsCollection()
 		{
 			OrdersWithReservations.Clear();
+			OrderedDishes.Clear();
 
 			var userOrders = _unitOfWork.Orders.GetAll()
 				.Join(_unitOfWork.Reservations.GetAll(), 

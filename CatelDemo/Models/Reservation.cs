@@ -54,7 +54,6 @@ namespace RestaurantHelper.Models
 		}
 		public static readonly PropertyData DayProperty = RegisterProperty("Day", typeof(DateTime));
 
-
 		public override string ToString()
 		{
 			return $"{Day} {FirstTime}-{LastTime}";
