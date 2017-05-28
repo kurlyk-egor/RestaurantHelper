@@ -16,13 +16,13 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class EnterViewModel : ViewModelBase
     {
-        private readonly IViewModel _parentViewModel;
+        private readonly IViewModel _rootViewModel;
         private readonly IViewModel _previousViewModel;
         private AuthorizationChecker _authorizationChecker;
 
         public EnterViewModel(IViewModel parentViewModel, IViewModel previousViewModel)
         {
-            _parentViewModel = parentViewModel;
+            _rootViewModel = parentViewModel;
             _previousViewModel = previousViewModel;
 
             BackCommand = new Command(OnBackCommandExecute);
@@ -47,7 +47,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
         private void OnBackCommandExecute()
         {
-            _parentViewModel.ChangePage(_previousViewModel);
+            _rootViewModel.ChangePage(_previousViewModel);
         }
 
         public Command TryEnterCommand { get; private set; }
@@ -62,22 +62,22 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
 	        if (_authorizationChecker.IsAdmin())
 	        {
-		        _parentViewModel.ChangePage(new ManagerMainViewModel());
+		        _rootViewModel.ChangePage(new ManagerMainViewModel());
 	        }
             else if (_authorizationChecker.IsMatchUser())
             {
                 User user = _authorizationChecker.GetUser();
-                //TODO: надо бы сделать какую нибудь заставку для успешной авторизации
-                _parentViewModel.ChangePage(new ClientMainViewModel(user));
+				//TODO: надо бы сделать какую нибудь заставку для успешной авторизации
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Успешная авторизация!"), 1111, new ClientMainViewModel(user));
             }
             else if (_authorizationChecker.IsExistsLogin())
             {
-                MessageBox.Show("Неверный пароль!");
-            }
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Неверный пароль!"), 777);
+			}
             else
             {
-				MessageBox.Show("Пользователь не зарегистрирован");
-            }
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Логин не найден!"), 777);
+			}
         }
         protected override async Task InitializeAsync()
         {

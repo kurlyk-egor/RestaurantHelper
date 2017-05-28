@@ -112,6 +112,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			_unitOfWork.Reservations.Delete(order.ReservationId);
 			_unitOfWork.SaveChanges();
 
+			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Заказ отменен!"), 777);
+
 			RefreshOrdersWithReservationsCollection();
 		}
 		public Command BackCommand { get; private set; }

@@ -20,12 +20,15 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private Action _refreshReviewsAction;
+		private readonly IViewModel _rootViewModel;
 		private readonly IViewModel _parentViewModel;
-		private readonly User _user;
 		private readonly ReviewsWithAnswersBinder _binder;
+		private readonly User _user;
+		
 
 		public ClientReviewsViewModel(IViewModel parentViewModel, User user)
 		{
+			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_parentViewModel = parentViewModel;
 			_binder = new ReviewsWithAnswersBinder();
 			_user = user;
@@ -140,7 +143,9 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		{
 			_unitOfWork.ClientReviews.Delete(SelectedClientReview.Id);
 			_unitOfWork.SaveChanges();
+
 			_refreshReviewsAction();
+			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Отзыв удален!"), 777);
 		}
 
 		private bool OnAnyReviewCommandCanExecute()
@@ -161,6 +166,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		public Command RefreshCommand { get; private set; }
 		private void OnRefreshCommandExecute()
 		{
+			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Обновление"), 999);
 			_refreshReviewsAction();
 		}
 

@@ -12,10 +12,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
     public class ClientProfileViewModel : ViewModelBase
     {
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
-		private readonly IViewModel _previousViewModel;
+		private readonly IViewModel _rootViewModel;
+		private readonly IViewModel _parentViewModel;
         public ClientProfileViewModel(IViewModel previousViewModel, User user)
         {
-            _previousViewModel = previousViewModel;
+			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+			_parentViewModel = previousViewModel;
             User = user;
 
             SaveCommand = new Command(OnSaveCommandExecute, OnSaveCommandCanExecute);
@@ -67,7 +69,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
 
 
-        public Command SaveCommand { get; private set; }
+	    public Command SaveCommand { get; private set; }
 
 	    private bool OnSaveCommandCanExecute()
 	    {
@@ -77,13 +79,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         {
             _unitOfWork.Users.Update(User);
             _unitOfWork.SaveChanges();
-        }
+
+			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Сохранено!"), 1000, _parentViewModel);
+		}
 
         public Command BackCommand { get; private set; }
         private void OnBackCommandExecute()
         {
-            var parent = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
-            parent.ChangeCurrentPage(_previousViewModel);
+            _rootViewModel.ChangePage(_parentViewModel);
         }
         protected override async Task InitializeAsync()
         {

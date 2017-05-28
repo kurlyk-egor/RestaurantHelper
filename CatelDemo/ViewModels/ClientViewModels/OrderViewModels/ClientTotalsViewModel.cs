@@ -122,7 +122,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void OnOrderCommandExecute()
 		{
 			SaveAllToDataBase();
-			_rootViewModel.ChangePage(new ClientMainViewModel(_user));
+			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Заказ успешно создан!"), 1000, new ClientMainViewModel(_user));
 		}
 
 
