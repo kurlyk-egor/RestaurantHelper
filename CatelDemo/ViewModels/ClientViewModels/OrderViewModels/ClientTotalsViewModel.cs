@@ -21,6 +21,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    private readonly IViewModel _rootViewModel;
 	    private readonly OrderedSumCalculator _sumCalculator;
 
+	    private OrderedDish _bonusDish;
+
 		public ClientTotalsViewModel(User user, Reservation reservation, FastObservableCollection<OrderedDish> orderedDishes)
         {
 			OrderedDishes = orderedDishes;
@@ -35,6 +37,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			OrderCommand = new Command(OnOrderCommandExecute);
 
 			FillViewModelProperties();
+
+			CheckBonus();
         }
 
 	    public string UserLogin
@@ -114,6 +118,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 	    public Command BackCommand { get; private set; }
 		private void OnBackCommandExecute()
 		{
+			OrderedDishes.Remove(_bonusDish);
 			_rootViewModel.ChangePage(new ClientMenuViewModel(_user, _reservation, OrderedDishes));
 		}
 
@@ -147,19 +152,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			LastTime = _reservation.LastTime.ToShortTimeString();
 
 			TotalSum = _sumCalculator.GetCurrentOrderedSum();
-
-			var bonuses = _unitOfWork.BonusActions.GetAll().Where(b => b.ExcessSum < TotalSum);
-			var bonus = bonuses.OrderBy(b => b.ExcessSum).LastOrDefault();
-
-			if (bonus != null)
-			{
-				BonusHeaderString = $"{bonus.Dish.Name} | ЗАКАЗ > {bonus.ExcessSum}";
-				BonusInfo = bonus.Description;
-			}
-			else
-			{
-				BonusInfo = "Извините, но за Ваш заказ бонус не предусмотрен.";
-			}
 		}
 
 		private void SaveAllToDataBase()
@@ -186,8 +178,26 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				_unitOfWork.OrderedDishes.Insert(dish);
 			}
 
-			// TODO: добавить бонусное блюдо
 			_unitOfWork.SaveChanges();
+		}
+
+	    private void CheckBonus()
+	    {
+			var bonuses = _unitOfWork.BonusActions.GetAll().Where(b => b.ExcessSum < TotalSum);
+			var bonus = bonuses.OrderBy(b => b.ExcessSum).LastOrDefault();
+
+			if (bonus != null)
+			{
+				BonusHeaderString = $"{bonus.Dish.Name} | ЗАКАЗ > {bonus.ExcessSum}";
+				BonusInfo = bonus.Description;
+				// добавить бонусное блюдо
+				_bonusDish = new OrderedDish {DishId = bonus.DishId, OrderedPrice = 0, Quantity = 1};
+				OrderedDishes.Add(_bonusDish);
+			}
+			else
+			{
+				BonusInfo = "Извините, но за Ваш заказ бонус не предусмотрен.";
+			}
 		}
 	}
 }

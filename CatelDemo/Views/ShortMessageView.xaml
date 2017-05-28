@@ -15,6 +15,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="20"
-            Text="{Binding Text}" />
+            Text="{Binding Text}"
+            TextWrapping="Wrap" />
     </Grid>
 </catel:DataWindow>

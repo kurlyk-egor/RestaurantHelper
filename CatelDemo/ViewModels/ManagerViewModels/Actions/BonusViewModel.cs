@@ -17,13 +17,12 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 	public class BonusViewModel : ViewModelBase
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
-		private readonly BonusAction _bonusAction;
+
 		public BonusViewModel()
 		{
 			Dishes.Clear();
 			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 
-			_bonusAction = new BonusAction();
 			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
 		}
 
@@ -72,21 +71,32 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		}
 		private void OnApplyActionExecute()
 		{
+			var root = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+
 			if (SelectedDish == null)
 			{
-				MessageBox.Show("Не выбрано блюдо!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 777);
 				return;
 			}
-			FillAmounExcessAction();
+
 			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;
-			if (!actionsFilter.CanAddAction(_bonusAction, out message))
+			var bonus = new BonusAction
 			{
-				MessageBox.Show(message);
+				DishId = SelectedDish.Id,
+				ExcessSum = DiscountValue,
+				Name = ActionName,
+				Description = ActionInfo
+			};
+
+			if (!actionsFilter.CanAddAction(bonus, out message))
+			{
+				root.ChangePageWithDialog(new ShortMessageViewModel(message), 999);
 			}
 			else
 			{
-				actionsFilter.SaveAction(_bonusAction);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Акция успешно добавлена!"), 1111);
+				actionsFilter.SaveAction(bonus);
 			}
 		}
 		protected override async Task InitializeAsync()
@@ -97,14 +107,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
-		}
-
-		private void FillAmounExcessAction()
-		{
-			_bonusAction.DishId = SelectedDish.Id;
-			_bonusAction.ExcessSum = DiscountValue;
-			_bonusAction.Name = ActionName;
-			_bonusAction.Description = ActionInfo;
 		}
 	}
 }

@@ -78,8 +78,7 @@
             Command="{Binding AddActionCommand}"
             Content="Запустить акцию"
             FontSize="18"
-            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
-            IsChecked="True" />
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
         <RadioButton
             x:Name="button1"
             Grid.Row="0"
@@ -92,7 +91,8 @@
             Command="{Binding ShowActionsCommand}"
             Content="Просмотреть все акции"
             FontSize="18"
-            Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
+            IsChecked="True" />
         <Rectangle
             Grid.Column="1"
             Width="237"

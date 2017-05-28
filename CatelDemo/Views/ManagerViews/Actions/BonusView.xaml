@@ -29,6 +29,7 @@
                 <ComboBox
                     x:Name="comboBox"
                     Width="120"
+                    Height="48"
                     Margin="20,31,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -36,7 +37,7 @@
                     SelectedItem="{Binding SelectedDish}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -61,9 +62,9 @@
                     AutoToolTipPlacement="TopLeft"
                     IsMoveToPointEnabled="True"
                     IsSnapToTickEnabled="True"
-                    Maximum="2000"
+                    Maximum="5000"
                     Minimum="100"
-                    TickFrequency="50"
+                    TickFrequency="100"
                     Value="{Binding DiscountValue}" />
 
                 <Button

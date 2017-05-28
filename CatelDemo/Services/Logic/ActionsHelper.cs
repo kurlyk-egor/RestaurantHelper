@@ -29,24 +29,18 @@ namespace RestaurantHelper.Services.Logic
 			var discount = action as DiscountAction;
 			if (discount != null)
 			{
-				foreach (var discountAction in _unitOfWork.DiscountActions.GetAll())
+				if(_unitOfWork.DiscountActions.GetAll().ToList().Exists(b => b.DishId == discount.DishId))
 				{
-					if (discount.DishId == discountAction.DishId)
-					{
 						message = "На этот товар уже установлена скидка";
-					}
 				}
 			}
 
 			var bonus = action as BonusAction;
 			if (bonus != null)
 			{
-				foreach (var amountAction in _unitOfWork.BonusActions.GetAll())
+				if(_unitOfWork.BonusActions.GetAll().ToList().Exists(b => b.ExcessSum == bonus.ExcessSum))
 				{
-					if (bonus.ExcessSum == amountAction.ExcessSum)
-					{
-						message = "За превышение данной суммы уже предусмотрен бонус";
-					}
+					message = "За превышение данной суммы уже предусмотрен бонус";
 				}
 			}
 

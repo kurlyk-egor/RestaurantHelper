@@ -30,7 +30,7 @@
                 <ComboBox
                     x:Name="ValidationRequiredField3"
                     Width="149"
-                    Height="45"
+                    Height="57"
                     Margin="10,31,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -39,7 +39,7 @@
                     SelectedItem="{Binding SelectedDish}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Name}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

@@ -18,13 +18,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 	public class DiscountViewModel : ViewModelBase
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
-		private readonly DiscountAction _discountAction;
 		public DiscountViewModel()
 		{
 			Dishes.Clear();
 			Dishes.AddItems(_unitOfWork.Dishes.GetAll());
 
-			_discountAction = new DiscountAction();
 			ApplyAction = new Command(OnApplyActionExecute, OnApplyActionCanExecute);
 		}
 
@@ -74,21 +72,31 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		}
 		private void OnApplyActionExecute()
 		{
+			var root = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+
 			if (SelectedDish == null)
 			{
-				MessageBox.Show("Не выбрано блюдо!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 777);
 				return;
 			}
-			FillDiscountAction();
+			var discount = new DiscountAction
+			{
+				DishId = SelectedDish.Id,
+				DiscountSum = DiscountValue,
+				Name = ActionName,
+				Description = ActionInfo
+			};
+
 			ActionsHelper actionsFilter = new ActionsHelper();
 			string message;
-			if (!actionsFilter.CanAddAction(_discountAction, out message))
+			if (!actionsFilter.CanAddAction(discount, out message))
 			{
-				MessageBox.Show(message);
+				root.ChangePageWithDialog(new ShortMessageViewModel(message), 999);
 			}
 			else
 			{
-				actionsFilter.SaveAction(_discountAction);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Акция успешно добавлена!"), 1111);
+				actionsFilter.SaveAction(discount);
 			}
 		}	
 
@@ -100,14 +108,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 		protected override async Task CloseAsync()
 		{
 			await base.CloseAsync();
-		}
-
-		private void FillDiscountAction()
-		{
-			_discountAction.DishId = SelectedDish.Id;
-			_discountAction.DiscountSum = DiscountValue;
-			_discountAction.Name = ActionName;
-			_discountAction.Description = ActionInfo;
 		}
 	}
 }

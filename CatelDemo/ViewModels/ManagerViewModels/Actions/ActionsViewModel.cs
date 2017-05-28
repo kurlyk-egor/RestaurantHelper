@@ -9,14 +9,12 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 {
 	public class ActionsViewModel : ViewModelBase
 	{
-		// страницы двух немного разных акций
-		private readonly List<IViewModel> _actionPages = new List<IViewModel> { new DiscountViewModel(), new BonusViewModel() };
-
 		public ActionsViewModel()
 		{
 			SelectionChangedCommand = new Command(OnSelectionChangedCommandExecute);
 			AddActionCommand = new Command(OnAddActionCommandExecute);
 			ShowActionsCommand = new Command(OnShowActionsCommandExecute);
+			SetShowActionProperties();
 		}
 
 		public FastObservableCollection <ActionType> ActionTypes
@@ -89,13 +87,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 		private void SetAddDiscountProperties()
 		{
-			ActionsPage = _actionPages.Find(vm => vm is DiscountViewModel);
+			ActionsPage = new DiscountViewModel();
 			SelectedActionType = ActionType.Discount;
 		}
 
 		private void SetAddBonusProperties()
 		{
-			ActionsPage = _actionPages.Find(vm => vm is BonusViewModel);
+			ActionsPage = new BonusViewModel();
 			SelectedActionType = ActionType.Bonus;
 		}
 	}
