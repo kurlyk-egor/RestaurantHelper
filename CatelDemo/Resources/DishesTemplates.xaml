@@ -88,18 +88,19 @@
                     x:Name="Discounted1"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    Margin="5,0,5,0"
                     Panel.ZIndex="1"
-                    FontSize="16"
-                    Foreground="OrangeRed"
+                    FontSize="17"
+                    Foreground="Red"
                     Opacity="1"
                     Text="АКЦИЯ"
                     Visibility="Collapsed">
                     <TextBlock.Effect>
                         <DropShadowEffect
-                            BlurRadius="4"
+                            BlurRadius="2"
                             Opacity="0.8"
-                            ShadowDepth="-1"
-                            Color="Fuchsia" />
+                            ShadowDepth="1"
+                            Color="WhiteSmoke" />
                     </TextBlock.Effect>
                     <TextBlock.LayoutTransform>
                         <RotateTransform Angle="-45" />
@@ -116,8 +117,9 @@
                     Margin="0,0,10,10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    FontSize="15"
-                    Foreground="MediumVioletRed"
+                    Opacity="1"
+                    FontSize="18"
+                    Foreground="Red"
                     Text="{Binding Converter={StaticResource DishToPercentConverter}}"
                     Visibility="Collapsed" />
 
