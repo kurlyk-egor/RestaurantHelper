@@ -43,7 +43,7 @@
             Command="{Binding MyOrdersCommand}"
             Content="Мои заказы"
             FontFamily="Batang"
-            FontSize="16"
+            FontSize="18"
             Foreground="#FF384261">
             <Button.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
