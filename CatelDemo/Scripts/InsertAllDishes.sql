@@ -1,4 +1,4 @@
-﻿insert into Dishes (Name, Info, Price, PicturePath)
+insert into Dishes (Name, Info, Price, PicturePath)
 values  ('Бульон куриный', 'Подается с перепелиным яйцом и свежей зеленью', 460, 'pack://application:,,,/Images/Dishes/1.jpg'),
 		('Суп луковый', 'Лук репка, вино, гренки сырные, желток, портвейн', 390, 'pack://application:,,,/Images/Dishes/12.jpg'),
 		('Салат из морепродуктов', 'Теплый салат изтигровых креветок, мидий, морского гребешка, спаржи, болгарского перца, кабачков и лука порея', 550, 'pack://application:,,,/Images/Dishes/7.jpg'),
