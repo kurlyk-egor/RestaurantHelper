@@ -7,6 +7,16 @@
 *.userosscache
 *.sln.docstates
 
+# unnecessary localizations
+/output/*/de
+/output/*/es
+/output/*/fr
+/output/*/it
+/output/*/nl
+/output/*/tr
+/output/*/zh-Hans
+
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -50,6 +60,9 @@ artifacts/
 *.obj
 *.pch
 *.pdb
+!/output/*/*.pdb
+!/output/*/*.xml
+
 *.pgc
 *.pgd
 *.rsp
