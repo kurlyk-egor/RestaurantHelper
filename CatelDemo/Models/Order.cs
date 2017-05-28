@@ -41,5 +41,10 @@ namespace RestaurantHelper.Models
 
 		[ForeignKey("ReservationId")]
 		public Reservation Reservation { get; set; }
+
+		/// <summary>
+		/// для данного заказа - все заказанные блюда
+		/// </summary>
+		public List<OrderedDish> OrderedDishes { get; set; }
 	}
 }

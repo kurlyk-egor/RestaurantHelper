@@ -19,17 +19,6 @@ namespace RestaurantHelper.Models.Actions
 		}
 		public static readonly PropertyData DiscountSumProperty = RegisterProperty("DiscountSum", typeof(int));
 
-		[Required]
-		public int DishId
-		{
-			get { return GetValue<int>(DishIdProperty); }
-			set { SetValue(DishIdProperty, value); }
-		}
-		public static readonly PropertyData DishIdProperty = RegisterProperty("DishId", typeof(int));
-
-		[ForeignKey("DishId")]
-		public Dish Dish { get; set; }
-
 		public override string ToString()
 		{
 			return $"СКИДКА {Id} | {DiscountSum,2}% | {Name,20}";

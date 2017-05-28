@@ -122,19 +122,6 @@
     <Compile Include="DAL\Repositories\TableRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
-    <Compile Include="Migrations\201705262214372_InitialCreate.cs" />
-    <Compile Include="Migrations\201705262214372_InitialCreate.Designer.cs">
-      <DependentUpon>201705262214372_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705270331565_MigrateDB.cs" />
-    <Compile Include="Migrations\201705270331565_MigrateDB.Designer.cs">
-      <DependentUpon>201705270331565_MigrateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705270920312_Migrate2.cs" />
-    <Compile Include="Migrations\201705270920312_Migrate2.Designer.cs">
-      <DependentUpon>201705270920312_Migrate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actions\Action.cs" />
     <Compile Include="Models\Actions\BonusAction.cs" />
     <Compile Include="Models\Actions\DiscountAction.cs" />
@@ -431,15 +418,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201705262214372_InitialCreate.resx">
-      <DependentUpon>201705262214372_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705270331565_MigrateDB.resx">
-      <DependentUpon>201705270331565_MigrateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705270920312_Migrate2.resx">
-      <DependentUpon>201705270920312_Migrate2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

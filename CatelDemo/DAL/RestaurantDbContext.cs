@@ -15,7 +15,7 @@ namespace RestaurantHelper.DAL
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			var sqLiteInitializer = new SqliteCreateDatabaseIfNotExists<RestaurantDbContext>(modelBuilder);
+			var sqLiteInitializer = new SqliteDropCreateDatabaseWhenModelChanges<RestaurantDbContext>(modelBuilder);
 			Database.SetInitializer(sqLiteInitializer);
 		}
 

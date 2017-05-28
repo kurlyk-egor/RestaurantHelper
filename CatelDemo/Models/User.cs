@@ -48,5 +48,10 @@ namespace RestaurantHelper.Models
             set { SetValue(PhoneProperty, value); }
         }
         public static readonly PropertyData PhoneProperty = RegisterProperty("Phone", typeof(string));
+
+		/// <summary>
+		/// все заказы пользователя
+		/// </summary>
+		public List<Order> Orders { get; set; }
     }
 }
