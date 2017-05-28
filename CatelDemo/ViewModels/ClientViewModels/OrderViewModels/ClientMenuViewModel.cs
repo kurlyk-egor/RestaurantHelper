@@ -33,6 +33,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_sumCalculator = new OrderedSumCalculator(OrderedDishes);
 
 			AddCommand = new Command(OnAddCommandExecute);
+			SelectionChangedCommand = new Command(OnSelectionChangedCommandExecute);
 			DeleteCommand = new Command(OnDeleteCommandExecute, OnDeleteCommandCanExecute);
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
@@ -97,27 +98,36 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData TotalSumProperty = RegisterProperty("TotalSum", typeof(int), 0);
 
-		/// <summary>
-			/// Gets or sets the property value.
-			/// </summary>
 		public DiscountAction Discount
 		{
 			get { return GetValue<DiscountAction>(DiscountProperty); }
 			set { SetValue(DiscountProperty, value); }
 		}
-
-		/// <summary>
-		/// Register the Discount property so it is known in the class.
-		/// </summary>
 		public static readonly PropertyData DiscountProperty = RegisterProperty("Discount", typeof(DiscountAction));
+
+		public bool IsVisibleActionInfo
+		{
+			get { return GetValue<bool>(IsVisibleActionInfoProperty); }
+			set { SetValue(IsVisibleActionInfoProperty, value); }
+		}
+		public static readonly PropertyData IsVisibleActionInfoProperty = RegisterProperty("IsVisibleActionInfo", typeof(bool), false);
 
 
 	    public Command AddCommand { get; private set; }
-
 		private void OnAddCommandExecute()
 		{
 			_sumCalculator.AddDishIntoOrderedDishes(SelectedDish);
 			TotalSum = _sumCalculator.GetCurrentOrderedSum();
+		}
+
+		public Command SelectionChangedCommand { get; private set; }
+		private void OnSelectionChangedCommandExecute()
+		{
+			IsVisibleActionInfo = SelectedDish.IsDiscounted;
+			if (IsVisibleActionInfo)
+			{
+				Discount = _unitOfWork.DiscountActions.GetAll().FirstOrDefault(d => d.DishId == SelectedDish.Id);
+			}
 		}
 
 		public Command DeleteCommand { get; private set; }

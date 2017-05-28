@@ -8,6 +8,7 @@ using Catel.MVVM;
 using RestaurantHelper.DAL;
 using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
+using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
@@ -50,13 +51,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData TableNumberProperty = RegisterProperty("TableNumber", typeof(int));
 
-		public int TableSeatsNumber
-		{
-			get { return GetValue<int>(TableSeatsNumberProperty); }
-			set { SetValue(TableSeatsNumberProperty, value); }
-		}
-		public static readonly PropertyData TableSeatsNumberProperty = RegisterProperty("TableSeatsNumber", typeof(int));
-
 		public string VisitDate
 		{
 			get { return GetValue<string>(VisitDateProperty); }
@@ -93,12 +87,28 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		}
 		public static readonly PropertyData TotalSumProperty = RegisterProperty("TotalSum", typeof(int));
 
-		public string PhoneNumber
+
+		public BonusAction Bonus
 		{
-			get { return GetValue<string>(PhoneNumberProperty); }
-			set { SetValue(PhoneNumberProperty, value); }
+			get { return GetValue<BonusAction>(BonusProperty); }
+			set { SetValue(BonusProperty, value); }
 		}
-		public static readonly PropertyData PhoneNumberProperty = RegisterProperty("PhoneNumber", typeof(string));
+		public static readonly PropertyData BonusProperty = RegisterProperty("Bonus", typeof(BonusAction));
+
+
+		public string BonusHeaderString
+		{
+			get { return GetValue<string>(BonusHeaderStringProperty); }
+			set { SetValue(BonusHeaderStringProperty, value); }
+		}
+		public static readonly PropertyData BonusHeaderStringProperty = RegisterProperty("BonusHeaderString", typeof(string));
+
+		public string BonusInfo
+		{
+			get { return GetValue<string>(BonusInfoProperty); }
+			set { SetValue(BonusInfoProperty, value); }
+		}
+		public static readonly PropertyData BonusInfoProperty = RegisterProperty("BonusInfo", typeof(string));
 
 
 	    public Command BackCommand { get; private set; }
@@ -129,21 +139,29 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private void FillViewModelProperties()
 		{
 			UserLogin = _user.Login;
-			PhoneNumber = _user.Phone;
 
 			TableNumber = _reservation.TableId;
-			TableSeatsNumber = _unitOfWork.Tables.GetById(_reservation.TableId).SeatsNumber;
 
 			VisitDate = _reservation.Day.ToLongDateString();
 			FirstTime = _reservation.FirstTime.ToShortTimeString();
 			LastTime = _reservation.LastTime.ToShortTimeString();
 
 			TotalSum = _sumCalculator.GetCurrentOrderedSum();
+
+			var bonuses = _unitOfWork.BonusActions.GetAll().Where(b => b.ExcessSum < TotalSum);
+			var bonus = bonuses.OrderBy(b => b.ExcessSum).LastOrDefault();
+
+			if (bonus != null)
+			{
+				BonusHeaderString = $"{bonus.Dish.Name} | ЗАКАЗ > {bonus.ExcessSum}";
+				BonusInfo = bonus.Description;
+			}
 		}
 
 		private void SaveAllToDataBase()
 		{
 			_unitOfWork.Reservations.Insert(_reservation);
+			_unitOfWork.SaveChanges();
 			// получаем индекс только что созданной брони, который сгенерировала БД
 			var reservationId = _unitOfWork.Reservations.GetAll().Max(r => r.Id);
 
@@ -154,6 +172,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			};
 
 			_unitOfWork.Orders.Insert(order);
+			_unitOfWork.SaveChanges();
 			// получаем индекс только что созданного заказа, который сгенерировала БД
 			var orderId = _unitOfWork.Orders.GetAll().Max(o => o.Id);
 
@@ -162,6 +181,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				dish.OrderId = orderId;
 				_unitOfWork.OrderedDishes.Insert(dish);
 			}
+
+			// TODO: добавить бонусное блюдо
 			_unitOfWork.SaveChanges();
 		}
 	}
