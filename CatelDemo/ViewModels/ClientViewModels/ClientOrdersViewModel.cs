@@ -85,14 +85,17 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		public Command SelectAnotherOrderCommand { get; private set; }
 		private void OnSelectAnotherOrderCommandExecute()
 		{
-			OrderedDishes.Clear();
-			// получаем все заказанные блюда
-			var orderedDishes = _unitOfWork.OrderedDishes.GetAll()
-				.Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
+			if(SelectedOrderWithReservation != null)
+			{
+				OrderedDishes.Clear();
+				// получаем все заказанные блюда
+				var orderedDishes = _unitOfWork.OrderedDishes.GetAll()
+					.Where(od => od.OrderId == SelectedOrderWithReservation.OrderId);
 
-			// добавляем в коллекцию
-			OrderedDishes.AddItems(orderedDishes);
-			TotalSum = _orderedSumCalculator.GetCurrentOrderedSum();
+				// добавляем в коллекцию
+				OrderedDishes.AddItems(orderedDishes);
+				TotalSum = _orderedSumCalculator.GetCurrentOrderedSum();
+			}
 		}
 
 

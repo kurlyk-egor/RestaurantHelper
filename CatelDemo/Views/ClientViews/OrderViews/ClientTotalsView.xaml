@@ -115,7 +115,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="210"
+                        Width="230"
                         DisplayMemberBinding="{Binding Path=DishId, Converter={StaticResource DishIdToNameConverter}}"
                         Header="НАЗВАНИЕ" />
                     <GridViewColumn
@@ -204,10 +204,10 @@
             x:Name="textBox"
             Width="120"
             Height="39"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
             Margin="134,222,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
             Text="{Binding UserLogin}"
             TextWrapping="Wrap" />
 
