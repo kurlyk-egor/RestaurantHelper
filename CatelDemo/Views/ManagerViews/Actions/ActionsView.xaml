@@ -103,8 +103,10 @@
             Panel.ZIndex="-1"
             Fill="{DynamicResource SecondaryAccentBrush}"
             Opacity="0.7"
-            Stroke="{DynamicResource MaterialDesignColumnHeader}"
-            StrokeThickness="2" />
+            RadiusX="10"
+            RadiusY="10"
+            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+            StrokeThickness="5" />
         <Rectangle
             Grid.ColumnSpan="2"
             Width="180"
@@ -115,8 +117,10 @@
             Panel.ZIndex="-1"
             Fill="{DynamicResource SecondaryAccentBrush}"
             Opacity="0.7"
-            Stroke="{DynamicResource MaterialDesignColumnHeader}"
-            StrokeThickness="2" />
+            RadiusX="10"
+            RadiusY="10"
+            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+            StrokeThickness="5" />
     </Grid>
 
 </catel:UserControl>

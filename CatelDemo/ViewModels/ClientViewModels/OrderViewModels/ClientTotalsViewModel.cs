@@ -156,6 +156,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				BonusHeaderString = $"{bonus.Dish.Name} | ЗАКАЗ > {bonus.ExcessSum}";
 				BonusInfo = bonus.Description;
 			}
+			else
+			{
+				BonusInfo = "Извините, но за Ваш заказ бонус не предусмотрен.";
+			}
 		}
 
 		private void SaveAllToDataBase()

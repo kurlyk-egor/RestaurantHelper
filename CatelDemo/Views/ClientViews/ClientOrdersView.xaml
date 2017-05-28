@@ -6,29 +6,30 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <Grid Width="800" Height="500">
+    <Grid Width="840" Height="500">
         <TextBlock
             x:Name="textBlock"
-            Width="92"
-            Margin="24,38,0,0"
+            Width="115"
+            Margin="24,28,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Пользователь:"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock1"
-            Width="152"
+            Width="186"
             Height="26"
             Margin="153,28,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
             Text="{Binding UserLogin}"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock2"
             Width="120"
             Height="26"
-            Margin="344,63,0,0"
+            Margin="390,58,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="МОИ ЗАКАЗЫ:"
@@ -37,7 +38,7 @@
             x:Name="listView"
             Width="440"
             Height="331"
-            Margin="344,89,0,0"
+            Margin="390,89,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource SecondaryAccentBrush}"
@@ -80,16 +81,16 @@
         </ListView>
         <Button
             x:Name="button"
-            Width="93"
-            Height="36"
-            Margin="78,442,0,0"
+            Width="122"
+            Height="48"
+            Margin="24,430,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад" />
         <GroupBox
             x:Name="groupBox"
-            Width="329"
+            Width="365"
             Height="357"
             Margin="10,63,0,0"
             HorizontalAlignment="Left"
@@ -97,24 +98,23 @@
             Header="Детали заказа">
             <ListView
                 x:Name="listBox"
-                Width="309"
+                Width="342"
                 Height="272"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontSize="11"
-                Foreground="{DynamicResource PrimaryHueMidBrush}"
+                Foreground="{DynamicResource PrimaryHueDarkBrush}"
                 ItemsSource="{Binding OrderedDishes}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn
-                            Width="170"
+                            Width="215"
                             DisplayMemberBinding="{Binding Path=DishId, Converter={StaticResource DishIdToNameConverter}}"
                             Header="НАЗВАНИЕ" />
                         <GridViewColumn
-                            Width="67"
-                            materialDesign:ColorZoneAssist.Mode="PrimaryDark"
+                            Width="62"
                             DisplayMemberBinding="{Binding OrderedPrice}"
                             Header="ЦЕНА" />
                         <GridViewColumn
@@ -141,15 +141,15 @@
             Margin="99,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
             IsReadOnly="True"
             Text="{Binding TotalSum}"
             TextWrapping="Wrap" />
         <Button
             x:Name="button1"
             Width="244"
-            Height="36"
-            Margin="500,442,0,0"
+            Height="48"
+            Margin="586,430,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteOrderCommand}"
