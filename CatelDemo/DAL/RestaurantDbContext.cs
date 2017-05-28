@@ -1,16 +1,24 @@
 ﻿using System.Data.Entity;
+using System.Data.SQLite;
 using RestaurantHelper.Models;
 using RestaurantHelper.Models.Actions;
 using RestaurantHelper.Models.Reviews;
+using SQLite.CodeFirst;
 
 namespace RestaurantHelper.DAL
 {
 	class RestaurantDbContext : DbContext
 	{
-		public RestaurantDbContext() : base() // TODO: connection string
-		{
-			
+		public RestaurantDbContext() : base("SQLiteConnection") 
+		{			
 		}
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			var sqLiteInitializer = new SqliteCreateDatabaseIfNotExists<RestaurantDbContext>(modelBuilder);
+			Database.SetInitializer(sqLiteInitializer);
+		}
+
 		public DbSet<BonusAction> BonusActions { get; set; }
 		public DbSet<DiscountAction> DiscountActions { get; set; }
 		public DbSet<ClientReview> ClientReviews { get; set; }

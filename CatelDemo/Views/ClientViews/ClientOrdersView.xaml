@@ -5,41 +5,43 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
-    <Grid Width="697" Height="500">
+    <Grid Width="800" Height="500">
         <TextBlock
             x:Name="textBlock"
             Width="83"
-            Margin="24,48,0,0"
+            Margin="24,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Пользователь:"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock1"
-            Width="124"
+            Width="152"
             Height="26"
-            Margin="112,38,0,0"
+            Margin="112,28,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="{Binding UserLogin}"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock2"
-            Width="87"
+            Width="120"
             Height="26"
-            Margin="320,38,0,0"
+            Margin="344,63,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Мои заказы:"
+            Text="МОИ ЗАКАЗЫ:"
             TextWrapping="Wrap" />
         <ListView
             x:Name="listView"
-            Width="446"
+            Width="440"
             Height="331"
-            Margin="241,89,0,0"
+            Margin="344,89,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             ItemsSource="{Binding OrdersWithReservations}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedOrderWithReservation}"
             SelectionMode="Single">
 
@@ -52,25 +54,25 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="100"
+                        Width="60"
                         DisplayMemberBinding="{Binding OrderId}"
-                        Header="ИД заказа" />
+                        Header="ИД" />
                     <GridViewColumn
-                        Width="80"
+                        Width="120"
                         DisplayMemberBinding="{Binding Day}"
-                        Header="Дата" />
+                        Header="ДАТА БРОНИ" />
                     <GridViewColumn
-                        Width="80"
+                        Width="90"
                         DisplayMemberBinding="{Binding FirstTime}"
-                        Header="Начало" />
+                        Header="НАЧАЛО" />
                     <GridViewColumn
                         Width="80"
                         DisplayMemberBinding="{Binding LastTime}"
-                        Header="Окончание" />
+                        Header="КОНЕЦ" />
                     <GridViewColumn
-                        Width="80"
+                        Width="90"
                         DisplayMemberBinding="{Binding TableId}"
-                        Header="Столик" />
+                        Header="СТОЛИК" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -85,24 +87,24 @@
             Content="Назад" />
         <GroupBox
             x:Name="groupBox"
-            Width="226"
-            Height="331"
-            Margin="10,89,0,0"
+            Width="329"
+            Height="357"
+            Margin="10,63,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Header="Детали заказа">
             <ListBox
                 x:Name="listBox"
-                Width="216"
-                Height="232"
-                Margin="0,10,0,0"
+                Width="309"
+                Height="249"
+                Margin="0,23,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 ItemsSource="{Binding Dishes}" />
         </GroupBox>
         <TextBlock
             x:Name="textBlock3"
-            Margin="24,128,0,0"
+            Margin="10,106,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Заказанные блюда:"
@@ -111,7 +113,7 @@
             x:Name="textBlock4"
             Width="51"
             Height="23"
-            Margin="24,386,0,0"
+            Margin="24,397,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Сумма:"
@@ -123,6 +125,7 @@
             Margin="99,386,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
             IsReadOnly="True"
             Text="{Binding TotalSum}"
             TextWrapping="Wrap" />
