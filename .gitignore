@@ -8,13 +8,13 @@
 *.sln.docstates
 
 # unnecessary localizations
-/output/*/de
-/output/*/es
-/output/*/fr
-/output/*/it
-/output/*/nl
-/output/*/tr
-/output/*/zh-Hans
+/output/Debug/de
+/output/Debug/es
+/output/Debug/fr
+/output/Debug/it
+/output/Debug/nl
+/output/Debug/tr
+/output/Debug/zh-Hans
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -60,8 +60,8 @@ artifacts/
 *.obj
 *.pch
 *.pdb
-!/output/*/*.pdb
-!/output/*/*.xml
+!/output/Debug/*.pdb
+!/output/Debug/*.xml
 
 *.pgc
 *.pgd
