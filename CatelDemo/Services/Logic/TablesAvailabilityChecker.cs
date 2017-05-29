@@ -28,7 +28,10 @@ namespace RestaurantHelper.Services.Logic
 			{
 				// TODO: скорее всего не хватает проверок
 				var reservations = _unitOfWork.Reservations.GetAll()
-					.Where(r => r.Day.Date == day.Date && IsReservationInTheTimeRange(r, first, second));
+					.Where(r => r.Day.Date == day.Date && 
+					// существующая бронь не должна попасть в диапазон выбора
+					// выбранная бронь тоже не должна попасть в диапазон существующей
+					(IsReservationInTheTimeRange(r, first, second) || IsTimeRangeInTheReservation(r, first, second)));
 
 
 				foreach (var r in reservations) // у столиков, попавших в этот набор, меням значение на false
@@ -87,7 +90,9 @@ namespace RestaurantHelper.Services.Logic
 
 			foreach (var order in filteredOrders)
 			{
-				info += $" ЗАКАЗ {order.Id,4} | ВРЕМЯ {order.Reservation.FirstTime.ToShortTimeString()}-{order.Reservation.LastTime.ToShortTimeString()}\n";
+				info += $" ЗАКАЗ {order.Id,4} | ";
+				info += $"ВРЕМЯ {order.Reservation.FirstTime.ToShortTimeString(),6}-{order.Reservation.LastTime.ToShortTimeString(),6} | ";
+				info +=	$"СТОЛИК {order.Reservation.Table.Number}\n";
 			}
 
 			return filteredOrders.Any();

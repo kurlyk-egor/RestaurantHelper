@@ -29,10 +29,10 @@ namespace RestaurantHelper.ViewModels
         public MainWindowViewModel()
         {
 			// TODO: запуск авторизации
-            //CurrentPage = new StartWindowViewModel(this);
+            CurrentPage = new StartWindowViewModel(this);
 
 			// TODO: запуск сразу клиентской части
-	        GetClient();
+	        //GetClient();
 
 			// TODO: запуск сразу из под админа
 			//CurrentPage = new ManagerMainViewModel();

@@ -49,7 +49,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			MaximumDate = helper.Maximum;
 
 			RefreshTablesCollection();
-			TableReservations.Clear();
 			ReservationsListRefresh();
 
 			if (reservation != null)
@@ -124,9 +123,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				IsEnabledTimePickers = true;
 			});
 			thread.Start();
-
-			//CheckOtherClientOrders();
-			ReservationsListRefresh(); // дата установлена
 		}
 
 		public Command DateValueChangedCommand { get; private set; }
@@ -141,8 +137,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				FirstTime = helper.FirstTime;
 			});
 			thread.Start();
-
-			//CheckOtherClientOrders();
 		}
 		#endregion
 
@@ -179,7 +173,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<FastObservableCollection<Table>>(TablesProperty); }
 			set { SetValue(TablesProperty, value); }
 		}
-
 		public static readonly PropertyData TablesProperty = RegisterProperty("Tables", typeof (FastObservableCollection<Table>),
 			new FastObservableCollection<Table>());
 
@@ -188,7 +181,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<Table>(SelectedItemTableProperty); }
 			set { SetValue(SelectedItemTableProperty, value); }
 		}
-
 		public static readonly PropertyData SelectedItemTableProperty = RegisterProperty("SelectedItemTable", typeof(Table));
 
 		public FastObservableCollection<Reservation> TableReservations
@@ -218,6 +210,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		{
 			ReservationsListRefresh();
 			CheckOtherClientOrders();
+
 			bool result = false;
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
@@ -226,7 +219,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 			if (result)
 			{
-				result = SelectedItemTable != null && SelectedItemTable.Availability;
+				result = SelectedItemTable != null && SelectedItemTable.Availability && !ErrorVisibility;
 			}
 			return result;
 		}
@@ -253,6 +246,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		{
 			Tables.Clear();
 			Tables.AddItems(_unitOfWork.Tables.GetAll());
+			_availabilityChecker.ResetValues();
 		}
 
 		private void ReservationsListRefresh()
