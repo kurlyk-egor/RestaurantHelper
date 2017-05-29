@@ -36,15 +36,10 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			_reservation = new Reservation();
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			
-			
-			//TODO: был вызов UOW
-			// передаем ссылку на наши столики
 			_availabilityChecker = new TablesAvailabilityChecker(Tables);
-
 
 			BackCommand = new Command(OnBackCommandExecute);
 			NextCommand = new Command(OnNextCommandExecute, OnNextCommandCanExecute);
-
 			TimeValuChangedCommand = new Command(OnTimeValuChangedCommandExecute);
 			DateValueChangedCommand = new Command(OnDateValueChangedCommandExecute);
 			TableSelectionChanged = new Command(OnTableSelectionChangedExecute);
@@ -71,14 +66,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<bool>(IsEnabledTimePickersProperty); }
 			set { SetValue(IsEnabledTimePickersProperty, value); }
 		}
-		public static readonly PropertyData IsEnabledTimePickersProperty = RegisterProperty("IsEnabledTimePickers", typeof (bool), false);
+		public static readonly PropertyData IsEnabledTimePickersProperty = RegisterProperty("IsEnabledTimePickers", typeof(bool), false);
 
 		public string StartFirstTime
 		{
 			get { return GetValue<string>(StartFirstTimeProperty); }
 			set { SetValue(StartFirstTimeProperty, value); }
 		}
-
 		public static readonly PropertyData StartFirstTimeProperty = RegisterProperty("StartFirstTime", typeof (string), "8:00");
 
 		public string StartLastTime
@@ -86,7 +80,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<string>(StartLastTimeProperty); }
 			set { SetValue(StartLastTimeProperty, value); }
 		}
-
 		public static readonly PropertyData StartLastTimeProperty = RegisterProperty("StartLastTime", typeof (string));
 
 		public string MinimumDate
@@ -94,7 +87,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<string>(MinimumDateProperty); }
 			set { SetValue(MinimumDateProperty, value); }
 		}
-
 		public static readonly PropertyData MinimumDateProperty = RegisterProperty("MinimumDate", typeof (string));
 
 		public string MaximumDate
@@ -102,19 +94,24 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			get { return GetValue<string>(MaximumDateProperty); }
 			set { SetValue(MaximumDateProperty, value); }
 		}
-
 		public static readonly PropertyData MaximumDateProperty = RegisterProperty("MaximumDate", typeof (string));
-
-		public Visibility CaptionVisibility
+	
+		public bool ErrorVisibility
 		{
-			get { return GetValue<Visibility>(CaptionVisibilityProperty); }
-			set { SetValue(CaptionVisibilityProperty, value); }
+			get { return GetValue<bool>(ErrorVisibilityProperty); }
+			set { SetValue(ErrorVisibilityProperty, value); }
 		}
-		public static readonly PropertyData CaptionVisibilityProperty = RegisterProperty("CaptionVisibility", typeof(Visibility), Visibility.Visible);
+		public static readonly PropertyData ErrorVisibilityProperty = RegisterProperty("ErrorVisibility", typeof(bool), false);
+
+		public string ConflictOrderInfo
+		{
+			get { return GetValue<string>(ConflictOrderInfoProperty); }
+			set { SetValue(ConflictOrderInfoProperty, value); }
+		}
+		public static readonly PropertyData ConflictOrderInfoProperty = RegisterProperty("ConflictOrderInfo", typeof(string));
 
 
 		public Command TimeValuChangedCommand { get; private set; }
-
 		private void OnTimeValuChangedCommandExecute() // выбрали какое то время
 		{
 			Thread thread = new Thread(() =>
@@ -128,11 +125,11 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			});
 			thread.Start();
 
+			//CheckOtherClientOrders();
 			ReservationsListRefresh(); // дата установлена
 		}
 
 		public Command DateValueChangedCommand { get; private set; }
-
 		private void OnDateValueChangedCommandExecute() // выбрали дату
 		{
 			Thread thread = new Thread(() =>
@@ -144,6 +141,8 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 				FirstTime = helper.FirstTime;
 			});
 			thread.Start();
+
+			//CheckOtherClientOrders();
 		}
 		#endregion
 
@@ -204,7 +203,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		public Command TableSelectionChanged { get; private set; }
 		private void OnTableSelectionChangedExecute()
 		{
-			CaptionVisibility = Visibility.Collapsed;
 			ReservationsListRefresh();
 		}
 
@@ -219,6 +217,7 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 		private bool OnNextCommandCanExecute()
 		{
 			ReservationsListRefresh();
+			CheckOtherClientOrders();
 			bool result = false;
 			if (!string.IsNullOrEmpty(FirstTime) && !string.IsNullOrEmpty(LastTime) && !string.IsNullOrEmpty(DateText))
 			{
@@ -270,6 +269,14 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 			}
 		}
 
+		private void CheckOtherClientOrders()
+		{
+			string info;
+			ErrorVisibility = _availabilityChecker.IsErrorClientReservation(_user, DateText, FirstTime, LastTime, out info);
+			ConflictOrderInfo = info;
+
+		}
+
 		private void SetViewModelProperties(Reservation reservation)
 		{	
 			FirstTimePickerHelper fHelper = new FirstTimePickerHelper(reservation.Day.ToShortDateString());
@@ -282,7 +289,6 @@ namespace RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels
 
 			DateText = reservation.Day.ToShortDateString();
 			SelectedItemTable = Tables.FirstOrDefault(table => table.Id == reservation.TableId);
-			CaptionVisibility = Visibility.Collapsed;
 			IsEnabledTimePickers = true;
 		}
 

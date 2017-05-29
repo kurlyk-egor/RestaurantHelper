@@ -139,7 +139,7 @@
         <ListBox
             x:Name="listBox"
             Width="142"
-            Height="240"
+            Height="153"
             Margin="852,114,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -164,14 +164,6 @@
             Text="Брони столика:"
             TextWrapping="Wrap" />
         <TextBlock
-            x:Name="textBlock1"
-            Margin="874,129,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Столик не выбран"
-            TextWrapping="Wrap"
-            Visibility="{Binding CaptionVisibility}" />
-        <TextBlock
             x:Name="textBlock2"
             Margin="852,70,0,0"
             HorizontalAlignment="Left"
@@ -191,7 +183,7 @@
             Text="{Binding ElementName=DatePicker, Path=Value, Converter={StaticResource DateToDateStringConverter}}" />
         <TextBlock
             x:Name="textBlock3"
-            Margin="100,0,0,100"
+            Margin="428,114,357,396"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="30"
@@ -199,6 +191,31 @@
             Foreground="{DynamicResource SecondaryAccentBrush}"
             Text="Выбор столика"
             TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock4"
+            Width="320"
+            Margin="373,159,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="20"
+            FontWeight="Black"
+            Foreground="{DynamicResource ValidationErrorBrush}"
+            Text="В выбранное время уже существует Ваш заказ"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            Visibility="{Binding ErrorVisibility, Converter={StaticResource BoolToCollapse}}" Height="55" />
+        <TextBlock
+            x:Name="textBlock1"
+            Width="320"
+            Foreground="{DynamicResource PrimaryHueDarkBrush}"
+            Height="110"
+            Margin="373,214,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap"
+            Visibility="{Binding ErrorVisibility, Converter={StaticResource BoolToCollapse}}">
+            <Run Text="{Binding ConflictOrderInfo}" />
+        </TextBlock>
     </Grid>
 
 </catel:UserControl>
