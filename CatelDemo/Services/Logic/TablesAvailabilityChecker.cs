@@ -26,6 +26,7 @@ namespace RestaurantHelper.Services.Logic
 			// если выбраны и время и дата
 			if (DateTime.TryParse(firstTime, out first) && DateTime.TryParse(secondTime, out second) && DateTime.TryParse(currentDay, out day))
 			{
+				// TODO: скорее всего не хватает проверок
 				var reservations = _unitOfWork.Reservations.GetAll()
 					.Where(r => r.Day.Date == day.Date && IsReservationInTheTimeRange(r, first, second));
 
@@ -68,6 +69,29 @@ namespace RestaurantHelper.Services.Logic
 			return GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber);
 		}
 
+		public bool IsErrorClientReservation(User user, string day, string firstTime, string lastTime, out string info)
+		{
+			info = string.Empty;
+			DateTime dateDay;
+			if (!DateTime.TryParse(day, out dateDay) || firstTime == null || lastTime == null)
+			{
+				return false;
+			}
+
+			var orders = _unitOfWork.Orders.GetAll().ToList();
+
+			var filteredOrders = orders.Where(order => order.Reservation != null)
+				.Where(order => order.UserId == user.Id && dateDay.Date == order.Reservation.Day.Date &&
+				                (IsReservationInTheTimeRange(order.Reservation, firstTime, lastTime) ||
+				                 IsTimeRangeInTheReservation(order.Reservation, firstTime, lastTime))).ToList();
+
+			foreach (var order in filteredOrders)
+			{
+				info += $" ЗАКАЗ {order.Id,4} | ВРЕМЯ {order.Reservation.FirstTime.ToShortTimeString()}-{order.Reservation.LastTime.ToShortTimeString()}\n";
+			}
+
+			return filteredOrders.Any();
+		}
 
 		/// <summary>
 		/// обновляет текущую доступность столиков 
@@ -85,7 +109,7 @@ namespace RestaurantHelper.Services.Logic
 		public bool IsReservationInTheTimeRange(Reservation r, string first, string second)
 		{
 			DateTime f, s;
-			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s))
+			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s) || r == null)
 			{
 				return false;
 			}
@@ -96,7 +120,7 @@ namespace RestaurantHelper.Services.Logic
 		public bool IsTimeRangeInTheReservation(Reservation r, string first, string second)
 		{
 			DateTime f, s;
-			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s))
+			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s) || r == null)
 			{
 				return false;
 			}
