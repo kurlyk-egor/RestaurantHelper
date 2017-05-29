@@ -4,6 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <Grid Name="Отчеты" />
+    <Grid Width="800" Height="600" />
 
 </catel:UserControl>

@@ -66,6 +66,7 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
                 AcceptsReturn="True"
+                Foreground="{DynamicResource PrimaryHueMidBrush}"
                 HorizontalScrollBarVisibility="Disabled"
                 MaxLength="150"
                 MinLines="5"

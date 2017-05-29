@@ -29,6 +29,7 @@ namespace RestaurantHelper.Services.Logic
 				var reservations = _unitOfWork.Reservations.GetAll()
 					.Where(r => r.Day.Date == day.Date && IsReservationInTheTimeRange(r, first, second));
 
+
 				foreach (var r in reservations) // у столиков, попавших в этот набор, меням значение на false
 				{
 					_tables.First(t => t.Id == r.TableId).Availability = false;
@@ -36,12 +37,9 @@ namespace RestaurantHelper.Services.Logic
 			}
 		}
 
-		private void ResetValues()
+		public void ResetValues()
 		{
-			foreach (Table t in _tables)
-			{
-				t.Availability = true;
-			}
+			_tables.ForEach(t => t.Availability = true);
 		}
 
 		/// <summary>
@@ -70,6 +68,7 @@ namespace RestaurantHelper.Services.Logic
 			return GetDaylyReservationsForTable(DateTime.Today.ToShortDateString(), tableNumber);
 		}
 
+
 		/// <summary>
 		/// обновляет текущую доступность столиков 
 		/// </summary>
@@ -82,7 +81,30 @@ namespace RestaurantHelper.Services.Logic
 			SetTablesAvailabilities(first, second, date);
 		}
 
-		private bool IsReservationInTheTimeRange(Reservation r, DateTime first, DateTime second)
+
+		public bool IsReservationInTheTimeRange(Reservation r, string first, string second)
+		{
+			DateTime f, s;
+			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s))
+			{
+				return false;
+			}
+
+			return IsReservationInTheTimeRange(r, f, s);
+		}
+
+		public bool IsTimeRangeInTheReservation(Reservation r, string first, string second)
+		{
+			DateTime f, s;
+			if (!DateTime.TryParse(first, out f) || !DateTime.TryParse(second, out s))
+			{
+				return false;
+			}
+
+			return IsTimeRangeInTheReservation(r, f, s);
+		}
+
+		public bool IsReservationInTheTimeRange(Reservation r, DateTime first, DateTime second)
 		{
 			return
 				// время брони полностью внутри диапазона
@@ -91,6 +113,18 @@ namespace RestaurantHelper.Services.Logic
 				(r.FirstTime.Hour >= first.Hour && r.FirstTime.Hour < second.Hour) ||
 				// конец в диапазоне
 				(r.LastTime.Hour > first.Hour && r.LastTime.Hour <= second.Hour);
+		}
+
+
+		public bool IsTimeRangeInTheReservation(Reservation r, DateTime first, DateTime second)
+		{
+			return
+				// время брони полностью внутри диапазона
+				(first.Hour >= r.FirstTime.Hour && second.Hour  <= r.LastTime.Hour) ||
+				// начало в диапазоне
+				(first.Hour >= r.FirstTime.Hour && second.Hour < r.FirstTime.Hour) ||
+				// конец в диапазоне
+				( first.Hour > r.LastTime.Hour &&  second.Hour <= r.LastTime.Hour);
 		}
 	}
 }

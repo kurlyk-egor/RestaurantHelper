@@ -63,6 +63,13 @@ namespace RestaurantHelper.Services.Logic
 
 		public string GetTimeString() => $"{_firstTime,2} - {_lastTime,2}";
 
+		public bool CanReservationFree(Reservation reservation)
+		{
+			var order = _unitOfWork.Orders.GetAll().FirstOrDefault(o => o.ReservationId == reservation.Id);
+			// Id == 0  - администратор
+			return order?.UserId == 0;
+		}
+
 		private void FillCurrentReservationForTable(int tableId)
 		{
 			DateTime current = DateTime.Now;

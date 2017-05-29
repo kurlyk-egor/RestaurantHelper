@@ -75,7 +75,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 			if (SelectedDish == null)
 			{
-				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 777);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 999);
 				return;
 			}
 
@@ -91,7 +91,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 			if (!actionsFilter.CanAddAction(bonus, out message))
 			{
-				root.ChangePageWithDialog(new ShortMessageViewModel(message), 999);
+				root.ChangePageWithDialog(new ShortMessageViewModel(message), 1300);
 			}
 			else
 			{

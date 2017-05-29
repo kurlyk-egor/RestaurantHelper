@@ -95,10 +95,10 @@
             Stroke="{DynamicResource PrimaryHueMidBrush}" />
         <ListBox
             x:Name="listBox"
-            Grid.Row="1"
+            Grid.RowSpan="2"
             Width="110"
-            Height="200"
-            Margin="625,0,0,0"
+            Height="154"
+            Margin="625,39,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="1"
@@ -116,10 +116,16 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding ReservationSelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListBox>
         <TextBlock
             x:Name="textBlock2"
-            Margin="634,36,0,0"
+            Margin="638,18,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Брони столика"
@@ -210,5 +216,26 @@
             VerticalAlignment="Top"
             Command="{Binding DeleteReservationCommand}"
             Content="Снять бронь" />
+        <TextBlock
+            x:Name="textBlock7"
+            Grid.Row="1"
+            Margin="625,144,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Клиент:"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="textBox3"
+            Grid.Row="1"
+            Width="124"
+            Height="30"
+            Margin="622,165,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            IsReadOnly="True"
+            Text="{Binding ReservationClientName}"
+            TextWrapping="Wrap" />
+
     </Grid>
 </catel:UserControl>

@@ -76,9 +76,12 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 
 			if (SelectedDish == null)
 			{
-				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 777);
+				root.ChangePageWithDialog(new ShortMessageViewModel("Блюдо не выбрано!"), 999);
 				return;
 			}
+
+			ActionsHelper actionsFilter = new ActionsHelper();
+			string message;
 			var discount = new DiscountAction
 			{
 				DishId = SelectedDish.Id,
@@ -87,11 +90,9 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 				Description = ActionInfo
 			};
 
-			ActionsHelper actionsFilter = new ActionsHelper();
-			string message;
 			if (!actionsFilter.CanAddAction(discount, out message))
 			{
-				root.ChangePageWithDialog(new ShortMessageViewModel(message), 999);
+				root.ChangePageWithDialog(new ShortMessageViewModel(message), 1300);
 			}
 			else
 			{

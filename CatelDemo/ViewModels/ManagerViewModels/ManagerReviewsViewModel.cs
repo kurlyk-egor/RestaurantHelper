@@ -17,7 +17,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 	public class ManagerReviewsViewModel : ViewModelBase
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
-		private const string NO_ANSWER = "Ответа еще нет.";
+		private const string NO_ANSWER = "Вы еще не ответили на этот отзыв.";
 		private readonly ReviewsWithAnswersBinder _binder;
 
 		public ManagerReviewsViewModel()
@@ -96,8 +96,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			int id = SelectedClientReview.Id;
 			_binder.SaveAnswer(AdminAnswer, id);
 			RefreshReviewsCollection();
-			// выбираем тот же отзыв
 			SelectedClientReview = ClientReviews.First(c => c.Id == id);
+
+			var root = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
+			root.ChangePageWithDialog(new ShortMessageViewModel("Ответ сохранен!"), 1500);
+			// выбираем тот же отзыв
 		}
 
 

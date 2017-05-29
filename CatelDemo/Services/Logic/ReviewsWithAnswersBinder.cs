@@ -7,7 +7,7 @@ namespace RestaurantHelper.Services.Logic
 {
 	class ReviewsWithAnswersBinder
 	{
-		private const string NO_ANSWER = "Ответа еще нет.";
+		private const string NO_ANSWER = "Вы еще не ответили на этот отзыв.";
 		private const string NO_SELECT = "Ничего не выбрано.";
 
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
@@ -54,7 +54,7 @@ namespace RestaurantHelper.Services.Logic
 
 			if (answerString == NO_ANSWER)
 			{
-				return "Администратор пока еще не ответил на этот вопрос.";
+				return "Администратор еще не ответил.";
 			}
 			return answerString;
 		}

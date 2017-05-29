@@ -28,6 +28,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		private const string TOOL_TIP_MESSAGE = "Довавить бронь текущему столику";
 
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+		private readonly IViewModel _root;
 		private readonly TablesAvailabilityRejuvenator _tablesAvailabilityRejuvenator;
 		private readonly AdminReservationsCreator _timeSelector;
 		private readonly ClientsForTableSelector _selector;
@@ -36,6 +37,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		public ManagerHallViewModel()
 		{
 			_tablesAvailabilityRejuvenator = new TablesAvailabilityRejuvenator(Tables);
+			_root = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_timeSelector = new AdminReservationsCreator();
 			_selector =  new ClientsForTableSelector();
 
@@ -47,6 +49,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			RenewTooltipMessageStart();
 
 			DeleteReservationCommand = new Command(OnDeleteReservationCommandExecute, OnDeleteReservationCommandCanExecute);
+			ReservationSelectionChangedCommand = new Command(OnReservationSelectionChangedCommandExecute);
 			TableSelectionChangedCommand = new Command(OnTableSelectionChangedCommandExecute);
 			AddReservationCommand = new Command(OnAddReservationCommandExecute);
 		}
@@ -125,6 +128,13 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		public static readonly PropertyData TimeStringProperty = RegisterProperty("TimeString", typeof(string));
 
+		public string ReservationClientName
+		{
+			get { return GetValue<string>(ReservationClientNameProperty); }
+			set { SetValue(ReservationClientNameProperty, value); }
+		}
+		public static readonly PropertyData ReservationClientNameProperty = RegisterProperty("ReservationClientName", typeof(string));
+
 		protected override async Task InitializeAsync()
 		{
 			await base.InitializeAsync();
@@ -148,6 +158,11 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		private void OnDeleteReservationCommandExecute()
 		{
+			if (! _timeSelector.CanReservationFree(SelectedReservation))
+			{
+				_root.ChangePageWithDialog(new ShortMessageViewModel("Вы не можете снять клиентскую бронь"), 2000);
+				return;
+			}
 			_unitOfWork.Reservations.Delete(SelectedReservation.Id);
 			_unitOfWork.SaveChanges();
 
@@ -164,7 +179,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 				bool? b = visualizer.ShowDialog(new AddReservationViewModel(SelectedItemTable));
 				if (b != true)
 				{
-					MessageBox.Show("Бронь не была добавлена!");
+					_root.ChangePageWithDialog(new ShortMessageViewModel("Отмена..."), 800);
 				}
 				else
 				{
@@ -188,6 +203,26 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 				foreach (var reserv in reservations)
 				{
 					TableReservations.Add(reserv);
+				}
+			}
+		}
+
+
+		public Command ReservationSelectionChangedCommand { get; private set; }
+		private void OnReservationSelectionChangedCommandExecute()
+		{
+			ReservationClientName = string.Empty;
+
+			if (SelectedReservation != null)
+			{
+				var order = _unitOfWork.Orders.GetAll().FirstOrDefault(o => o.ReservationId == SelectedReservation.Id);
+				if (order == null)
+				{
+					ReservationClientName = "Администратор";
+				}
+				else
+				{
+					ReservationClientName = order.User.Login;
 				}
 			}
 		}

@@ -30,13 +30,6 @@ namespace RestaurantHelper.Services.Logic
 		{
 			var checker = new TablesAvailabilityChecker(_myTables);
 			checker.TablesAvailableNowRefresh();
-			//var newTablesList = checker.TablesAvailableNowRefresh();
-
-			//foreach (var newTable in newTablesList)
-			//{
-			//	int id = newTable.Id;
-			//	_myTables.Single(t => t.Id == id).Availability = newTable.Availability;
-			//}
 		}
 
 		public int GetFreeTablesCount()
