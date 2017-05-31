@@ -24,7 +24,7 @@ namespace RestaurantHelper.Models.Reviews
 		public static readonly PropertyData UserIdProperty = RegisterProperty("UserId", typeof(int));
 
 		[ForeignKey("UserId")]
-		public User User { get; set; }
+		public virtual User User { get; set; }
 
 		public string Text
 		{

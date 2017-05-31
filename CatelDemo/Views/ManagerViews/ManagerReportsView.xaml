@@ -2,8 +2,296 @@
     x:Class="RestaurantHelper.Views.ManagerViews.ManagerReportsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:catel="http://catel.codeplex.com">
+    xmlns:catel="http://catel.codeplex.com"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:m="http://materialdesigninxaml.net/winfx/xaml/themes"
+    FontSize="11">
 
-    <Grid Width="800" Height="600" />
+    <Grid Width="800" Height="530">
+        <ComboBox
+            x:Name="comboBox"
+            Width="143"
+            Margin="41,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="{DynamicResource PrimaryHueDarkBrush}"
+            IsEditable="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding Periods}"
+            SelectedItem="{Binding SelectedPeriod}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding PeriodSelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+        <TextBlock
+            Margin="65,22,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Выберите период"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="435,22,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Заказы за выбранный период"
+            TextWrapping="Wrap" />
+        <ListView
+            Width="537"
+            Height="249"
+            Margin="253,42,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            m:ColorZoneAssist.Mode="Accent"
+            BorderBrush="Black"
+            FontSize="11"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            ItemsSource="{Binding Orders}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedItem="{Binding SelectedOrder}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn
+                        Width="80"
+                        DisplayMemberBinding="{Binding Id}"
+                        Header="ИД" />
+                    <GridViewColumn
+                        Width="160"
+                        DisplayMemberBinding="{Binding User.Login}"
+                        Header="Клиент" />
+                    <GridViewColumn
+                        Width="170"
+                        DisplayMemberBinding="{Binding Reservation, Converter={StaticResource ReservationToReportDateConverter}}"
+                        Header="Дата" />
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding Converter={StaticResource OrderToTotalSumConverter}}"
+                        Header="Сумма заказа" />
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding OrderSelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+        <TextBlock
+            Margin="35,296,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Заказанные блюда за период"
+            TextWrapping="Wrap" />
+        <ListView
+            Width="444"
+            Height="178"
+            Margin="10,316,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            ItemsSource="{Binding OrderedDishes}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedItem="{Binding SelectedOrderedDish}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn
+                        Width="150"
+                        DisplayMemberBinding="{Binding Dish.Name}"
+                        Header="Блюдо" />
+                    <GridViewColumn
+                        Width="75"
+                        DisplayMemberBinding="{Binding Quantity}"
+                        Header="КОЛ-ВО" />
+                    <GridViewColumn
+                        Width="60"
+                        DisplayMemberBinding="{Binding OrderedPrice}"
+                        Header="Цена" />
+                    <GridViewColumn
+                        Width="60"
+                        DisplayMemberBinding="{Binding OrderedPrice}"
+                        Header="Цена" />
+                    <GridViewColumn
+                        Width="120"
+                        DisplayMemberBinding="{Binding OrderId}"
+                        Header="ИД заказа" />
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding OrderedDishSelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+        <TextBlock
+            Margin="459,296,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Потери на бонусных блюдах"
+            TextWrapping="Wrap" />
+        <ListView
+            Width="331"
+            Height="178"
+            Margin="459,316,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            ItemsSource="{Binding BonusDishes}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedItem="{Binding SelectedBonusDish}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn
+                        Width="150"
+                        DisplayMemberBinding="{Binding Dish.Name}"
+                        Header="Блюдо" />
+                    <GridViewColumn
+                        Width="75"
+                        DisplayMemberBinding="{Binding Quantity}"
+                        Header="КОЛ-ВО" />
+                    <GridViewColumn
+                        Width="100"
+                        DisplayMemberBinding="{Binding OrderId}"
+                        Header="ИД заказа" />
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <catel:EventToCommand Command="{Binding BonusDishSelectionChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+        <TextBlock
+            x:Name="textBlock3"
+            Margin="41,114,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Доходы"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock3_Copy"
+            Margin="38,149,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Расходы"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock3_Copy1"
+            Margin="34,184,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Прибыль"
+            TextWrapping="Wrap" />
+        <TextBlock
+            x:Name="textBlock3_Copy2"
+            Margin="33,219,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Клиентов"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="53,254,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Блюд"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="10,499,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Сумма вычисляется с учетом проведенных акций. Цена за единицу указана без учета акций"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="80"
+            Height="35"
+            Margin="104,101,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Text="{Binding Incomes}"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="80"
+            Height="35"
+            Margin="104,136,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Text="{Binding Costs}"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="80"
+            Height="35"
+            Margin="104,171,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Text="{Binding Profit}"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="80"
+            Height="35"
+            Margin="104,206,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Text="{Binding ClientsCount}"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="80"
+            Height="35"
+            Margin="104,241,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="11"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Text="{Binding DishesCount}"
+            TextWrapping="Wrap" />
+        <GroupBox
+            Width="176"
+            Height="221"
+            Margin="20,70,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Сводка" />
+        <Rectangle
+            Width="537"
+            Height="249"
+            Margin="253,42,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Fill="Transparent"
+            Stroke="{DynamicResource PrimaryHueLightBrush}"
+            StrokeThickness="2" />
+        <Rectangle
+            Width="444"
+            Height="178"
+            Margin="10,316,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Fill="Transparent"
+            Stroke="{DynamicResource PrimaryHueLightBrush}"
+            StrokeThickness="2" />
+        <Rectangle
+            Width="331"
+            Height="178"
+            Margin="459,316,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Panel.ZIndex="-1"
+            Fill="Transparent"
+            Stroke="{DynamicResource PrimaryHueLightBrush}"
+            StrokeThickness="2" />
+    </Grid>
 
 </catel:UserControl>

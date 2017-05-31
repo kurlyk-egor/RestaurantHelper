@@ -28,7 +28,7 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData TableIdProperty = RegisterProperty("TableId", typeof(int));
 
 		[ForeignKey("TableId")]
-		public Table Table { get; set; }
+		public virtual Table Table { get; set; }
 
 		[Required]
 		public DateTime FirstTime

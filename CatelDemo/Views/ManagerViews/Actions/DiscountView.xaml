@@ -39,7 +39,7 @@
                     SelectedItem="{Binding SelectedDish}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

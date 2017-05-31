@@ -96,8 +96,8 @@
         <Rectangle
             Grid.Column="1"
             Width="237"
-            Height="42"
-            Margin="79,23,0,0"
+            Height="44"
+            Margin="79,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
@@ -110,8 +110,8 @@
         <Rectangle
             Grid.ColumnSpan="2"
             Width="180"
-            Height="42"
-            Margin="62,23,0,0"
+            Height="44"
+            Margin="62,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"

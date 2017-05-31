@@ -21,10 +21,10 @@
             VerticalAlignment="Stretch"
             Header="Работники ресторана">
             <ListView
-                x:Name="listBox"
-                Margin="0,0,0,5"
+                Margin="5,0,0,5"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                Foreground="{DynamicResource SecondaryAccentBrush}"
                 ItemsSource="{Binding Employees}"
                 SelectedItem="{Binding SelectedEmployee}"
                 SelectionMode="Single">

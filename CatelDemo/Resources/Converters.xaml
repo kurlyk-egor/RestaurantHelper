@@ -22,4 +22,6 @@
     <converters:ReviewIdToIndicateColorConverter x:Key="ReviewIdToColorConverter" />
     <converters:ActionToPercentOrSumConverter x:Key="ActionToPercentOrSumConverter" />
     <converters:DishToDiscountPercentConverter x:Key="DishToPercentConverter" />
+    <converters:ReservationToReportDateConverter x:Key="ReservationToReportDateConverter" />
+    <converters:OrderToTotalSumConverter x:Key="OrderToTotalSumConverter" />
 </ResourceDictionary>

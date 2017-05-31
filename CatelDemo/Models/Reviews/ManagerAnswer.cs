@@ -25,7 +25,7 @@ namespace RestaurantHelper.Models.Reviews
 		public static readonly PropertyData ReviewIdProperty = RegisterProperty("ReviewId", typeof(int));
 
 		[ForeignKey("ReviewId")]
-		public ClientReview Review { get; set; }	
+		public virtual ClientReview Review { get; set; }	
 
 
 		[MinLength(10), MaxLength(255), Required]

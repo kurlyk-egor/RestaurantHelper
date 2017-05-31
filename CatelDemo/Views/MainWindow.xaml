@@ -5,7 +5,7 @@
     xmlns:catel="http://catel.codeplex.com"
     Background="{DynamicResource MaterialDesignPaper}"
     BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
-    BorderThickness="2"
+    BorderThickness="1"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Left="100"
     MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"

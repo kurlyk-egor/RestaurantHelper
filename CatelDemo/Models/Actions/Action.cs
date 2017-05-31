@@ -40,7 +40,7 @@ namespace RestaurantHelper.Models.Actions
 		public static readonly PropertyData DishIdProperty = RegisterProperty("DishId", typeof(int));
 
 		[ForeignKey("DishId")]
-		public Dish Dish { get; set; }
+		public virtual Dish Dish { get; set; }
 
 
 		[MinLength(5), MaxLength(20), Required]

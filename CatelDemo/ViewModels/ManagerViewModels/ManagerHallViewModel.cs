@@ -100,13 +100,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 		}
 		public static readonly PropertyData BusyTablesCountProperty = RegisterProperty("BusyTablesCount", typeof(int));
 
-		public string SelectedTableClientName
-		{
-			get { return GetValue<string>(SelectedTableClientNameProperty); }
-			set { SetValue(SelectedTableClientNameProperty, value); }
-		}
-		public static readonly PropertyData SelectedTableClientNameProperty = RegisterProperty("SelectedTableClientName", typeof(string));
-
 		public string ToolTipText
 		{
 			get { return GetValue<string>(ToolTipTextProperty); }
@@ -197,8 +190,6 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels
 			{
 				var tableChecker = new TablesAvailabilityChecker(Tables);
 				var reservations = tableChecker.GetTodayReservationsForTable(SelectedItemTable.Number);
-				var userName = _selector.GetUserNameForSelectedTable(SelectedItemTable.Id);
-				SelectedTableClientName = userName;
 
 				foreach (var reserv in reservations)
 				{

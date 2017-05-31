@@ -132,23 +132,16 @@
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock3"
-            Margin="416,16,0,0"
+            Margin="415,32,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Выбранный столик"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock4"
-            Margin="416,39,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Клиент"
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox1"
             Width="20"
             Height="26"
-            Margin="554,10,0,0"
+            Margin="553,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
@@ -177,18 +170,6 @@
                     TextWrapping="Wrap" />
             </Button.Content>
         </Button>
-        <TextBox
-            x:Name="textBox2"
-            Grid.RowSpan="2"
-            Width="120"
-            Height="33"
-            Margin="472,30,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
-            IsReadOnly="True"
-            Text="{Binding SelectedTableClientName}"
-            TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock5"
             Grid.Row="1"

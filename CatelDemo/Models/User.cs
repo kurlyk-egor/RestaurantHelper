@@ -52,6 +52,6 @@ namespace RestaurantHelper.Models
 		/// <summary>
 		/// все заказы пользователя
 		/// </summary>
-		public List<Order> Orders { get; set; }
+		public virtual List<Order> Orders { get; set; }
     }
 }

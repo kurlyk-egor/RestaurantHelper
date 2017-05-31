@@ -38,15 +38,15 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData ReservationIdProperty = RegisterProperty("ReservationId", typeof(int));
 
 		[ForeignKey("UserId")]
-		public User User { get; set; }
+		public virtual User User { get; set; }
 
 		[ForeignKey("ReservationId")]
-		public Reservation Reservation { get; set; }
+		public virtual Reservation Reservation { get; set; }
 
 		/// <summary>
 		/// для данного заказа - все заказанные блюда
 		/// </summary>
 		
-		public List<OrderedDish> OrderedDishes { get; set; }
+		public virtual List<OrderedDish> OrderedDishes { get; set; }
 	}
 }

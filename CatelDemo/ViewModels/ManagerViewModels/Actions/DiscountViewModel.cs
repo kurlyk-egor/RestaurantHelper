@@ -46,7 +46,7 @@ namespace RestaurantHelper.ViewModels.ManagerViewModels.Actions
 			get { return GetValue<int>(DiscountValueProperty); }
 			set { SetValue(DiscountValueProperty, value); }
 		}
-		public static readonly PropertyData DiscountValueProperty = RegisterProperty("DiscountValue", typeof(int), 10);
+		public static readonly PropertyData DiscountValueProperty = RegisterProperty("DiscountValue", typeof(int), 40);
 
 		public string ActionName
 		{

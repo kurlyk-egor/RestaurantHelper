@@ -28,7 +28,7 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData OrderIdProperty = RegisterProperty("OrderId", typeof(int));
 
 		[ForeignKey("OrderId")]
-		public Order Order { get; set; }
+		public virtual Order Order { get; set; }
 
 		[Required]
 		public int DishId
@@ -39,7 +39,7 @@ namespace RestaurantHelper.Models
 		public static readonly PropertyData DishIdProperty = RegisterProperty("DishId", typeof(int));
 
 		[ForeignKey("DishId")]
-		public Dish Dish { get; set; }
+		public virtual Dish Dish { get; set; }
 
 		/// <summary>
 		/// количество одинаковых заказанных блюд

@@ -139,6 +139,8 @@
     <Compile Include="Services\Converters\ActionToTypeNameConverter.cs" />
     <Compile Include="Services\Converters\DishIdToNameConverter.cs" />
     <Compile Include="Services\Converters\DishToDiscountPercentConverter.cs" />
+    <Compile Include="Services\Converters\OrderToTotalSumConverter.cs" />
+    <Compile Include="Services\Converters\ReservationToReportDateConverter.cs" />
     <Compile Include="Services\Converters\ReviewIdToIndicateColorConverter.cs" />
     <Compile Include="Services\Logic\ActionsHelper.cs" />
     <Compile Include="Services\Logic\AuthorizationChecker.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Services\Converters\TableNumberToPicturePathConverter.cs" />
     <Compile Include="Services\Logic\ManagerMenuChanger.cs" />
     <Compile Include="Services\Logic\OrderedSumCalculator.cs" />
+    <Compile Include="Services\Logic\ReportsCreator.cs" />
     <Compile Include="Services\Logic\ReviewsWithAnswersBinder.cs" />
     <Compile Include="Services\Logic\TableAvailabilityRejuvenator.cs" />
     <Compile Include="Services\Logic\TablesAvailabilityChecker.cs" />
@@ -463,6 +466,9 @@
     <Resource Include="Images\Dishes\9.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Man.png" />
+    <Resource Include="Images\welcone.png" />
+    <Resource Include="Images\Main.png" />
     <Content Include="Scripts\InsertAllDishes.sql" />
     <Content Include="Scripts\InsertAllTables.sql" />
   </ItemGroup>

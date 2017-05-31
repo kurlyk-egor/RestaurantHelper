@@ -10,20 +10,33 @@
     FontWeight="DemiBold">
 
     <Grid
-        Width="405"
-        MinWidth="370"
-        MinHeight="310"
+        Width="500"
+        MinWidth="500"
+        MinHeight="200"
+        Background="White"
         Focusable="True">
+
+        <Rectangle Margin="32,210,26,26" Opacity="0.2">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FFD1E4E8" />
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Image
+            Height="90"
+            Margin="47,72,52,418"
+            Source="../../Images/welcone.png" />
 
         <TextBox
             x:Name="ValidationRequiredField1"
-            Width="257"
-            Height="42"
-            Margin="119,74,0,0"
+            Width="328"
+            Height="47"
+            Margin="119,275,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Введите логин"
             materialDesign:HintAssist.HintOpacity="0.5"
+            FontSize="20"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             MaxLength="20"
             TextWrapping="Wrap">
@@ -37,57 +50,97 @@
             </TextBox.Text>
         </TextBox>
         <PasswordBox
-            Width="257"
-            Height="41"
-            Margin="119,146,0,0"
+            Width="328"
+            Height="45"
+            Margin="119,369,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Введите пароль"
             materialDesign:HintAssist.HintOpacity="0.3"
+            FontSize="20"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             MaxLength="20">
             <i:Interaction.Behaviors>
                 <catel:UpdateBindingOnPasswordChanged Password="{Binding Password}" />
             </i:Interaction.Behaviors>
         </PasswordBox>
-        <TextBlock
-            Margin="44,82,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Логин"
-            TextWrapping="Wrap" />
-        <TextBlock
-            Margin="33,153,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Пароль"
-            TextWrapping="Wrap" />
         <Button
-            Width="113"
-            Height="45"
-            Margin="21,255,0,0"
+            Width="138"
+            Height="56"
+            Margin="63,473,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
-            Content="Назад" />
+            Content="Назад"
+            FontSize="22"
+            FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF75CAD3" />
+                    <GradientStop Color="#FFC7EBF3" />
+                    <GradientStop Offset="0.508" Color="#FF2AB1CF" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
-            Width="118"
-            Height="45"
-            Margin="277,255,0,0"
+            Width="138"
+            Height="56"
+            Margin="304,473,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding TryEnterCommand}"
             Content="Войти"
+            FontSize="22"
             IsDefault="True"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF75CAD3" />
+                    <GradientStop Color="#FFC7EBF3" />
+                    <GradientStop Offset="0.508" Color="#FF2AB1CF" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <GroupBox
-            Width="374"
+            Width="442"
             Height="229"
-            Margin="21,10,0,0"
+            Margin="32,210,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
             Header="Авторизация" />
+
+        <StackPanel>
+            <materialDesign:PackIcon
+                Width="56"
+                Height="56"
+                Margin="52,271,0,0"
+                HorizontalAlignment="Left"
+                Kind="AccountBox">
+                <materialDesign:PackIcon.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="1" Color="#FF75CAD3" />
+                        <GradientStop Color="#FFC7EBF3" />
+                        <GradientStop Offset="0.508" Color="#FF2AB1CF" />
+                    </LinearGradientBrush>
+                </materialDesign:PackIcon.Foreground>
+            </materialDesign:PackIcon>
+            <materialDesign:PackIcon
+                Width="56"
+                Height="56"
+                Margin="52,31,0,0"
+                HorizontalAlignment="Left"
+                Kind="Lock"
+                RenderTransformOrigin="0.536,-5.5">
+                <materialDesign:PackIcon.Foreground>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="1" Color="#FFB9E3E8" />
+                        <GradientStop Color="#FFC7EBF3" />
+                        <GradientStop Offset="0.635" Color="#FF2AB1CF" />
+                    </LinearGradientBrush>
+                </materialDesign:PackIcon.Foreground>
+            </materialDesign:PackIcon>
+        </StackPanel>
 
     </Grid>
 

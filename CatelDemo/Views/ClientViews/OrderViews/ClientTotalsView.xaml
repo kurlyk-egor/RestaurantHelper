@@ -113,7 +113,7 @@
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedOrderedDish}">
             <ListView.View>
-                <GridView>
+                <GridView AllowsColumnReorder="False">
                     <GridViewColumn
                         Width="230"
                         DisplayMemberBinding="{Binding Path=DishId, Converter={StaticResource DishIdToNameConverter}}"
@@ -161,7 +161,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
-            Header="GroupBox" />
+            Header="Детали заказа" />
         <TextBlock
             x:Name="textBlock4_Copy"
             Margin="101,177,0,0"
