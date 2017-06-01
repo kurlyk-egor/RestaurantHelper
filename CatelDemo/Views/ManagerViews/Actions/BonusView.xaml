@@ -17,14 +17,15 @@
             Margin="15,15,15,27"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Header="Параметры акции">
+            Header="Параметры акции:" Background="White"
+            FontFamily="Georgia">
             <Grid>
                 <TextBlock
                     x:Name="textBlock"
                     Margin="25,10,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Text="Бесплатное блюдо"
+                    Text="Бесплатное блюдо:"
                     TextWrapping="Wrap" />
                 <ComboBox
                     x:Name="comboBox"
@@ -72,13 +73,21 @@
                     VerticalAlignment="Bottom"
                     Command="{Binding ApplyAction}"
                     Content="Применить акцию"
-                    Style="{StaticResource ValidatingButton}" />
+                    Style="{StaticResource ValidatingButton}" BorderBrush="{x:Null}" FontFamily="Georgia" FontSize="16" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF75CAD3" Offset="1"/>
+                            <GradientStop Color="#FFC7EBF3"/>
+                            <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
 
                 <TextBox
                     x:Name="ValidationRequiredField2"
                     Width="231"
-                    Height="39"
-                    Margin="0,20,10,0"
+                    Height="40"
+                    Margin="0,19,10,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.FloatingScale="0.8"
@@ -86,6 +95,9 @@
                     materialDesign:HintAssist.IsFloating="True"
                     Foreground="{DynamicResource PrimaryHueMidBrush}"
                     MaxLength="20">
+                    <TextBox.BorderBrush>
+                        <SolidColorBrush Color="#FF47AFF7"/>
+                    </TextBox.BorderBrush>
                     <TextBox.Text>
                         <Binding Path="ActionName" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -105,7 +117,7 @@
                     Margin="20,150,20,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Text="Информация об акции" />
+                    Text="Информация об акции:" />
 
                 <TextBox
                     x:Name="ValidationRequiredField1"
@@ -116,7 +128,7 @@
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Top"
                     AcceptsReturn="True"
-                    BorderBrush="{DynamicResource SecondaryAccentBrush}"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
                     BorderThickness="1"
                     Foreground="{DynamicResource PrimaryHueMidBrush}"
                     TextWrapping="Wrap">

@@ -8,22 +8,26 @@
     xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
     FontSize="15">
 
-    <Grid Width="1000" Height="600">
+    <Grid Width="1000" Height="600" Background="White">
+
         <ListBox
             x:Name="Dishes"
             Width="519"
             Height="399"
-            Margin="23,40,0,0"
+            Margin="23,44,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Background="{DynamicResource MaterialDesignPaper}"
+            Background="#FFE2F2F9"
             ItemContainerStyle="{StaticResource DishesListBoxItemStyle}"
             ItemTemplate="{StaticResource DishDataTemplate}"
             ItemsSource="{Binding Dishes}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedDish}"
-            Style="{StaticResource DishesStyle}">
+            Style="{StaticResource DishesStyle}" BorderThickness="3">
+            <ListBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </ListBox.BorderBrush>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <catel:EventToCommand Command="{Binding AddCommand}" />
@@ -33,6 +37,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
+        
         <ListView
             x:Name="listBox1"
             Width="380"
@@ -76,7 +81,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
-            Content="Назад" />
+            Content="Назад"  FontFamily="Georgia" FontSize="23" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button2"
             Width="380"
@@ -85,16 +98,29 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteCommand}"
-            Content="Удалить" />
+            Content="Удалить" FontFamily="Georgia" FontSize="20" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock"
             Width="467"
-            Margin="23,10,0,0"
+            Margin="23,12,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+             FontFamily="Georgia"
             FontSize="15"
             Text="Выберите блюда из списка ниже (двойной клик чтобы заказать):"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <Button
             x:Name="button3"
             Width="204"
@@ -103,49 +129,61 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding NextCommand}"
-            Content="Далее" />
-        <Image
-            x:Name="image"
-            Width="63"
-            Height="63"
-            Margin="547,217,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Source="../../../Images/arrows.jpg"
-            Stretch="Uniform" />
+            Content="Далее"  FontFamily="Georgia" FontSize="23" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock1"
             Margin="626,40,0,0"
+             FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Ваш заказ:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <Rectangle
             Width="380"
             Height="62"
-            Margin="610,377,0,0"
+            Margin="610,385,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Fill="#FFF4F4F5"
-            Stroke="Black" />
+            Fill="#FFE2F2F9" Opacity="0.8" >
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+            </Rectangle.Stroke>
+        </Rectangle>
         <TextBlock
             x:Name="textBlock3"
             Width="111"
             Height="28"
-            Margin="663,400,0,0"
+             FontFamily="Georgia"
+            Margin="663,408,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="15"
-            Text="Сумма заказа" />
+            Text="Сумма заказа:" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <TextBox
             x:Name="textBox"
             Width="111"
             Height="36"
-            Margin="814,392,0,0"
+            Margin="808,400,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="20"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             IsReadOnly="True"
             Text="{Binding TotalSum}"
             TextWrapping="Wrap" />
@@ -154,10 +192,14 @@
             Width="506"
             Height="114"
             Margin="230,460,0,0"
+            FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             m:ColorZoneAssist.Mode="Accent"
             Visibility="{Binding IsVisibleActionInfo, Converter={StaticResource BoolToCollapse}}">
+            <GroupBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </GroupBox.Foreground>
             <GroupBox.Header>
                 <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                     <Run Text="Проводимая акция: " />

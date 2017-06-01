@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
 
-    <Grid Width="800" Height="500">
+    <Grid Width="800" Height="500" Background="White">
         <ListBox
             x:Name="listBox"
             Width="735"
@@ -18,7 +18,11 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedDish}"
-            Style="{StaticResource DishesStyle}" />
+            Style="{StaticResource DishesStyle}" Background="#FFF1F7F9" >
+            <ListBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </ListBox.BorderBrush>
+        </ListBox>
         <Button
             x:Name="button"
             Width="181"
@@ -27,7 +31,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding AddDishCommand}"
-            Content="Добавить" />
+            Content="Добавить" FontFamily="Georgia" FontSize="18" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button1"
             Width="180"
@@ -36,7 +48,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteDishCommand}"
-            Content="Удалить" />
+            Content="Удалить"  FontFamily="Georgia" FontSize="18" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button2"
             Width="180"
@@ -45,16 +65,23 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding EditDishCommand}"
-            Content="Редактировать" />
+            Content="Редактировать" FontFamily="Georgia" FontSize="18" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock"
             Margin="275,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="15"
-            FontWeight="Bold"
+            FontSize="18"
             Text="Доступные в ресторане блюда:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" />
     </Grid>
 
 </catel:UserControl>

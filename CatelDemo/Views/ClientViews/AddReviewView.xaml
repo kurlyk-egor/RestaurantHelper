@@ -25,7 +25,7 @@
             Margin="0,100,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Header="Введите текст отзыва:">
+            Header="Введите текст отзыва:" FontFamily="Georgia" BorderBrush="{x:Null}">
             <TextBox
                 x:Name="ValidationRequiredField1"
                 Margin="0,0,0,12"
@@ -33,10 +33,10 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
                 AcceptsReturn="True"
-                Foreground="{DynamicResource SecondaryAccentBrush}"
+                Foreground="#FF4EB1EA"
                 HorizontalScrollBarVisibility="Disabled"
                 TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Auto" Background="#FFEEF5F5" BorderBrush="#FF3696E6">
                 <TextBox.Text>
                     <Binding Path="Text" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>

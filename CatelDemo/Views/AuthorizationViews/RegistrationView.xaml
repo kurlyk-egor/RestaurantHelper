@@ -10,24 +10,78 @@
     FontSize="15"
     FontWeight="Bold">
 
-    <Grid MinWidth="450" MinHeight="330">
+    <Grid MinWidth="160" MinHeight="250" Background="White" Height="505" Width="334">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="31" />
+            <ColumnDefinition Width="273"/>
+            <ColumnDefinition Width="146"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0" />
-            <RowDefinition Height="65" />
-            <RowDefinition Height="65" />
-            <RowDefinition Height="65" />
-            <RowDefinition Height="65" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="394"/>
+            <RowDefinition Height="97"/>
         </Grid.RowDefinitions>
+        <Rectangle Margin="30,30,0,0" RenderTransformOrigin="-2.68,-2.556" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FFEEF7F7"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image Source="../../Resources/Man.png" Margin="97,25,101,269" Height="100" RenderTransformOrigin="0.17,-1.57" Grid.Column="1" Grid.Row="1"/>
+        <materialDesign:PackIcon Kind="Pen" 
+        Height="34" Width="36" Margin="12,148,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.448"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Account" 
+        Height="34" Width="36" Margin="13,268,0,0" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Lock" 
+        Width="36" Height="38" Margin="13,326,0,0" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8DD1D8" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.717"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="CellphoneAndroid"
+        Width="40" Height="33" Margin="9,211,0,0" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8DD1D8" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.717"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+
         <TextBox
             x:Name="ValidationRequiredField1"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="5,10,0,10"
+            Margin="64,268,14,92"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             VerticalContentAlignment="Center"
@@ -35,7 +89,7 @@
             materialDesign:HintAssist.HintOpacity="0.5"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             MaxLength="20"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" FontWeight="Normal" FontStyle="Italic" FontSize="14" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding
                     Path="Login"
@@ -53,9 +107,7 @@
             </TextBox.Text>
         </TextBox>
         <PasswordBox
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="5,10,0,10"
+            Margin="64,335,81,30"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             VerticalContentAlignment="Center"
@@ -63,7 +115,7 @@
             materialDesign:HintAssist.HintOpacity="0.3"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             MaxLength="20"
-            PasswordChar="*">
+            PasswordChar="*" FontWeight="Normal" FontStyle="Italic" FontSize="14" Grid.Column="1" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <catel:UpdateBindingOnPasswordChanged Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </i:Interaction.Behaviors>
@@ -71,16 +123,14 @@
 
         <TextBox
             x:Name="ValidationRequiredField2"
-            Grid.Row="3"
-            Grid.Column="1"
-            Margin="5,10,0,10"
+            Margin="64,143,87,220"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             VerticalContentAlignment="Center"
             materialDesign:HintAssist.Hint="Введите ФИО"
             materialDesign:HintAssist.HintOpacity="0.5"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
-            MaxLength="30">
+            MaxLength="30" FontStyle="Italic" FontWeight="Normal" FontSize="14" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding
                     Path="Name"
@@ -97,17 +147,15 @@
             </TextBox.Text>
         </TextBox>
         <TextBox
-            x:Name="ValidationRequiredField3"
-            Grid.Row="4"
-            Grid.Column="1"
-            Margin="5,10,0,10"
+            x:Name="ValidationRequiredField3" 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             VerticalContentAlignment="Center"
             materialDesign:HintAssist.Hint="Ваш телефон"
             materialDesign:HintAssist.HintOpacity="0.5"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
-            MaxLength="12">
+            MaxLength="12" Margin="60,201,18,162" FontWeight="Normal" FontStyle="Italic" FontSize="14" Grid.Column="1" Grid.Row="1"
+            >
             <TextBox.Text>
                 <Binding
                     Path="Phone"
@@ -127,57 +175,65 @@
 
 
         <Button
-            Grid.Row="5"
-            Grid.Column="0"
-            Width="100"
-            Height="35"
-            Margin="20,20"
+            Width="92"
+            Height="28"
+            BorderBrush="#FF5CD8E8" FontSize="15"
+             FontFamily="Georgia" FontWeight="Normal"
+            Margin="16,11,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
-            Content="Назад" />
+            Content="Назад" RenderTransformOrigin="0.583,-1.722" Grid.Column="1" Grid.Row="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
-            Grid.Row="5"
-            Grid.Column="1"
-            Width="120"
-            Height="35"
-            Margin="170,0,0,0"
+            Width="118"
+            Height="28"
+            Margin="0,11,10,58"
             HorizontalAlignment="Right"
+             BorderBrush="#FF5CD8E8" FontSize="13"
+             FontFamily="Georgia" FontWeight="Normal"
             VerticalAlignment="Center"
             materialDesign:ColorZoneAssist.Mode="Accent"
             Command="{Binding RegistrationCommand}"
             Content="Регистрация"
-            Style="{StaticResource ValidatingButton}" />
-
+            Style="{StaticResource ValidatingButton}" RenderTransformOrigin="0.217,0.639" Grid.Column="1" Grid.Row="2" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
-            Grid.Row="1"
             Grid.Column="0"
-            Margin="0,0,15,0"
+            Margin="-15,-82,1,93"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Text="Логин" />
+            Text="Логин" Height="20" Width="45" />
         <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Margin="0,0,15,0"
+            Margin="0,-118,198,129"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Text="Пароль" />
+            Text="Пароль" Height="20" Width="55" Grid.Column="1" />
         <TextBlock
-            Grid.Row="3"
-            Grid.Column="0"
-            Margin="0,0,15,0"
+            Margin="0,-118,92,129"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Text="ФИО" />
+            Text="ФИО" Height="20" Width="36" Grid.Column="1" />
         <TextBlock
-            Grid.Row="4"
-            Grid.Column="0"
             Width="68"
-            Margin="0,18,15,17"
+            Margin="-40,-180,3,191"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Text="Телефон" />
+            Text="Телефон" Height="20" />
 
     </Grid>
 

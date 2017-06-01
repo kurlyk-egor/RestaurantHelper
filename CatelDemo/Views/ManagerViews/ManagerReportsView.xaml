@@ -7,7 +7,7 @@
     xmlns:m="http://materialdesigninxaml.net/winfx/xaml/themes"
     FontSize="11">
 
-    <Grid Width="800" Height="530">
+    <Grid Width="800" Height="530" Background="White">
         <ComboBox
             x:Name="comboBox"
             Width="143"
@@ -34,8 +34,9 @@
         <TextBlock
             Margin="435,22,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
-            Text="Заказы за выбранный период"
+            Text="Заказы за выбранный период:"
             TextWrapping="Wrap" />
         <ListView
             Width="537"
@@ -46,7 +47,7 @@
             m:ColorZoneAssist.Mode="Accent"
             BorderBrush="Black"
             FontSize="11"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             ItemsSource="{Binding Orders}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -80,8 +81,9 @@
         <TextBlock
             Margin="35,296,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
-            Text="Заказанные блюда за период"
+            Text="Заказанные блюда за период:"
             TextWrapping="Wrap" />
         <ListView
             Width="444"
@@ -90,7 +92,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="11"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             ItemsSource="{Binding OrderedDishes}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -129,7 +131,8 @@
             Margin="459,296,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Потери на бонусных блюдах"
+            FontFamily="Georgia"
+            Text="Потери на бонусных блюдах:"
             TextWrapping="Wrap" />
         <ListView
             Width="331"
@@ -138,7 +141,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="11"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             ItemsSource="{Binding BonusDishes}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -202,6 +205,7 @@
         <TextBlock
             Margin="10,499,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
             Text="Сумма вычисляется с учетом проведенных акций. Цена за единицу указана без учета акций"
             TextWrapping="Wrap" />
@@ -260,6 +264,7 @@
             Height="221"
             Margin="20,70,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
             Header="Сводка" />
         <Rectangle

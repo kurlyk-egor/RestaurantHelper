@@ -35,7 +35,15 @@
             Content="Сохранить"
             IsDefault="True"
             Style="{StaticResource ValidatingButton}"
-            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" FontFamily="Georgia" FontSize="17" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
         <Button
             x:Name="button"
@@ -62,20 +70,21 @@
             Width="328"
             Height="288"
             Margin="10,10,0,0"
+            FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Header="Информация о работнике">
             <Grid>
                 <TextBlock
                     x:Name="textBlock"
-                    Margin="10,18,213,0"
+                    Margin="10,11,213,0"
                     VerticalAlignment="Top"
-                    Text="ФИО"
+                    Text="ФИО:"
                     TextWrapping="Wrap" />
                 <TextBlock
                     x:Name="textBlock2"
                     Height="17"
-                    Margin="54,163,67,0"
+                    Margin="77,163,44,0"
                     VerticalAlignment="Top"
                     Text="Выбор рабочих дней"
                     TextWrapping="Wrap" />
@@ -83,14 +92,14 @@
                 <TextBox
                     x:Name="ValidationRequiredField1"
                     Width="207"
-                    Height="49"
-                    Margin="93,0,0,0"
+                    Height="31"
+                    Margin="101,11,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Top"
                     materialDesign:HintAssist.Hint="Введите здесь ФИО"
                     materialDesign:HintAssist.HintOpacity="0.5"
-                    Foreground="{DynamicResource SecondaryAccentBrush}"
+                    Foreground="#FF3399FF"
                     MaxLength="30"
                     TextAlignment="Left"
                     TextWrapping="Wrap">
@@ -111,20 +120,20 @@
                 </TextBox>
                 <TextBlock
                     x:Name="textBlock_Copy"
-                    Margin="10,74,188,0"
+                    Margin="10,67,236,0"
                     VerticalAlignment="Top"
-                    Text="Возраст"
+                    Text="Возраст:"
                     TextWrapping="Wrap" />
                 <TextBox
                     x:Name="ValidationRequiredField2"
                     Width="120"
                     Height="28"
-                    Margin="93,70,0,0"
+                    Margin="98,63,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Возраст"
                     materialDesign:HintAssist.HintOpacity="0.5"
-                    Foreground="{DynamicResource SecondaryAccentBrush}"
+                    Foreground="#FF3399FF"
                     MaxLength="10"
                     TextWrapping="Wrap">
                     <TextBox.Text>
@@ -142,7 +151,7 @@
                 </TextBox>
                 <TextBlock
                     x:Name="textBlock_Copy1"
-                    Margin="9,123,175,0"
+                    Margin="7,116,219,0"
                     VerticalAlignment="Top"
                     Text="Должность"
                     TextWrapping="Wrap" />
@@ -150,12 +159,12 @@
                     x:Name="ValidationRequiredField3"
                     Width="208"
                     Height="28"
-                    Margin="92,119,0,0"
+                    Margin="97,112,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Должность"
                     materialDesign:HintAssist.HintOpacity="0.5"
-                    Foreground="{DynamicResource SecondaryAccentBrush}"
+                    Foreground="#FF3399FF"
                     MaxLength="20"
                     TextWrapping="Wrap">
                     <TextBox.Text>

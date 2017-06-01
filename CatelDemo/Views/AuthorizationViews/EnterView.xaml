@@ -10,36 +10,44 @@
     FontWeight="DemiBold">
 
     <Grid
-        Width="500"
-        MinWidth="500"
-        MinHeight="200"
+        Width="340"
+        Height="436"
         Background="White"
         Focusable="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="256*"/>
+            <RowDefinition Height="135*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
 
-        <Rectangle Margin="32,210,26,26" Opacity="0.2">
+        <Image
+            Margin="16,2,5,159" HorizontalAlignment="Center"
+            Source="../../Images/welcone.png" RenderTransformOrigin="0.36,0.02" Grid.Column="1" Grid.Row="1" />
+
+        <Rectangle Margin="1,85,29,134" Opacity="0.2" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2">
             <Rectangle.Fill>
-                <SolidColorBrush Color="#FFD1E4E8" />
+                <SolidColorBrush Color="#FFD1E4E8"/>
             </Rectangle.Fill>
         </Rectangle>
 
-        <Image
-            Height="90"
-            Margin="47,72,52,418"
-            Source="../../Images/welcone.png" />
-
         <TextBox
             x:Name="ValidationRequiredField1"
-            Width="328"
-            Height="47"
-            Margin="119,275,0,0"
+            Width="209"
+            Height="35"
+            Margin="64,129,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Введите логин"
             materialDesign:HintAssist.HintOpacity="0.5"
-            FontSize="20"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            FontSize="17"
+            Foreground="#FF75C3E6"
             MaxLength="20"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" FontStyle="Italic" Background="#FFE7F0EF" SelectionBrush="#FFE7F0EF" FontWeight="Normal" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -50,30 +58,33 @@
             </TextBox.Text>
         </TextBox>
         <PasswordBox
-            Width="328"
-            Height="45"
-            Margin="119,369,0,0"
+            Width="209"
+            Height="30"
+            Margin="64,202,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Введите пароль"
             materialDesign:HintAssist.HintOpacity="0.3"
-            FontSize="20"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
-            MaxLength="20">
+            FontSize="16"
+            MaxLength="20" SelectionBrush="#FF2AC1D1" Background="#FFE7F0EF" FontStyle="Italic" FontWeight="Normal" Grid.Column="1" Grid.Row="1">
+            <PasswordBox.Foreground>
+                <SolidColorBrush Color="#FF24AEBB"/>
+            </PasswordBox.Foreground>
             <i:Interaction.Behaviors>
                 <catel:UpdateBindingOnPasswordChanged Password="{Binding Password}" />
             </i:Interaction.Behaviors>
         </PasswordBox>
         <Button
-            Width="138"
-            Height="56"
-            Margin="63,473,0,0"
+            Width="96"
+            Height="35"
+            Margin="7,53,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад"
-            FontSize="22"
-            FontWeight="Bold">
+            FontFamily="Georgia"
+            FontSize="17"
+            FontWeight="Normal" Grid.Column="1" Grid.Row="2">
             <Button.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="1" Color="#FF75CAD3" />
@@ -83,16 +94,17 @@
             </Button.Background>
         </Button>
         <Button
-            Width="138"
-            Height="56"
-            Margin="304,473,0,0"
+            Width="106"
+            Height="35"
+            Margin="164,53,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding TryEnterCommand}"
-            Content="Войти"
-            FontSize="22"
+            Content="Вход"
+            FontSize="17"
+            FontFamily="Georgia"
             IsDefault="True"
-            Style="{StaticResource ValidatingButton}">
+            Style="{StaticResource ValidatingButton}" FontWeight="Normal" Grid.Column="1" Grid.Row="2">
             <Button.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="1" Color="#FF75CAD3" />
@@ -101,47 +113,37 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <GroupBox
-            Width="442"
-            Height="229"
-            Margin="32,210,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Panel.ZIndex="-1"
-            Header="Авторизация" />
 
-        <StackPanel>
-            <materialDesign:PackIcon
-                Width="56"
-                Height="56"
-                Margin="52,271,0,0"
+
+        <materialDesign:PackIcon
+                Width="42"
+                Height="55"
+                Margin="16,117,0,0"
                 HorizontalAlignment="Left"
-                Kind="AccountBox">
-                <materialDesign:PackIcon.Foreground>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Offset="1" Color="#FF75CAD3" />
-                        <GradientStop Color="#FFC7EBF3" />
-                        <GradientStop Offset="0.508" Color="#FF2AB1CF" />
-                    </LinearGradientBrush>
-                </materialDesign:PackIcon.Foreground>
-            </materialDesign:PackIcon>
-            <materialDesign:PackIcon
+                Kind="AccountBox" Grid.Column="1" Grid.Row="1">
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF75CAD3" />
+                    <GradientStop Color="#FFC7EBF3" />
+                    <GradientStop Offset="0.508" Color="#FF2AB1CF" />
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon
                 Width="56"
-                Height="56"
-                Margin="52,31,0,0"
+                Height="41"
+                Margin="9,193,0,0"
                 HorizontalAlignment="Left"
                 Kind="Lock"
-                RenderTransformOrigin="0.536,-5.5">
-                <materialDesign:PackIcon.Foreground>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Offset="1" Color="#FFB9E3E8" />
-                        <GradientStop Color="#FFC7EBF3" />
-                        <GradientStop Offset="0.635" Color="#FF2AB1CF" />
-                    </LinearGradientBrush>
-                </materialDesign:PackIcon.Foreground>
-            </materialDesign:PackIcon>
-        </StackPanel>
-
+                RenderTransformOrigin="0.536,-5.5" Grid.Column="1" Grid.Row="1">
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FFB9E3E8" />
+                    <GradientStop Color="#FFC7EBF3" />
+                    <GradientStop Offset="0.635" Color="#FF2AB1CF" />
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
     </Grid>
 
 </catel:UserControl>

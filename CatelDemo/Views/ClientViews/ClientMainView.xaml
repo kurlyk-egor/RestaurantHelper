@@ -3,118 +3,135 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com">
-    <catel:UserControl.Background>
-        <ImageBrush ImageSource="../../Images/1750_2500.png" Stretch="Fill" />
-    </catel:UserControl.Background>
 
     <Grid
         Height="440"
-        MinWidth="350"
-        MinHeight="440">
+        MinWidth="300"
+        MinHeight="440" Width="306" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="257*"/>
+            <ColumnDefinition Width="22*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="62*"/>
+            <RowDefinition Height="77*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+        <Image Source="../../Resources/welcone.png" Margin="11,0,10,0" Grid.Column="1" Grid.Row="1"/>
+        <Rectangle Margin="3,4,2,0" Opacity="0.2" Height="345" VerticalAlignment="Top" Grid.Row="2" Grid.RowSpan="6" Grid.Column="1">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FFABD2DA"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
         <Button
             x:Name="button"
-            Width="139"
+            Width="157"
             Height="45"
-            Margin="101,101,0,0"
+            Margin="50,25,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="#FFECEAEA"
+            BorderBrush="{x:Null}"
             Command="{Binding OrderCommand}"
             Content="Заказать"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF4B567A">
+            FontSize="19" FontFamily="Georgia" FontWeight="Normal"
+            Foreground="White" Grid.Row="2" Grid.Column="1">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
         <Button
             x:Name="button1"
-            Width="139"
+            Width="157"
             Height="45"
-            Margin="101,163,0,0"
+            Margin="50,8,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="#FFECEAEA"
+            BorderBrush="{x:Null}"
             Command="{Binding MyOrdersCommand}"
             Content="Мои заказы"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF384261">
+            FontSize="16" FontFamily="Georgia" FontWeight="Normal"
+            Foreground="White" Grid.Row="3" Grid.Column="1">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
         <Button
             x:Name="button2"
-            Width="139"
+            Width="157"
             Height="47"
-            Margin="101,223,0,0"
+            Margin="50,6,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="#FFEAE8E8"
+            BorderBrush="{x:Null}"
             Command="{Binding ProfileCommand}"
             Content="Профиль"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF404A6C">
+            FontSize="17" FontFamily="Georgia" FontWeight="Normal"
+            Foreground="White" Grid.Row="4" Grid.Column="1">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
         <Button
             x:Name="button3"
-            Width="139"
+            Width="157"
             Height="61"
-            Margin="101,290,0,0"
+            Margin="50,9,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="#FFEAEAEA"
+            BorderBrush="{x:Null}"
             Command="{Binding ReviewsCommand}"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF3B4463">
+            FontSize="16" FontFamily="Batang" FontWeight="Bold"
+            Foreground="White" Grid.Row="5" Grid.Column="1">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
                 </LinearGradientBrush>
             </Button.Background>
             <Button.Content>
-                <TextBlock Text="Отзывы/ вопросы" TextWrapping="Wrap" />
+                <TextBlock Text="Отзывы/ вопросы" TextWrapping="Wrap" FontFamily="Georgia" FontWeight="Normal" />
             </Button.Content>
         </Button>
         <Button
             x:Name="button5"
-            Width="139"
+            Width="157"
             Height="46"
-            Margin="101,368,0,0"
+            Margin="50,7,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            BorderBrush="#FFE4E3E3"
+            BorderBrush="{x:Null}"
             Command="{Binding ExitCommand}"
             Content="Выход"
-            FontFamily="Batang"
-            FontSize="18"
-            Foreground="#FF3F4A6E">
+            FontSize="17" FontFamily="Georgia" FontWeight="Normal"
+            Foreground="White" Grid.Row="6" Grid.Column="1">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="#FFF5FAFF" />
-                    <GradientStop Offset="1" Color="#FFD2E3F4" />
-                    <GradientStop Offset="0.487" Color="#FFE3ECF5" />
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
