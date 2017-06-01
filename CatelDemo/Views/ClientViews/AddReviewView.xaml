@@ -17,11 +17,12 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStyle="None">
 
-    <Grid Width="350" Height="229">
+    <Grid Width="350" Height="329">
         <GroupBox
             x:Name="groupBox"
             Width="350"
             Height="171"
+            Margin="0,100,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Header="Введите текст отзыва:">
@@ -52,7 +53,7 @@
         <Button
             x:Name="button"
             Width="120"
-            Margin="220,187,0,0"
+            Margin="220,287,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
@@ -63,7 +64,7 @@
         <Button
             x:Name="button1"
             Width="116"
-            Margin="10,187,0,0"
+            Margin="10,287,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Отмена"
@@ -72,13 +73,39 @@
         <Button
             x:Name="Collapsed"
             Width="330"
-            Margin="10,187,0,0"
+            Margin="10,287,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding OkCommand}"
             Content="Сохранить"
             IsDefault="True"
             Style="{StaticResource ValidatingButton}"
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
+        <GroupBox
+            Width="350"
+            Height="100"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Доступные для ответа заказы" />
+        <ComboBox
+            Width="330"
+            Height="32"
+            Margin="10,51,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding MyOrders}"
+            SelectedItem="{Binding SelectedOrder}"
+            Visibility="{Binding TwoButtonMode, Converter={StaticResource BoolToCollapse}}" />
+        <TextBlock
+            Width="330"
+            Height="32"
+            Margin="10,63,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Text="Вы уже выбрали заказ для ответа."
+            TextAlignment="Center"
+            TextWrapping="Wrap"
             Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
     </Grid>
 

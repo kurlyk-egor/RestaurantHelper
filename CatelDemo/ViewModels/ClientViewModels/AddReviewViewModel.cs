@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
+using Catel.Collections;
 using Catel.Data;
 using RestaurantHelper.DAL;
 using RestaurantHelper.Models;
@@ -18,11 +22,12 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 	{
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
 		private readonly Action<ClientReview> _addOrEdit;
+
 		public AddReviewViewModel(ClientReview review = null, User user = null)
 		{
 			if (review == null)
 			{
-				if (user != null)
+				if (user != null) // иначе - отзыв уже создан и привязан к юзеру
 				{
 					review = new ClientReview {UserId = user.Id};
 				}
@@ -36,10 +41,13 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 				OneButtonMode = true;
 				TwoButtonMode = false;
 				_addOrEdit = EditReview;
+				// формальность, элемент будет скрыт. это чтобы была доступна кнопка сохранения
+				SelectedOrder = review.Order;
 			}
 			ClientReview = review;
+			GetMyOrders(); // наполнить комбобокс
 
-			OkCommand = new Command(OnOkCommandExecute);
+			OkCommand = new Command(OnOkCommandExecute, OnOkCommandCanExecute);
 		}
 
 
@@ -74,6 +82,24 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 			set { SetValue(TextProperty, value); }
 		}
 		public static readonly PropertyData TextProperty = RegisterProperty("Text", typeof(string));
+
+
+		public FastObservableCollection<Order> MyOrders
+		{
+			get { return GetValue<FastObservableCollection<Order>>(MyOrdersProperty); }
+			set { SetValue(MyOrdersProperty, value); }
+		}
+		public static readonly PropertyData MyOrdersProperty = RegisterProperty("MyOrders", typeof(FastObservableCollection<Order>),
+			new FastObservableCollection<Order>());
+
+		public Order SelectedOrder
+		{
+			get { return GetValue<Order>(SelectedOrderProperty); }
+			set { SetValue(SelectedOrderProperty, value); }
+		}
+		public static readonly PropertyData SelectedOrderProperty = RegisterProperty("SelectedOrder", typeof(Order));
+
+
 		protected override async Task InitializeAsync()
 		{
 			await base.InitializeAsync();
@@ -86,10 +112,17 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 
 		public Command OkCommand { get; private set; }
+
+		private bool OnOkCommandCanExecute()
+		{
+			return SelectedOrder != null;
+		}
 		private async void OnOkCommandExecute()
 		{
 			ClientReview.DateTime = DateTime.Now;
 			ClientReview.Text = Text;
+			ClientReview.OrderId = SelectedOrder.Id;
+
 			_addOrEdit(ClientReview);
 			await CloseViewModelAsync(true);
 		}
@@ -104,6 +137,19 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 		{
 			_unitOfWork.ClientReviews.Update(clientReview);
 			_unitOfWork.SaveChanges();
+		}
+
+		private void GetMyOrders()
+		{
+			// получаем все отзывы
+			var reviews = _unitOfWork.ClientReviews.GetAll().ToList();
+
+			// получаем заказы. далее для отображения ищем заказы определенного пользователя
+			var orders = _unitOfWork.Orders.GetAll().ToList().Where(o => o.UserId == ClientReview.UserId)
+				//такие, на которые еще нет отзывов
+				.Where(o => !reviews.Exists(r => r.OrderId == o.Id));
+			MyOrders.Clear();
+			MyOrders.AddItems(orders);
 		}
 	}
 }

@@ -60,7 +60,7 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
                 AcceptsReturn="True"
-                Foreground="{DynamicResource PrimaryHueMidBrush}"
+                Foreground="{DynamicResource SecondaryAccentBrush}"
                 HorizontalScrollBarVisibility="Disabled"
                 IsReadOnly="True"
                 MinLines="5"

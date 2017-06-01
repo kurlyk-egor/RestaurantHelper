@@ -10,7 +10,7 @@
     FontSize="15"
     FontWeight="Medium">
 
-    <Grid MinWidth="400" MinHeight="450">
+    <Grid MinWidth="400" MinHeight="470">
         <TextBlock
             x:Name="textBlock"
             Margin="39,22,0,0"
@@ -31,18 +31,18 @@
             Margin="47,159,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Пароль"
+            Text="Старый пароль"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock3"
-            Margin="47,227,0,0"
+            Margin="47,272,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="ФИО"
             TextWrapping="Wrap" />
         <TextBlock
             x:Name="textBlock4"
-            Margin="47,300,0,0"
+            Margin="47,345,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Телефон"
@@ -80,19 +80,19 @@
             Margin="172,159,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Пароль"
+            materialDesign:HintAssist.Hint="Старый пароль"
             materialDesign:HintAssist.HintOpacity="0.8"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             MaxLength="20">
             <i:Interaction.Behaviors>
-                <catel:UpdateBindingOnPasswordChanged Password="{Binding Password}" />
+                <catel:UpdateBindingOnPasswordChanged Password="{Binding OldPassword}" />
             </i:Interaction.Behaviors>
         </PasswordBox>
         <TextBox
             x:Name="ValidationRequiredField2"
             Width="241"
             Height="35"
-            Margin="119,227,0,0"
+            Margin="119,272,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="ФИО"
@@ -116,7 +116,7 @@
             x:Name="ValidationRequiredField3"
             Width="241"
             Height="34"
-            Margin="119,293,0,0"
+            Margin="119,338,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Номер телефона"
@@ -138,7 +138,7 @@
             x:Name="button"
             Width="122"
             Height="39"
-            Margin="246,363,0,0"
+            Margin="246,408,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding SaveCommand}"
@@ -148,12 +148,31 @@
             x:Name="button1"
             Width="91"
             Height="39"
-            Margin="47,363,0,0"
+            Margin="47,408,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
             Content="Назад"
             RenderTransformOrigin="0.339,0.326" />
+        <TextBlock
+            Margin="47,214,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Новый пароль"
+            TextWrapping="Wrap" />
+        <PasswordBox
+            Width="188"
+            Height="31"
+            Margin="172,214,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint="Новый пароль"
+            materialDesign:HintAssist.HintOpacity="0.8"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
+            MaxLength="20">
+            <i:Interaction.Behaviors>
+                <catel:UpdateBindingOnPasswordChanged Password="{Binding NewPassword}" />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
     </Grid>
-
 </catel:UserControl>

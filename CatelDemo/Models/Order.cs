@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Catel.Data;
 using RestaurantHelper.Models.Additional;
 
+
 namespace RestaurantHelper.Models
 {
 	public class Order : MyModelBase
@@ -46,7 +47,11 @@ namespace RestaurantHelper.Models
 		/// <summary>
 		/// для данного заказа - все заказанные блюда
 		/// </summary>
-		
 		public virtual List<OrderedDish> OrderedDishes { get; set; }
+
+		public override string ToString()
+		{
+			return $"ЗАКАЗ N {Id :5}  | ДАТА: {Reservation.Day.ToShortDateString()} / {Reservation.FirstTime.ToShortTimeString()}-{Reservation.LastTime.ToShortTimeString()} | СТОЛИК {Reservation.Table.Number}";
+		}
 	}
 }

@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RestaurantHelper.App" Collapsed="true">
+    <Position X="36" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.DAL.RestaurantDbContext" Collapsed="true">
+    <Position X="39.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAACAAAAAAAAAAEAQAQAABGIAAAAAAAAAAAQBAAAA=</HashCode>
+      <FileName>DAL\RestaurantDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.DAL.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIEEgGAgACAGACAAEAQAQIABDIAAAQAAACAAARBAAIA=</HashCode>
+      <FileName>DAL\UnitOfWork.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.BonusActionRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\BonusActionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.ClientReviewRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\ClientReviewRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.DiscountActionRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\DiscountActionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.DishRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\DishRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.EmployeeRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\EmployeeRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.ManagerAnswerRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\ManagerAnswerRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.OrderedDishRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\OrderedDishRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.OrderRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\OrderRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.ReservationRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\ReservationRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.TableRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\TableRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.DAL.Repositories.UserRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgEAAAAAAAgAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Models.Actions.Action">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAgAAAAEAAAAAQAAEAAAAAAAAAAACAQBAA=</HashCode>
+      <FileName>Models\Actions\Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Actions.BonusAction">
+    <Position X="10.75" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAEAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\Actions\BonusAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Actions.DiscountAction">
+    <Position X="12.75" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\Actions\DiscountAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Additional.MyModelBase" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Models\Additional\MyModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Additional.OrderWithReservationInfo" Collapsed="true">
+    <Position X="27.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAQAAAIAAAAAAAAAAAAAwAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Additional\OrderWithReservationInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Dish">
+    <Position X="15" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAggAIQAAAAAAAABCAAQAAAAAAAACAAAAAEAABCA=</HashCode>
+      <FileName>Models\Dish.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Employee">
+    <Position X="18" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="RestaurantHelper.Models.Additional.MyModelBase" ManuallyRouted="true">
+      <Path>
+        <Point X="12.5" Y="1.191" />
+        <Point X="12.5" Y="1.625" />
+        <Point X="18.75" Y="1.625" />
+        <Point X="18.75" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAIgAEAAAARAAAAAEABAAAAAAAAABAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Order">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAABAAAEEAACAAgAAAAAAAAAAAAgAQAABAA=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.OrderedDish">
+    <Position X="7" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EQECAAAAAAAAAAAAAAABAAAIAEAAQAAAAAAAgCAQBAA=</HashCode>
+      <FileName>Models\OrderedDish.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Reservation">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACQAAAIAIAAAAEAAAAQAQQAAYAAAAAAAAAAAAADAA=</HashCode>
+      <FileName>Models\Reservation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Table">
+    <Position X="10" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAgEABEAAAAAAIAAAACQAEEAAABAA=</HashCode>
+      <FileName>Models\Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.User">
+    <Position X="19.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAECAAgAAAAEAAAAAAAAAAQAAAAAABACAAgQIAAABAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Reviews.ClientReview">
+    <Position X="16.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAEDAAAAAAAAAAAAAAAAAAgIAAAAAAYAEAAgCAAABAA=</HashCode>
+      <FileName>Models\Reviews\ClientReview.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Models.Reviews.ManagerAnswer">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAIAAAAAAAAAAAAAAYAEACACAAABAA=</HashCode>
+      <FileName>Models\Reviews\ManagerAnswer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Properties.Resources" Collapsed="true">
+    <Position X="37.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Properties.Settings" Collapsed="true">
+    <Position X="25.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ActionToDescriptionConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ActionToDescriptionConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ActionToDishNameConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ActionToDishNameConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ActionToPercentOrSumConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ActionToPercentOrSumConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ActionToTypeNameConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ActionToTypeNameConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ActionTypeToDescriptionConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ActionTypeToDescriptionConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.DateToDateStringConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\DateToDateStringConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.DateToTimeConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\DateToTimeConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.DishIdToNameConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\DishIdToNameConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.DishToDiscountPercentConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\DishToDiscountPercentConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.OrderToTotalSumConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\OrderToTotalSumConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ReservationToReportDateConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ReservationToReportDateConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.ReviewIdToIndicateColorConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\ReviewIdToIndicateColorConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.TableAvailabilityToColorConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\TableAvailabilityToColorConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.TableAvailabilityToToolTipMessageConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\TableAvailabilityToToolTipMessageConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.TableNumberToPicturePathConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\TableNumberToPicturePathConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.TableTypeToHeightConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAEAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\TableTypeToHeightConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.TableTypeToWidthConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\TableTypeToWidthConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Converters.UserIdToLoginConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Converters\UserIdToLoginConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.ActionsHelper" Collapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAgCAAAAAgAAAABAAAAADAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Logic\ActionsHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.AdminReservationsCreator" Collapsed="true">
+    <Position X="34.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAABAAAAAAAAAgBBABAAAAAAAMAARAgACAAAAAA=</HashCode>
+      <FileName>Services\Logic\AdminReservationsCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.AuthorizationChecker" Collapsed="true">
+    <Position X="37.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAggEAAAAACAAAAIAAEAAEAAAAAAA=</HashCode>
+      <FileName>Services\Logic\AuthorizationChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.ClientsForTableSelector" Collapsed="true">
+    <Position X="29" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Logic\ClientsForTableSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.DaysParser" Collapsed="true">
+    <Position X="39.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAA=</HashCode>
+      <FileName>Services\Logic\DaysParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.ManagerMenuChanger" Collapsed="true">
+    <Position X="43" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAACAAAAgAAAIAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Services\Logic\ManagerMenuChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.OrderedSumCalculator" Collapsed="true">
+    <Position X="41.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAQAAACgAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Logic\OrderedSumCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.ReportsCreator" Collapsed="true">
+    <Position X="32.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCgABAAAAAQAABAAgAAJAAAAIAAhAAAAACAAAIgQAA=</HashCode>
+      <FileName>Services\Logic\ReportsCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.ReviewsWithAnswersBinder" Collapsed="true">
+    <Position X="43" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAABAAAAARACgAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Services\Logic\ReviewsWithAnswersBinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.TablesAvailabilityRejuvenator" Collapsed="true">
+    <Position X="25.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACABAAAAAAQAAgAAAAAAABAAAAAgAAAAAAQAAAA=</HashCode>
+      <FileName>Services\Logic\TableAvailabilityRejuvenator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.TablesAvailabilityChecker" Collapsed="true">
+    <Position X="43" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAEAADAAAAAAgAEgAIAAIAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Services\Logic\TablesAvailabilityChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.HallPickersHelpers.DateMinMaxHelper" Collapsed="true">
+    <Position X="34.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Services\Logic\HallPickersHelpers\DateMinMaxHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.HallPickersHelpers.FirstTimePickerHelper" Collapsed="true">
+    <Position X="43" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAABAAAAAAAAAAAAAAQAEAAAAAAAAA=</HashCode>
+      <FileName>Services\Logic\HallPickersHelpers\FirstTimePickerHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.Logic.HallPickersHelpers.LastTimePickerHelper" Collapsed="true">
+    <Position X="25.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Logic\HallPickersHelpers\LastTimePickerHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.ValidationRules.ExistingLoginValidationRule" Collapsed="true">
+    <Position X="41.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ValidationRules\ExistingLoginValidationRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.ValidationRules.NotEmptyValidationRule" Collapsed="true">
+    <Position X="36" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ValidationRules\NotEmptyValidationRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.ValidationRules.NumericTextBoxValidationRule" Collapsed="true">
+    <Position X="37.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ValidationRules\NumericTextBoxValidationRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Services.ValidationRules.StringLengthMinMaxValidationRule" Collapsed="true">
+    <Position X="34.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ValidationRules\StringLengthMinMaxValidationRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.AuthorizationViewModels.EnterViewModel" Collapsed="true">
+    <Position X="39.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAgAAAAAgCAAAACAAAAAAAAAAAxACAEgQAAAUAAA=</HashCode>
+      <FileName>ViewModels\AuthorizationViewModels\EnterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.AuthorizationViewModels.RegistrationViewModel" Collapsed="true">
+    <Position X="30.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAAgAgAAECAAAAgAAAAQAAAAAAxQiIEgQIAgAAAA=</HashCode>
+      <FileName>ViewModels\AuthorizationViewModels\RegistrationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.AuthorizationViewModels.StartWindowViewModel" Collapsed="true">
+    <Position X="32.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAEAAAAABIAAAQAAAAAAQAIEAAAAgAAAA=</HashCode>
+      <FileName>ViewModels\AuthorizationViewModels\StartWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.AddReviewViewModel" Collapsed="true">
+    <Position X="32.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAkAAAAAAAAAQAIgAQAAAAAgAgAAAMkkQgCAAAgEg=</HashCode>
+      <FileName>ViewModels\ClientViewModels\AddReviewViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.ClientMainViewModel" Collapsed="true">
+    <Position X="30.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAEAAAkQACAQBAAIAAAAAKEIQAAEAAAAgAAAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\ClientMainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.ClientOrdersViewModel" Collapsed="true">
+    <Position X="37.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0AAAAQIAAEDACAAAAiCAACAAABABAoAAAEAIAQoIAAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\ClientOrdersViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.ClientProfileViewModel" Collapsed="true">
+    <Position X="41.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAJAAgAgAAECAAAAjAAAAQAAGAAAgAAAkgQIAkUAAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\ClientProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.ClientReviewsViewModel" Collapsed="true">
+    <Position X="27.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgKACAAQYGJBDCACiiiBAAAQQAAAEoAAAEEACglAAAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\ClientReviewsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels.ClientHallViewModel" Collapsed="true">
+    <Position X="27.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EDESQASAgQQBCAAEImAEQgAQaBYCAoAABEUaAAEGIRQ=</HashCode>
+      <FileName>ViewModels\ClientViewModels\OrderViewModels\ClientHallViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels.ClientMenuViewModel" Collapsed="true">
+    <Position X="34.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>mIAICAEAFgCADQECC2QAAAAAABAAAoAAhkAACQBEIAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\OrderViewModels\ClientMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ClientViewModels.OrderViewModels.ClientTotalsViewModel" Collapsed="true">
+    <Position X="32.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kACAQAAAg0CACYEgAiAAoABQAhYCAoAADEAAAQAAAAA=</HashCode>
+      <FileName>ViewModels\ClientViewModels\OrderViewModels\ClientTotalsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="29" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEAEgAAABAAAI=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ShortMessageViewModel" Collapsed="true">
+    <Position X="29" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAACAAAAAA=</HashCode>
+      <FileName>ViewModels\ShortMessageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModelExtension" Collapsed="true">
+    <Position X="36" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.Actions.ActionsViewModel" Collapsed="true">
+    <Position X="29" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAAAAAAQAAAACAACAAAAAAAAAQEAAAQAEgIDRAAAAg=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\Actions\ActionsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.Actions.BonusViewModel" Collapsed="true">
+    <Position X="43" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GQAIAABAAAAAAAAAA4QgCIAAAAAAQQAAAEAEAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\Actions\BonusViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.Actions.DeleteActionsViewModel" Collapsed="true">
+    <Position X="43" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAAAAIAAACAAAAQAQAAAAAAAAABAAAEAAAAABAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\Actions\DeleteActionsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.Actions.DiscountViewModel" Collapsed="true">
+    <Position X="29" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GQAIAABAAAAAAAAAA4QgCIAAAAAAQQAAAEAEAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\Actions\DiscountViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows.AddDishViewModel" Collapsed="true">
+    <Position X="41.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAgkgAIQAAAAQAAABAAAQAAgAAABAIEEQAAGABACk=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\AdditionalWindows\AddDishViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows.AddEmployeeViewModel" Collapsed="true">
+    <Position X="25.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAgQgEoAAKBEAARgAsAAQGQAKgCAMADIEEQAAAABgAg=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\AdditionalWindows\AddEmployeeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.AdditionalWindows.AddReservationViewModel" Collapsed="true">
+    <Position X="29" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAgAAAAAAAgAAgQgAAAABAAAAAAAAIBEAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\AdditionalWindows\AddReservationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerEmployeesViewModel" Collapsed="true">
+    <Position X="34.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAACABASCAAAAAgEEQEAACAAAAIAAAEBAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerEmployeesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerHallViewModel" Collapsed="true">
+    <Position X="37.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EHIYoAAAYMQSgSAAYhAISgBIAAQBQAAAAUEAQAACkAE=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerHallViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerMainViewModel" Collapsed="true">
+    <Position X="41.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NAABAAAAAAAAEACAAABQEIAAAAAAEAAAAEABAQEAgAQ=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerMainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerMenuViewModel" Collapsed="true">
+    <Position X="27.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAKAAAICAAIAAAAEQQCAAAAAAAACAAABEAAAAAAAAE=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerReportsViewModel" Collapsed="true">
+    <Position X="30.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>lAEELAAiBQCAAAAAIIIyIIECBACAQAAYAMAAASBABGA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerReportsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.ViewModels.ManagerViewModels.ManagerReviewsViewModel" Collapsed="true">
+    <Position X="34.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAACAAQIAIBAABACgoAAAAwAAAAAACAAEEBCABCAAA=</HashCode>
+      <FileName>ViewModels\ManagerViewModels\ManagerReviewsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestaurantHelper.Views.AuthorizationViews.EnterView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AuthorizationViews\EnterView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.AuthorizationViews.RegistrationView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AuthorizationViews\RegistrationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.AuthorizationViews.StartWindowView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AuthorizationViews\StartWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.AddReviewView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\AddReviewView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.ClientMainView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\ClientMainView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.ClientOrdersView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\ClientOrdersView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.ClientProfileView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\ClientProfileView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.ClientReviewsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\ClientReviewsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.OrderViews.ClientHallView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\OrderViews\ClientHallView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.OrderViews.ClientMenuView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\OrderViews\ClientMenuView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ClientViews.OrderViews.ClientTotalsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ClientViews\OrderViews\ClientTotalsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ShortMessageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ShortMessageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.Actions.ActionsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\Actions\ActionsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.Actions.BonusView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\Actions\BonusView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.Actions.DeleteActionsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\Actions\DeleteActionsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.Actions.DiscountView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\Actions\DiscountView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.AdditionalWindows.AddDishView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\AdditionalWindows\AddDishView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.AdditionalWindows.AddEmployeeView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\AdditionalWindows\AddEmployeeView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.AdditionalWindows.AddReservationView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\AdditionalWindows\AddReservationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerEmployeesView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerEmployeesView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerHallView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerHallView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerMainView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerMainView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerMenuView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerMenuView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerReportsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerReportsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RestaurantHelper.Views.ManagerViews.ManagerReviewsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ManagerViews\ManagerReviewsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="RestaurantHelper.DAL.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="25.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DAL\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="RestaurantHelper.Models.Actions.ActionType" Collapsed="true">
+    <Position X="25.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Actions\Action.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RestaurantHelper.Models.Days" Collapsed="true">
+    <Position X="27.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RestaurantHelper.Services.Logic.Period" Collapsed="true">
+    <Position X="29" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAAA=</HashCode>
+      <FileName>Services\Logic\ReportsCreator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

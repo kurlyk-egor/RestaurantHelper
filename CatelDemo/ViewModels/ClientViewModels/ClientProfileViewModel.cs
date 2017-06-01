@@ -6,18 +6,21 @@ using RestaurantHelper.DAL;
 using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.ViewModels;
 using RestaurantHelper.Models;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.ClientViewModels
 {
     public class ClientProfileViewModel : ViewModelBase
     {
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.GetInstance();
+	    private AuthorizationChecker _authorizationChecker;
 		private readonly IViewModel _rootViewModel;
 		private readonly IViewModel _parentViewModel;
         public ClientProfileViewModel(IViewModel previousViewModel, User user)
         {
 			_rootViewModel = ViewModelManager.GetFirstOrDefaultInstance<MainWindowViewModel>();
 			_parentViewModel = previousViewModel;
+			_authorizationChecker = new AuthorizationChecker(user);
             User = user;
 
             SaveCommand = new Command(OnSaveCommandExecute, OnSaveCommandCanExecute);
@@ -42,16 +45,22 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
         public static readonly PropertyData LoginProperty = RegisterProperty("Login", typeof(string));
 
 
-        [ViewModelToModel("User")]
-        public string Password
+        public string OldPassword
         {
-            get { return GetValue<string>(PasswordProperty); }
-            set { SetValue(PasswordProperty, value); }
+            get { return GetValue<string>(OldPasswordProperty); }
+            set { SetValue(OldPasswordProperty, value); }
         }
-        public static readonly PropertyData PasswordProperty = RegisterProperty("Password", typeof(string));
+        public static readonly PropertyData OldPasswordProperty = RegisterProperty("OldPassword", typeof(string));
+
+		public string NewPassword
+		{
+			get { return GetValue<string>(NewPasswordProperty); }
+			set { SetValue(NewPasswordProperty, value); }
+		}
+		public static readonly PropertyData NewPasswordProperty = RegisterProperty("NewPassword", typeof(string));
 
 
-        [ViewModelToModel("User")]
+		[ViewModelToModel("User")]
         public string Name
         {
             get { return GetValue<string>(NameProperty); }
@@ -73,15 +82,25 @@ namespace RestaurantHelper.ViewModels.ClientViewModels
 
 	    private bool OnSaveCommandCanExecute()
 	    {
-		    return Password != null && Password.Length > 1;
+		    return OldPassword != null && OldPassword.Length > 2 && 
+					NewPassword != null && NewPassword.Length > 2;
 	    }
 		private void OnSaveCommandExecute()
-        {
-            _unitOfWork.Users.Update(User);
-            _unitOfWork.SaveChanges();
+		{
+			// хэш-код введенного пароля совпал с сохраненным
+			if (_authorizationChecker.GetHashPassword(OldPassword) == User.Password)
+			{
+				User.Password = _authorizationChecker.GetHashPassword(NewPassword);
+				_unitOfWork.Users.Update(User);
+				_unitOfWork.SaveChanges();
 
-			_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Сохранено!"), 1000, _parentViewModel);
-		}
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Сохранено!"), 1000, _parentViewModel);
+			}
+			else
+			{
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Неверно указан существующий пароль!"), 1222);
+			}
+        }
 
         public Command BackCommand { get; private set; }
         private void OnBackCommandExecute()

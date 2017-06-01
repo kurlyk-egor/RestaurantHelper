@@ -12,6 +12,7 @@ using RestaurantHelper.ViewModels.ClientViewModels;
 using RestaurantHelper.ViewModels.ManagerViewModels;
 using Xceed.Wpf.Toolkit;
 
+
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
     public class EnterViewModel : ViewModelBase
@@ -67,7 +68,6 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
             else if (_authorizationChecker.IsMatchUser())
             {
                 User user = _authorizationChecker.GetUser();
-				//TODO: надо бы сделать какую нибудь заставку для успешной авторизации
 				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Успешная авторизация!"), 1111, new ClientMainViewModel(user));
             }
             else if (_authorizationChecker.IsExistsLogin())
@@ -76,7 +76,7 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 			}
             else
             {
-				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Логин не найден!"), 777);
+				_rootViewModel.ChangePageWithDialog(new ShortMessageViewModel("Пользователь не зарегистрирован!"), 777);
 			}
         }
         protected override async Task InitializeAsync()

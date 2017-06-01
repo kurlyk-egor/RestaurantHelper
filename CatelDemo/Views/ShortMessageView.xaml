@@ -9,9 +9,8 @@
     WindowStyle="None">
 
     <Grid
-        Width="500"
-        Height="350"
-        Margin="-7"
+        Width="400"
+        Height="320"
         Background="White">
         <Rectangle
             Fill="#FFEAF5F5"
@@ -20,13 +19,13 @@
             StrokeThickness="5" />
 
         <TextBlock
-            Height="37"
-            Margin="101,231,22,82"
+            Height="100"
+            Margin="60,160,60,50"
             VerticalAlignment="Center"
-            FontFamily="Batang"
-            FontSize="24"
-            Foreground="#FF32CBDA"
+            FontSize="22"
+            Foreground="{DynamicResource SecondaryAccentBrush}"
             Text="{Binding Text}"
+            TextAlignment="Center"
             TextWrapping="Wrap" />
     </Grid>
 </catel:DataWindow>

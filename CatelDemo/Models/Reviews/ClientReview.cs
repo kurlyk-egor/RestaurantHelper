@@ -26,6 +26,16 @@ namespace RestaurantHelper.Models.Reviews
 		[ForeignKey("UserId")]
 		public virtual User User { get; set; }
 
+		public int OrderId
+		{
+			get { return GetValue<int>(OrderIdProperty); }
+			set { SetValue(OrderIdProperty, value); }
+		}
+		public static readonly PropertyData OrderIdProperty = RegisterProperty("OrderId", typeof(int));
+
+		[ForeignKey("OrderId")]
+		public virtual Order Order { get; set; }
+
 		public string Text
 		{
 			get { return GetValue<string>(TextProperty); }

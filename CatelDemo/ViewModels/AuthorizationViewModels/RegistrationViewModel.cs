@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Security.Cryptography;
 using Catel.Data;
 using Catel.IoC;
 using Catel.MVVM;
@@ -8,6 +9,7 @@ using Catel.Services;
 using RestaurantHelper.DAL;
 using RestaurantHelper.DAL.Repositories;
 using RestaurantHelper.Models;
+using RestaurantHelper.Services.Logic;
 
 namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 {
@@ -85,10 +87,11 @@ namespace RestaurantHelper.ViewModels.AuthorizationViewModels
 
 	    private bool OnRegistrationCommandCanExecute()
 	    {
-		    return Password != null && Password.Length > 1;
+		    return Password != null && Password.Length > 2;
 	    }
 		private void OnRegistrationCommandExecute()
-        {
+		{
+			Password = new AuthorizationChecker(User).GetHashPassword(Password);
             _unitOfWork.Users.Insert(User);
             _unitOfWork.SaveChanges();
 

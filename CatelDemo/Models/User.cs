@@ -25,7 +25,6 @@ namespace RestaurantHelper.Models
         }
         public static readonly PropertyData LoginProperty = RegisterProperty("Login", typeof(string));
 
-		[MinLength(1), MaxLength(20)]
 		public string Password
         {
             get { return GetValue<string>(PasswordProperty); }
