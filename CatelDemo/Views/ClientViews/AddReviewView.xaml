@@ -24,7 +24,7 @@
             Height="171"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Header="Введите текст отзыва:">
+            Header="Введите текст отзыва:" FontFamily="Georgia" BorderBrush="{x:Null}">
             <TextBox
                 x:Name="ValidationRequiredField1"
                 Margin="0,0,0,12"
@@ -32,10 +32,10 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Top"
                 AcceptsReturn="True"
-                Foreground="{DynamicResource SecondaryAccentBrush}"
+                Foreground="#FF4EB1EA"
                 HorizontalScrollBarVisibility="Disabled"
                 TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Auto" Background="#FFEEF5F5" BorderBrush="#FF3696E6">
                 <TextBox.Text>
                     <Binding Path="Text" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -79,7 +79,15 @@
             Content="Сохранить"
             IsDefault="True"
             Style="{StaticResource ValidatingButton}"
-            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" />
+            Visibility="{Binding OneButtonMode, Converter={StaticResource BoolToCollapse}}" FontFamily="Georgia" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 
 </catel:DataWindow>

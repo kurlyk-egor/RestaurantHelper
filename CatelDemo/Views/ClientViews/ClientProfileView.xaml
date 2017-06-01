@@ -8,59 +8,91 @@
     xmlns:validationRules="clr-namespace:RestaurantHelper.Services.ValidationRules"
     CreateWarningAndErrorValidatorForViewModel="False"
     FontSize="15"
-    FontWeight="Medium">
+    FontWeight="Medium" Background="White">
 
-    <Grid MinWidth="400" MinHeight="450">
-        <TextBlock
-            x:Name="textBlock"
-            Margin="39,22,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="30"
-            Text="Профиль пользователя"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock1"
-            Margin="47,105,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Логин"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock2"
-            Margin="47,159,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Пароль"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock3"
-            Margin="47,227,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="ФИО"
-            TextWrapping="Wrap" />
-        <TextBlock
-            x:Name="textBlock4"
-            Margin="47,300,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="Телефон"
-            TextWrapping="Wrap" />
+    <Grid MinWidth="200" MinHeight="450" Width="374" Height="518">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="325*"/>
+            <ColumnDefinition Width="24*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="135*"/>
+            <RowDefinition Height="27*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Margin="1,32,23,80" Opacity="0.8" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Rectangle.Stroke>
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FFF9F9F9"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image Source="../../Resources/Man.png" Margin="96,15,103,255.5" RenderTransformOrigin="0.625,-0.04" OpacityMask="Black" Grid.Column="1" Grid.Row="1"/>
+        <materialDesign:PackIcon Kind="Pen" 
+        Height="34" Width="36" Margin="16,285,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.448"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Account" 
+        Height="Auto" Width="36" Margin="14,169,0,201.5" RenderTransformOrigin="1.135,-2.271" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Lock" 
+        Width="36" Height="38" Margin="14,227,0,0" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8DD1D8" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.717"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="CellphoneAndroid"
+        Width="40" Height="32" Margin="16,345,0,0" Grid.Column="1" Grid.Row="1" >
+            <materialDesign:PackIcon.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8DD1D8" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.717"/>
+                </LinearGradientBrush>
+            </materialDesign:PackIcon.Foreground>
+        </materialDesign:PackIcon>
+
         <TextBox
             x:Name="ValidationRequiredField1"
             Width="188"
-            Height="40"
-            Margin="172,94,0,0"
+            Height="36"
+            Margin="68,169,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="18"
-            FontWeight="Bold"
+            FontWeight="Normal"
             Foreground="{DynamicResource PrimaryHueDarkBrush}"
             IsEnabled="False"
             MaxLength="20"
             Opacity="1"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" Background="#FFE7F0EF" FontFamily="Batang" FontStyle="Italic" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -76,14 +108,14 @@
         <PasswordBox
             x:Name="textBox1"
             Width="188"
-            Height="31"
-            Margin="172,159,0,0"
+            Height="36"
+            Margin="68,227,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Пароль"
             materialDesign:HintAssist.HintOpacity="0.8"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
-            MaxLength="20">
+            Foreground="#FF75C3E6"
+            MaxLength="20" Background="#FFE7F0EF" FontFamily="Batang" FontSize="11" Grid.Column="1" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <catel:UpdateBindingOnPasswordChanged Password="{Binding Password}" />
             </i:Interaction.Behaviors>
@@ -91,15 +123,15 @@
         <TextBox
             x:Name="ValidationRequiredField2"
             Width="241"
-            Height="35"
-            Margin="119,227,0,0"
+            Height="34"
+            Margin="66,281,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="ФИО"
             materialDesign:HintAssist.HintOpacity="0.8"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="#FF75C3E6"
             MaxLength="30"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" Background="#FFE7F0EF" FontFamily="Batang" FontSize="18" FontStyle="Italic" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -116,14 +148,14 @@
             x:Name="ValidationRequiredField3"
             Width="241"
             Height="34"
-            Margin="119,293,0,0"
+            Margin="67,341,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Номер телефона"
             materialDesign:HintAssist.HintOpacity="0.8"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="#FF75C3E6"
             MaxLength="15"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" Background="#FFE7F0EF" FontStyle="Italic" FontFamily="Batang" FontSize="18" Grid.Column="1" Grid.Row="1">
             <TextBox.Text>
                 <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -137,23 +169,45 @@
         <Button
             x:Name="button"
             Width="122"
-            Height="39"
-            Margin="246,363,0,0"
+            Height="40"
+            Margin="178,18.5,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            FontFamily="Georgia"
+            FontWeight="Normal"
+            FontSize="14"
             Command="{Binding SaveCommand}"
             Content="Сохранить"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}" Grid.Column="1" Grid.Row="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button1"
             Width="91"
-            Height="39"
-            Margin="47,363,0,0"
+            Height="40"
+            Margin="21,18.5,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            FontFamily="Georgia"
+            FontWeight="Normal"
+            FontSize="15"
             Command="{Binding BackCommand}"
             Content="Назад"
-            RenderTransformOrigin="0.339,0.326" />
+            RenderTransformOrigin="0.339,0.326" Grid.Column="1" Grid.Row="2" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 
 </catel:UserControl>

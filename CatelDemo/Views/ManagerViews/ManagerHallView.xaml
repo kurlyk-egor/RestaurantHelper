@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:catel="http://catel.codeplex.com"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" Background="White">
     <Grid
         Width="756"
         MinWidth="750"
@@ -11,14 +11,31 @@
         Margin="10"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="617*"/>
+            <ColumnDefinition Width="139*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="350*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-
+        <Rectangle Fill="#FFFAFDFF" HorizontalAlignment="Left" Width="756" StrokeThickness="2" Grid.ColumnSpan="2">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Rectangle
+            Width="589"
+            Height="62"
+            Margin="20,7,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="White" >
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Rectangle.Stroke>
+        </Rectangle>
         <ListBox
             x:Name="TableViewer"
-            Grid.Row="1"
             Width="600"
             Height="410"
             Margin="10,0,0,10"
@@ -29,6 +46,9 @@
             ItemsSource="{Binding Tables}"
             SelectedItem="{Binding SelectedItemTable}"
             Style="{StaticResource Style}">
+            <ListBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </ListBox.BorderBrush>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <catel:EventToCommand Command="{Binding TableSelectionChangedCommand}" />
@@ -36,76 +56,73 @@
             </i:Interaction.Triggers>
         </ListBox>
 
+
         <TextBlock
             x:Name="textBlock"
-            Margin="160,13,0,0"
+            Margin="30,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="     Столиков занято:"
-            TextWrapping="Wrap" />
+            Text="Столиков занято:"
+            FontFamily="Georgia" 
+            Height="14"  />
         <TextBlock
             x:Name="textBlock_Copy"
-            Margin="160,39,0,0"
+            Margin="29,39,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Столиков свободно:"
-            TextWrapping="Wrap" />
+            FontFamily="Georgia" />
         <TextBox
             x:Name="textBox"
             Width="20"
-            Height="30"
-            Margin="300,6,0,0"
+            Margin="147,-3,0,466"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
             IsReadOnly="True"
             Text="{Binding BusyTablesCount}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" FontSize="13" >
+            <TextBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+            </TextBox.Foreground>
+        </TextBox>
         <TextBox
             x:Name="textBox_Copy"
             Width="20"
             Height="30"
-            Margin="300,32,0,0"
+            Margin="172,32,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
             IsReadOnly="True"
             Text="{Binding FreeTablesCount}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" FontSize="13" >
+            <TextBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionTextColorKey}}"/>
+            </TextBox.Foreground>
+        </TextBox>
         <TextBlock
             x:Name="textBlock1"
             Width="68"
-            Margin="45,27,0,0"
+            Margin="522,25,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="20"
+            FontSize="18"
             FontWeight="Black"
-            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             RenderTransformOrigin="0.676,0.649"
             Text="{Binding TimeString}"
-            TextWrapping="Wrap" />
-        <Rectangle
-            Grid.RowSpan="2"
-            Width="589"
-            Height="62"
-            Margin="20,7,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Fill="Transparent"
-            Stroke="{DynamicResource PrimaryHueMidBrush}" />
+            TextWrapping="Wrap" Height="24" FontFamily="Georgia" />
+
         <ListBox
             x:Name="listBox"
-            Grid.RowSpan="2"
             Width="110"
             Height="154"
-            Margin="625,39,0,0"
+            Margin="14,45,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="1"
             BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
             BorderThickness="1"
             ItemsSource="{Binding TableReservations}"
-            SelectedItem="{Binding SelectedReservation}">
+            SelectedItem="{Binding SelectedReservation}" Background="White" Grid.Column="1">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -125,23 +142,23 @@
         </ListBox>
         <TextBlock
             x:Name="textBlock2"
-            Margin="638,18,0,0"
+            Margin="17,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Брони столика"
-            TextWrapping="Wrap" />
+            Text="Брони столика:"
+            TextWrapping="Wrap" FontFamily="Georgia" Height="14" Width="105" Grid.Column="1" />
         <TextBlock
             x:Name="textBlock3"
-            Margin="415,32,0,0"
+            Margin="273,32,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Выбранный столик"
-            TextWrapping="Wrap" />
+            Text="Выбранный столик:"
+            TextWrapping="Wrap" FontFamily="Georgia" Height="21" Width="113" />
         <TextBox
             x:Name="textBox1"
             Width="20"
             Height="26"
-            Margin="553,22,0,0"
+            Margin="405,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
@@ -150,10 +167,9 @@
             TextWrapping="Wrap" />
         <Button
             x:Name="button"
-            Grid.Row="1"
             Width="110"
             Height="68"
-            Margin="625,216,0,0"
+            Margin="12,277,0,0"
             Padding="4"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -161,7 +177,14 @@
             IsEnabled="{Binding IsEnabledAddButton}"
             ToolTip="{Binding ToolTipText}"
             ToolTipService.Placement="Top"
-            ToolTipService.ShowOnDisabled="True">
+            ToolTipService.ShowOnDisabled="True" FontFamily="Georgia" FontSize="14" Grid.Column="1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <Button.Content>
                 <TextBlock
                     FontSize="13"
@@ -172,51 +195,54 @@
         </Button>
         <TextBlock
             x:Name="textBlock5"
-            Grid.Row="1"
             Width="121"
             Height="87"
-            Margin="625,298,0,0"
+            Margin="12,359,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextWrapping="Wrap"><Run Text="До ___________ - бронь до конца ТЕКУЩЕГО часа" /><Run Text=" " /><Run Text="После - до конца СЛЕДУЮЩЕГО часа" /></TextBlock>
+            TextWrapping="Wrap" Grid.Column="1"><Run Text="До ___________ - бронь до конца ТЕКУЩЕГО часа" /><Run Text=" " /><Run Text="После - до конца СЛЕДУЮЩЕГО часа" /></TextBlock>
         <TextBlock
             x:Name="textBlock6"
-            Grid.Row="1"
-            Margin="650,296,0,0"
+            Margin="37,357,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource PrimaryHueDarkBrush}"
             Text="40 минут"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" Height="16" Width="49" Grid.Column="1" />
         <Button
             x:Name="button1"
-            Grid.Row="1"
             Width="124"
-            Margin="622,392,0,0"
+            Margin="9,453,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteReservationCommand}"
-            Content="Снять бронь" />
+            Content="Снять бронь" FontFamily="Georgia" FontSize="13" Grid.Column="1" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock7"
-            Grid.Row="1"
-            Margin="625,144,0,0"
+            Margin="12,205,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Клиент:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" Height="14" Width="54" Grid.Column="1" />
         <TextBox
             x:Name="textBox3"
-            Grid.Row="1"
             Width="124"
             Height="30"
-            Margin="622,165,0,0"
+            Margin="9,226,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             IsReadOnly="True"
             Text="{Binding ReservationClientName}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" Grid.Column="1" />
 
     </Grid>
 </catel:UserControl>

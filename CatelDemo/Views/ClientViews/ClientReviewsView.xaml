@@ -5,12 +5,17 @@
     xmlns:catel="http://catel.codeplex.com"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
 
-    <Grid MinWidth="800" MinHeight="500">
+    <Grid MinWidth="800" MinHeight="500" Background="White" Height="510">
+        <Rectangle Fill="#FFFAFDFF" HorizontalAlignment="Left" Height="429" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" StrokeThickness="2">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Rectangle.Stroke>
+        </Rectangle>
         <ListBox
             x:Name="listBox"
             Width="500"
             Height="373"
-            Margin="35,61,0,0"
+            Margin="27,54,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             ItemContainerStyle="{StaticResource ReviewsListBoxItemStyle}"
@@ -19,6 +24,9 @@
             SelectedItem="{Binding SelectedClientReview}"
             Style="{StaticResource ReviewsStyle}"
             VirtualizingPanel.ScrollUnit="Pixel">
+            <ListBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </ListBox.BorderBrush>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <catel:EventToCommand Command="{Binding SelectionChangedCommand}" />
@@ -29,30 +37,46 @@
             x:Name="button"
             Width="222"
             Height="37"
-            Margin="557,322,0,0"
+            Margin="551,282,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding AddReviewCommand}"
-            Content="Добавить отзыв/вопрос" />
+            Content="Добавить отзыв/вопрос" FontFamily="Georgia"
+            FontSize="16">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock1"
-            Width="178"
+            Width="150"
             Height="19"
-            Margin="589,61,0,0"
+            Margin="592,25,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            FontFamily="Comic Sans MS"
             Text="Ответ Администратора:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontSize="13" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionTextColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <Border
             Width="222"
             Height="218"
-            Margin="557,85,0,0"
+            Margin="551,51,0,0"
             Padding="13"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="{DynamicResource MaterialDesignPaper}"
-            BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="2">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Border.BorderBrush>
             <TextBox
                 x:Name="textBox"
                 Margin="0,0,0,-4"
@@ -72,7 +96,7 @@
         <Rectangle
             Width="15"
             Height="15"
-            Margin="365,10,0,0"
+            Margin="365,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Fill="OrangeRed"
@@ -88,17 +112,25 @@
         <TextBlock
             Width="100"
             Height="15"
-            Margin="385,35,0,0"
+            Margin="385,33,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Отвеченные" />
+            Text="Отвеченные" FontFamily="Comic Sans MS" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionTextColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <TextBlock
             Width="100"
             Height="15"
-            Margin="385,10,0,0"
+            Margin="385,14,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Неотвеченные" />
+            Text="Неотвеченные" FontFamily="Comic Sans MS" >
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionTextColorKey}}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
         <RadioButton
             x:Name="RadioButtonAll"
             Margin="35,23,0,0"
@@ -107,85 +139,140 @@
             Panel.ZIndex="1"
             Command="{Binding AllReviewsCommand}"
             Content="ВСЕ ОТЗЫВЫ"
-            FontSize="13"
             FontWeight="DemiBold"
             Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
-            IsChecked="True" />
+            IsChecked="True" FontFamily="Comic Sans MS" FontSize="11" >
+            <RadioButton.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FF35C8FF" Offset="1"/>
+                </RadialGradientBrush>
+            </RadioButton.Background>
+        </RadioButton>
         <RadioButton
             x:Name="RadioButtonMy"
-            Margin="169,23,0,0"
+            Margin="165,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="1"
             Command="{Binding MyReviewsCommand}"
             Content="МОИ ОТЗЫВЫ"
-            FontSize="13"
             FontWeight="DemiBold"
             Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
-            IsChecked="{Binding IsMyReviews}" />
+            IsChecked="{Binding IsMyReviews}" FontFamily="Comic Sans MS" FontSize="11" />
         <Button
             x:Name="button1"
             Width="113"
             Height="45"
-            Margin="35,444,0,0"
+            Margin="35,454,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Content="Назад"
             Command="{Binding BackCommand}"
-            Content="Назад" />
+            FontFamily="Georgia"
+            FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button2"
-            Width="188"
+            Width="159"
             Height="45"
-            Margin="347,444,0,0"
+            Margin="351,454,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding RefreshCommand}"
-            Content="Обновить" />
+            Content="Обновить" FontFamily="Georgia"
+            FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button_Copy"
             Width="222"
             Height="37"
-            Margin="557,378,0,0"
+            Margin="551,338,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding EditReviewCommand}"
             Content="Редактировать отзыв/вопрос"
-            FontSize="13"
             ToolTip="{Binding ToolTipText}"
-            ToolTipService.ShowOnDisabled="True" />
+            ToolTipService.ShowOnDisabled="True" FontFamily="Georgia"
+            FontSize="14">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="button_Copy1"
             Width="222"
             Height="37"
-            Margin="557,429,0,0"
+            Margin="551,389,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteReviewCommand}"
             Content="Удалить отзыв/вопрос"
             ToolTip="{Binding ToolTipText}"
-            ToolTipService.ShowOnDisabled="True" />
+            ToolTipService.ShowOnDisabled="True" FontFamily="Georgia"
+            FontSize="15">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Rectangle
             Width="130"
             Height="40"
             Margin="163,12,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Fill="{DynamicResource SecondaryAccentBrush}"
             RadiusX="10"
             RadiusY="10"
-            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-            StrokeThickness="5" />
+            Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+            StrokeThickness="2" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
         <Rectangle
             Width="125"
             Height="40"
             Margin="29,12,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Fill="{DynamicResource SecondaryAccentBrush}"
             RadiusX="10"
             RadiusY="10"
-            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-            StrokeThickness="5" />
+            Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+            StrokeThickness="2" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 
 </catel:UserControl>

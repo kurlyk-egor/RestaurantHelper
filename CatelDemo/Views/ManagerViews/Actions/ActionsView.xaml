@@ -11,10 +11,10 @@
         <catel:ViewModelToViewConverter x:Key="ViewModelToViewConverter" />
     </UserControl.Resources>
 
-    <Grid MinWidth="500" MinHeight="300">
+    <Grid MinWidth="500" MinHeight="300" Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="60*" />
+            <ColumnDefinition Width="251*" />
+            <ColumnDefinition Width="249*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
@@ -24,7 +24,7 @@
             x:Name="groupBox"
             Grid.Row="1"
             Grid.Column="0"
-            Margin="15,15,15,25"
+            Margin="15,15,136,25"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Header="Тип акции"
@@ -61,15 +61,13 @@
 
         <ContentControl
             Grid.Row="1"
-            Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Content="{Binding Path=ActionsPage, Converter={StaticResource ViewModelToViewConverter}}" />
+            Content="{Binding Path=ActionsPage, Converter={StaticResource ViewModelToViewConverter}}" Grid.ColumnSpan="2" Margin="138,0,0,0" />
         <RadioButton
             x:Name="AddActionButton"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
             Width="180"
             Margin="67,29,0,0"
             HorizontalAlignment="Left"
@@ -77,50 +75,64 @@
             VerticalContentAlignment="Center"
             Command="{Binding AddActionCommand}"
             Content="Запустить акцию"
-            FontSize="18"
-            Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
+            FontSize="16"
+            FontFamily="Comic Sans MS"
+            Foreground="{DynamicResource SecondaryAccentForegroundBrush}" Height="26" />
         <RadioButton
             x:Name="button1"
             Grid.Row="0"
             Grid.Column="1"
             Width="230"
-            Margin="84,29,0,0"
+            Margin="6,29,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             VerticalContentAlignment="Center"
             Command="{Binding ShowActionsCommand}"
             Content="Просмотреть все акции"
-            FontSize="18"
+            FontSize="16"
             Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
-            IsChecked="True" />
+            IsChecked="True" Height="26" FontFamily="Comic Sans MS" />
         <Rectangle
             Grid.Column="1"
             Width="237"
             Height="44"
-            Margin="79,22,0,0"
+            Margin="1,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
-            Fill="{DynamicResource SecondaryAccentBrush}"
             Opacity="0.7"
             RadiusX="10"
             RadiusY="10"
-            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-            StrokeThickness="5" />
+            Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+            StrokeThickness="2" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
         <Rectangle
-            Grid.ColumnSpan="2"
             Width="180"
             Height="44"
             Margin="62,22,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
-            Fill="{DynamicResource SecondaryAccentBrush}"
             Opacity="0.7"
             RadiusX="10"
             RadiusY="10"
-            Stroke="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-            StrokeThickness="5" />
+            Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+            StrokeThickness="2" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 
 </catel:UserControl>

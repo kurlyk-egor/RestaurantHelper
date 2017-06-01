@@ -12,7 +12,8 @@
         </Style>
     </catel:UserControl.Resources>
 
-    <Grid Width="680" Height="400">
+    <Grid Width="680" Height="400" Background="White">
+
         <Button
             x:Name="button"
             Width="105"
@@ -26,6 +27,7 @@
             x:Name="button1"
             Width="188"
             Height="40"
+            FontFamily="Georgia"
             Margin="370,343,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -40,10 +42,12 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Столик"
+            FontFamily="Georgia"
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox1"
             Width="42"
+            FontFamily="Georgia"
             Height="33"
             Margin="101,60,0,0"
             HorizontalAlignment="Left"
@@ -57,6 +61,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Дата:"
+            FontFamily="Georgia"
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox2"
@@ -64,6 +69,7 @@
             Height="36"
             Margin="145,109,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             Text="{Binding VisitDate}"
@@ -73,6 +79,7 @@
             Width="58"
             Height="26"
             Margin="38,177,0,0"
+            FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Время:"
@@ -80,6 +87,7 @@
         <TextBox
             x:Name="textBox3"
             Width="43"
+            FontFamily="Georgia"
             Height="35"
             Margin="195,161,0,0"
             HorizontalAlignment="Left"
@@ -93,6 +101,7 @@
             Height="35"
             Margin="118,161,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             Text="{Binding LastTime}"
@@ -142,6 +151,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Сумма:"
+            FontFamily="Georgia"
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox5"
@@ -149,6 +159,7 @@
             Height="31"
             Margin="101,276,0,0"
             HorizontalAlignment="Left"
+            FontFamily="Georgia"
             VerticalAlignment="Top"
             Foreground="{DynamicResource SecondaryAccentBrush}"
             Text="{Binding TotalSum}"
@@ -157,11 +168,12 @@
             x:Name="groupBox"
             Width="245"
             Height="312"
+            FontFamily="Georgia"
             Margin="20,18,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Panel.ZIndex="-1"
-            Header="Детали заказа" />
+            Header="Детали заказа" Background="#FFFAFBFB" />
         <TextBlock
             x:Name="textBlock4_Copy"
             Margin="101,177,0,0"
@@ -180,11 +192,12 @@
             x:Name="groupBox1"
             Width="394"
             Height="101"
+            FontFamily="Georgia"
             Margin="276,18,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             materialDesign:ColorZoneAssist.Mode="Accent"
-            FontSize="11">
+            FontSize="11" Background="#FFF7EEEE">
             <GroupBox.Header>
                 <TextBlock Foreground="Black">
                     <Run Text="Бонусное блюдо: " />
@@ -199,12 +212,15 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Пользователь"
+            FontFamily="Georgia"
+            
             TextWrapping="Wrap" />
         <TextBox
             x:Name="textBox"
             Width="120"
             Height="39"
             Margin="134,222,0,0"
+            FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="{DynamicResource SecondaryAccentBrush}"

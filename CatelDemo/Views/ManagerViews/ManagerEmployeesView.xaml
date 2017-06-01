@@ -8,7 +8,7 @@
         MinWidth="800"
         MinHeight="500"
         HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+        VerticalAlignment="Stretch" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="500*" />
             <RowDefinition Height="100*" />
@@ -18,13 +18,14 @@
             Grid.Row="0"
             Margin="10"
             HorizontalAlignment="Stretch"
+            FontFamily="Georgia"
             VerticalAlignment="Stretch"
-            Header="Работники ресторана">
+            Header="Работники ресторана" Background="#FFFBFBFB">
             <ListView
                 Margin="5,0,0,5"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Foreground="{DynamicResource SecondaryAccentBrush}"
+                Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
                 ItemsSource="{Binding Employees}"
                 SelectedItem="{Binding SelectedEmployee}"
                 SelectionMode="Single">
@@ -61,7 +62,15 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Command="{Binding AddEmployeeCommand}"
-                Content="Добавить" />
+                Content="Добавить" FontFamily="Georgia" FontSize="17" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 x:Name="button1_Copy"
                 Width="115"
@@ -69,15 +78,31 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Command="{Binding DeleteEmployeeCommand}"
-                Content="Удалить" />
+                Content="Удалить"  FontFamily="Georgia" FontSize="17" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 x:Name="button2_Copy"
-                Width="135"
+                Width="154"
                 Margin="30,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Command="{Binding EditEmployeeCommand}"
-                Content="Редактировать" />
+                Content="Редактировать"  FontFamily="Georgia" FontSize="17" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
     </Grid>
 

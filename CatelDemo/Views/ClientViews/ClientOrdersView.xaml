@@ -6,47 +6,57 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <Grid Width="840" Height="500">
+    <Grid Width="840" Height="500" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="#FFFAFDFF" HorizontalAlignment="Left" Height="427" Margin="10,10,0,0" VerticalAlignment="Top" Width="820" StrokeThickness="2" Grid.ColumnSpan="2">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Rectangle.Stroke>
+        </Rectangle>
         <TextBlock
             x:Name="textBlock"
             Width="115"
-            Margin="24,28,0,0"
+            Margin="28,32,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Пользователь:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" FontSize="14" />
         <TextBlock
             x:Name="textBlock1"
             Width="186"
             Height="26"
-            Margin="153,28,0,0"
+            Margin="133,26,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
-            Text="{Binding UserLogin}"
-            TextWrapping="Wrap" />
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+            TextWrapping="Wrap" FontFamily="Georgia" FontSize="16" Grid.ColumnSpan="2" />
         <TextBlock
             x:Name="textBlock2"
             Width="120"
             Height="26"
-            Margin="390,58,0,0"
+            Margin="320,52,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="МОИ ЗАКАЗЫ:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" FontSize="15" Grid.Column="1" />
         <ListView
             x:Name="listView"
-            Width="440"
+            Width="428"
             Height="331"
-            Margin="390,89,0,0"
+            Margin="180,89,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
             ItemsSource="{Binding OrdersWithReservations}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedItem="{Binding SelectedOrderWithReservation}"
-            SelectionMode="Single">
+            SelectionMode="Single" BorderBrush="{x:Null}" BorderThickness="3" Background="White" Grid.Column="1">
+            <ListView.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </ListView.Foreground>
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -83,22 +93,30 @@
             x:Name="button"
             Width="122"
             Height="48"
-            Margin="24,430,0,0"
+            Margin="46,444,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding BackCommand}"
-            Content="Назад" />
+            Content="Назад" FontFamily="Georgia" FontSize="19">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <GroupBox
             x:Name="groupBox"
-            Width="365"
+            Width="367"
             Height="357"
-            Margin="10,63,0,0"
+            Margin="18,63,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Header="Детали заказа">
+            Header="Детали заказа:" FontFamily="Georgia" FontSize="15" Grid.ColumnSpan="2">
             <ListView
                 x:Name="listBox"
-                Width="342"
+                Width="347"
                 Height="272"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -129,31 +147,39 @@
             x:Name="textBlock4"
             Width="51"
             Height="23"
-            Margin="24,397,0,0"
+            Margin="34,397,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Сумма:"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" FontFamily="Georgia" />
         <TextBox
             x:Name="textBox"
             Width="120"
-            Height="34"
-            Margin="99,386,0,0"
+            Height="28"
+            Margin="91,387,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Foreground="{DynamicResource SecondaryAccentBrush}"
+            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
             IsReadOnly="True"
-            Text="{Binding TotalSum}"
-            TextWrapping="Wrap" />
+            Text="23232"
+            TextWrapping="Wrap" FontSize="14" Grid.ColumnSpan="2" />
         <Button
             x:Name="button1"
-            Width="244"
+            Width="192"
             Height="48"
-            Margin="586,430,0,0"
+            Margin="380,444,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Command="{Binding DeleteOrderCommand}"
-            Content="Отменить заказ" />
+            Content="Отменить заказ" FontFamily="Georgia" FontSize="20" Grid.Column="1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 
 </catel:UserControl>

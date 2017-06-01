@@ -32,9 +32,17 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding HallCommand}"
                 Content="Монитор"
-                FontSize="17"
-                FontWeight="UltraBlack" />
-
+                FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="UltraBlack" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
@@ -42,7 +50,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding EmployeesCommand}"
-                Content="Работники" />
+                Content="Работники"  FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
 
             <Button
                 Grid.Row="0"
@@ -51,7 +69,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding MenuCommand}"
-                Content="Меню" />
+                Content="Меню" FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 Grid.Row="0"
                 Grid.Column="3"
@@ -59,7 +87,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding ReportsCommand}"
-                Content="Отчеты" />
+                Content="Отчеты" FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 Grid.Row="0"
                 Grid.Column="4"
@@ -67,7 +105,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding ActionsCommand}"
-                Content="Акции" />
+                Content="Акции" FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 Grid.Row="0"
                 Grid.Column="5"
@@ -75,7 +123,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding ReviewsCommand}"
-                Content="Отзывы" />
+                Content="Отзывы" FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Button
                 Grid.Row="0"
                 Grid.Column="6"
@@ -83,7 +141,17 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding ExitCommand}"
-                Content="Выход" />
+                Content="Выход" FontSize="16"
+                FontFamily="Georgia"
+                FontWeight="Normal" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF75CAD3" Offset="1"/>
+                        <GradientStop Color="#FFC7EBF3"/>
+                        <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
 
         <ContentControl

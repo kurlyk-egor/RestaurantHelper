@@ -6,12 +6,13 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:validationRules="clr-namespace:RestaurantHelper.Services.ValidationRules">
 
-    <Grid MinWidth="800" MinHeight="500">
+    <Grid MinWidth="800" MinHeight="500" Background="White">
         <TextBlock
             x:Name="textBlock"
             Margin="90,20,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            FontFamily="Georgia"
             Text="Отзывы клиентов о работе ресторана:" />
         <ListBox
             x:Name="listBox"
@@ -25,7 +26,10 @@
             ItemsSource="{Binding ClientReviews}"
             SelectedItem="{Binding SelectedClientReview}"
             Style="{StaticResource ReviewsStyle}"
-            VirtualizingPanel.ScrollUnit="Pixel">
+            VirtualizingPanel.ScrollUnit="Pixel" Background="#FFF1F9FB">
+            <ListBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </ListBox.BorderBrush>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <catel:EventToCommand Command="{Binding SelectionChangedCommand}" />
@@ -40,12 +44,21 @@
             VerticalAlignment="Top"
             Command="{Binding SaveAnswerCommand}"
             Content="Сохранить ответ"
-            Style="{StaticResource ValidatingButton}" />
+            Style="{StaticResource ValidatingButton}" FontFamily="Georgia" FontSize="17" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF75CAD3" Offset="1"/>
+                    <GradientStop Color="#FFC7EBF3"/>
+                    <GradientStop Color="#FF2AB1CF" Offset="0.508"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBlock
             x:Name="textBlock1"
             Width="178"
             Height="19"
             Margin="589,61,0,0"
+            FontFamily="Georgia"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Введите ответ в поле ниже:"
@@ -58,8 +71,10 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="{DynamicResource MaterialDesignPaper}"
-            BorderBrush="Black"
             BorderThickness="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            </Border.BorderBrush>
             <TextBox
                 x:Name="ValidationRequiredField1"
                 HorizontalAlignment="Stretch"
@@ -72,7 +87,7 @@
                 MinLines="5"
                 TextAlignment="Justify"
                 TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Auto" BorderBrush="#FF36A0DC">
                 <TextBox.Text>
                     <Binding Path="AdminAnswer" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -107,6 +122,7 @@
         <TextBlock
             Width="100"
             Height="15"
+            FontFamily="Georgia"
             Margin="385,35,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -114,6 +130,7 @@
         <TextBlock
             Width="100"
             Height="15"
+            FontFamily="Georgia"
             Margin="385,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
